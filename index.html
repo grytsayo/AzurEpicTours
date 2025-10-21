@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -868,32 +868,91 @@
         bottom: 20px;
         right: 20px;
     }
-    
+
     .social-button {
         width: 55px;
         height: 55px;
         font-size: 24px;
     }
-    
+
     .social-button::before {
         display: none;
+    }
+}
+
+/* Language Switcher Styles */
+.language-switcher {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 1000;
+    display: flex;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 5px;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    color: #667eea;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.lang-btn:hover {
+    background: rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.lang-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+@media (max-width: 768px) {
+    .language-switcher {
+        top: 15px;
+        right: 15px;
+        padding: 4px;
+    }
+
+    .lang-btn {
+        padding: 6px 12px;
+        font-size: 0.85rem;
     }
 }
 
     </style>
 </head>
 <body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="ru">RU</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+    </div>
+
     <div class="hero">
         <div class="hero-content">
-            <h1>Французская Ривьера с местным гидом</h1>
-            <p>Откройте для себя настоящую Ривьеру: Монако, Канны, Ницца, Антиб. Приватные туры с персональным подходом</p>
-            <a href="#tours" class="cta-button">Выбрать тур</a>
+            <h1 data-i18n="heroTitle">Французская Ривьера с местным гидом</h1>
+            <p data-i18n="heroSubtitle">Откройте для себя настоящую Ривьеру: Монако, Канны, Ницца, Антиб. Приватные туры с персональным подходом</p>
+            <a href="#tours" class="cta-button" data-i18n="heroButton">Выбрать тур</a>
         </div>
     </div>
 
     <div class="container" id="tours">
-        <h2 class="section-title">Мои приватные туры</h2>
-        <p class="section-subtitle">Каждый тур создан с любовью к Ривьере и вниманием к деталям. Только для вас и ваших близких. Бесплатная отмена за 24 часа.</p>
+        <h2 class="section-title" data-i18n="toursTitle">Мои приватные туры</h2>
+        <p class="section-subtitle" data-i18n="toursSubtitle">Каждый тур создан с любовью к Ривьере и вниманием к деталям. Только для вас и ваших близких. Бесплатная отмена за 24 часа.</p>
 
         <div class="tours-grid">
             <!-- Tour 1: Monaco Majesty -->
@@ -902,27 +961,27 @@
                 </div>
                 <div class="tour-content">
                     <div class="tour-header">
-                        <h3 class="tour-title">Monaco Majesty</h3>
-                        <span class="tour-duration">4 часа</span>
+                        <h3 class="tour-title" data-i18n="tour1Title">Monaco Majesty</h3>
+                        <span class="tour-duration" data-i18n="tour1Duration">4 часа</span>
                     </div>
-                    <p class="tour-tagline">Роскошь княжества в одном туре</p>
+                    <p class="tour-tagline" data-i18n="tour1Tagline">Роскошь княжества в одном туре</p>
                     <div class="tour-highlights">
-                        <h4>Основные моменты:</h4>
+                        <h4 data-i18n="highlightsLabel">Основные моменты:</h4>
                         <ul>
-                            <li>Средневековая деревня Эз и парфюмерия</li>
-                            <li>Дворец Принца с инсайдерскими историями</li>
-                            <li>Казино Монте-Карло и трасса Формулы 1</li>
-                            <li>Панорамные виды на Монако</li>
+                            <li data-i18n="tour1H1">Средневековая деревня Эз и парфюмерия</li>
+                            <li data-i18n="tour1H2">Дворец Принца с инсайдерскими историями</li>
+                            <li data-i18n="tour1H3">Казино Монте-Карло и трасса Формулы 1</li>
+                            <li data-i18n="tour1H4">Панорамные виды на Монако</li>
                         </ul>
                     </div>
                     <div class="tour-features">
-                        <span class="feature-tag">Трансфер включен</span>
-                        <span class="feature-tag">Приватный тур</span>
-                        <span class="feature-tag">3 языка</span>
+                        <span class="feature-tag" data-i18n="tour1Tag1">Трансфер включен</span>
+                        <span class="feature-tag" data-i18n="tour1Tag2">Приватный тур</span>
+                        <span class="feature-tag" data-i18n="tour1Tag3">3 языка</span>
                     </div>
                     <div class="tour-footer">
-                        <span class="tour-price">от €200</span>
-                        <button class="details-button" onclick="event.stopPropagation(); openModal('modal1')">Детали тура</button>
+                        <span class="tour-price" data-i18n="tour1Price">от €200</span>
+                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); openModal('modal1')">Детали тура</button>
                     </div>
                 </div>
             </div>
@@ -933,27 +992,27 @@
                 </div>
                 <div class="tour-content">
                     <div class="tour-header">
-                        <h3 class="tour-title">Monaco Coastline Journey</h3>
-                        <span class="tour-duration">6 часов</span>
+                        <h3 class="tour-title" data-i18n="tour2Title">Monaco Coastline Journey</h3>
+                        <span class="tour-duration" data-i18n="tour2Duration">6 часов</span>
                     </div>
-                    <p class="tour-tagline">Создайте свой идеальный маршрут</p>
+                    <p class="tour-tagline" data-i18n="tour2Tagline">Создайте свой идеальный маршрут</p>
                     <div class="tour-highlights">
-                        <h4>Основные моменты:</h4>
+                        <h4 data-i18n="highlightsLabel">Основные моменты:</h4>
                         <ul>
-                            <li>Средневековый Эз и парфюмерия Fragonard</li>
-                            <li>Монако: дворец, собор, музей океанографии</li>
-                            <li>Монте-Карло: казино и роскошь</li>
-                            <li>Полная гибкость маршрута</li>
+                            <li data-i18n="tour2H1">Средневековый Эз и парфюмерия Fragonard</li>
+                            <li data-i18n="tour2H2">Монако: дворец, собор, музей океанографии</li>
+                            <li data-i18n="tour2H3">Монте-Карло: казино и роскошь</li>
+                            <li data-i18n="tour2H4">Полная гибкость маршрута</li>
                         </ul>
                     </div>
                     <div class="tour-features">
-                        <span class="feature-tag">VIP опыт</span>
-                        <span class="feature-tag">Гид на всех остановках</span>
-                        <span class="feature-tag">Вода включена</span>
+                        <span class="feature-tag" data-i18n="tour2Tag1">VIP опыт</span>
+                        <span class="feature-tag" data-i18n="tour2Tag2">Гид на всех остановках</span>
+                        <span class="feature-tag" data-i18n="tour2Tag3">Вода включена</span>
                     </div>
                     <div class="tour-footer">
-                        <span class="tour-price">от €300</span>
-                        <button class="details-button" onclick="event.stopPropagation(); openModal('modal2')">Детали тура</button>
+                        <span class="tour-price" data-i18n="tour2Price">от €300</span>
+                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); openModal('modal2')">Детали тура</button>
                     </div>
                 </div>
             </div>
@@ -964,27 +1023,27 @@
                 </div>
                 <div class="tour-content">
                     <div class="tour-header">
-                        <h3 class="tour-title">Grand Riviera Tour</h3>
-                        <span class="tour-duration">8 часов</span>
+                        <h3 class="tour-title" data-i18n="tour3Title">Grand Riviera Tour</h3>
+                        <span class="tour-duration" data-i18n="tour3Duration">8 часов</span>
                     </div>
-                    <p class="tour-tagline">Всё лучшее за один день</p>
+                    <p class="tour-tagline" data-i18n="tour3Tagline">Всё лучшее за один день</p>
                     <div class="tour-highlights">
-                        <h4>Основные моменты:</h4>
+                        <h4 data-i18n="highlightsLabel">Основные моменты:</h4>
                         <ul>
-                            <li>Монако, Эз, Сен-Поль-де-Ванс</li>
-                            <li>Антиб и Канны с гидом</li>
-                            <li>Захватывающие пейзажи</li>
-                            <li>Приватный опыт для вашей семьи</li>
+                            <li data-i18n="tour3H1">Монако, Эз, Сен-Поль-де-Ванс</li>
+                            <li data-i18n="tour3H2">Антиб и Канны с гидом</li>
+                            <li data-i18n="tour3H3">Захватывающие пейзажи</li>
+                            <li data-i18n="tour3H4">Приватный опыт для вашей семьи</li>
                         </ul>
                     </div>
                     <div class="tour-features">
-                        <span class="feature-tag">Полный день</span>
-                        <span class="feature-tag">6 локаций</span>
-                        <span class="feature-tag">Макс комфорт</span>
+                        <span class="feature-tag" data-i18n="tour3Tag1">Полный день</span>
+                        <span class="feature-tag" data-i18n="tour3Tag2">6 локаций</span>
+                        <span class="feature-tag" data-i18n="tour3Tag3">Макс комфорт</span>
                     </div>
                     <div class="tour-footer">
-                        <span class="tour-price">от €450</span>
-                        <button class="details-button" onclick="event.stopPropagation(); openModal('modal3')">Детали тура</button>
+                        <span class="tour-price" data-i18n="tour3Price">от €450</span>
+                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); openModal('modal3')">Детали тура</button>
                     </div>
                 </div>
             </div>
@@ -995,27 +1054,27 @@
                 </div>
                 <div class="tour-content">
                     <div class="tour-header">
-                        <h3 class="tour-title">Monaco by Night</h3>
-                        <span class="tour-duration">4 часа</span>
+                        <h3 class="tour-title" data-i18n="tour4Title">Monaco by Night</h3>
+                        <span class="tour-duration" data-i18n="tour4Duration">4 часа</span>
                     </div>
-                    <p class="tour-tagline">Волшебство вечернего княжества</p>
+                    <p class="tour-tagline" data-i18n="tour4Tagline">Волшебство вечернего княжества</p>
                     <div class="tour-highlights">
-                        <h4>Основные моменты:</h4>
+                        <h4 data-i18n="highlightsLabel">Основные моменты:</h4>
                         <ul>
-                            <li>Вечерний Эз с уникальными видами</li>
-                            <li>Панорама освещённого Монако</li>
-                            <li>Дворец и собор в ночной подсветке</li>
-                            <li>Казино Монте-Карло ночью</li>
+                            <li data-i18n="tour4H1">Вечерний Эз с уникальными видами</li>
+                            <li data-i18n="tour4H2">Панорама освещённого Монако</li>
+                            <li data-i18n="tour4H3">Дворец и собор в ночной подсветке</li>
+                            <li data-i18n="tour4H4">Казино Монте-Карло ночью</li>
                         </ul>
                     </div>
                     <div class="tour-features">
-                        <span class="feature-tag">Вечерний тур</span>
-                        <span class="feature-tag">Романтика</span>
-                        <span class="feature-tag">Фотостопы</span>
+                        <span class="feature-tag" data-i18n="tour4Tag1">Вечерний тур</span>
+                        <span class="feature-tag" data-i18n="tour4Tag2">Романтика</span>
+                        <span class="feature-tag" data-i18n="tour4Tag3">Фотостопы</span>
                     </div>
                     <div class="tour-footer">
-                        <span class="tour-price">от €200</span>
-                        <button class="details-button" onclick="event.stopPropagation(); openModal('modal4')">Детали тура</button>
+                        <span class="tour-price" data-i18n="tour4Price">от €200</span>
+                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); openModal('modal4')">Детали тура</button>
                     </div>
                 </div>
             </div>
@@ -1027,11 +1086,11 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close" onclick="closeModal('modal1')">&times;</span>
-                <h2>Monaco Majesty: Private Tailor-Made Tour</h2>
-                <p style="margin-top: 10px; opacity: 0.9;">4 часа роскоши и истории княжества</p>
+                <h2 data-i18n="modal1Title">Monaco Majesty: Private Tailor-Made Tour</h2>
+                <p style="margin-top: 10px; opacity: 0.9;" data-i18n="modal1Subtitle">4 часа роскоши и истории княжества</p>
             </div>
             <div class="modal-body">
-                <h3>📸 Фотогалерея</h3>
+                <h3 data-i18n="modal1Gallery">📸 Фотогалерея</h3>
                 <div class="modal-gallery">
                     <!-- ИНСТРУКЦИЯ: Замените src на ваши реальные фото -->
                     <img src="./images/MC_magesty_01.jpg" alt="Monaco view" class="gallery-image" onclick="openLightbox(this.src, 'gallery1')">
@@ -1040,66 +1099,66 @@
                     <img src="./images/MC_majesty_04.jpg" alt="Palace" class="gallery-image" onclick="openLightbox(this.src, 'gallery1')">
                 </div>
 
-                <h3>✨ О туре</h3>
-                <p>Окунитесь в гламур Монако на приватном туре: прогуляйтесь по гавани, полной яхт, исследуйте Дворец Принца, испытайте удачу в казино Монте-Карло и почувствуйте адреналин трассы Формулы 1.</p>
+                <h3 data-i18n="modal1About">✨ О туре</h3>
+                <p data-i18n="modal1AboutText">Окунитесь в гламур Монако на приватном туре: прогуляйтесь по гавани, полной яхт, исследуйте Дворец Принца, испытайте удачу в казино Монте-Карло и почувствуйте адреналин трассы Формулы 1.</p>
 
-                <h3>🎯 Основные моменты</h3>
+                <h3 data-i18n="modal1Highlights">🎯 Основные моменты</h3>
                 <ul>
-                    <li>Средневековая деревня Эз: мощеные улочки и парфюмерная фабрика</li>
-                    <li>Исследуйте старый город Монако и Дворец Принца с инсайдерскими историями от гида</li>
-                    <li>Погрузитесь в гламур Монте-Карло на площади Казино и трассе Формулы 1</li>
-                    <li>Полная гибкость — настройте остановки и темп для VIP-опыта</li>
-                    <li>Эксклюзивная остановка с панорамным видом на Монако</li>
+                    <li data-i18n="modal1HL1">Средневековая деревня Эз: мощеные улочки и парфюмерная фабрика</li>
+                    <li data-i18n="modal1HL2">Исследуйте старый город Монако и Дворец Принца с инсайдерскими историями от гида</li>
+                    <li data-i18n="modal1HL3">Погрузитесь в гламур Монте-Карло на площади Казино и трассе Формулы 1</li>
+                    <li data-i18n="modal1HL4">Полная гибкость — настройте остановки и темп для VIP-опыта</li>
+                    <li data-i18n="modal1HL5">Эксклюзивная остановка с панорамным видом на Монако</li>
                 </ul>
 
-                <h3>🗺️ Маршрут</h3>
+                <h3 data-i18n="modal1Route">🗺️ Маршрут</h3>
                 <div class="itinerary-item">
-                    <strong>Мон-Борон, Ницца</strong> (10 мин)<br>
-                    Потрясающий вид на Бухту Ангелов и холмы Ниццы
+                    <strong data-i18n="modal1Stop1">Мон-Борон, Ницца</strong> (10 мин)<br>
+                    <span data-i18n="modal1Stop1Desc">Потрясающий вид на Бухту Ангелов и холмы Ниццы</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>Эз</strong> (45 мин)<br>
-                    Средневековая деревня на скале с захватывающими видами
+                    <strong data-i18n="modal1Stop2">Эз</strong> (45 мин)<br>
+                    <span data-i18n="modal1Stop2Desc">Средневековая деревня на скале с захватывающими видами</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>Парфюмерия Fragonard</strong> (45 мин, опционально)<br>
-                    Экскурсия по парфюмерной фабрике
+                    <strong data-i18n="modal1Stop3">Парфюмерия Fragonard</strong> (45 мин, опционально)<br>
+                    <span data-i18n="modal1Stop3Desc">Экскурсия по парфюмерной фабрике</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>Ла-Тюрби</strong> (1.5 часа, опционально)<br>
-                    Римский трофей Августа с панорамными видами
+                    <strong data-i18n="modal1Stop4">Ла-Тюрби</strong> (1.5 часа, опционально)<br>
+                    <span data-i18n="modal1Stop4Desc">Римский трофей Августа с панорамными видами</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>Monaco City</strong> (1 час)<br>
-                    Дворец Принца, собор, старый город
+                    <strong data-i18n="modal1Stop5">Monaco City</strong> (1 час)<br>
+                    <span data-i18n="modal1Stop5Desc">Дворец Принца, собор, старый город</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>Казино Монте-Карло</strong> (40 мин)<br>
-                    Легендарное казино, Отель де Пари, трасса Формулы 1
+                    <strong data-i18n="modal1Stop6">Казино Монте-Карло</strong> (40 мин)<br>
+                    <span data-i18n="modal1Stop6Desc">Легендарное казино, Отель де Пари, трасса Формулы 1</span>
                 </div>
 
-                <h3>✅ Что включено</h3>
+                <h3 data-i18n="modal1Included">✅ Что включено</h3>
                 <div class="includes-grid">
-                    <div class="includes-item included">Трансфер от/до вашего отеля</div>
-                    <div class="includes-item included">Персональный водитель</div>
-                    <div class="includes-item included">Гид на всех остановках</div>
-                    <div class="includes-item included">Посещение парфюмерии</div>
-                    <div class="includes-item included">Вода в бутылках</div>
-                    <div class="includes-item not-included">Еда и напитки</div>
-                    <div class="includes-item not-included">Вход во Дворец Принца</div>
-                    <div class="includes-item not-included">Вход в Океанографический музей</div>
+                    <div class="includes-item included" data-i18n="modal1Inc1">Трансфер от/до вашего отеля</div>
+                    <div class="includes-item included" data-i18n="modal1Inc2">Персональный водитель</div>
+                    <div class="includes-item included" data-i18n="modal1Inc3">Гид на всех остановках</div>
+                    <div class="includes-item included" data-i18n="modal1Inc4">Посещение парфюмерии</div>
+                    <div class="includes-item included" data-i18n="modal1Inc5">Вода в бутылках</div>
+                    <div class="includes-item not-included" data-i18n="modal1NotInc1">Еда и напитки</div>
+                    <div class="includes-item not-included" data-i18n="modal1NotInc2">Вход во Дворец Принца</div>
+                    <div class="includes-item not-included" data-i18n="modal1NotInc3">Вход в Океанографический музей</div>
                 </div>
 
-                <h3>ℹ️ Важная информация</h3>
+                <h3 data-i18n="modal1Info">ℹ️ Важная информация</h3>
                 <ul>
-                    <li><strong>Языки:</strong> Английский, Французский, Русский</li>
-                    <li><strong>Трансфер:</strong> 6 точек сбора (Ницца, Сен-Жан-Кап-Ферра, Вильнёв-Лубе, Антиб и др.)</li>
-                    <li><strong>Бесплатная отмена:</strong> За 24 часа до начала</li>
-                    <li><strong>Бронь без оплаты:</strong> Забронируйте сейчас, платите позже</li>
+                    <li><strong data-i18n="modal1InfoLang">Языки:</strong> <span data-i18n="modal1InfoLangText">Английский, Французский, Русский</span></li>
+                    <li><strong data-i18n="modal1InfoPickup">Трансфер:</strong> <span data-i18n="modal1InfoPickupText">6 точек сбора (Ницца, Сен-Жан-Кап-Ферра, Вильнёв-Лубе, Антиб и др.)</span></li>
+                    <li><strong data-i18n="modal1InfoCancel">Бесплатная отмена:</strong> <span data-i18n="modal1InfoCancelText">За 24 часа до начала</span></li>
+                    <li><strong data-i18n="modal1InfoReserve">Бронь без оплаты:</strong> <span data-i18n="modal1InfoReserveText">Забронируйте сейчас, платите позже</span></li>
                 </ul>
 
                 <div style="text-align: center;">
-                    <a href="https://widgets.bokun.io/online-sales/your-booking-link" target="_blank" class="book-cta">Забронировать тур</a>
+                    <a href="https://widgets.bokun.io/online-sales/your-booking-link" target="_blank" class="book-cta" data-i18n="bookButton">Забронировать тур</a>
                 </div>
             </div>
         </div>
@@ -1110,8 +1169,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close" onclick="closeModal('modal2')">&times;</span>
-                <h2>Monaco Coastline Journey</h2>
-                <p style="margin-top: 10px; opacity: 0.9;">6 часов вашего идеального путешествия</p>
+                <h2 data-i18n="modal2Title">Monaco Coastline Journey</h2>
+                <p style="margin-top: 10px; opacity: 0.9;" data-i18n="modal2Subtitle">6 часов вашего идеального путешествия</p>
             </div>
             <div class="modal-body">
                 <h3>📸 Фотогалерея</h3>
@@ -1122,63 +1181,63 @@
                     <img src="./images/MC_coast_04.jpg" alt="Views" class="gallery-image" onclick="openLightbox(this.src, 'gallery2')">
                 </div>
 
-                <h3>✨ О туре</h3>
-                <p>Создайте своё лучшее путешествие по побережью Монако с нашим приватным туром на авто! Вы выбираете, где остановиться, что пропустить и сколько времени провести — каждая деталь подстроена под ваши желания.</p>
+                <h3 data-i18n="modal2About">✨ О туре</h3>
+                <p data-i18n="modal2AboutText">Создайте своё лучшее путешествие по побережью Монако с нашим приватным туром на авто! Вы выбираете, где остановиться, что пропустить и сколько времени провести — каждая деталь подстроена под ваши желания.</p>
 
-                <h3>🎯 Основные моменты</h3>
+                <h3 data-i18n="modal2Highlights">🎯 Основные моменты</h3>
                 <ul>
-                    <li>Средневековая деревня Эз: мощеные улочки и парфюмерная фабрика</li>
-                    <li>Знаковые места Монако: Дворец Принца и трасса Формулы 1</li>
-                    <li>Гламур Монте-Карло: роскошь Казино и Отель де Пари</li>
-                    <li>Полная кастомизация под вас: приватный гид, внимательный к вашим предпочтениям</li>
-                    <li>Живописные поездки: дорога Moyenne Corniche, виды на Средиземное море</li>
+                    <li data-i18n="modal2HL1">Средневековая деревня Эз: мощеные улочки и парфюмерная фабрика</li>
+                    <li data-i18n="modal2HL2">Знаковые места Монако: Дворец Принца и трасса Формулы 1</li>
+                    <li data-i18n="modal2HL3">Гламур Монте-Карло: роскошь Казино и Отель де Пари</li>
+                    <li data-i18n="modal2HL4">Полная кастомизация под вас: приватный гид, внимательный к вашим предпочтениям</li>
+                    <li data-i18n="modal2HL5">Живописные поездки: дорога Moyenne Corniche, виды на Средиземное море</li>
                 </ul>
 
-                <h3>🗺️ Маршрут</h3>
+                <h3 data-i18n="modal2Route">🗺️ Маршрут</h3>
                 <div class="itinerary-item">
-                    <strong>Панорамные точки</strong> (20 мин)<br>
-                    Фотостопы с видами на Бухту Ангелов
+                    <strong data-i18n="modal2Stop1">Панорамные точки</strong> (20 мин)<br>
+                    <span data-i18n="modal2Stop1Desc">Фотостопы с видами на Бухту Ангелов</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>Эз</strong> (1 час 45 мин)<br>
-                    Средневековая деревня, гид-экскурсия, свободное время
+                    <strong data-i18n="modal2Stop2">Эз</strong> (1 час 45 мин)<br>
+                    <span data-i18n="modal2Stop2Desc">Средневековая деревня, гид-экскурсия, свободное время</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>Парфюмерия Fragonard</strong> (опционально)<br>
-                    Гид-тур и шопинг в парфюмерии
+                    <strong data-i18n="modal2Stop3">Парфюмерия Fragonard</strong> (опционально)<br>
+                    <span data-i18n="modal2Stop3Desc">Гид-тур и шопинг в парфюмерии</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>Ла-Тюрби</strong> (20 мин, опционально)<br>
-                    Римский Трофей Августа
+                    <strong data-i18n="modal2Stop4">Ла-Тюрби</strong> (20 мин, опционально)<br>
+                    <span data-i18n="modal2Stop4Desc">Римский Трофей Августа</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>Monaco City</strong> (1.5 часа)<br>
-                    Гид-экскурсия по старому городу, шопинг
+                    <strong data-i18n="modal2Stop5">Monaco City</strong> (1.5 часа)<br>
+                    <span data-i18n="modal2Stop5Desc">Гид-экскурсия по старому городу, шопинг</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>Монте-Карло</strong> (1.5 часа)<br>
-                    Казино, свободное время, прогулка
+                    <strong data-i18n="modal2Stop6">Монте-Карло</strong> (1.5 часа)<br>
+                    <span data-i18n="modal2Stop6Desc">Казино, свободное время, прогулка</span>
                 </div>
 
-                <h3>✅ Что включено</h3>
+                <h3 data-i18n="modal2Included">✅ Что включено</h3>
                 <div class="includes-grid">
-                    <div class="includes-item included">Приватный гид/водитель</div>
-                    <div class="includes-item included">Трансфер на авто с кондиционером</div>
-                    <div class="includes-item included">Трансфер от/до отеля</div>
-                    <div class="includes-item included">Гид-тур по парфюмерии в Эз</div>
-                    <div class="includes-item included">Входной билет в Старый Эз</div>
-                    <div class="includes-item included">Пешая экскурсия (по желанию)</div>
-                    <div class="includes-item included">Вода в бутылках</div>
-                    <div class="includes-item not-included">Еда и напитки</div>
-                    <div class="includes-item not-included">Вход во Дворец Принца</div>
-                    <div class="includes-item not-included">Вход в Океанографический музей</div>
+                    <div class="includes-item included" data-i18n="modal2Inc1">Приватный гид/водитель</div>
+                    <div class="includes-item included" data-i18n="modal2Inc2">Трансфер на авто с кондиционером</div>
+                    <div class="includes-item included" data-i18n="modal2Inc3">Трансфер от/до отеля</div>
+                    <div class="includes-item included" data-i18n="modal2Inc4">Гид-тур по парфюмерии в Эз</div>
+                    <div class="includes-item included" data-i18n="modal2Inc5">Входной билет в Старый Эз</div>
+                    <div class="includes-item included" data-i18n="modal2Inc6">Пешая экскурсия (по желанию)</div>
+                    <div class="includes-item included" data-i18n="modal2Inc7">Вода в бутылках</div>
+                    <div class="includes-item not-included" data-i18n="modal2NotInc1">Еда и напитки</div>
+                    <div class="includes-item not-included" data-i18n="modal2NotInc2">Вход во Дворец Принца</div>
+                    <div class="includes-item not-included" data-i18n="modal2NotInc3">Вход в Океанографический музей</div>
                 </div>
 
-                <h3>ℹ️ Важная информация</h3>
+                <h3 data-i18n="modal2ImportantInfo">ℹ️ Важная информация</h3>
                 <ul>
-                    <li><strong>Языки:</strong> Английский, Французский, Русский</li>
-                    <li><strong>Трансфер:</strong> 5 точек сбора</li>
-                    <li><strong>Бесплатная отмена:</strong> За 24 часа до начала</li>
+                    <li><strong data-i18n="modal2InfoLang">Языки:</strong> <span data-i18n="modal2InfoLangText">Английский, Французский, Русский</span></li>
+                    <li><strong data-i18n="modal2InfoTransfer">Трансфер:</strong> <span data-i18n="modal2InfoTransferText">5 точек сбора</span></li>
+                    <li><strong data-i18n="modal2InfoCancel">Бесплатная отмена:</strong> <span data-i18n="modal2InfoCancelText">За 24 часа до начала</span></li>
                 </ul>
 
                 <div style="text-align: center;">
@@ -1193,8 +1252,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close" onclick="closeModal('modal3')">&times;</span>
-                <h2>Grand Riviera Tour</h2>
-                <p style="margin-top: 10px; opacity: 0.9;">8 часов магии Французской Ривьеры</p>
+                <h2 data-i18n="modal3Title">Grand Riviera Tour</h2>
+                <p style="margin-top: 10px; opacity: 0.9;" data-i18n="modal3Subtitle">8 часов магии Французской Ривьеры</p>
             </div>
             <div class="modal-body">
                 <h3>📸 Фотогалерея</h3>
@@ -1205,57 +1264,57 @@
                     <img src="./images/grandtour_04.jpg" alt="Saint Paul" class="gallery-image" onclick="openLightbox(this.src, 'gallery3')">
                 </div>
 
-                <h3>✨ О туре</h3>
-                <p>Очарование Французской Ривьеры выходит за рамки известных красот Ниццы, Монако и Канн. Позвольте мне провести вас в завораживающее путешествие по скрытым жемчужинам региона.</p>
+                <h3 data-i18n="modal3About">✨ О туре</h3>
+                <p data-i18n="modal3AboutText">Очарование Французской Ривьеры выходит за рамки известных красот Ниццы, Монако и Канн. Позвольте мне провести вас в завораживающее путешествие по скрытым жемчужинам региона.</p>
 
-                <h3>🎯 Основные моменты</h3>
+                <h3 data-i18n="modal3Highlights">🎯 Основные моменты</h3>
                 <ul>
-                    <li>Приватный опыт. Только ваша семья или близкие друзья</li>
-                    <li>Ваш личный гид на каждой остановке</li>
-                    <li>Потрясающие пейзажи и захватывающие виды</li>
-                    <li>6 уникальных локаций за один день</li>
+                    <li data-i18n="modal3HL1">Приватный опыт. Только ваша семья или близкие друзья</li>
+                    <li data-i18n="modal3HL2">Ваш личный гид на каждой остановке</li>
+                    <li data-i18n="modal3HL3">Потрясающие пейзажи и захватывающие виды</li>
+                    <li data-i18n="modal3HL4">6 уникальных локаций за один день</li>
                 </ul>
 
-                <h3>🗺️ Полный маршрут</h3>
+                <h3 data-i18n="modal3Route">🗺️ Полный маршрут</h3>
                 <div class="itinerary-item">
-                    <strong>1. Мон-Борон</strong> (7 мин)<br>
-                    Потрясающий вид на Бухту Ангелов и холмы Ниццы
+                    <strong data-i18n="modal3Stop1">1. Мон-Борон</strong> (7 мин)<br>
+                    <span data-i18n="modal3Stop1Desc">Потрясающий вид на Бухту Ангелов и холмы Ниццы</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>2. Эз</strong> (45 мин)<br>
-                    Средневековая деревня на скале высотой 400 метров
+                    <strong data-i18n="modal3Stop2">2. Эз</strong> (45 мин)<br>
+                    <span data-i18n="modal3Stop2Desc">Средневековая деревня на скале высотой 400 метров</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>3. Парфюмерия Fragonard</strong> (45 мин)<br>
-                    Ароматный оазис
+                    <strong data-i18n="modal3Stop3">3. Парфюмерия Fragonard</strong> (45 мин)<br>
+                    <span data-i18n="modal3Stop3Desc">Ароматный оазис</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>4. Монако и Монте-Карло</strong> (1 час 45 мин)<br>
-                    Дворец, собор, музей, казино, трасса Формулы 1
+                    <strong data-i18n="modal3Stop4">4. Монако и Монте-Карло</strong> (1 час 45 мин)<br>
+                    <span data-i18n="modal3Stop4Desc">Дворец, собор, музей, казино, трасса Формулы 1</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>5. Сен-Поль-де-Ванс</strong> (1 час)<br>
-                    Живописная деревня художников
+                    <strong data-i18n="modal3Stop5">5. Сен-Поль-де-Ванс</strong> (1 час)<br>
+                    <span data-i18n="modal3Stop5Desc">Живописная деревня художников</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>6. Антиб</strong> (1 час)<br>
-                    Средневековый шарм на скалистом утёсе
+                    <strong data-i18n="modal3Stop6">6. Антиб</strong> (1 час)<br>
+                    <span data-i18n="modal3Stop6Desc">Средневековый шарм на скалистом утёсе</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>7. Канны</strong> (1 час)<br>
-                    Дворец Фестивалей, набережная Круазетт
+                    <strong data-i18n="modal3Stop7">7. Канны</strong> (1 час)<br>
+                    <span data-i18n="modal3Stop7Desc">Дворец Фестивалей, набережная Круазетт</span>
                 </div>
 
-                <h3>✅ Что включено</h3>
+                <h3 data-i18n="modal3Included">✅ Что включено</h3>
                 <div class="includes-grid">
-                    <div class="includes-item included">Ваш личный гид</div>
-                    <div class="includes-item included">Трансфер от/до отеля</div>
-                    <div class="includes-item included">Авто с кондиционером</div>
-                    <div class="includes-item included">Гид-тур по парфюмерии</div>
-                    <div class="includes-item included">Входной билет в Старый Эз</div>
-                    <div class="includes-item included">Вода в бутылках</div>
-                    <div class="includes-item not-included">Еда и напитки</div>
-                    <div class="includes-item not-included">Входы в музеи</div>
+                    <div class="includes-item included" data-i18n="modal3Inc1">Ваш личный гид</div>
+                    <div class="includes-item included" data-i18n="modal3Inc2">Трансфер от/до отеля</div>
+                    <div class="includes-item included" data-i18n="modal3Inc3">Авто с кондиционером</div>
+                    <div class="includes-item included" data-i18n="modal3Inc4">Гид-тур по парфюмерии</div>
+                    <div class="includes-item included" data-i18n="modal3Inc5">Входной билет в Старый Эз</div>
+                    <div class="includes-item included" data-i18n="modal3Inc6">Вода в бутылках</div>
+                    <div class="includes-item not-included" data-i18n="modal3NotInc1">Еда и напитки</div>
+                    <div class="includes-item not-included" data-i18n="modal3NotInc2">Входы в музеи</div>
                 </div>
 
                 <div style="text-align: center; margin-top: 20px;">
@@ -1270,8 +1329,8 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="close" onclick="closeModal('modal4')">&times;</span>
-                <h2>Monaco by Night</h2>
-                <p style="margin-top: 10px; opacity: 0.9;">4 часа волшебства вечернего княжества</p>
+                <h2 data-i18n="modal4Title">Monaco by Night</h2>
+                <p style="margin-top: 10px; opacity: 0.9;" data-i18n="modal4Subtitle">4 часа волшебства вечернего княжества</p>
             </div>
             <div class="modal-body">
                 <h3>📸 Фотогалерея</h3>
@@ -1282,55 +1341,55 @@
                     <img src="./images/MC_night_04.jpg" alt="Views night" class="gallery-image" onclick="openLightbox(this.src, 'gallery4')">
                 </div>
 
-                <h3>✨ О туре</h3>
-                <p>Откройте для себя красоту Монако ночью на приватном туре. Посетите средневековую деревню Эз и увидьте Дворец Принца, Собор Святого Николая и Казино Монте-Карло в волшебной ночной подсветке.</p>
+                <h3 data-i18n="modal4About">✨ О туре</h3>
+                <p data-i18n="modal4AboutText">Откройте для себя красоту Монако ночью на приватном туре. Посетите средневековую деревню Эз и увидьте Дворец Принца, Собор Святого Николая и Казино Монте-Карло в волшебной ночной подсветке.</p>
 
-                <h3>🎯 Основные моменты</h3>
+                <h3 data-i18n="modal4Highlights">🎯 Основные моменты</h3>
                 <ul>
-                    <li>Потрясающие виды на Средиземное море из средневековой деревни</li>
-                    <li>Восхититесь освещёнными небоскрёбами, яхтами и морем</li>
-                    <li>Увидьте Дворец Принца и Собор в ночной подсветке</li>
-                    <li>Знаменитое Казино Монте-Карло ночью</li>
-                    <li>Испытайте удачу в самом известном казино мира</li>
+                    <li data-i18n="modal4HL1">Потрясающие виды на Средиземное море из средневековой деревни</li>
+                    <li data-i18n="modal4HL2">Восхититесь освещёнными небоскрёбами, яхтами и морем</li>
+                    <li data-i18n="modal4HL3">Увидьте Дворец Принца и Собор в ночной подсветке</li>
+                    <li data-i18n="modal4HL4">Знаменитое Казино Монте-Карло ночью</li>
+                    <li data-i18n="modal4HL5">Испытайте удачу в самом известном казино мира</li>
                 </ul>
 
-                <h3>🗺️ Вечерний маршрут</h3>
+                <h3 data-i18n="modal4Route">🗺️ Вечерний маршрут</h3>
                 <div class="itinerary-item">
-                    <strong>Панорамная точка 1</strong> (10 мин)<br>
-                    Вечерний вид на Бухту Ангелов
+                    <strong data-i18n="modal4Stop1">Панорамная точка 1</strong> (10 мин)<br>
+                    <span data-i18n="modal4Stop1Desc">Вечерний вид на Бухту Ангелов</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>Эз-Виллаж</strong> (30 мин)<br>
-                    Средневековая деревня в вечернем свете
+                    <strong data-i18n="modal4Stop2">Эз-Виллаж</strong> (30 мин)<br>
+                    <span data-i18n="modal4Stop2Desc">Средневековая деревня в вечернем свете</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>Панорама Монако</strong> (5 мин)<br>
-                    Освещённые небоскрёбы и яхты
+                    <strong data-i18n="modal4Stop3">Панорама Монако</strong> (5 мин)<br>
+                    <span data-i18n="modal4Stop3Desc">Освещённые небоскрёбы и яхты</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>Monaco-Ville</strong> (45 мин)<br>
-                    Дворец и Собор в ночной подсветке
+                    <strong data-i18n="modal4Stop4">Monaco-Ville</strong> (45 мин)<br>
+                    <span data-i18n="modal4Stop4Desc">Дворец и Собор в ночной подсветке</span>
                 </div>
                 <div class="itinerary-item">
-                    <strong>Монте-Карло</strong> (1.5 часа)<br>
-                    Казино, Отель де Пари, трасса Формулы 1
+                    <strong data-i18n="modal4Stop5">Монте-Карло</strong> (1.5 часа)<br>
+                    <span data-i18n="modal4Stop5Desc">Казино, Отель де Пари, трасса Формулы 1</span>
                 </div>
 
-                <h3>✅ Что включено</h3>
+                <h3 data-i18n="modal4Included">✅ Что включено</h3>
                 <div class="includes-grid">
-                    <div class="includes-item included">Приватный трансфер</div>
-                    <div class="includes-item included">Живой гид</div>
-                    <div class="includes-item included">Панорамные остановки</div>
-                    <div class="includes-item included">Фото-возможности</div>
-                    <div class="includes-item not-included">Еда и напитки</div>
-                    <div class="includes-item not-included">Вход в Казино</div>
+                    <div class="includes-item included" data-i18n="modal4Inc1">Приватный трансфер</div>
+                    <div class="includes-item included" data-i18n="modal4Inc2">Живой гид</div>
+                    <div class="includes-item included" data-i18n="modal4Inc3">Панорамные остановки</div>
+                    <div class="includes-item included" data-i18n="modal4Inc4">Фото-возможности</div>
+                    <div class="includes-item not-included" data-i18n="modal4NotInc1">Еда и напитки</div>
+                    <div class="includes-item not-included" data-i18n="modal4NotInc2">Вход в Казино</div>
                 </div>
 
-                <h3>ℹ️ Важная информация</h3>
+                <h3 data-i18n="modal4ImportantInfo">ℹ️ Важная информация</h3>
                 <ul>
-                    <li><strong>Не подходит для:</strong> Людей в инвалидных колясках, людей с боязнью высоты</li>
-                    <li><strong>Казино:</strong> Требуется ID для входа, есть дресс-код</li>
-                    <li><strong>Курение:</strong> Запрещено в автомобиле</li>
+                    <li><strong data-i18n="modal4InfoNotSuitable">Не подходит для:</strong> <span data-i18n="modal4InfoNotSuitableText">Людей в инвалидных колясках, людей с боязнью высоты</span></li>
+                    <li><strong data-i18n="modal4InfoCasino">Казино:</strong> <span data-i18n="modal4InfoCasinoText">Требуется ID для входа, есть дресс-код</span></li>
+                    <li><strong data-i18n="modal4InfoSmoking">Курение:</strong> <span data-i18n="modal4InfoSmokingText">Запрещено в автомобиле</span></li>
                 </ul>
 
                 <div style="text-align: center; margin-top: 20px;">
@@ -1343,41 +1402,41 @@
     <!-- Reviews Section -->
     <div class="reviews-section">
         <div class="reviews-container">
-            <h2 class="section-title">Отзывы клиентов</h2>
-            <p class="section-subtitle">Что говорят о наших турах</p>
+            <h2 class="section-title" data-i18n="reviewsTitle">Отзывы клиентов</h2>
+            <p class="section-subtitle" data-i18n="reviewsSubtitle">Что говорят о наших турах</p>
             
             <div class="slider-wrapper">
                 <div class="reviews-slider" id="reviewsSlider">
                     <div class="review-card">
                         <div class="review-content">
                             <div class="review-stars">★★★★★</div>
-                            <p class="review-text">"Потрясающий тур! Наш гид показал нам скрытые жемчужины Монако, о которых мы никогда бы не узнали. Профессионально, познавательно и очень комфортно. Однозначно рекомендую!"</p>
-                            <p class="review-author">Мария и Сергей</p>
-                            <p class="review-date">Сентябрь 2024</p>
+                            <p class="review-text" data-i18n="review1Text">"Потрясающий тур! Наш гид показал нам скрытые жемчужины Монако, о которых мы никогда бы не узнали. Профессионально, познавательно и очень комфортно. Однозначно рекомендую!"</p>
+                            <p class="review-author" data-i18n="review1Author">Мария и Сергей</p>
+                            <p class="review-date" data-i18n="review1Date">Сентябрь 2024</p>
                         </div>
                     </div>
                     <div class="review-card">
                         <div class="review-content">
                             <div class="review-stars">★★★★★</div>
-                            <p class="review-text">"Это был лучший день нашего отпуска! Гранд-тур по Ривьере превзошел все ожидания. Каждая локация была идеально подобрана, а рассказы гида сделали поездку незабываемой."</p>
-                            <p class="review-author">Анна К.</p>
-                            <p class="review-date">Август 2024</p>
+                            <p class="review-text" data-i18n="review2Text">"Это был лучший день нашего отпуска! Гранд-тур по Ривьере превзошел все ожидания. Каждая локация была идеально подобрана, а рассказы гида сделали поездку незабываемой."</p>
+                            <p class="review-author" data-i18n="review2Author">Анна К.</p>
+                            <p class="review-date" data-i18n="review2Date">Август 2024</p>
                         </div>
                     </div>
                     <div class="review-card">
                         <div class="review-content">
                             <div class="review-stars">★★★★★</div>
-                            <p class="review-text">"Приватный тур по Монако ночью — это что-то особенное! Романтично, красиво и очень атмосферно. Спасибо за прекрасно организованную поездку!"</p>
-                            <p class="review-author">Дмитрий и Елена</p>
-                            <p class="review-date">Июль 2024</p>
+                            <p class="review-text" data-i18n="review3Text">"Приватный тур по Монако ночью — это что-то особенное! Романтично, красиво и очень атмосферно. Спасибо за прекрасно организованную поездку!"</p>
+                            <p class="review-author" data-i18n="review3Author">Дмитрий и Елена</p>
+                            <p class="review-date" data-i18n="review3Date">Июль 2024</p>
                         </div>
                     </div>
                     <div class="review-card">
                         <div class="review-content">
                             <div class="review-stars">★★★★★</div>
-                            <p class="review-text">"Отличный сервис и внимание к деталям! Всё было организовано идеально. Гид говорит на трёх языках, что очень удобно. Будем рекомендовать друзьям!"</p>
-                            <p class="review-author">Александр М.</p>
-                            <p class="review-date">Июнь 2024</p>
+                            <p class="review-text" data-i18n="review4Text">"Отличный сервис и внимание к деталям! Всё было организовано идеально. Гид говорит на трёх языках, что очень удобно. Будем рекомендовать друзьям!"</p>
+                            <p class="review-author" data-i18n="review4Author">Александр М.</p>
+                            <p class="review-date" data-i18n="review4Date">Июнь 2024</p>
                         </div>
                     </div>
                 </div>
@@ -1389,43 +1448,43 @@
     <!-- Contact Form Section -->
 <div class="contact-section">
     <div class="contact-container">
-        <h2 class="section-title" style="color: white;">Свяжитесь со мной</h2>
-        <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Задайте вопрос или забронируйте тур прямо сейчас</p>
-        
+        <h2 class="section-title" style="color: white;" data-i18n="contactTitle">Свяжитесь со мной</h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.9);" data-i18n="contactSubtitle">Задайте вопрос или забронируйте тур прямо сейчас</p>
+
         <form class="contact-form" id="contactForm">
             <div class="form-group">
-                <label for="name">Ваше имя *</label>
+                <label for="name" data-i18n="formName">Ваше имя *</label>
                 <input type="text" id="name" name="name" required placeholder="Иван Иванов">
             </div>
-            
+
             <div class="form-group">
-                <label for="email">Email *</label>
+                <label for="email" data-i18n="formEmail">Email *</label>
                 <input type="email" id="email" name="email" required placeholder="ivan@example.com">
             </div>
-            
+
             <div class="form-group">
-                <label for="phone">Телефон</label>
+                <label for="phone" data-i18n="formPhone">Телефон</label>
                 <input type="tel" id="phone" name="phone" placeholder="+7 (900) 123-45-67">
             </div>
-            
+
             <div class="form-group">
-                <label for="tour">Интересующий тур</label>
+                <label for="tour" data-i18n="formTour">Интересующий тур</label>
                 <select id="tour" name="tour">
-                    <option value="">Выберите тур</option>
-                    <option value="monaco-majesty">Monaco Majesty (4 часа)</option>
-                    <option value="monaco-coastline">Monaco Coastline Journey (6 часов)</option>
-                    <option value="grand-riviera">Grand Riviera Tour (8 часов)</option>
-                    <option value="monaco-night">Monaco by Night (4 часа)</option>
-                    <option value="other">Другое</option>
+                    <option value="" data-i18n="formTourSelect">Выберите тур</option>
+                    <option value="monaco-majesty" data-i18n="formOption1">Monaco Majesty (4 часа)</option>
+                    <option value="monaco-coastline" data-i18n="formOption2">Monaco Coastline Journey (6 часов)</option>
+                    <option value="grand-riviera" data-i18n="formOption3">Grand Riviera Tour (8 часов)</option>
+                    <option value="monaco-night" data-i18n="formOption4">Monaco by Night (4 часа)</option>
+                    <option value="other" data-i18n="formOptionOther">Другое</option>
                 </select>
             </div>
-            
+
             <div class="form-group">
-                <label for="message">Ваше сообщение *</label>
+                <label for="message" data-i18n="formMessage">Ваше сообщение *</label>
                 <textarea id="message" name="message" required placeholder="Расскажите о ваших пожеланиях..."></textarea>
             </div>
-            
-            <button type="submit" class="submit-button">Отправить запрос</button>
+
+            <button type="submit" class="submit-button" data-i18n="formSubmit">Отправить запрос</button>
             
             <div id="formMessage" class="form-message"></div>
         </form>
@@ -1434,22 +1493,22 @@
 
     <div class="about-section">
         <div class="about-content">
-            <h2 class="section-title">Почему я?</h2>
-            <p>Я живу на Французской Ривьере уже более 10 лет и знаю каждый уголок этого волшебного региона. Мои туры — это не просто экскурсии, а погружение в местную культуру, истории и секретные места, о которых не пишут в путеводителях.</p>
-            <p>Работаю только с небольшими группами или индивидуально, чтобы каждый тур был максимально персональным и комфортным для вас. Говорю на трёх языках: английском, французском и русском.</p>
-            
+            <h2 class="section-title" data-i18n="aboutTitle">Почему я?</h2>
+            <p data-i18n="aboutText1">Я живу на Французской Ривьере уже более 10 лет и знаю каждый уголок этого волшебного региона. Мои туры — это не просто экскурсии, а погружение в местную культуру, истории и секретные места, о которых не пишут в путеводителях.</p>
+            <p data-i18n="aboutText2">Работаю только с небольшими группами или индивидуально, чтобы каждый тур был максимально персональным и комфортным для вас. Говорю на трёх языках: английском, французском и русском.</p>
+
             <div class="stats">
                 <div class="stat-item">
                     <span class="stat-number">500+</span>
-                    <span class="stat-label">Довольных гостей</span>
+                    <span class="stat-label" data-i18n="stat1Label">Довольных гостей</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">10+</span>
-                    <span class="stat-label">Лет на Ривьере</span>
+                    <span class="stat-label" data-i18n="stat2Label">Лет на Ривьере</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">5.0★</span>
-                    <span class="stat-label">Рейтинг на GetYourGuide</span>
+                    <span class="stat-label" data-i18n="stat3Label">Рейтинг на GetYourGuide</span>
                 </div>
             </div>
         </div>
@@ -1466,10 +1525,10 @@
     </div>
 
     <footer>
-        <p> Свяжитесь со мной для бронирования или вопросов</p>
+        <p data-i18n="footerContact"> Свяжитесь со мной для бронирования или вопросов</p>
         <p> mail: azurepictours@gmail.com</p>
         <p> Phone: +33(0)6.24.72.99.83</p>
-        <p style="margin-top: 20px; opacity: 0.8;">© 2025 Приватные туры по Французской Ривьере. Все права защищены.</p>
+        <p style="margin-top: 20px; opacity: 0.8;" data-i18n="footerRights">© 2025 Приватные туры по Французской Ривьере. Все права защищены.</p>
     </footer>
 
     <!-- Floating Social Buttons -->
@@ -1498,6 +1557,817 @@
 </div>
 
     <script>
+        // Translations object
+        const translations = {
+            ru: {
+                // Hero section
+                heroTitle: "Французская Ривьера с местным гидом",
+                heroSubtitle: "Откройте для себя настоящую Ривьеру: Монако, Канны, Ницца, Антиб. Приватные туры с персональным подходом",
+                heroButton: "Выбрать тур",
+
+                // Tours section
+                toursTitle: "Мои приватные туры",
+                toursSubtitle: "Каждый тур создан с любовью к Ривьере и вниманием к деталям. Только для вас и ваших близких. Бесплатная отмена за 24 часа.",
+
+                // Tour cards
+                tour1Title: "Monaco Majesty",
+                tour1Duration: "4 часа",
+                tour1Tagline: "Роскошь княжества в одном туре",
+                tour1Price: "от €200",
+
+                tour2Title: "Monaco Coastline Journey",
+                tour2Duration: "6 часов",
+                tour2Tagline: "Создайте свой идеальный маршрут",
+                tour2Price: "от €300",
+
+                tour3Title: "Grand Riviera Tour",
+                tour3Duration: "8 часов",
+                tour3Tagline: "Всё лучшее за один день",
+                tour3Price: "от €450",
+
+                tour4Title: "Monaco by Night",
+                tour4Duration: "4 часа",
+                tour4Tagline: "Волшебство вечернего княжества",
+                tour4Price: "от €200",
+
+                highlightsLabel: "Основные моменты:",
+                detailsButton: "Детали тура",
+                bookButton: "Забронировать тур",
+
+                // Tour 1 highlights
+                tour1H1: "Средневековая деревня Эз и парфюмерия",
+                tour1H2: "Дворец Принца с инсайдерскими историями",
+                tour1H3: "Казино Монте-Карло и трасса Формулы 1",
+                tour1H4: "Панорамные виды на Монако",
+
+                // Tour 2 highlights
+                tour2H1: "Средневековый Эз и парфюмерия Fragonard",
+                tour2H2: "Монако: дворец, собор, музей океанографии",
+                tour2H3: "Монте-Карло: казино и роскошь",
+                tour2H4: "Полная гибкость маршрута",
+
+                // Tour 3 highlights
+                tour3H1: "Монако, Эз, Сен-Поль-де-Ванс",
+                tour3H2: "Антиб и Канны с гидом",
+                tour3H3: "Захватывающие пейзажи",
+                tour3H4: "Приватный опыт для вашей семьи",
+
+                // Tour 4 highlights
+                tour4H1: "Вечерний Эз с уникальными видами",
+                tour4H2: "Панорама освещённого Монако",
+                tour4H3: "Дворец и собор в ночной подсветке",
+                tour4H4: "Казино Монте-Карло ночью",
+
+                // Feature tags Tour 1
+                tour1Tag1: "Трансфер включен",
+                tour1Tag2: "Приватный тур",
+                tour1Tag3: "3 языка",
+
+                // Feature tags Tour 2
+                tour2Tag1: "VIP опыт",
+                tour2Tag2: "Гид на всех остановках",
+                tour2Tag3: "Вода включена",
+
+                // Feature tags Tour 3
+                tour3Tag1: "Полный день",
+                tour3Tag2: "6 локаций",
+                tour3Tag3: "Макс комфорт",
+
+                // Feature tags Tour 4
+                tour4Tag1: "Вечерний тур",
+                tour4Tag2: "Романтика",
+                tour4Tag3: "Фотостопы",
+
+                // Reviews
+                review1Text: "Потрясающий тур! Наш гид показал нам скрытые жемчужины Монако, о которых мы никогда бы не узнали. Профессионально, познавательно и очень комфортно. Однозначно рекомендую!",
+                review1Author: "Мария и Сергей",
+                review1Date: "Сентябрь 2024",
+
+                review2Text: "Это был лучший день нашего отпуска! Гранд-тур по Ривьере превзошел все ожидания. Каждая локация была идеально подобрана, а рассказы гида сделали поездку незабываемой.",
+                review2Author: "Анна К.",
+                review2Date: "Август 2024",
+
+                review3Text: "Приватный тур по Монако ночью — это что-то особенное! Романтично, красиво и очень атмосферно. Спасибо за прекрасно организованную поездку!",
+                review3Author: "Дмитрий и Елена",
+                review3Date: "Июль 2024",
+
+                review4Text: "Отличный сервис и внимание к деталям! Всё было организовано идеально. Гид говорит на трёх языках, что очень удобно. Будем рекомендовать друзьям!",
+                review4Author: "Александр М.",
+                review4Date: "Июнь 2024",
+
+                // Form options
+                formOption1: "Monaco Majesty (4 часа)",
+                formOption2: "Monaco Coastline Journey (6 часов)",
+                formOption3: "Grand Riviera Tour (8 часов)",
+                formOption4: "Monaco by Night (4 часа)",
+                formOptionOther: "Другое",
+
+                // Modal 1: Monaco Majesty
+                modal1Title: "Monaco Majesty: Private Tailor-Made Tour",
+                modal1Subtitle: "4 часа роскоши и истории княжества",
+                modal1Gallery: "📸 Фотогалерея",
+                modal1About: "✨ О туре",
+                modal1AboutText: "Окунитесь в гламур Монако на приватном туре: прогуляйтесь по гавани, полной яхт, исследуйте Дворец Принца, испытайте удачу в казино Монте-Карло и почувствуйте адреналин трассы Формулы 1.",
+                modal1Highlights: "🎯 Основные моменты",
+                modal1HL1: "Средневековая деревня Эз: мощеные улочки и парфюмерная фабрика",
+                modal1HL2: "Исследуйте старый город Монако и Дворец Принца с инсайдерскими историями от гида",
+                modal1HL3: "Погрузитесь в гламур Монте-Карло на площади Казино и трассе Формулы 1",
+                modal1HL4: "Полная гибкость — настройте остановки и темп для VIP-опыта",
+                modal1HL5: "Эксклюзивная остановка с панорамным видом на Монако",
+                modal1Route: "🗺️ Маршрут",
+                modal1Stop1: "Мон-Борон, Ницца",
+                modal1Stop1Desc: "Потрясающий вид на Бухту Ангелов и холмы Ниццы",
+                modal1Stop2: "Эз",
+                modal1Stop2Desc: "Средневековая деревня на скале с захватывающими видами",
+                modal1Stop3: "Парфюмерия Fragonard",
+                modal1Stop3Desc: "Экскурсия по парфюмерной фабрике",
+                modal1Stop4: "Ла-Тюрби",
+                modal1Stop4Desc: "Римский трофей Августа с панорамными видами",
+                modal1Stop5: "Monaco City",
+                modal1Stop5Desc: "Дворец Принца, собор, старый город",
+                modal1Stop6: "Казино Монте-Карло",
+                modal1Stop6Desc: "Легендарное казино, Отель де Пари, трасса Формулы 1",
+                modal1Included: "✅ Что включено",
+                modal1Inc1: "Трансфер от/до вашего отеля",
+                modal1Inc2: "Персональный водитель",
+                modal1Inc3: "Гид на всех остановках",
+                modal1Inc4: "Посещение парфюмерии",
+                modal1Inc5: "Вода в бутылках",
+                modal1NotInc1: "Еда и напитки",
+                modal1NotInc2: "Вход во Дворец Принца",
+                modal1NotInc3: "Вход в Океанографический музей",
+                modal1Info: "ℹ️ Важная информация",
+                modal1InfoLang: "Языки:",
+                modal1InfoLangText: "Английский, Французский, Русский",
+                modal1InfoPickup: "Трансфер:",
+                modal1InfoPickupText: "6 точек сбора (Ницца, Сен-Жан-Кап-Ферра, Вильнёв-Лубе, Антиб и др.)",
+                modal1InfoCancel: "Бесплатная отмена:",
+                modal1InfoCancelText: "За 24 часа до начала",
+                modal1InfoReserve: "Бронь без оплаты:",
+                modal1InfoReserveText: "Забронируйте сейчас, платите позже",
+
+                // Modal 2: Monaco Coastline
+                modal2Title: "Monaco Coastline Journey",
+                modal2Subtitle: "6 часов вашего идеального путешествия",
+                modal2AboutText: "Создайте своё лучшее путешествие по побережью Монако с нашим приватным туром на авто! Вы выбираете, где остановиться, что пропустить и сколько времени провести — каждая деталь подстроена под ваши желания.",
+                modal2HL1: "Средневековая деревня Эз: мощеные улочки и парфюмерная фабрика",
+                modal2HL2: "Знаковые места Монако: Дворец Принца и трасса Формулы 1",
+                modal2HL3: "Гламур Монте-Карло: роскошь Казино и Отель де Пари",
+                modal2HL4: "Полная кастомизация под вас: приватный гид, внимательный к вашим предпочтениям",
+                modal2HL5: "Живописные поездки: дорога Moyenne Corniche, виды на Средиземное море",
+                modal2Stop1: "Панорамные точки",
+                modal2Stop1Desc: "Фотостопы с видами на Бухту Ангелов",
+                modal2Stop2: "Эз",
+                modal2Stop2Desc: "Средневековая деревня, гид-экскурсия, свободное время",
+                modal2Stop3: "Парфюмерия Fragonard",
+                modal2Stop3Desc: "Гид-тур и шопинг в парфюмерии",
+                modal2Stop4: "Ла-Тюрби",
+                modal2Stop4Desc: "Римский Трофей Августа",
+                modal2Stop5: "Monaco City",
+                modal2Stop5Desc: "Гид-экскурсия по старому городу, шопинг",
+                modal2Stop6: "Монте-Карло",
+                modal2Stop6Desc: "Казино, свободное время, прогулка",
+                modal2Inc1: "Приватный гид/водитель",
+                modal2Inc2: "Трансфер на авто с кондиционером",
+                modal2Inc3: "Трансфер от/до отеля",
+                modal2Inc4: "Гид-тур по парфюмерии в Эз",
+                modal2Inc5: "Входной билет в Старый Эз",
+                modal2Inc6: "Пешая экскурсия (по желанию)",
+                modal2Inc7: "Вода в бутылках",
+                modal2InfoPickupText: "5 точек сбора",
+
+                // Modal 3: Grand Riviera
+                modal3Title: "Grand Riviera Tour",
+                modal3Subtitle: "8 часов магии Французской Ривьеры",
+                modal3AboutText: "Очарование Французской Ривьеры выходит за рамки известных красот Ниццы, Монако и Канн. Позвольте мне провести вас в завораживающее путешествие по скрытым жемчужинам региона.",
+                modal3HL1: "Приватный опыт. Только ваша семья или близкие друзья",
+                modal3HL2: "Ваш личный гид на каждой остановке",
+                modal3HL3: "Потрясающие пейзажи и захватывающие виды",
+                modal3HL4: "6 уникальных локаций за один день",
+                modal3Stop1: "Мон-Борон",
+                modal3Stop1Desc: "Потрясающий вид на Бухту Ангелов и холмы Ниццы",
+                modal3Stop2: "Эз",
+                modal3Stop2Desc: "Средневековая деревня на скале высотой 400 метров",
+                modal3Stop3: "Парфюмерия Fragonard",
+                modal3Stop3Desc: "Ароматный оазис",
+                modal3Stop4: "Монако и Монте-Карло",
+                modal3Stop4Desc: "Дворец, собор, музей, казино, трасса Формулы 1",
+                modal3Stop5: "Сен-Поль-де-Ванс",
+                modal3Stop5Desc: "Живописная деревня художников",
+                modal3Stop6: "Антиб",
+                modal3Stop6Desc: "Средневековый шарм на скалистом утёсе",
+                modal3Stop7: "Канны",
+                modal3Stop7Desc: "Дворец Фестивалей, набережная Круазетт",
+                modal3Inc1: "Ваш личный гид",
+                modal3Inc2: "Трансфер от/до отеля",
+                modal3Inc3: "Авто с кондиционером",
+                modal3Inc4: "Гид-тур по парфюмерии",
+                modal3Inc5: "Входной билет в Старый Эз",
+                modal3Inc6: "Вода в бутылках",
+                modal3NotInc1: "Еда и напитки",
+                modal3NotInc2: "Входы в музеи",
+
+                // Modal 4: Monaco by Night
+                modal4Title: "Monaco by Night",
+                modal4Subtitle: "4 часа волшебства вечернего княжества",
+                modal4AboutText: "Откройте для себя красоту Монако ночью на приватном туре. Посетите средневековую деревню Эз и увидьте Дворец Принца, Собор Святого Николая и Казино Монте-Карло в волшебной ночной подсветке.",
+                modal4HL1: "Потрясающие виды на Средиземное море из средневековой деревни",
+                modal4HL2: "Восхититесь освещёнными небоскрёбами, яхтами и морем",
+                modal4HL3: "Увидьте Дворец Принца и Собор в ночной подсветке",
+                modal4HL4: "Знаменитое Казино Монте-Карло ночью",
+                modal4HL5: "Испытайте удачу в самом известном казино мира",
+                modal4Stop1: "Панорамная точка 1",
+                modal4Stop1Desc: "Вечерний вид на Бухту Ангелов",
+                modal4Stop2: "Эз-Виллаж",
+                modal4Stop2Desc: "Средневековая деревня в вечернем свете",
+                modal4Stop3: "Панорама Монако",
+                modal4Stop3Desc: "Освещённые небоскрёбы и яхты",
+                modal4Stop4: "Monaco-Ville",
+                modal4Stop4Desc: "Дворец и Собор в ночной подсветке",
+                modal4Stop5: "Монте-Карло",
+                modal4Stop5Desc: "Казино, Отель де Пари, трасса Формулы 1",
+                modal4Inc1: "Приватный трансфер",
+                modal4Inc2: "Живой гид",
+                modal4Inc3: "Панорамные остановки",
+                modal4Inc4: "Фото-возможности",
+                modal4NotInc1: "Еда и напитки",
+                modal4NotInc2: "Вход в Казино",
+                modal4InfoNotSuitable: "Не подходит для:",
+                modal4InfoNotSuitableText: "Людей в инвалидных колясках, людей с боязнью высоты",
+                modal4InfoCasino: "Казино:",
+                modal4InfoCasinoText: "Требуется ID для входа, есть дресс-код",
+                modal4InfoSmoking: "Курение:",
+                modal4InfoSmokingText: "Запрещено в автомобиле",
+
+                // About section
+                aboutTitle: "Почему я?",
+                aboutText1: "Я живу на Французской Ривьере уже более 10 лет и знаю каждый уголок этого волшебного региона. Мои туры — это не просто экскурсии, а погружение в местную культуру, истории и секретные места, о которых не пишут в путеводителях.",
+                aboutText2: "Работаю только с небольшими группами или индивидуально, чтобы каждый тур был максимально персональным и комфортным для вас. Говорю на трёх языках: английском, французском и русском.",
+                stat1Label: "Довольных гостей",
+                stat2Label: "Лет на Ривьере",
+                stat3Label: "Рейтинг на GetYourGuide",
+
+                // Reviews section
+                reviewsTitle: "Отзывы клиентов",
+                reviewsSubtitle: "Что говорят о наших турах",
+
+                // Contact section
+                contactTitle: "Свяжитесь со мной",
+                contactSubtitle: "Задайте вопрос или забронируйте тур прямо сейчас",
+                formName: "Ваше имя",
+                formEmail: "Email",
+                formPhone: "Телефон",
+                formTour: "Интересующий тур",
+                formTourSelect: "Выберите тур",
+                formMessage: "Ваше сообщение",
+                formSubmit: "Отправить запрос",
+                formSuccess: "✓ Спасибо! Ваше сообщение отправлено. Я свяжусь с вами в ближайшее время.",
+                formError: "✗ Ошибка отправки. Попробуйте позже или напишите напрямую.",
+
+                // Footer
+                footerContact: "Свяжитесь со мной для бронирования или вопросов",
+                footerRights: "© 2025 Приватные туры по Французской Ривьере. Все права защищены."
+            },
+            en: {
+                // Hero section
+                heroTitle: "French Riviera with a Local Guide",
+                heroSubtitle: "Discover the real Riviera: Monaco, Cannes, Nice, Antibes. Private tours with a personal touch",
+                heroButton: "Choose a tour",
+
+                // Tours section
+                toursTitle: "My Private Tours",
+                toursSubtitle: "Each tour is crafted with love for the Riviera and attention to detail. Just for you and your loved ones. Free cancellation 24 hours before.",
+
+                // Tour cards
+                tour1Title: "Monaco Majesty",
+                tour1Duration: "4 hours",
+                tour1Tagline: "The luxury of the principality in one tour",
+                tour1Price: "from €200",
+
+                tour2Title: "Monaco Coastline Journey",
+                tour2Duration: "6 hours",
+                tour2Tagline: "Create your perfect itinerary",
+                tour2Price: "from €300",
+
+                tour3Title: "Grand Riviera Tour",
+                tour3Duration: "8 hours",
+                tour3Tagline: "All the best in one day",
+                tour3Price: "from €450",
+
+                tour4Title: "Monaco by Night",
+                tour4Duration: "4 hours",
+                tour4Tagline: "Magic of the evening principality",
+                tour4Price: "from €200",
+
+                highlightsLabel: "Highlights:",
+                detailsButton: "Tour details",
+                bookButton: "Book tour",
+
+                // Tour 1 highlights
+                tour1H1: "Medieval village of Èze and perfumery",
+                tour1H2: "Prince's Palace with insider stories",
+                tour1H3: "Monte Carlo Casino and Formula 1 track",
+                tour1H4: "Panoramic views of Monaco",
+
+                // Tour 2 highlights
+                tour2H1: "Medieval Èze and Fragonard perfumery",
+                tour2H2: "Monaco: palace, cathedral, oceanography museum",
+                tour2H3: "Monte Carlo: casino and luxury",
+                tour2H4: "Full route flexibility",
+
+                // Tour 3 highlights
+                tour3H1: "Monaco, Èze, Saint-Paul-de-Vence",
+                tour3H2: "Antibes and Cannes with guide",
+                tour3H3: "Breathtaking landscapes",
+                tour3H4: "Private experience for your family",
+
+                // Tour 4 highlights
+                tour4H1: "Evening Èze with unique views",
+                tour4H2: "Panorama of illuminated Monaco",
+                tour4H3: "Palace and cathedral in night lighting",
+                tour4H4: "Monte Carlo Casino at night",
+
+                // Feature tags Tour 1
+                tour1Tag1: "Transfer included",
+                tour1Tag2: "Private tour",
+                tour1Tag3: "3 languages",
+
+                // Feature tags Tour 2
+                tour2Tag1: "VIP experience",
+                tour2Tag2: "Guide at all stops",
+                tour2Tag3: "Water included",
+
+                // Feature tags Tour 3
+                tour3Tag1: "Full day",
+                tour3Tag2: "6 locations",
+                tour3Tag3: "Max comfort",
+
+                // Feature tags Tour 4
+                tour4Tag1: "Evening tour",
+                tour4Tag2: "Romance",
+                tour4Tag3: "Photo stops",
+
+                // Reviews
+                review1Text: "Amazing tour! Our guide showed us hidden gems of Monaco we would never have known about. Professional, informative and very comfortable. Definitely recommend!",
+                review1Author: "Maria & Sergey",
+                review1Date: "September 2024",
+
+                review2Text: "This was the best day of our vacation! The Grand Riviera tour exceeded all expectations. Each location was perfectly selected, and the guide's stories made the trip unforgettable.",
+                review2Author: "Anna K.",
+                review2Date: "August 2024",
+
+                review3Text: "Private Monaco by night tour is something special! Romantic, beautiful and very atmospheric. Thank you for the wonderfully organized trip!",
+                review3Author: "Dmitry & Elena",
+                review3Date: "July 2024",
+
+                review4Text: "Excellent service and attention to detail! Everything was organized perfectly. The guide speaks three languages, which is very convenient. We will recommend to friends!",
+                review4Author: "Alexander M.",
+                review4Date: "June 2024",
+
+                // Form options
+                formOption1: "Monaco Majesty (4 hours)",
+                formOption2: "Monaco Coastline Journey (6 hours)",
+                formOption3: "Grand Riviera Tour (8 hours)",
+                formOption4: "Monaco by Night (4 hours)",
+                formOptionOther: "Other",
+
+                // Modal 1: Monaco Majesty
+                modal1Title: "Monaco Majesty: Private Tailor-Made Tour",
+                modal1Subtitle: "4 hours of luxury and principality history",
+                modal1Gallery: "📸 Photo Gallery",
+                modal1About: "✨ About the Tour",
+                modal1AboutText: "Immerse yourself in Monaco's glamour on a private tour: stroll the yacht-filled harbor, explore the Prince's Palace, try your luck at Monte Carlo Casino, and feel the adrenaline of the Formula 1 track.",
+                modal1Highlights: "🎯 Highlights",
+                modal1HL1: "Medieval village of Èze: cobbled streets and perfume factory",
+                modal1HL2: "Explore Monaco's old town and Prince's Palace with insider stories from your guide",
+                modal1HL3: "Immerse yourself in Monte Carlo glamour at Casino Square and the Formula 1 track",
+                modal1HL4: "Full flexibility — customize stops and pace for a VIP experience",
+                modal1HL5: "Exclusive stop with panoramic views of Monaco",
+                modal1Route: "🗺️ Itinerary",
+                modal1Stop1: "Mont Boron, Nice",
+                modal1Stop1Desc: "Stunning view of the Bay of Angels and Nice hills",
+                modal1Stop2: "Èze",
+                modal1Stop2Desc: "Medieval village on a cliff with breathtaking views",
+                modal1Stop3: "Fragonard Perfumery",
+                modal1Stop3Desc: "Tour of the perfume factory",
+                modal1Stop4: "La Turbie",
+                modal1Stop4Desc: "Augustus Trophy with panoramic views",
+                modal1Stop5: "Monaco City",
+                modal1Stop5Desc: "Prince's Palace, cathedral, old town",
+                modal1Stop6: "Monte Carlo Casino",
+                modal1Stop6Desc: "Legendary casino, Hotel de Paris, Formula 1 track",
+                modal1Included: "✅ What's Included",
+                modal1Inc1: "Transfer from/to your hotel",
+                modal1Inc2: "Personal driver",
+                modal1Inc3: "Guide at all stops",
+                modal1Inc4: "Perfumery visit",
+                modal1Inc5: "Bottled water",
+                modal1NotInc1: "Food and drinks",
+                modal1NotInc2: "Prince's Palace entrance",
+                modal1NotInc3: "Oceanographic Museum entrance",
+                modal1Info: "ℹ️ Important Information",
+                modal1InfoLang: "Languages:",
+                modal1InfoLangText: "English, French, Russian",
+                modal1InfoPickup: "Transfer:",
+                modal1InfoPickupText: "6 pickup points (Nice, Saint-Jean-Cap-Ferrat, Villeneuve-Loubet, Antibes, etc.)",
+                modal1InfoCancel: "Free cancellation:",
+                modal1InfoCancelText: "24 hours before start",
+                modal1InfoReserve: "Reserve now, pay later:",
+                modal1InfoReserveText: "Book now, pay later",
+
+                // Modal 2: Monaco Coastline
+                modal2Title: "Monaco Coastline Journey",
+                modal2Subtitle: "6 hours of your perfect journey",
+                modal2AboutText: "Create your best Monaco coastline journey with our private car tour! You choose where to stop, what to skip, and how long to spend — every detail is tailored to your wishes.",
+                modal2HL1: "Medieval village of Èze: cobbled streets and perfume factory",
+                modal2HL2: "Monaco landmarks: Prince's Palace and Formula 1 track",
+                modal2HL3: "Monte Carlo glamour: Casino luxury and Hotel de Paris",
+                modal2HL4: "Full customization for you: private guide attentive to your preferences",
+                modal2HL5: "Scenic drives: Moyenne Corniche road, Mediterranean Sea views",
+                modal2Stop1: "Panoramic points",
+                modal2Stop1Desc: "Photo stops with views of the Bay of Angels",
+                modal2Stop2: "Èze",
+                modal2Stop2Desc: "Medieval village, guided tour, free time",
+                modal2Stop3: "Fragonard Perfumery",
+                modal2Stop3Desc: "Guided tour and shopping at the perfumery",
+                modal2Stop4: "La Turbie",
+                modal2Stop4Desc: "Roman Trophy of Augustus",
+                modal2Stop5: "Monaco City",
+                modal2Stop5Desc: "Guided tour of the old town, shopping",
+                modal2Stop6: "Monte Carlo",
+                modal2Stop6Desc: "Casino, free time, walk",
+                modal2Inc1: "Private guide/driver",
+                modal2Inc2: "Air-conditioned car transfer",
+                modal2Inc3: "Hotel pickup and drop-off",
+                modal2Inc4: "Guided tour of Èze perfumery",
+                modal2Inc5: "Entrance ticket to Old Èze",
+                modal2Inc6: "Walking tour (optional)",
+                modal2Inc7: "Bottled water",
+                modal2InfoPickupText: "5 pickup points",
+
+                // Modal 3: Grand Riviera
+                modal3Title: "Grand Riviera Tour",
+                modal3Subtitle: "8 hours of French Riviera magic",
+                modal3AboutText: "The charm of the French Riviera extends beyond the famous beauties of Nice, Monaco and Cannes. Let me take you on a fascinating journey through the region's hidden gems.",
+                modal3HL1: "Private experience. Only your family or close friends",
+                modal3HL2: "Your personal guide at every stop",
+                modal3HL3: "Stunning landscapes and breathtaking views",
+                modal3HL4: "6 unique locations in one day",
+                modal3Stop1: "Mont Boron",
+                modal3Stop1Desc: "Stunning view of the Bay of Angels and Nice hills",
+                modal3Stop2: "Èze",
+                modal3Stop2Desc: "Medieval village on a 400-meter cliff",
+                modal3Stop3: "Fragonard Perfumery",
+                modal3Stop3Desc: "Fragrant oasis",
+                modal3Stop4: "Monaco and Monte Carlo",
+                modal3Stop4Desc: "Palace, cathedral, museum, casino, Formula 1 track",
+                modal3Stop5: "Saint-Paul-de-Vence",
+                modal3Stop5Desc: "Picturesque artists' village",
+                modal3Stop6: "Antibes",
+                modal3Stop6Desc: "Medieval charm on a rocky cliff",
+                modal3Stop7: "Cannes",
+                modal3Stop7Desc: "Palais des Festivals, Croisette promenade",
+                modal3Inc1: "Your personal guide",
+                modal3Inc2: "Hotel pickup and drop-off",
+                modal3Inc3: "Air-conditioned car",
+                modal3Inc4: "Guided tour of the perfumery",
+                modal3Inc5: "Entrance ticket to Old Èze",
+                modal3Inc6: "Bottled water",
+                modal3NotInc1: "Food and drinks",
+                modal3NotInc2: "Museum entrances",
+
+                // Modal 4: Monaco by Night
+                modal4Title: "Monaco by Night",
+                modal4Subtitle: "4 hours of evening principality magic",
+                modal4AboutText: "Discover the beauty of Monaco at night on a private tour. Visit the medieval village of Èze and see the Prince's Palace, St. Nicholas Cathedral and Monte Carlo Casino in magical night lighting.",
+                modal4HL1: "Stunning views of the Mediterranean Sea from the medieval village",
+                modal4HL2: "Admire the illuminated skyscrapers, yachts and sea",
+                modal4HL3: "See the Prince's Palace and Cathedral in night lighting",
+                modal4HL4: "Famous Monte Carlo Casino at night",
+                modal4HL5: "Try your luck at the world's most famous casino",
+                modal4Stop1: "Panoramic point 1",
+                modal4Stop1Desc: "Evening view of the Bay of Angels",
+                modal4Stop2: "Èze Village",
+                modal4Stop2Desc: "Medieval village in evening light",
+                modal4Stop3: "Monaco Panorama",
+                modal4Stop3Desc: "Illuminated skyscrapers and yachts",
+                modal4Stop4: "Monaco-Ville",
+                modal4Stop4Desc: "Palace and Cathedral in night lighting",
+                modal4Stop5: "Monte Carlo",
+                modal4Stop5Desc: "Casino, Hotel de Paris, Formula 1 track",
+                modal4Inc1: "Private transfer",
+                modal4Inc2: "Live guide",
+                modal4Inc3: "Panoramic stops",
+                modal4Inc4: "Photo opportunities",
+                modal4NotInc1: "Food and drinks",
+                modal4NotInc2: "Casino entrance",
+                modal4InfoNotSuitable: "Not suitable for:",
+                modal4InfoNotSuitableText: "People in wheelchairs, people with fear of heights",
+                modal4InfoCasino: "Casino:",
+                modal4InfoCasinoText: "ID required for entry, dress code applies",
+                modal4InfoSmoking: "Smoking:",
+                modal4InfoSmokingText: "Prohibited in the car",
+
+                // About section
+                aboutTitle: "Why choose me?",
+                aboutText1: "I have been living on the French Riviera for over 10 years and know every corner of this magical region. My tours are not just excursions, but an immersion into local culture, stories and secret places that are not written about in guidebooks.",
+                aboutText2: "I only work with small groups or individually, so that each tour is as personal and comfortable as possible for you. I speak three languages: English, French and Russian.",
+                stat1Label: "Happy guests",
+                stat2Label: "Years on the Riviera",
+                stat3Label: "GetYourGuide rating",
+
+                // Reviews section
+                reviewsTitle: "Customer Reviews",
+                reviewsSubtitle: "What people say about our tours",
+
+                // Contact section
+                contactTitle: "Contact me",
+                contactSubtitle: "Ask a question or book a tour right now",
+                formName: "Your name",
+                formEmail: "Email",
+                formPhone: "Phone",
+                formTour: "Tour of interest",
+                formTourSelect: "Select a tour",
+                formMessage: "Your message",
+                formSubmit: "Send request",
+                formSuccess: "✓ Thank you! Your message has been sent. I will contact you shortly.",
+                formError: "✗ Sending error. Please try later or write directly.",
+
+                // Footer
+                footerContact: "Contact me for booking or questions",
+                footerRights: "© 2025 Private Tours of the French Riviera. All rights reserved."
+            },
+            fr: {
+                // Hero section
+                heroTitle: "Côte d'Azur avec un guide local",
+                heroSubtitle: "Découvrez la vraie Riviera : Monaco, Cannes, Nice, Antibes. Visites privées avec une touche personnelle",
+                heroButton: "Choisir une visite",
+
+                // Tours section
+                toursTitle: "Mes visites privées",
+                toursSubtitle: "Chaque visite est conçue avec amour pour la Riviera et souci du détail. Rien que pour vous et vos proches. Annulation gratuite 24 heures avant.",
+
+                // Tour cards
+                tour1Title: "Monaco Majesté",
+                tour1Duration: "4 heures",
+                tour1Tagline: "Le luxe de la principauté en une seule visite",
+                tour1Price: "à partir de 200€",
+
+                tour2Title: "Voyage Côtier de Monaco",
+                tour2Duration: "6 heures",
+                tour2Tagline: "Créez votre itinéraire parfait",
+                tour2Price: "à partir de 300€",
+
+                tour3Title: "Grand Tour de la Riviera",
+                tour3Duration: "8 heures",
+                tour3Tagline: "Tout le meilleur en un jour",
+                tour3Price: "à partir de 450€",
+
+                tour4Title: "Monaco la Nuit",
+                tour4Duration: "4 heures",
+                tour4Tagline: "Magie de la principauté le soir",
+                tour4Price: "à partir de 200€",
+
+                highlightsLabel: "Points forts :",
+                detailsButton: "Détails de la visite",
+                bookButton: "Réserver la visite",
+
+                // Tour 1 highlights
+                tour1H1: "Village médiéval d'Èze et parfumerie",
+                tour1H2: "Palais du Prince avec histoires d'initiés",
+                tour1H3: "Casino de Monte-Carlo et circuit de Formule 1",
+                tour1H4: "Vues panoramiques sur Monaco",
+
+                // Tour 2 highlights
+                tour2H1: "Èze médiéval et parfumerie Fragonard",
+                tour2H2: "Monaco : palais, cathédrale, musée océanographique",
+                tour2H3: "Monte-Carlo : casino et luxe",
+                tour2H4: "Flexibilité totale de l'itinéraire",
+
+                // Tour 3 highlights
+                tour3H1: "Monaco, Èze, Saint-Paul-de-Vence",
+                tour3H2: "Antibes et Cannes avec guide",
+                tour3H3: "Paysages époustouflants",
+                tour3H4: "Expérience privée pour votre famille",
+
+                // Tour 4 highlights
+                tour4H1: "Èze en soirée avec vues uniques",
+                tour4H2: "Panorama de Monaco illuminé",
+                tour4H3: "Palais et cathédrale illuminés la nuit",
+                tour4H4: "Casino de Monte-Carlo la nuit",
+
+                // Feature tags Tour 1
+                tour1Tag1: "Transfert inclus",
+                tour1Tag2: "Visite privée",
+                tour1Tag3: "3 langues",
+
+                // Feature tags Tour 2
+                tour2Tag1: "Expérience VIP",
+                tour2Tag2: "Guide à tous les arrêts",
+                tour2Tag3: "Eau incluse",
+
+                // Feature tags Tour 3
+                tour3Tag1: "Journée complète",
+                tour3Tag2: "6 lieux",
+                tour3Tag3: "Confort maximum",
+
+                // Feature tags Tour 4
+                tour4Tag1: "Visite du soir",
+                tour4Tag2: "Romantisme",
+                tour4Tag3: "Arrêts photo",
+
+                // Reviews
+                review1Text: "Visite incroyable ! Notre guide nous a montré des joyaux cachés de Monaco que nous n'aurions jamais connus. Professionnel, instructif et très confortable. Je recommande absolument !",
+                review1Author: "Maria & Sergey",
+                review1Date: "Septembre 2024",
+
+                review2Text: "C'était le meilleur jour de nos vacances ! Le Grand Tour de la Riviera a dépassé toutes les attentes. Chaque lieu était parfaitement sélectionné, et les histoires du guide ont rendu le voyage inoubliable.",
+                review2Author: "Anna K.",
+                review2Date: "Août 2024",
+
+                review3Text: "La visite privée de Monaco la nuit est quelque chose de spécial ! Romantique, beau et très atmosphérique. Merci pour le voyage merveilleusement organisé !",
+                review3Author: "Dmitry & Elena",
+                review3Date: "Juillet 2024",
+
+                review4Text: "Excellent service et attention aux détails ! Tout était parfaitement organisé. Le guide parle trois langues, ce qui est très pratique. Nous recommanderons à nos amis !",
+                review4Author: "Alexander M.",
+                review4Date: "Juin 2024",
+
+                // Form options
+                formOption1: "Monaco Majesté (4 heures)",
+                formOption2: "Voyage Côtier de Monaco (6 heures)",
+                formOption3: "Grand Tour de la Riviera (8 heures)",
+                formOption4: "Monaco la Nuit (4 heures)",
+                formOptionOther: "Autre",
+
+                // Modal 1: Monaco Majesty
+                modal1Title: "Monaco Majesté : Visite Privée Sur Mesure",
+                modal1Subtitle: "4 heures de luxe et d'histoire de la principauté",
+                modal1Gallery: "📸 Galerie Photos",
+                modal1About: "✨ À Propos de la Visite",
+                modal1AboutText: "Plongez dans le glamour de Monaco lors d'une visite privée : promenez-vous dans le port rempli de yachts, explorez le Palais des Princes, tentez votre chance au Casino de Monte-Carlo et ressentez l'adrénaline du circuit de Formule 1.",
+                modal1Highlights: "🎯 Points Forts",
+                modal1HL1: "Village médiéval d'Èze : ruelles pavées et fabrique de parfums",
+                modal1HL2: "Explorez la vieille ville de Monaco et le Palais des Princes avec des histoires d'initiés de votre guide",
+                modal1HL3: "Plongez dans le glamour de Monte-Carlo sur la Place du Casino et le circuit de Formule 1",
+                modal1HL4: "Flexibilité totale — personnalisez les arrêts et le rythme pour une expérience VIP",
+                modal1HL5: "Arrêt exclusif avec vue panoramique sur Monaco",
+                modal1Route: "🗺️ Itinéraire",
+                modal1Stop1: "Mont Boron, Nice",
+                modal1Stop1Desc: "Vue imprenable sur la Baie des Anges et les collines de Nice",
+                modal1Stop2: "Èze",
+                modal1Stop2Desc: "Village médiéval sur une falaise avec des vues à couper le souffle",
+                modal1Stop3: "Parfumerie Fragonard",
+                modal1Stop3Desc: "Visite de la fabrique de parfums",
+                modal1Stop4: "La Turbie",
+                modal1Stop4Desc: "Trophée d'Auguste avec vues panoramiques",
+                modal1Stop5: "Monaco-Ville",
+                modal1Stop5Desc: "Palais des Princes, cathédrale, vieille ville",
+                modal1Stop6: "Casino de Monte-Carlo",
+                modal1Stop6Desc: "Casino légendaire, Hôtel de Paris, circuit de Formule 1",
+                modal1Included: "✅ Ce Qui Est Inclus",
+                modal1Inc1: "Transfert depuis/vers votre hôtel",
+                modal1Inc2: "Chauffeur personnel",
+                modal1Inc3: "Guide à tous les arrêts",
+                modal1Inc4: "Visite de la parfumerie",
+                modal1Inc5: "Eau en bouteille",
+                modal1NotInc1: "Nourriture et boissons",
+                modal1NotInc2: "Entrée au Palais des Princes",
+                modal1NotInc3: "Entrée au Musée océanographique",
+                modal1Info: "ℹ️ Informations Importantes",
+                modal1InfoLang: "Langues :",
+                modal1InfoLangText: "Anglais, Français, Russe",
+                modal1InfoPickup: "Transfert :",
+                modal1InfoPickupText: "6 points de ramassage (Nice, Saint-Jean-Cap-Ferrat, Villeneuve-Loubet, Antibes, etc.)",
+                modal1InfoCancel: "Annulation gratuite :",
+                modal1InfoCancelText: "24 heures avant le début",
+                modal1InfoReserve: "Réservation sans paiement :",
+                modal1InfoReserveText: "Réservez maintenant, payez plus tard",
+
+                // Modal 2: Monaco Coastline
+                modal2Title: "Voyage Côtier de Monaco",
+                modal2Subtitle: "6 heures de votre voyage parfait",
+                modal2AboutText: "Créez votre meilleur voyage côtier de Monaco avec notre visite privée en voiture ! Vous choisissez où vous arrêter, quoi sauter et combien de temps passer — chaque détail est adapté à vos souhaits.",
+                modal2HL1: "Village médiéval d'Èze : ruelles pavées et fabrique de parfums",
+                modal2HL2: "Sites emblématiques de Monaco : Palais des Princes et circuit de Formule 1",
+                modal2HL3: "Glamour de Monte-Carlo : luxe du Casino et Hôtel de Paris",
+                modal2HL4: "Personnalisation complète pour vous : guide privé attentif à vos préférences",
+                modal2HL5: "Routes panoramiques : route de la Moyenne Corniche, vues sur la Méditerranée",
+                modal2Stop1: "Points panoramiques",
+                modal2Stop1Desc: "Arrêts photo avec vues sur la Baie des Anges",
+                modal2Stop2: "Èze",
+                modal2Stop2Desc: "Village médiéval, visite guidée, temps libre",
+                modal2Stop3: "Parfumerie Fragonard",
+                modal2Stop3Desc: "Visite guidée et shopping à la parfumerie",
+                modal2Stop4: "La Turbie",
+                modal2Stop4Desc: "Trophée romain d'Auguste",
+                modal2Stop5: "Monaco-Ville",
+                modal2Stop5Desc: "Visite guidée de la vieille ville, shopping",
+                modal2Stop6: "Monte-Carlo",
+                modal2Stop6Desc: "Casino, temps libre, promenade",
+                modal2Inc1: "Guide/chauffeur privé",
+                modal2Inc2: "Transfert en voiture climatisée",
+                modal2Inc3: "Prise en charge et dépôt à l'hôtel",
+                modal2Inc4: "Visite guidée de la parfumerie d'Èze",
+                modal2Inc5: "Billet d'entrée au Vieil Èze",
+                modal2Inc6: "Visite à pied (en option)",
+                modal2Inc7: "Eau en bouteille",
+                modal2InfoPickupText: "5 points de ramassage",
+
+                // Modal 3: Grand Riviera
+                modal3Title: "Grand Tour de la Riviera",
+                modal3Subtitle: "8 heures de magie de la Côte d'Azur",
+                modal3AboutText: "Le charme de la Côte d'Azur s'étend au-delà des beautés célèbres de Nice, Monaco et Cannes. Laissez-moi vous emmener dans un voyage fascinant à travers les joyaux cachés de la région.",
+                modal3HL1: "Expérience privée. Seulement votre famille ou vos amis proches",
+                modal3HL2: "Votre guide personnel à chaque arrêt",
+                modal3HL3: "Paysages époustouflants et vues à couper le souffle",
+                modal3HL4: "6 lieux uniques en une journée",
+                modal3Stop1: "Mont Boron",
+                modal3Stop1Desc: "Vue imprenable sur la Baie des Anges et les collines de Nice",
+                modal3Stop2: "Èze",
+                modal3Stop2Desc: "Village médiéval sur une falaise de 400 mètres",
+                modal3Stop3: "Parfumerie Fragonard",
+                modal3Stop3Desc: "Oasis parfumée",
+                modal3Stop4: "Monaco et Monte-Carlo",
+                modal3Stop4Desc: "Palais, cathédrale, musée, casino, circuit de Formule 1",
+                modal3Stop5: "Saint-Paul-de-Vence",
+                modal3Stop5Desc: "Village d'artistes pittoresque",
+                modal3Stop6: "Antibes",
+                modal3Stop6Desc: "Charme médiéval sur une falaise rocheuse",
+                modal3Stop7: "Cannes",
+                modal3Stop7Desc: "Palais des Festivals, promenade de la Croisette",
+                modal3Inc1: "Votre guide personnel",
+                modal3Inc2: "Prise en charge et dépôt à l'hôtel",
+                modal3Inc3: "Voiture climatisée",
+                modal3Inc4: "Visite guidée de la parfumerie",
+                modal3Inc5: "Billet d'entrée au Vieil Èze",
+                modal3Inc6: "Eau en bouteille",
+                modal3NotInc1: "Nourriture et boissons",
+                modal3NotInc2: "Entrées aux musées",
+
+                // Modal 4: Monaco by Night
+                modal4Title: "Monaco la Nuit",
+                modal4Subtitle: "4 heures de magie de la principauté le soir",
+                modal4AboutText: "Découvrez la beauté de Monaco la nuit lors d'une visite privée. Visitez le village médiéval d'Èze et voyez le Palais des Princes, la Cathédrale Saint-Nicolas et le Casino de Monte-Carlo dans un éclairage nocturne magique.",
+                modal4HL1: "Vues imprenables sur la Méditerranée depuis le village médiéval",
+                modal4HL2: "Admirez les gratte-ciel illuminés, les yachts et la mer",
+                modal4HL3: "Voyez le Palais des Princes et la Cathédrale illuminés la nuit",
+                modal4HL4: "Célèbre Casino de Monte-Carlo la nuit",
+                modal4HL5: "Tentez votre chance au casino le plus célèbre du monde",
+                modal4Stop1: "Point panoramique 1",
+                modal4Stop1Desc: "Vue du soir sur la Baie des Anges",
+                modal4Stop2: "Village d'Èze",
+                modal4Stop2Desc: "Village médiéval en lumière du soir",
+                modal4Stop3: "Panorama de Monaco",
+                modal4Stop3Desc: "Gratte-ciel et yachts illuminés",
+                modal4Stop4: "Monaco-Ville",
+                modal4Stop4Desc: "Palais et Cathédrale illuminés la nuit",
+                modal4Stop5: "Monte-Carlo",
+                modal4Stop5Desc: "Casino, Hôtel de Paris, circuit de Formule 1",
+                modal4Inc1: "Transfert privé",
+                modal4Inc2: "Guide en direct",
+                modal4Inc3: "Arrêts panoramiques",
+                modal4Inc4: "Opportunités photo",
+                modal4NotInc1: "Nourriture et boissons",
+                modal4NotInc2: "Entrée au Casino",
+                modal4InfoNotSuitable: "Non adapté pour :",
+                modal4InfoNotSuitableText: "Personnes en fauteuil roulant, personnes ayant peur des hauteurs",
+                modal4InfoCasino: "Casino :",
+                modal4InfoCasinoText: "Pièce d'identité requise pour l'entrée, code vestimentaire",
+                modal4InfoSmoking: "Tabagisme :",
+                modal4InfoSmokingText: "Interdit dans la voiture",
+
+                // About section
+                aboutTitle: "Pourquoi me choisir ?",
+                aboutText1: "Je vis sur la Côte d'Azur depuis plus de 10 ans et je connais chaque recoin de cette région magique. Mes visites ne sont pas de simples excursions, mais une immersion dans la culture locale, les histoires et les lieux secrets dont on ne parle pas dans les guides touristiques.",
+                aboutText2: "Je ne travaille qu'avec de petits groupes ou individuellement, afin que chaque visite soit aussi personnelle et confortable que possible pour vous. Je parle trois langues : anglais, français et russe.",
+                stat1Label: "Clients satisfaits",
+                stat2Label: "Années sur la Riviera",
+                stat3Label: "Note GetYourGuide",
+
+                // Reviews section
+                reviewsTitle: "Avis des clients",
+                reviewsSubtitle: "Ce que les gens disent de nos visites",
+
+                // Contact section
+                contactTitle: "Contactez-moi",
+                contactSubtitle: "Posez une question ou réservez une visite maintenant",
+                formName: "Votre nom",
+                formEmail: "Email",
+                formPhone: "Téléphone",
+                formTour: "Visite d'intérêt",
+                formTourSelect: "Sélectionnez une visite",
+                formMessage: "Votre message",
+                formSubmit: "Envoyer la demande",
+                formSuccess: "✓ Merci ! Votre message a été envoyé. Je vous contacterai bientôt.",
+                formError: "✗ Erreur d'envoi. Veuillez réessayer plus tard ou écrire directement.",
+
+                // Footer
+                footerContact: "Contactez-moi pour réservation ou questions",
+                footerRights: "© 2025 Visites privées de la Côte d'Azur. Tous droits réservés."
+            }
+        };
+
         let currentGallery = [];
         let currentImageIndex = 0;
 
@@ -1719,6 +2589,47 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     });
 
 });
+
+        // Language Switcher Functions
+        let currentLanguage = localStorage.getItem('selectedLanguage') || 'ru';
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('selectedLanguage', lang);
+
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+
+        // Initialize language switcher
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language
+            changeLanguage(currentLanguage);
+
+            // Add click handlers to language buttons
+            document.querySelectorAll('.lang-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    changeLanguage(lang);
+                });
+            });
+        });
     </script>
 </body>
 </html>
