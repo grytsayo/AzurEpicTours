@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" id="html-root">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -868,32 +868,91 @@
         bottom: 20px;
         right: 20px;
     }
-    
+
     .social-button {
         width: 55px;
         height: 55px;
         font-size: 24px;
     }
-    
+
     .social-button::before {
         display: none;
+    }
+}
+
+/* Language Switcher Styles */
+.language-switcher {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    z-index: 1000;
+    display: flex;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 5px;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.lang-btn {
+    background: transparent;
+    border: none;
+    color: #667eea;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.lang-btn:hover {
+    background: rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+.lang-btn.active {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+@media (max-width: 768px) {
+    .language-switcher {
+        top: 15px;
+        right: 15px;
+        padding: 4px;
+    }
+
+    .lang-btn {
+        padding: 6px 12px;
+        font-size: 0.85rem;
     }
 }
 
     </style>
 </head>
 <body>
+    <!-- Language Switcher -->
+    <div class="language-switcher">
+        <button class="lang-btn active" data-lang="ru">RU</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+    </div>
+
     <div class="hero">
         <div class="hero-content">
-            <h1>Французская Ривьера с местным гидом</h1>
-            <p>Откройте для себя настоящую Ривьеру: Монако, Канны, Ницца, Антиб. Приватные туры с персональным подходом</p>
-            <a href="#tours" class="cta-button">Выбрать тур</a>
+            <h1 data-i18n="heroTitle">Французская Ривьера с местным гидом</h1>
+            <p data-i18n="heroSubtitle">Откройте для себя настоящую Ривьеру: Монако, Канны, Ницца, Антиб. Приватные туры с персональным подходом</p>
+            <a href="#tours" class="cta-button" data-i18n="heroButton">Выбрать тур</a>
         </div>
     </div>
 
     <div class="container" id="tours">
-        <h2 class="section-title">Мои приватные туры</h2>
-        <p class="section-subtitle">Каждый тур создан с любовью к Ривьере и вниманием к деталям. Только для вас и ваших близких. Бесплатная отмена за 24 часа.</p>
+        <h2 class="section-title" data-i18n="toursTitle">Мои приватные туры</h2>
+        <p class="section-subtitle" data-i18n="toursSubtitle">Каждый тур создан с любовью к Ривьере и вниманием к деталям. Только для вас и ваших близких. Бесплатная отмена за 24 часа.</p>
 
         <div class="tours-grid">
             <!-- Tour 1: Monaco Majesty -->
@@ -902,12 +961,12 @@
                 </div>
                 <div class="tour-content">
                     <div class="tour-header">
-                        <h3 class="tour-title">Monaco Majesty</h3>
-                        <span class="tour-duration">4 часа</span>
+                        <h3 class="tour-title" data-i18n="tour1Title">Monaco Majesty</h3>
+                        <span class="tour-duration" data-i18n="tour1Duration">4 часа</span>
                     </div>
-                    <p class="tour-tagline">Роскошь княжества в одном туре</p>
+                    <p class="tour-tagline" data-i18n="tour1Tagline">Роскошь княжества в одном туре</p>
                     <div class="tour-highlights">
-                        <h4>Основные моменты:</h4>
+                        <h4 data-i18n="highlightsLabel">Основные моменты:</h4>
                         <ul>
                             <li>Средневековая деревня Эз и парфюмерия</li>
                             <li>Дворец Принца с инсайдерскими историями</li>
@@ -921,8 +980,8 @@
                         <span class="feature-tag">3 языка</span>
                     </div>
                     <div class="tour-footer">
-                        <span class="tour-price">от €200</span>
-                        <button class="details-button" onclick="event.stopPropagation(); openModal('modal1')">Детали тура</button>
+                        <span class="tour-price" data-i18n="tour1Price">от €200</span>
+                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); openModal('modal1')">Детали тура</button>
                     </div>
                 </div>
             </div>
@@ -933,12 +992,12 @@
                 </div>
                 <div class="tour-content">
                     <div class="tour-header">
-                        <h3 class="tour-title">Monaco Coastline Journey</h3>
-                        <span class="tour-duration">6 часов</span>
+                        <h3 class="tour-title" data-i18n="tour2Title">Monaco Coastline Journey</h3>
+                        <span class="tour-duration" data-i18n="tour2Duration">6 часов</span>
                     </div>
-                    <p class="tour-tagline">Создайте свой идеальный маршрут</p>
+                    <p class="tour-tagline" data-i18n="tour2Tagline">Создайте свой идеальный маршрут</p>
                     <div class="tour-highlights">
-                        <h4>Основные моменты:</h4>
+                        <h4 data-i18n="highlightsLabel">Основные моменты:</h4>
                         <ul>
                             <li>Средневековый Эз и парфюмерия Fragonard</li>
                             <li>Монако: дворец, собор, музей океанографии</li>
@@ -952,8 +1011,8 @@
                         <span class="feature-tag">Вода включена</span>
                     </div>
                     <div class="tour-footer">
-                        <span class="tour-price">от €300</span>
-                        <button class="details-button" onclick="event.stopPropagation(); openModal('modal2')">Детали тура</button>
+                        <span class="tour-price" data-i18n="tour2Price">от €300</span>
+                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); openModal('modal2')">Детали тура</button>
                     </div>
                 </div>
             </div>
@@ -964,12 +1023,12 @@
                 </div>
                 <div class="tour-content">
                     <div class="tour-header">
-                        <h3 class="tour-title">Grand Riviera Tour</h3>
-                        <span class="tour-duration">8 часов</span>
+                        <h3 class="tour-title" data-i18n="tour3Title">Grand Riviera Tour</h3>
+                        <span class="tour-duration" data-i18n="tour3Duration">8 часов</span>
                     </div>
-                    <p class="tour-tagline">Всё лучшее за один день</p>
+                    <p class="tour-tagline" data-i18n="tour3Tagline">Всё лучшее за один день</p>
                     <div class="tour-highlights">
-                        <h4>Основные моменты:</h4>
+                        <h4 data-i18n="highlightsLabel">Основные моменты:</h4>
                         <ul>
                             <li>Монако, Эз, Сен-Поль-де-Ванс</li>
                             <li>Антиб и Канны с гидом</li>
@@ -983,8 +1042,8 @@
                         <span class="feature-tag">Макс комфорт</span>
                     </div>
                     <div class="tour-footer">
-                        <span class="tour-price">от €450</span>
-                        <button class="details-button" onclick="event.stopPropagation(); openModal('modal3')">Детали тура</button>
+                        <span class="tour-price" data-i18n="tour3Price">от €450</span>
+                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); openModal('modal3')">Детали тура</button>
                     </div>
                 </div>
             </div>
@@ -995,12 +1054,12 @@
                 </div>
                 <div class="tour-content">
                     <div class="tour-header">
-                        <h3 class="tour-title">Monaco by Night</h3>
-                        <span class="tour-duration">4 часа</span>
+                        <h3 class="tour-title" data-i18n="tour4Title">Monaco by Night</h3>
+                        <span class="tour-duration" data-i18n="tour4Duration">4 часа</span>
                     </div>
-                    <p class="tour-tagline">Волшебство вечернего княжества</p>
+                    <p class="tour-tagline" data-i18n="tour4Tagline">Волшебство вечернего княжества</p>
                     <div class="tour-highlights">
-                        <h4>Основные моменты:</h4>
+                        <h4 data-i18n="highlightsLabel">Основные моменты:</h4>
                         <ul>
                             <li>Вечерний Эз с уникальными видами</li>
                             <li>Панорама освещённого Монако</li>
@@ -1014,8 +1073,8 @@
                         <span class="feature-tag">Фотостопы</span>
                     </div>
                     <div class="tour-footer">
-                        <span class="tour-price">от €200</span>
-                        <button class="details-button" onclick="event.stopPropagation(); openModal('modal4')">Детали тура</button>
+                        <span class="tour-price" data-i18n="tour4Price">от €200</span>
+                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); openModal('modal4')">Детали тура</button>
                     </div>
                 </div>
             </div>
@@ -1343,8 +1402,8 @@
     <!-- Reviews Section -->
     <div class="reviews-section">
         <div class="reviews-container">
-            <h2 class="section-title">Отзывы клиентов</h2>
-            <p class="section-subtitle">Что говорят о наших турах</p>
+            <h2 class="section-title" data-i18n="reviewsTitle">Отзывы клиентов</h2>
+            <p class="section-subtitle" data-i18n="reviewsSubtitle">Что говорят о наших турах</p>
             
             <div class="slider-wrapper">
                 <div class="reviews-slider" id="reviewsSlider">
@@ -1389,29 +1448,29 @@
     <!-- Contact Form Section -->
 <div class="contact-section">
     <div class="contact-container">
-        <h2 class="section-title" style="color: white;">Свяжитесь со мной</h2>
-        <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Задайте вопрос или забронируйте тур прямо сейчас</p>
-        
+        <h2 class="section-title" style="color: white;" data-i18n="contactTitle">Свяжитесь со мной</h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.9);" data-i18n="contactSubtitle">Задайте вопрос или забронируйте тур прямо сейчас</p>
+
         <form class="contact-form" id="contactForm">
             <div class="form-group">
-                <label for="name">Ваше имя *</label>
+                <label for="name" data-i18n="formName">Ваше имя *</label>
                 <input type="text" id="name" name="name" required placeholder="Иван Иванов">
             </div>
-            
+
             <div class="form-group">
-                <label for="email">Email *</label>
+                <label for="email" data-i18n="formEmail">Email *</label>
                 <input type="email" id="email" name="email" required placeholder="ivan@example.com">
             </div>
-            
+
             <div class="form-group">
-                <label for="phone">Телефон</label>
+                <label for="phone" data-i18n="formPhone">Телефон</label>
                 <input type="tel" id="phone" name="phone" placeholder="+7 (900) 123-45-67">
             </div>
-            
+
             <div class="form-group">
-                <label for="tour">Интересующий тур</label>
+                <label for="tour" data-i18n="formTour">Интересующий тур</label>
                 <select id="tour" name="tour">
-                    <option value="">Выберите тур</option>
+                    <option value="" data-i18n="formTourSelect">Выберите тур</option>
                     <option value="monaco-majesty">Monaco Majesty (4 часа)</option>
                     <option value="monaco-coastline">Monaco Coastline Journey (6 часов)</option>
                     <option value="grand-riviera">Grand Riviera Tour (8 часов)</option>
@@ -1419,13 +1478,13 @@
                     <option value="other">Другое</option>
                 </select>
             </div>
-            
+
             <div class="form-group">
-                <label for="message">Ваше сообщение *</label>
+                <label for="message" data-i18n="formMessage">Ваше сообщение *</label>
                 <textarea id="message" name="message" required placeholder="Расскажите о ваших пожеланиях..."></textarea>
             </div>
-            
-            <button type="submit" class="submit-button">Отправить запрос</button>
+
+            <button type="submit" class="submit-button" data-i18n="formSubmit">Отправить запрос</button>
             
             <div id="formMessage" class="form-message"></div>
         </form>
@@ -1434,22 +1493,22 @@
 
     <div class="about-section">
         <div class="about-content">
-            <h2 class="section-title">Почему я?</h2>
-            <p>Я живу на Французской Ривьере уже более 10 лет и знаю каждый уголок этого волшебного региона. Мои туры — это не просто экскурсии, а погружение в местную культуру, истории и секретные места, о которых не пишут в путеводителях.</p>
-            <p>Работаю только с небольшими группами или индивидуально, чтобы каждый тур был максимально персональным и комфортным для вас. Говорю на трёх языках: английском, французском и русском.</p>
-            
+            <h2 class="section-title" data-i18n="aboutTitle">Почему я?</h2>
+            <p data-i18n="aboutText1">Я живу на Французской Ривьере уже более 10 лет и знаю каждый уголок этого волшебного региона. Мои туры — это не просто экскурсии, а погружение в местную культуру, истории и секретные места, о которых не пишут в путеводителях.</p>
+            <p data-i18n="aboutText2">Работаю только с небольшими группами или индивидуально, чтобы каждый тур был максимально персональным и комфортным для вас. Говорю на трёх языках: английском, французском и русском.</p>
+
             <div class="stats">
                 <div class="stat-item">
                     <span class="stat-number">500+</span>
-                    <span class="stat-label">Довольных гостей</span>
+                    <span class="stat-label" data-i18n="stat1Label">Довольных гостей</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">10+</span>
-                    <span class="stat-label">Лет на Ривьере</span>
+                    <span class="stat-label" data-i18n="stat2Label">Лет на Ривьере</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">5.0★</span>
-                    <span class="stat-label">Рейтинг на GetYourGuide</span>
+                    <span class="stat-label" data-i18n="stat3Label">Рейтинг на GetYourGuide</span>
                 </div>
             </div>
         </div>
@@ -1466,10 +1525,10 @@
     </div>
 
     <footer>
-        <p> Свяжитесь со мной для бронирования или вопросов</p>
+        <p data-i18n="footerContact"> Свяжитесь со мной для бронирования или вопросов</p>
         <p> mail: azurepictours@gmail.com</p>
         <p> Phone: +33(0)6.24.72.99.83</p>
-        <p style="margin-top: 20px; opacity: 0.8;">© 2025 Приватные туры по Французской Ривьере. Все права защищены.</p>
+        <p style="margin-top: 20px; opacity: 0.8;" data-i18n="footerRights">© 2025 Приватные туры по Французской Ривьере. Все права защищены.</p>
     </footer>
 
     <!-- Floating Social Buttons -->
@@ -1498,6 +1557,202 @@
 </div>
 
     <script>
+        // Translations object
+        const translations = {
+            ru: {
+                // Hero section
+                heroTitle: "Французская Ривьера с местным гидом",
+                heroSubtitle: "Откройте для себя настоящую Ривьеру: Монако, Канны, Ницца, Антиб. Приватные туры с персональным подходом",
+                heroButton: "Выбрать тур",
+
+                // Tours section
+                toursTitle: "Мои приватные туры",
+                toursSubtitle: "Каждый тур создан с любовью к Ривьере и вниманием к деталям. Только для вас и ваших близких. Бесплатная отмена за 24 часа.",
+
+                // Tour cards
+                tour1Title: "Monaco Majesty",
+                tour1Duration: "4 часа",
+                tour1Tagline: "Роскошь княжества в одном туре",
+                tour1Price: "от €200",
+
+                tour2Title: "Monaco Coastline Journey",
+                tour2Duration: "6 часов",
+                tour2Tagline: "Создайте свой идеальный маршрут",
+                tour2Price: "от €300",
+
+                tour3Title: "Grand Riviera Tour",
+                tour3Duration: "8 часов",
+                tour3Tagline: "Всё лучшее за один день",
+                tour3Price: "от €450",
+
+                tour4Title: "Monaco by Night",
+                tour4Duration: "4 часа",
+                tour4Tagline: "Волшебство вечернего княжества",
+                tour4Price: "от €200",
+
+                highlightsLabel: "Основные моменты:",
+                detailsButton: "Детали тура",
+                bookButton: "Забронировать тур",
+
+                // About section
+                aboutTitle: "Почему я?",
+                aboutText1: "Я живу на Французской Ривьере уже более 10 лет и знаю каждый уголок этого волшебного региона. Мои туры — это не просто экскурсии, а погружение в местную культуру, истории и секретные места, о которых не пишут в путеводителях.",
+                aboutText2: "Работаю только с небольшими группами или индивидуально, чтобы каждый тур был максимально персональным и комфортным для вас. Говорю на трёх языках: английском, французском и русском.",
+                stat1Label: "Довольных гостей",
+                stat2Label: "Лет на Ривьере",
+                stat3Label: "Рейтинг на GetYourGuide",
+
+                // Reviews section
+                reviewsTitle: "Отзывы клиентов",
+                reviewsSubtitle: "Что говорят о наших турах",
+
+                // Contact section
+                contactTitle: "Свяжитесь со мной",
+                contactSubtitle: "Задайте вопрос или забронируйте тур прямо сейчас",
+                formName: "Ваше имя",
+                formEmail: "Email",
+                formPhone: "Телефон",
+                formTour: "Интересующий тур",
+                formTourSelect: "Выберите тур",
+                formMessage: "Ваше сообщение",
+                formSubmit: "Отправить запрос",
+                formSuccess: "✓ Спасибо! Ваше сообщение отправлено. Я свяжусь с вами в ближайшее время.",
+                formError: "✗ Ошибка отправки. Попробуйте позже или напишите напрямую.",
+
+                // Footer
+                footerContact: "Свяжитесь со мной для бронирования или вопросов",
+                footerRights: "© 2025 Приватные туры по Французской Ривьере. Все права защищены."
+            },
+            en: {
+                // Hero section
+                heroTitle: "French Riviera with a Local Guide",
+                heroSubtitle: "Discover the real Riviera: Monaco, Cannes, Nice, Antibes. Private tours with a personal touch",
+                heroButton: "Choose a tour",
+
+                // Tours section
+                toursTitle: "My Private Tours",
+                toursSubtitle: "Each tour is crafted with love for the Riviera and attention to detail. Just for you and your loved ones. Free cancellation 24 hours before.",
+
+                // Tour cards
+                tour1Title: "Monaco Majesty",
+                tour1Duration: "4 hours",
+                tour1Tagline: "The luxury of the principality in one tour",
+                tour1Price: "from €200",
+
+                tour2Title: "Monaco Coastline Journey",
+                tour2Duration: "6 hours",
+                tour2Tagline: "Create your perfect itinerary",
+                tour2Price: "from €300",
+
+                tour3Title: "Grand Riviera Tour",
+                tour3Duration: "8 hours",
+                tour3Tagline: "All the best in one day",
+                tour3Price: "from €450",
+
+                tour4Title: "Monaco by Night",
+                tour4Duration: "4 hours",
+                tour4Tagline: "Magic of the evening principality",
+                tour4Price: "from €200",
+
+                highlightsLabel: "Highlights:",
+                detailsButton: "Tour details",
+                bookButton: "Book tour",
+
+                // About section
+                aboutTitle: "Why choose me?",
+                aboutText1: "I have been living on the French Riviera for over 10 years and know every corner of this magical region. My tours are not just excursions, but an immersion into local culture, stories and secret places that are not written about in guidebooks.",
+                aboutText2: "I only work with small groups or individually, so that each tour is as personal and comfortable as possible for you. I speak three languages: English, French and Russian.",
+                stat1Label: "Happy guests",
+                stat2Label: "Years on the Riviera",
+                stat3Label: "GetYourGuide rating",
+
+                // Reviews section
+                reviewsTitle: "Customer Reviews",
+                reviewsSubtitle: "What people say about our tours",
+
+                // Contact section
+                contactTitle: "Contact me",
+                contactSubtitle: "Ask a question or book a tour right now",
+                formName: "Your name",
+                formEmail: "Email",
+                formPhone: "Phone",
+                formTour: "Tour of interest",
+                formTourSelect: "Select a tour",
+                formMessage: "Your message",
+                formSubmit: "Send request",
+                formSuccess: "✓ Thank you! Your message has been sent. I will contact you shortly.",
+                formError: "✗ Sending error. Please try later or write directly.",
+
+                // Footer
+                footerContact: "Contact me for booking or questions",
+                footerRights: "© 2025 Private Tours of the French Riviera. All rights reserved."
+            },
+            fr: {
+                // Hero section
+                heroTitle: "Côte d'Azur avec un guide local",
+                heroSubtitle: "Découvrez la vraie Riviera : Monaco, Cannes, Nice, Antibes. Visites privées avec une touche personnelle",
+                heroButton: "Choisir une visite",
+
+                // Tours section
+                toursTitle: "Mes visites privées",
+                toursSubtitle: "Chaque visite est conçue avec amour pour la Riviera et souci du détail. Rien que pour vous et vos proches. Annulation gratuite 24 heures avant.",
+
+                // Tour cards
+                tour1Title: "Monaco Majesté",
+                tour1Duration: "4 heures",
+                tour1Tagline: "Le luxe de la principauté en une seule visite",
+                tour1Price: "à partir de 200€",
+
+                tour2Title: "Voyage Côtier de Monaco",
+                tour2Duration: "6 heures",
+                tour2Tagline: "Créez votre itinéraire parfait",
+                tour2Price: "à partir de 300€",
+
+                tour3Title: "Grand Tour de la Riviera",
+                tour3Duration: "8 heures",
+                tour3Tagline: "Tout le meilleur en un jour",
+                tour3Price: "à partir de 450€",
+
+                tour4Title: "Monaco la Nuit",
+                tour4Duration: "4 heures",
+                tour4Tagline: "Magie de la principauté le soir",
+                tour4Price: "à partir de 200€",
+
+                highlightsLabel: "Points forts :",
+                detailsButton: "Détails de la visite",
+                bookButton: "Réserver la visite",
+
+                // About section
+                aboutTitle: "Pourquoi me choisir ?",
+                aboutText1: "Je vis sur la Côte d'Azur depuis plus de 10 ans et je connais chaque recoin de cette région magique. Mes visites ne sont pas de simples excursions, mais une immersion dans la culture locale, les histoires et les lieux secrets dont on ne parle pas dans les guides touristiques.",
+                aboutText2: "Je ne travaille qu'avec de petits groupes ou individuellement, afin que chaque visite soit aussi personnelle et confortable que possible pour vous. Je parle trois langues : anglais, français et russe.",
+                stat1Label: "Clients satisfaits",
+                stat2Label: "Années sur la Riviera",
+                stat3Label: "Note GetYourGuide",
+
+                // Reviews section
+                reviewsTitle: "Avis des clients",
+                reviewsSubtitle: "Ce que les gens disent de nos visites",
+
+                // Contact section
+                contactTitle: "Contactez-moi",
+                contactSubtitle: "Posez une question ou réservez une visite maintenant",
+                formName: "Votre nom",
+                formEmail: "Email",
+                formPhone: "Téléphone",
+                formTour: "Visite d'intérêt",
+                formTourSelect: "Sélectionnez une visite",
+                formMessage: "Votre message",
+                formSubmit: "Envoyer la demande",
+                formSuccess: "✓ Merci ! Votre message a été envoyé. Je vous contacterai bientôt.",
+                formError: "✗ Erreur d'envoi. Veuillez réessayer plus tard ou écrire directement.",
+
+                // Footer
+                footerContact: "Contactez-moi pour réservation ou questions",
+                footerRights: "© 2025 Visites privées de la Côte d'Azur. Tous droits réservés."
+            }
+        };
+
         let currentGallery = [];
         let currentImageIndex = 0;
 
@@ -1719,6 +1974,47 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     });
 
 });
+
+        // Language Switcher Functions
+        let currentLanguage = localStorage.getItem('selectedLanguage') || 'ru';
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('selectedLanguage', lang);
+
+            // Update all elements with data-i18n attribute
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+
+        // Initialize language switcher
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial language
+            changeLanguage(currentLanguage);
+
+            // Add click handlers to language buttons
+            document.querySelectorAll('.lang-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    changeLanguage(lang);
+                });
+            });
+        });
     </script>
 </body>
 </html>
