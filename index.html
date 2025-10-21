@@ -1,0 +1,1724 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Приватные туры по Французской Ривьере | Локальный гид</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            /* ИНСТРУКЦИЯ: Замените 'riviera-background.jpg' на имя вашего файла фото */
+            /* Положите фото в ту же папку, что и этот HTML файл */
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('./riviera-background.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 20px 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 500px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInDown 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 60px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tours-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .tour-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .tour-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+            /* ИНСТРУКЦИЯ: Замените фоновый градиент на ваше фото */
+            /* Пример: background: url('./images/monaco-tour.jpg'); */
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #f8f9fa;
+        }
+
+        .tour-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), transparent);
+        }
+
+        /* Gallery styles */
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-image:hover {
+            transform: scale(1.05);
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox-content {
+            position: relative;
+            margin: auto;
+            padding: 0;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .lightbox-image {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .lightbox-close:hover {
+            transform: scale(1.2);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.3);
+            color: white;
+            padding: 20px 15px;
+            cursor: pointer;
+            font-size: 30px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255,255,255,0.5);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        .tour-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .tour-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .tour-title {
+            font-size: 1.4rem;
+            color: #2d3748;
+            flex: 1;
+        }
+
+        .tour-duration {
+            background: #fef3c7;
+            color: #92400e;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            white-space: nowrap;
+            margin-left: 10px;
+        }
+
+        .tour-tagline {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .tour-highlights {
+            margin: 15px 0;
+        }
+
+        .tour-highlights h4 {
+            font-size: 0.9rem;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .tour-highlights ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tour-highlights li {
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .tour-highlights li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .tour-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 15px 0;
+        }
+
+        .feature-tag {
+            background: #f0f4ff;
+            color: #667eea;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .tour-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            margin-top: auto;
+        }
+
+        .tour-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .details-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .details-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 0;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.4s ease;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+        }
+
+        .close {
+            color: white;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .close:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .modal-body h3 {
+            color: #667eea;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .modal-body p {
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .modal-body ul {
+            margin-left: 20px;
+            color: #555;
+        }
+
+        .modal-body li {
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .itinerary-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        .itinerary-item strong {
+            color: #667eea;
+        }
+
+        .includes-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .includes-item {
+            display: flex;
+            align-items: start;
+            gap: 10px;
+        }
+
+        .includes-item.included::before {
+            content: '✓';
+            color: #10b981;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .includes-item.not-included::before {
+            content: '✗';
+            color: #ef4444;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .book-cta {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: inline-block;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .book-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .about-section {
+            background: linear-gradient(135deg, #f6f9fc 0%, #e9f2ff 100%);
+            padding: 80px 20px;
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 50px;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* Reviews Slider Styles */
+        .reviews-section {
+            background: white;
+            padding: 80px 20px;
+        }
+
+        .reviews-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slider-wrapper {
+            position: relative;
+            overflow: hidden;
+            margin-top: 40px;
+        }
+
+        .reviews-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .review-card {
+            min-width: 100%;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .review-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .review-stars {
+            color: #fbbf24;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .review-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .review-author {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 1rem;
+        }
+
+        .review-date {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #d1d5db;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: #667eea;
+            width: 30px;
+            border-radius: 5px;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .tours-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .includes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 5% auto;
+            }
+        }
+
+        /* Contact Form Styles */
+.contact-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 80px 20px;
+    color: white;
+}
+
+.contact-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-form {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #2d3748;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.submit-button {
+    width: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+}
+
+.form-message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    display: none;
+}
+
+.form-message.success {
+    background: #d1fae5;
+    color: #065f46;
+    display: block;
+}
+
+.form-message.error {
+    background: #fee2e2;
+    color: #991b1b;
+    display: block;
+}
+
+/* Floating Social Buttons */
+.floating-buttons {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 999;
+}
+
+.social-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 28px;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.social-button:hover {
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+.whatsapp-button {
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+}
+
+.telegram-button {
+    background: linear-gradient(135deg, #0088cc 0%, #0088cc 100%);
+}
+
+.social-button:hover {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(37, 211, 102, 0.6);
+    }
+}
+
+.telegram-button:hover {
+    animation: pulseTelegram 1s infinite;
+}
+
+@keyframes pulseTelegram {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(0, 136, 204, 0.6);
+    }
+}
+
+/* Tooltip */
+.social-button::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 70px;
+    background: #2d3748;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.social-button:hover::before {
+    opacity: 1;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .floating-buttons {
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .social-button {
+        width: 55px;
+        height: 55px;
+        font-size: 24px;
+    }
+    
+    .social-button::before {
+        display: none;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Французская Ривьера с местным гидом</h1>
+            <p>Откройте для себя настоящую Ривьеру: Монако, Канны, Ницца, Антиб. Приватные туры с персональным подходом</p>
+            <a href="#tours" class="cta-button">Выбрать тур</a>
+        </div>
+    </div>
+
+    <div class="container" id="tours">
+        <h2 class="section-title">Мои приватные туры</h2>
+        <p class="section-subtitle">Каждый тур создан с любовью к Ривьере и вниманием к деталям. Только для вас и ваших близких. Бесплатная отмена за 24 часа.</p>
+
+        <div class="tours-grid">
+            <!-- Tour 1: Monaco Majesty -->
+            <div class="tour-card" onclick="openModal('modal1')">
+                <div class="tour-image" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/MC_magesty_01.jpg'); background-size: cover; background-position: center;">
+                </div>
+                <div class="tour-content">
+                    <div class="tour-header">
+                        <h3 class="tour-title">Monaco Majesty</h3>
+                        <span class="tour-duration">4 часа</span>
+                    </div>
+                    <p class="tour-tagline">Роскошь княжества в одном туре</p>
+                    <div class="tour-highlights">
+                        <h4>Основные моменты:</h4>
+                        <ul>
+                            <li>Средневековая деревня Эз и парфюмерия</li>
+                            <li>Дворец Принца с инсайдерскими историями</li>
+                            <li>Казино Монте-Карло и трасса Формулы 1</li>
+                            <li>Панорамные виды на Монако</li>
+                        </ul>
+                    </div>
+                    <div class="tour-features">
+                        <span class="feature-tag">Трансфер включен</span>
+                        <span class="feature-tag">Приватный тур</span>
+                        <span class="feature-tag">3 языка</span>
+                    </div>
+                    <div class="tour-footer">
+                        <span class="tour-price">от €200</span>
+                        <button class="details-button" onclick="event.stopPropagation(); openModal('modal1')">Детали тура</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 2: Monaco Coastline -->
+            <div class="tour-card" onclick="openModal('modal2')">
+                <div class="tour-image" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/MC_coast_02.jpg'); background-size: cover; background-position: center;">
+                </div>
+                <div class="tour-content">
+                    <div class="tour-header">
+                        <h3 class="tour-title">Monaco Coastline Journey</h3>
+                        <span class="tour-duration">6 часов</span>
+                    </div>
+                    <p class="tour-tagline">Создайте свой идеальный маршрут</p>
+                    <div class="tour-highlights">
+                        <h4>Основные моменты:</h4>
+                        <ul>
+                            <li>Средневековый Эз и парфюмерия Fragonard</li>
+                            <li>Монако: дворец, собор, музей океанографии</li>
+                            <li>Монте-Карло: казино и роскошь</li>
+                            <li>Полная гибкость маршрута</li>
+                        </ul>
+                    </div>
+                    <div class="tour-features">
+                        <span class="feature-tag">VIP опыт</span>
+                        <span class="feature-tag">Гид на всех остановках</span>
+                        <span class="feature-tag">Вода включена</span>
+                    </div>
+                    <div class="tour-footer">
+                        <span class="tour-price">от €300</span>
+                        <button class="details-button" onclick="event.stopPropagation(); openModal('modal2')">Детали тура</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 3: Grand Riviera -->
+            <div class="tour-card" onclick="openModal('modal3')">
+                <div class="tour-image" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/grandtour_04.jpg'); background-size: cover; background-position: center;">
+                </div>
+                <div class="tour-content">
+                    <div class="tour-header">
+                        <h3 class="tour-title">Grand Riviera Tour</h3>
+                        <span class="tour-duration">8 часов</span>
+                    </div>
+                    <p class="tour-tagline">Всё лучшее за один день</p>
+                    <div class="tour-highlights">
+                        <h4>Основные моменты:</h4>
+                        <ul>
+                            <li>Монако, Эз, Сен-Поль-де-Ванс</li>
+                            <li>Антиб и Канны с гидом</li>
+                            <li>Захватывающие пейзажи</li>
+                            <li>Приватный опыт для вашей семьи</li>
+                        </ul>
+                    </div>
+                    <div class="tour-features">
+                        <span class="feature-tag">Полный день</span>
+                        <span class="feature-tag">6 локаций</span>
+                        <span class="feature-tag">Макс комфорт</span>
+                    </div>
+                    <div class="tour-footer">
+                        <span class="tour-price">от €450</span>
+                        <button class="details-button" onclick="event.stopPropagation(); openModal('modal3')">Детали тура</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tour 4: Monaco by Night -->
+            <div class="tour-card" onclick="openModal('modal4')">
+                <div class="tour-image" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/MC_night_01.jpg'); background-size: cover; background-position: center;">
+                </div>
+                <div class="tour-content">
+                    <div class="tour-header">
+                        <h3 class="tour-title">Monaco by Night</h3>
+                        <span class="tour-duration">4 часа</span>
+                    </div>
+                    <p class="tour-tagline">Волшебство вечернего княжества</p>
+                    <div class="tour-highlights">
+                        <h4>Основные моменты:</h4>
+                        <ul>
+                            <li>Вечерний Эз с уникальными видами</li>
+                            <li>Панорама освещённого Монако</li>
+                            <li>Дворец и собор в ночной подсветке</li>
+                            <li>Казино Монте-Карло ночью</li>
+                        </ul>
+                    </div>
+                    <div class="tour-features">
+                        <span class="feature-tag">Вечерний тур</span>
+                        <span class="feature-tag">Романтика</span>
+                        <span class="feature-tag">Фотостопы</span>
+                    </div>
+                    <div class="tour-footer">
+                        <span class="tour-price">от €200</span>
+                        <button class="details-button" onclick="event.stopPropagation(); openModal('modal4')">Детали тура</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 1: Monaco Majesty -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('modal1')">&times;</span>
+                <h2>Monaco Majesty: Private Tailor-Made Tour</h2>
+                <p style="margin-top: 10px; opacity: 0.9;">4 часа роскоши и истории княжества</p>
+            </div>
+            <div class="modal-body">
+                <h3>📸 Фотогалерея</h3>
+                <div class="modal-gallery">
+                    <!-- ИНСТРУКЦИЯ: Замените src на ваши реальные фото -->
+                    <img src="./images/MC_magesty_01.jpg" alt="Monaco view" class="gallery-image" onclick="openLightbox(this.src, 'gallery1')">
+                    <img src="./images/MC_magesty_02.jpg" alt="Monte Carlo" class="gallery-image" onclick="openLightbox(this.src, 'gallery1')">
+                    <img src="./images/MC_magesty_03.jpg" alt="Eze village" class="gallery-image" onclick="openLightbox(this.src, 'gallery1')">
+                    <img src="./images/MC_majesty_04.jpg" alt="Palace" class="gallery-image" onclick="openLightbox(this.src, 'gallery1')">
+                </div>
+
+                <h3>✨ О туре</h3>
+                <p>Окунитесь в гламур Монако на приватном туре: прогуляйтесь по гавани, полной яхт, исследуйте Дворец Принца, испытайте удачу в казино Монте-Карло и почувствуйте адреналин трассы Формулы 1.</p>
+
+                <h3>🎯 Основные моменты</h3>
+                <ul>
+                    <li>Средневековая деревня Эз: мощеные улочки и парфюмерная фабрика</li>
+                    <li>Исследуйте старый город Монако и Дворец Принца с инсайдерскими историями от гида</li>
+                    <li>Погрузитесь в гламур Монте-Карло на площади Казино и трассе Формулы 1</li>
+                    <li>Полная гибкость — настройте остановки и темп для VIP-опыта</li>
+                    <li>Эксклюзивная остановка с панорамным видом на Монако</li>
+                </ul>
+
+                <h3>🗺️ Маршрут</h3>
+                <div class="itinerary-item">
+                    <strong>Мон-Борон, Ницца</strong> (10 мин)<br>
+                    Потрясающий вид на Бухту Ангелов и холмы Ниццы
+                </div>
+                <div class="itinerary-item">
+                    <strong>Эз</strong> (45 мин)<br>
+                    Средневековая деревня на скале с захватывающими видами
+                </div>
+                <div class="itinerary-item">
+                    <strong>Парфюмерия Fragonard</strong> (45 мин, опционально)<br>
+                    Экскурсия по парфюмерной фабрике
+                </div>
+                <div class="itinerary-item">
+                    <strong>Ла-Тюрби</strong> (1.5 часа, опционально)<br>
+                    Римский трофей Августа с панорамными видами
+                </div>
+                <div class="itinerary-item">
+                    <strong>Monaco City</strong> (1 час)<br>
+                    Дворец Принца, собор, старый город
+                </div>
+                <div class="itinerary-item">
+                    <strong>Казино Монте-Карло</strong> (40 мин)<br>
+                    Легендарное казино, Отель де Пари, трасса Формулы 1
+                </div>
+
+                <h3>✅ Что включено</h3>
+                <div class="includes-grid">
+                    <div class="includes-item included">Трансфер от/до вашего отеля</div>
+                    <div class="includes-item included">Персональный водитель</div>
+                    <div class="includes-item included">Гид на всех остановках</div>
+                    <div class="includes-item included">Посещение парфюмерии</div>
+                    <div class="includes-item included">Вода в бутылках</div>
+                    <div class="includes-item not-included">Еда и напитки</div>
+                    <div class="includes-item not-included">Вход во Дворец Принца</div>
+                    <div class="includes-item not-included">Вход в Океанографический музей</div>
+                </div>
+
+                <h3>ℹ️ Важная информация</h3>
+                <ul>
+                    <li><strong>Языки:</strong> Английский, Французский, Русский</li>
+                    <li><strong>Трансфер:</strong> 6 точек сбора (Ницца, Сен-Жан-Кап-Ферра, Вильнёв-Лубе, Антиб и др.)</li>
+                    <li><strong>Бесплатная отмена:</strong> За 24 часа до начала</li>
+                    <li><strong>Бронь без оплаты:</strong> Забронируйте сейчас, платите позже</li>
+                </ul>
+
+                <div style="text-align: center;">
+                    <a href="https://widgets.bokun.io/online-sales/your-booking-link" target="_blank" class="book-cta">Забронировать тур</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Monaco Coastline -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('modal2')">&times;</span>
+                <h2>Monaco Coastline Journey</h2>
+                <p style="margin-top: 10px; opacity: 0.9;">6 часов вашего идеального путешествия</p>
+            </div>
+            <div class="modal-body">
+                <h3>📸 Фотогалерея</h3>
+                <div class="modal-gallery">
+                    <img src="./images/MC_coast_01.jpg" alt="Coastline view" class="gallery-image" onclick="openLightbox(this.src, 'gallery2')">
+                    <img src="./images/MC_coast_02.jpg" alt="Eze" class="gallery-image" onclick="openLightbox(this.src, 'gallery2')">
+                    <img src="./images/MC_coast_03.jpg" alt="Monaco" class="gallery-image" onclick="openLightbox(this.src, 'gallery2')">
+                    <img src="./images/MC_coast_04.jpg" alt="Views" class="gallery-image" onclick="openLightbox(this.src, 'gallery2')">
+                </div>
+
+                <h3>✨ О туре</h3>
+                <p>Создайте своё лучшее путешествие по побережью Монако с нашим приватным туром на авто! Вы выбираете, где остановиться, что пропустить и сколько времени провести — каждая деталь подстроена под ваши желания.</p>
+
+                <h3>🎯 Основные моменты</h3>
+                <ul>
+                    <li>Средневековая деревня Эз: мощеные улочки и парфюмерная фабрика</li>
+                    <li>Знаковые места Монако: Дворец Принца и трасса Формулы 1</li>
+                    <li>Гламур Монте-Карло: роскошь Казино и Отель де Пари</li>
+                    <li>Полная кастомизация под вас: приватный гид, внимательный к вашим предпочтениям</li>
+                    <li>Живописные поездки: дорога Moyenne Corniche, виды на Средиземное море</li>
+                </ul>
+
+                <h3>🗺️ Маршрут</h3>
+                <div class="itinerary-item">
+                    <strong>Панорамные точки</strong> (20 мин)<br>
+                    Фотостопы с видами на Бухту Ангелов
+                </div>
+                <div class="itinerary-item">
+                    <strong>Эз</strong> (1 час 45 мин)<br>
+                    Средневековая деревня, гид-экскурсия, свободное время
+                </div>
+                <div class="itinerary-item">
+                    <strong>Парфюмерия Fragonard</strong> (опционально)<br>
+                    Гид-тур и шопинг в парфюмерии
+                </div>
+                <div class="itinerary-item">
+                    <strong>Ла-Тюрби</strong> (20 мин, опционально)<br>
+                    Римский Трофей Августа
+                </div>
+                <div class="itinerary-item">
+                    <strong>Monaco City</strong> (1.5 часа)<br>
+                    Гид-экскурсия по старому городу, шопинг
+                </div>
+                <div class="itinerary-item">
+                    <strong>Монте-Карло</strong> (1.5 часа)<br>
+                    Казино, свободное время, прогулка
+                </div>
+
+                <h3>✅ Что включено</h3>
+                <div class="includes-grid">
+                    <div class="includes-item included">Приватный гид/водитель</div>
+                    <div class="includes-item included">Трансфер на авто с кондиционером</div>
+                    <div class="includes-item included">Трансфер от/до отеля</div>
+                    <div class="includes-item included">Гид-тур по парфюмерии в Эз</div>
+                    <div class="includes-item included">Входной билет в Старый Эз</div>
+                    <div class="includes-item included">Пешая экскурсия (по желанию)</div>
+                    <div class="includes-item included">Вода в бутылках</div>
+                    <div class="includes-item not-included">Еда и напитки</div>
+                    <div class="includes-item not-included">Вход во Дворец Принца</div>
+                    <div class="includes-item not-included">Вход в Океанографический музей</div>
+                </div>
+
+                <h3>ℹ️ Важная информация</h3>
+                <ul>
+                    <li><strong>Языки:</strong> Английский, Французский, Русский</li>
+                    <li><strong>Трансфер:</strong> 5 точек сбора</li>
+                    <li><strong>Бесплатная отмена:</strong> За 24 часа до начала</li>
+                </ul>
+
+                <div style="text-align: center;">
+                    <a href="https://widgets.bokun.io/online-sales/your-booking-link" target="_blank" class="book-cta">Забронировать тур</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Grand Riviera -->
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('modal3')">&times;</span>
+                <h2>Grand Riviera Tour</h2>
+                <p style="margin-top: 10px; opacity: 0.9;">8 часов магии Французской Ривьеры</p>
+            </div>
+            <div class="modal-body">
+                <h3>📸 Фотогалерея</h3>
+                <div class="modal-gallery">
+                    <img src="./images/grandtour_01.jpg" alt="Riviera tour" class="gallery-image" onclick="openLightbox(this.src, 'gallery3')">
+                    <img src="./images/grandtour_02.jpg" alt="Cannes" class="gallery-image" onclick="openLightbox(this.src, 'gallery3')">
+                    <img src="./images/grandtour_03.jpg" alt="Antibes" class="gallery-image" onclick="openLightbox(this.src, 'gallery3')">
+                    <img src="./images/grandtour_04.jpg" alt="Saint Paul" class="gallery-image" onclick="openLightbox(this.src, 'gallery3')">
+                </div>
+
+                <h3>✨ О туре</h3>
+                <p>Очарование Французской Ривьеры выходит за рамки известных красот Ниццы, Монако и Канн. Позвольте мне провести вас в завораживающее путешествие по скрытым жемчужинам региона.</p>
+
+                <h3>🎯 Основные моменты</h3>
+                <ul>
+                    <li>Приватный опыт. Только ваша семья или близкие друзья</li>
+                    <li>Ваш личный гид на каждой остановке</li>
+                    <li>Потрясающие пейзажи и захватывающие виды</li>
+                    <li>6 уникальных локаций за один день</li>
+                </ul>
+
+                <h3>🗺️ Полный маршрут</h3>
+                <div class="itinerary-item">
+                    <strong>1. Мон-Борон</strong> (7 мин)<br>
+                    Потрясающий вид на Бухту Ангелов и холмы Ниццы
+                </div>
+                <div class="itinerary-item">
+                    <strong>2. Эз</strong> (45 мин)<br>
+                    Средневековая деревня на скале высотой 400 метров
+                </div>
+                <div class="itinerary-item">
+                    <strong>3. Парфюмерия Fragonard</strong> (45 мин)<br>
+                    Ароматный оазис
+                </div>
+                <div class="itinerary-item">
+                    <strong>4. Монако и Монте-Карло</strong> (1 час 45 мин)<br>
+                    Дворец, собор, музей, казино, трасса Формулы 1
+                </div>
+                <div class="itinerary-item">
+                    <strong>5. Сен-Поль-де-Ванс</strong> (1 час)<br>
+                    Живописная деревня художников
+                </div>
+                <div class="itinerary-item">
+                    <strong>6. Антиб</strong> (1 час)<br>
+                    Средневековый шарм на скалистом утёсе
+                </div>
+                <div class="itinerary-item">
+                    <strong>7. Канны</strong> (1 час)<br>
+                    Дворец Фестивалей, набережная Круазетт
+                </div>
+
+                <h3>✅ Что включено</h3>
+                <div class="includes-grid">
+                    <div class="includes-item included">Ваш личный гид</div>
+                    <div class="includes-item included">Трансфер от/до отеля</div>
+                    <div class="includes-item included">Авто с кондиционером</div>
+                    <div class="includes-item included">Гид-тур по парфюмерии</div>
+                    <div class="includes-item included">Входной билет в Старый Эз</div>
+                    <div class="includes-item included">Вода в бутылках</div>
+                    <div class="includes-item not-included">Еда и напитки</div>
+                    <div class="includes-item not-included">Входы в музеи</div>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="https://widgets.bokun.io/online-sales/your-booking-link" target="_blank" class="book-cta">Забронировать тур</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: Monaco by Night -->
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close" onclick="closeModal('modal4')">&times;</span>
+                <h2>Monaco by Night</h2>
+                <p style="margin-top: 10px; opacity: 0.9;">4 часа волшебства вечернего княжества</p>
+            </div>
+            <div class="modal-body">
+                <h3>📸 Фотогалерея</h3>
+                <div class="modal-gallery">
+                    <img src="./images/MC_night_01.jpg" alt="Monaco night" class="gallery-image" onclick="openLightbox(this.src, 'gallery4')">
+                    <img src="./images/MC_night_02.jpg" alt="Casino night" class="gallery-image" onclick="openLightbox(this.src, 'gallery4')">
+                    <img src="./images/MC_night_03.jpg" alt="Palace night" class="gallery-image" onclick="openLightbox(this.src, 'gallery4')">
+                    <img src="./images/MC_night_04.jpg" alt="Views night" class="gallery-image" onclick="openLightbox(this.src, 'gallery4')">
+                </div>
+
+                <h3>✨ О туре</h3>
+                <p>Откройте для себя красоту Монако ночью на приватном туре. Посетите средневековую деревню Эз и увидьте Дворец Принца, Собор Святого Николая и Казино Монте-Карло в волшебной ночной подсветке.</p>
+
+                <h3>🎯 Основные моменты</h3>
+                <ul>
+                    <li>Потрясающие виды на Средиземное море из средневековой деревни</li>
+                    <li>Восхититесь освещёнными небоскрёбами, яхтами и морем</li>
+                    <li>Увидьте Дворец Принца и Собор в ночной подсветке</li>
+                    <li>Знаменитое Казино Монте-Карло ночью</li>
+                    <li>Испытайте удачу в самом известном казино мира</li>
+                </ul>
+
+                <h3>🗺️ Вечерний маршрут</h3>
+                <div class="itinerary-item">
+                    <strong>Панорамная точка 1</strong> (10 мин)<br>
+                    Вечерний вид на Бухту Ангелов
+                </div>
+                <div class="itinerary-item">
+                    <strong>Эз-Виллаж</strong> (30 мин)<br>
+                    Средневековая деревня в вечернем свете
+                </div>
+                <div class="itinerary-item">
+                    <strong>Панорама Монако</strong> (5 мин)<br>
+                    Освещённые небоскрёбы и яхты
+                </div>
+                <div class="itinerary-item">
+                    <strong>Monaco-Ville</strong> (45 мин)<br>
+                    Дворец и Собор в ночной подсветке
+                </div>
+                <div class="itinerary-item">
+                    <strong>Монте-Карло</strong> (1.5 часа)<br>
+                    Казино, Отель де Пари, трасса Формулы 1
+                </div>
+
+                <h3>✅ Что включено</h3>
+                <div class="includes-grid">
+                    <div class="includes-item included">Приватный трансфер</div>
+                    <div class="includes-item included">Живой гид</div>
+                    <div class="includes-item included">Панорамные остановки</div>
+                    <div class="includes-item included">Фото-возможности</div>
+                    <div class="includes-item not-included">Еда и напитки</div>
+                    <div class="includes-item not-included">Вход в Казино</div>
+                </div>
+
+                <h3>ℹ️ Важная информация</h3>
+                <ul>
+                    <li><strong>Не подходит для:</strong> Людей в инвалидных колясках, людей с боязнью высоты</li>
+                    <li><strong>Казино:</strong> Требуется ID для входа, есть дресс-код</li>
+                    <li><strong>Курение:</strong> Запрещено в автомобиле</li>
+                </ul>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="https://widgets.bokun.io/online-sales/your-booking-link" target="_blank" class="book-cta">Забронировать тур</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="reviews-section">
+        <div class="reviews-container">
+            <h2 class="section-title">Отзывы клиентов</h2>
+            <p class="section-subtitle">Что говорят о наших турах</p>
+            
+            <div class="slider-wrapper">
+                <div class="reviews-slider" id="reviewsSlider">
+                    <div class="review-card">
+                        <div class="review-content">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Потрясающий тур! Наш гид показал нам скрытые жемчужины Монако, о которых мы никогда бы не узнали. Профессионально, познавательно и очень комфортно. Однозначно рекомендую!"</p>
+                            <p class="review-author">Мария и Сергей</p>
+                            <p class="review-date">Сентябрь 2024</p>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Это был лучший день нашего отпуска! Гранд-тур по Ривьере превзошел все ожидания. Каждая локация была идеально подобрана, а рассказы гида сделали поездку незабываемой."</p>
+                            <p class="review-author">Анна К.</p>
+                            <p class="review-date">Август 2024</p>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Приватный тур по Монако ночью — это что-то особенное! Романтично, красиво и очень атмосферно. Спасибо за прекрасно организованную поездку!"</p>
+                            <p class="review-author">Дмитрий и Елена</p>
+                            <p class="review-date">Июль 2024</p>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-content">
+                            <div class="review-stars">★★★★★</div>
+                            <p class="review-text">"Отличный сервис и внимание к деталям! Всё было организовано идеально. Гид говорит на трёх языках, что очень удобно. Будем рекомендовать друзьям!"</p>
+                            <p class="review-author">Александр М.</p>
+                            <p class="review-date">Июнь 2024</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-dots" id="sliderDots"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Form Section -->
+<div class="contact-section">
+    <div class="contact-container">
+        <h2 class="section-title" style="color: white;">Свяжитесь со мной</h2>
+        <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">Задайте вопрос или забронируйте тур прямо сейчас</p>
+        
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label for="name">Ваше имя *</label>
+                <input type="text" id="name" name="name" required placeholder="Иван Иванов">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required placeholder="ivan@example.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Телефон</label>
+                <input type="tel" id="phone" name="phone" placeholder="+7 (900) 123-45-67">
+            </div>
+            
+            <div class="form-group">
+                <label for="tour">Интересующий тур</label>
+                <select id="tour" name="tour">
+                    <option value="">Выберите тур</option>
+                    <option value="monaco-majesty">Monaco Majesty (4 часа)</option>
+                    <option value="monaco-coastline">Monaco Coastline Journey (6 часов)</option>
+                    <option value="grand-riviera">Grand Riviera Tour (8 часов)</option>
+                    <option value="monaco-night">Monaco by Night (4 часа)</option>
+                    <option value="other">Другое</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Ваше сообщение *</label>
+                <textarea id="message" name="message" required placeholder="Расскажите о ваших пожеланиях..."></textarea>
+            </div>
+            
+            <button type="submit" class="submit-button">Отправить запрос</button>
+            
+            <div id="formMessage" class="form-message"></div>
+        </form>
+    </div>
+</div>
+
+    <div class="about-section">
+        <div class="about-content">
+            <h2 class="section-title">Почему я?</h2>
+            <p>Я живу на Французской Ривьере уже более 10 лет и знаю каждый уголок этого волшебного региона. Мои туры — это не просто экскурсии, а погружение в местную культуру, истории и секретные места, о которых не пишут в путеводителях.</p>
+            <p>Работаю только с небольшими группами или индивидуально, чтобы каждый тур был максимально персональным и комфортным для вас. Говорю на трёх языках: английском, французском и русском.</p>
+            
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Довольных гостей</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Лет на Ривьере</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">5.0★</span>
+                    <span class="stat-label">Рейтинг на GetYourGuide</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox for gallery images -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <div class="lightbox-content">
+            <span class="lightbox-nav lightbox-prev" onclick="changeLightboxImage(-1)">&#10094;</span>
+            <img id="lightbox-img" class="lightbox-image" src="" alt="Gallery image">
+            <span class="lightbox-nav lightbox-next" onclick="changeLightboxImage(1)">&#10095;</span>
+        </div>
+    </div>
+
+    <footer>
+        <p> Свяжитесь со мной для бронирования или вопросов</p>
+        <p> mail: azurepictours@gmail.com</p>
+        <p> Phone: +33(0)6.24.72.99.83</p>
+        <p style="margin-top: 20px; opacity: 0.8;">© 2025 Приватные туры по Французской Ривьере. Все права защищены.</p>
+    </footer>
+
+    <!-- Floating Social Buttons -->
+<div class="floating-buttons">
+    <a href="https://wa.me/+33624729983?text=Здравствуйте!%20Хочу%20узнать%20о%20турах%20по%20Ривьере" 
+       target="_blank" 
+       class="social-button whatsapp-button" 
+       data-tooltip="Написать в WhatsApp"
+       aria-label="WhatsApp">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 0C7.164 0 0 7.164 0 16c0 2.825.744 5.488 2.044 7.792L0 32l8.384-2.192A15.939 15.939 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm0 29.156c-2.425 0-4.748-.656-6.728-1.9l-.484-.288-5.016 1.316 1.34-4.888-.316-.5A13.084 13.084 0 012.844 16C2.844 8.732 8.732 2.844 16 2.844S29.156 8.732 29.156 16 23.268 29.156 16 29.156z" fill="white"/>
+            <path d="M23.156 19.5c-.388-.196-2.296-1.132-2.652-1.26-.356-.128-.616-.196-.876.196-.26.392-.996 1.26-1.22 1.516-.224.256-.448.288-.836.092-.388-.196-1.64-.604-3.124-1.928-1.156-.94-1.936-2.1-2.16-2.488-.224-.388-.024-.6.172-.792.176-.176.388-.46.58-.688.192-.228.256-.388.384-.644.128-.256.064-.48-.032-.676-.096-.196-.876-2.108-1.2-2.888-.316-.76-.636-.656-.876-.668-.224-.012-.48-.016-.736-.016-.256 0-.672.096-.876.388-.204.292-1.168 1.14-1.168 2.78s1.196 3.224 1.364 3.444c.168.22 2.364 3.608 5.728 5.06.8.344 1.424.548 1.908.7.804.252 1.536.216 2.116.132.644-.096 1.98-.808 2.26-1.588.28-.78.28-1.448.196-1.588-.084-.14-.34-.224-.728-.42z" fill="white"/>
+        </svg>
+    </a>
+    
+    <a href="https://t.me/grytsayo" 
+       target="_blank" 
+       class="social-button telegram-button" 
+       data-tooltip="Написать в Telegram"
+       aria-label="Telegram">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 32C24.8366 32 32 24.8366 32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32Z" fill="white"/>
+            <path d="M7.27734 15.7109L22.8281 9.73828C23.5938 9.46484 24.2695 9.92578 24.0273 11.0273L24.0312 11.0234L21.2891 24.1758C21.0898 25.0859 20.5352 25.3203 19.7539 24.8906L15.5273 21.8203L13.4844 23.7773C13.2578 24.0039 13.0664 24.1953 12.6211 24.1953L12.9258 19.9023L20.7969 12.7969C21.1406 12.4883 20.7227 12.3125 20.2695 12.6172L10.4883 18.7539L6.33203 17.4805C5.44141 17.1992 5.42187 16.5742 6.52734 16.1289L7.27734 15.7109Z" fill="#0088cc"/>
+        </svg>
+    </a>
+</div>
+
+    <script>
+        let currentGallery = [];
+        let currentImageIndex = 0;
+
+        // Reviews Slider
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.review-card');
+        const totalSlides = slides.length;
+        const slider = document.getElementById('reviewsSlider');
+        const dotsContainer = document.getElementById('sliderDots');
+
+        // Create dots
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'dot';
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            updateDots();
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            goToSlide(currentSlide);
+        }
+
+        function updateDots() {
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        // Auto-advance every 5 seconds
+        setInterval(nextSlide, 5000);
+
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function openLightbox(imageSrc, galleryId) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            // Get all images from current gallery
+            const modal = event.target.closest('.modal');
+            const galleryImages = modal.querySelectorAll('.gallery-image');
+            currentGallery = Array.from(galleryImages).map(img => img.src);
+            currentImageIndex = currentGallery.indexOf(imageSrc);
+            
+            lightboxImg.src = imageSrc;
+            lightbox.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function changeLightboxImage(direction) {
+            currentImageIndex += direction;
+            
+            if (currentImageIndex >= currentGallery.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = currentGallery.length - 1;
+            }
+            
+            document.getElementById('lightbox-img').src = currentGallery[currentImageIndex];
+        }
+
+        // Close lightbox on outside click
+        document.getElementById('lightbox')?.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeLightbox();
+            }
+        });
+
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', function(e) {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox && lightbox.style.display === 'block') {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') changeLightboxImage(-1);
+                if (e.key === 'ArrowRight') changeLightboxImage(1);
+            }
+        });
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '0';
+                    entry.target.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        entry.target.style.transition = 'all 0.6s ease';
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.tour-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Contact Form Handler
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formMessage = document.getElementById('formMessage');
+    const submitButton = this.querySelector('.submit-button');
+    
+    // Показываем загрузку
+    submitButton.textContent = 'Отправка...';
+    submitButton.disabled = true;
+    
+    // Получаем данные формы
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        tour: document.getElementById('tour').value,
+        message: document.getElementById('message').value
+    };
+    
+    // ВАЖНО: Здесь нужно настроить отправку на ваш email
+    // Вариант 1: Используйте сервис типа Formspree.io или EmailJS
+    // Вариант 2: Отправьте на ваш backend
+    
+    // Для демонстрации - показываем успех через 1 секунду
+    setTimeout(() => {
+        formMessage.className = 'form-message success';
+        formMessage.textContent = '✓ Спасибо! Ваше сообщение отправлено. Я свяжусь с вами в ближайшее время.';
+        
+        // Очищаем форму
+        this.reset();
+        
+        // Возвращаем кнопку в исходное состояние
+        submitButton.textContent = 'Отправить запрос';
+        submitButton.disabled = false;
+        
+        // Скрываем сообщение через 5 секунд
+        setTimeout(() => {
+            formMessage.style.display = 'none';
+        }, 5000);
+    }, 1000);
+    
+    
+    // РЕАЛЬНАЯ ОТПРАВКА через FormSubmit.co (бесплатно):
+    // 1. Замените YOUR_EMAIL на ваш email
+  
+    
+    fetch('https://formsubmit.co/azurepictours@gmail.com', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => {
+        if (response.ok) {
+            formMessage.className = 'form-message success';
+            formMessage.textContent = '✓ Спасибо! Ваше сообщение отправлено.';
+            this.reset();
+        } else {
+            throw new Error('Ошибка отправки');
+        }
+    })
+    .catch(error => {
+        formMessage.className = 'form-message error';
+        formMessage.textContent = '✗ Ошибка отправки. Попробуйте позже или напишите напрямую.';
+    })
+    .finally(() => {
+        submitButton.textContent = 'Отправить запрос';
+        submitButton.disabled = false;
+    });
+
+});
+    </script>
+</body>
+</html>
