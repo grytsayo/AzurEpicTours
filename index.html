@@ -948,10 +948,10 @@
 
 /* Language Switcher Styles */
 .language-switcher {
-    position: fixed !important;
-    top: 30px !important;
-    right: 30px !important;
-    z-index: 9999 !important;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    z-index: 100;
     display: flex !important;
     gap: 5px;
     background: rgba(255, 255, 255, 0.95);
@@ -991,8 +991,6 @@
 
 @media (max-width: 768px) {
     .language-switcher {
-        top: 15px;
-        right: 15px;
         padding: 4px;
     }
 
@@ -1005,14 +1003,14 @@
     </style>
 </head>
 <body>
-    <!-- Language Switcher -->
-    <div class="language-switcher">
-        <button class="lang-btn active" data-lang="ru">RU</button>
-        <button class="lang-btn" data-lang="en">EN</button>
-        <button class="lang-btn" data-lang="fr">FR</button>
-    </div>
-
     <div class="hero">
+        <!-- Language Switcher -->
+        <div class="language-switcher">
+            <button class="lang-btn active" data-lang="ru">RU</button>
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="fr">FR</button>
+        </div>
+
         <div class="hero-content">
             <h1 data-i18n="heroTitle">Французская Ривьера с местным гидом</h1>
             <p data-i18n="heroSubtitle">Откройте для себя настоящую Ривьеру: Монако, Канны, Ницца, Антиб. Приватные туры с персональным подходом</p>
