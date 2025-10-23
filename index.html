@@ -879,6 +879,32 @@
     box-shadow: 0 10px 30px rgba(234, 67, 53, 0.4);
 }
 
+.email-submit-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.email-form-message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.email-form-message.success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 2px solid #10b981;
+}
+
+.email-form-message.error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 2px solid #ef4444;
+}
+
 /* Tooltip */
 .social-button::before {
     content: attr(data-tooltip);
@@ -1568,7 +1594,15 @@
         <h2 data-i18n="emailModalTitle">Написать Email</h2>
         <p data-i18n="emailModalSubtitle">Выберите тур и отправьте запрос</p>
 
-        <form id="emailForm">
+        <form id="emailForm" name="email-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+            <!-- Netlify form identifier -->
+            <input type="hidden" name="form-name" value="email-contact" />
+
+            <!-- Honeypot for spam protection (hidden from users) -->
+            <p style="display: none;">
+                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            </p>
+
             <div class="email-form-group">
                 <label for="emailName" data-i18n="formName">Ваше имя *</label>
                 <input type="text" id="emailName" name="name" required placeholder="Иван Иванов">
@@ -1595,6 +1629,8 @@
                 <label for="emailMessage" data-i18n="formMessage">Ваше сообщение *</label>
                 <textarea id="emailMessage" name="message" required placeholder="Расскажите о ваших пожеланиях..."></textarea>
             </div>
+
+            <div id="emailFormMessage" class="email-form-message" style="display: none;"></div>
 
             <button type="submit" class="email-submit-button" data-i18n="formSubmit">Отправить запрос</button>
         </form>
@@ -1868,6 +1904,7 @@
                 formTourSelect: "Выберите тур",
                 formMessage: "Ваше сообщение",
                 formSubmit: "Отправить запрос",
+                formSending: "Отправка...",
                 formSuccess: "✓ Спасибо! Ваше сообщение отправлено. Я свяжусь с вами в ближайшее время.",
                 formError: "✗ Ошибка отправки. Попробуйте позже или напишите напрямую.",
 
@@ -2139,6 +2176,7 @@
                 formTourSelect: "Select a tour",
                 formMessage: "Your message",
                 formSubmit: "Send request",
+                formSending: "Sending...",
                 formSuccess: "✓ Thank you! Your message has been sent. I will contact you shortly.",
                 formError: "✗ Sending error. Please try later or write directly.",
 
@@ -2410,6 +2448,7 @@
                 formTourSelect: "Sélectionnez une visite",
                 formMessage: "Votre message",
                 formSubmit: "Envoyer la demande",
+                formSending: "Envoi en cours...",
                 formSuccess: "✓ Merci ! Votre message a été envoyé. Je vous contacterai bientôt.",
                 formError: "✗ Erreur d'envoi. Veuillez réessayer plus tard ou écrire directement.",
 
@@ -2701,34 +2740,67 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
             }
         });
 
-        // Email Form Submission
+        // Email Form Submission with Netlify Forms
         document.addEventListener('DOMContentLoaded', function() {
             const emailForm = document.getElementById('emailForm');
+            const formMessage = document.getElementById('emailFormMessage');
+            const submitButton = emailForm ? emailForm.querySelector('button[type="submit"]') : null;
+
             if (emailForm) {
                 emailForm.addEventListener('submit', function(e) {
                     e.preventDefault();
 
-                    const name = document.getElementById('emailName').value;
-                    const email = document.getElementById('emailAddress').value;
-                    const tour = document.getElementById('emailTour').value;
-                    const message = document.getElementById('emailMessage').value;
+                    // Disable submit button
+                    if (submitButton) {
+                        submitButton.disabled = true;
+                        submitButton.textContent = translations[currentLanguage].formSending || 'Отправка...';
+                    }
 
-                    // Get tour name for subject
-                    const tourSelect = document.getElementById('emailTour');
-                    const tourName = tourSelect.options[tourSelect.selectedIndex].text;
+                    // Hide any previous messages
+                    formMessage.style.display = 'none';
+                    formMessage.className = 'email-form-message';
 
-                    // Compose email
-                    const subject = tour ? `Запрос: ${tourName}` : 'Запрос информации';
-                    const body = `Имя: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AТур: ${tourName}%0D%0A%0D%0AСообщение:%0D%0A${message}`;
+                    // Prepare form data
+                    const formData = new FormData(emailForm);
 
-                    // Open email client
-                    window.location.href = `mailto:azurepictours@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+                    // Submit to Netlify
+                    fetch('/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams(formData).toString()
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Success
+                            formMessage.textContent = translations[currentLanguage].formSuccess || '✓ Спасибо! Ваше сообщение отправлено.';
+                            formMessage.className = 'email-form-message success';
+                            formMessage.style.display = 'block';
 
-                    // Close modal and reset form
-                    setTimeout(function() {
-                        closeEmailModal();
-                        emailForm.reset();
-                    }, 500);
+                            // Reset form
+                            emailForm.reset();
+
+                            // Close modal after 3 seconds
+                            setTimeout(function() {
+                                closeEmailModal();
+                                formMessage.style.display = 'none';
+                            }, 3000);
+                        } else {
+                            throw new Error('Form submission failed');
+                        }
+                    })
+                    .catch(error => {
+                        // Error
+                        formMessage.textContent = translations[currentLanguage].formError || '✗ Ошибка отправки. Попробуйте позже.';
+                        formMessage.className = 'email-form-message error';
+                        formMessage.style.display = 'block';
+                    })
+                    .finally(() => {
+                        // Re-enable submit button
+                        if (submitButton) {
+                            submitButton.disabled = false;
+                            submitButton.textContent = translations[currentLanguage].formSubmit || 'Отправить запрос';
+                        }
+                    });
                 });
             }
         });
