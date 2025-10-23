@@ -1553,6 +1553,22 @@
         <p style="margin-top: 20px; opacity: 0.8;" data-i18n="footerRights">© 2025 Приватные туры по Французской Ривьере. Все права защищены.</p>
     </footer>
 
+    <!-- Hidden form for Netlify detection (DO NOT REMOVE) -->
+    <form name="email-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+        <input type="hidden" name="form-name" value="email-contact" />
+        <input type="text" name="bot-field" />
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <select name="tour">
+            <option value="monaco-majesty">Monaco Majesty</option>
+            <option value="monaco-coastline">Monaco Coastline Journey</option>
+            <option value="grand-riviera">Grand Riviera Tour</option>
+            <option value="monaco-night">Monaco by Night</option>
+            <option value="other">Other</option>
+        </select>
+        <textarea name="message"></textarea>
+    </form>
+
     <!-- Floating Social Buttons -->
 <div class="floating-buttons">
     <a href="https://wa.me/+33624729983?text=Здравствуйте!%20Хочу%20узнать%20о%20турах%20по%20Ривьере" 
