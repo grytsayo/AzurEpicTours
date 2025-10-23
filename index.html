@@ -684,98 +684,6 @@
             }
         }
 
-        /* Contact Form Styles */
-.contact-section {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    padding: 80px 20px;
-    color: white;
-}
-
-.contact-container {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.contact-form {
-    background: white;
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    color: #2d3748;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.form-group input,
-.form-group textarea,
-.form-group select {
-    width: 100%;
-    padding: 12px 15px;
-    border: 2px solid #e2e8f0;
-    border-radius: 10px;
-    font-size: 1rem;
-    font-family: inherit;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus,
-.form-group select:focus {
-    outline: none;
-    border-color: #667eea;
-}
-
-.form-group textarea {
-    resize: vertical;
-    min-height: 120px;
-}
-
-.submit-button {
-    width: 100%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-.submit-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-}
-
-.form-message {
-    margin-top: 15px;
-    padding: 12px;
-    border-radius: 8px;
-    text-align: center;
-    display: none;
-}
-
-.form-message.success {
-    background: #d1fae5;
-    color: #065f46;
-    display: block;
-}
-
-.form-message.error {
-    background: #fee2e2;
-    color: #991b1b;
-    display: block;
-}
-
 /* Floating Social Buttons */
 .floating-buttons {
     position: fixed;
@@ -815,6 +723,10 @@
     background: linear-gradient(135deg, #0088cc 0%, #0088cc 100%);
 }
 
+.email-button {
+    background: linear-gradient(135deg, #EA4335 0%, #C5221F 100%);
+}
+
 .social-button:hover {
     animation: pulse 1s infinite;
 }
@@ -839,6 +751,132 @@
     50% {
         box-shadow: 0 4px 25px rgba(0, 136, 204, 0.6);
     }
+}
+
+.email-button:hover {
+    animation: pulseEmail 1s infinite;
+}
+
+@keyframes pulseEmail {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(234, 67, 53, 0.6);
+    }
+}
+
+/* Email Modal Styles */
+.email-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.email-modal-content {
+    background: white;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    position: relative;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.email-modal-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.email-modal-close:hover {
+    color: #333;
+}
+
+.email-modal h2 {
+    color: #2d3748;
+    margin-bottom: 10px;
+}
+
+.email-modal p {
+    color: #718096;
+    margin-bottom: 20px;
+}
+
+.email-form-group {
+    margin-bottom: 20px;
+}
+
+.email-form-group label {
+    display: block;
+    color: #2d3748;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.email-form-group input,
+.email-form-group textarea,
+.email-form-group select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e2e8f0;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s ease;
+}
+
+.email-form-group input:focus,
+.email-form-group textarea:focus,
+.email-form-group select:focus {
+    outline: none;
+    border-color: #EA4335;
+}
+
+.email-form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.email-submit-button {
+    width: 100%;
+    background: linear-gradient(135deg, #EA4335 0%, #C5221F 100%);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.email-submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(234, 67, 53, 0.4);
 }
 
 /* Tooltip */
@@ -882,23 +920,25 @@
 
 /* Language Switcher Styles */
 .language-switcher {
-    position: fixed;
-    top: 30px;
-    right: 30px;
-    z-index: 1000;
-    display: flex;
+    position: fixed !important;
+    top: 30px !important;
+    right: 30px !important;
+    z-index: 9999 !important;
+    display: flex !important;
     gap: 5px;
     background: rgba(255, 255, 255, 0.95);
     padding: 5px;
     border-radius: 25px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     backdrop-filter: blur(10px);
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 .lang-btn {
     background: transparent;
     border: none;
-    color: #667eea;
+    color: #667eea !important;
     font-weight: 600;
     font-size: 0.9rem;
     padding: 8px 16px;
@@ -906,6 +946,8 @@
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: inherit;
+    display: inline-block !important;
+    visibility: visible !important;
 }
 
 .lang-btn:hover {
@@ -1445,52 +1487,6 @@
         </div>
     </div>
 
-    <!-- Contact Form Section -->
-<div class="contact-section">
-    <div class="contact-container">
-        <h2 class="section-title" style="color: white;" data-i18n="contactTitle">Свяжитесь со мной</h2>
-        <p class="section-subtitle" style="color: rgba(255,255,255,0.9);" data-i18n="contactSubtitle">Задайте вопрос или забронируйте тур прямо сейчас</p>
-
-        <form class="contact-form" id="contactForm">
-            <div class="form-group">
-                <label for="name" data-i18n="formName">Ваше имя *</label>
-                <input type="text" id="name" name="name" required placeholder="Иван Иванов">
-            </div>
-
-            <div class="form-group">
-                <label for="email" data-i18n="formEmail">Email *</label>
-                <input type="email" id="email" name="email" required placeholder="ivan@example.com">
-            </div>
-
-            <div class="form-group">
-                <label for="phone" data-i18n="formPhone">Телефон</label>
-                <input type="tel" id="phone" name="phone" placeholder="+7 (900) 123-45-67">
-            </div>
-
-            <div class="form-group">
-                <label for="tour" data-i18n="formTour">Интересующий тур</label>
-                <select id="tour" name="tour">
-                    <option value="" data-i18n="formTourSelect">Выберите тур</option>
-                    <option value="monaco-majesty" data-i18n="formOption1">Monaco Majesty (4 часа)</option>
-                    <option value="monaco-coastline" data-i18n="formOption2">Monaco Coastline Journey (6 часов)</option>
-                    <option value="grand-riviera" data-i18n="formOption3">Grand Riviera Tour (8 часов)</option>
-                    <option value="monaco-night" data-i18n="formOption4">Monaco by Night (4 часа)</option>
-                    <option value="other" data-i18n="formOptionOther">Другое</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="message" data-i18n="formMessage">Ваше сообщение *</label>
-                <textarea id="message" name="message" required placeholder="Расскажите о ваших пожеланиях..."></textarea>
-            </div>
-
-            <button type="submit" class="submit-button" data-i18n="formSubmit">Отправить запрос</button>
-            
-            <div id="formMessage" class="form-message"></div>
-        </form>
-    </div>
-</div>
-
     <div class="about-section">
         <div class="about-content">
             <h2 class="section-title" data-i18n="aboutTitle">Почему я?</h2>
@@ -1544,9 +1540,9 @@
         </svg>
     </a>
     
-    <a href="https://t.me/grytsayo" 
-       target="_blank" 
-       class="social-button telegram-button" 
+    <a href="https://t.me/grytsayo"
+       target="_blank"
+       class="social-button telegram-button"
        data-tooltip="Написать в Telegram"
        aria-label="Telegram">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1554,6 +1550,55 @@
             <path d="M7.27734 15.7109L22.8281 9.73828C23.5938 9.46484 24.2695 9.92578 24.0273 11.0273L24.0312 11.0234L21.2891 24.1758C21.0898 25.0859 20.5352 25.3203 19.7539 24.8906L15.5273 21.8203L13.4844 23.7773C13.2578 24.0039 13.0664 24.1953 12.6211 24.1953L12.9258 19.9023L20.7969 12.7969C21.1406 12.4883 20.7227 12.3125 20.2695 12.6172L10.4883 18.7539L6.33203 17.4805C5.44141 17.1992 5.42187 16.5742 6.52734 16.1289L7.27734 15.7109Z" fill="#0088cc"/>
         </svg>
     </a>
+
+    <button class="social-button email-button"
+       data-tooltip="Написать Email"
+       aria-label="Email"
+       onclick="openEmailModal()">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M28 6H4C2.9 6 2.01 6.9 2.01 8L2 24C2 25.1 2.9 26 4 26H28C29.1 26 30 25.1 30 24V8C30 6.9 29.1 6 28 6ZM28 10L16 17L4 10V8L16 15L28 8V10Z" fill="white"/>
+        </svg>
+    </button>
+</div>
+
+<!-- Email Modal -->
+<div id="emailModal" class="email-modal">
+    <div class="email-modal-content">
+        <span class="email-modal-close" onclick="closeEmailModal()">&times;</span>
+        <h2 data-i18n="emailModalTitle">Написать Email</h2>
+        <p data-i18n="emailModalSubtitle">Выберите тур и отправьте запрос</p>
+
+        <form id="emailForm">
+            <div class="email-form-group">
+                <label for="emailName" data-i18n="formName">Ваше имя *</label>
+                <input type="text" id="emailName" name="name" required placeholder="Иван Иванов">
+            </div>
+
+            <div class="email-form-group">
+                <label for="emailAddress" data-i18n="formEmail">Email *</label>
+                <input type="email" id="emailAddress" name="email" required placeholder="ivan@example.com">
+            </div>
+
+            <div class="email-form-group">
+                <label for="emailTour" data-i18n="formTour">Интересующий тур</label>
+                <select id="emailTour" name="tour">
+                    <option value="" data-i18n="formTourSelect">Выберите тур</option>
+                    <option value="monaco-majesty" data-i18n="formOption1">Monaco Majesty (4 часа)</option>
+                    <option value="monaco-coastline" data-i18n="formOption2">Monaco Coastline Journey (6 часов)</option>
+                    <option value="grand-riviera" data-i18n="formOption3">Grand Riviera Tour (8 часов)</option>
+                    <option value="monaco-night" data-i18n="formOption4">Monaco by Night (4 часа)</option>
+                    <option value="other" data-i18n="formOptionOther">Другое</option>
+                </select>
+            </div>
+
+            <div class="email-form-group">
+                <label for="emailMessage" data-i18n="formMessage">Ваше сообщение *</label>
+                <textarea id="emailMessage" name="message" required placeholder="Расскажите о ваших пожеланиях..."></textarea>
+            </div>
+
+            <button type="submit" class="email-submit-button" data-i18n="formSubmit">Отправить запрос</button>
+        </form>
+    </div>
 </div>
 
     <script>
@@ -1814,6 +1859,8 @@
                 // Contact section
                 contactTitle: "Свяжитесь со мной",
                 contactSubtitle: "Задайте вопрос или забронируйте тур прямо сейчас",
+                emailModalTitle: "Написать Email",
+                emailModalSubtitle: "Выберите тур и отправьте запрос",
                 formName: "Ваше имя",
                 formEmail: "Email",
                 formPhone: "Телефон",
@@ -2083,6 +2130,8 @@
                 // Contact section
                 contactTitle: "Contact me",
                 contactSubtitle: "Ask a question or book a tour right now",
+                emailModalTitle: "Send Email",
+                emailModalSubtitle: "Choose a tour and send your request",
                 formName: "Your name",
                 formEmail: "Email",
                 formPhone: "Phone",
@@ -2352,6 +2401,8 @@
                 // Contact section
                 contactTitle: "Contactez-moi",
                 contactSubtitle: "Posez une question ou réservez une visite maintenant",
+                emailModalTitle: "Envoyer un Email",
+                emailModalSubtitle: "Choisissez une visite et envoyez votre demande",
                 formName: "Votre nom",
                 formEmail: "Email",
                 formPhone: "Téléphone",
@@ -2629,6 +2680,57 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
                     changeLanguage(lang);
                 });
             });
+        });
+
+        // Email Modal Functions
+        function openEmailModal() {
+            document.getElementById('emailModal').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        function closeEmailModal() {
+            document.getElementById('emailModal').style.display = 'none';
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('emailModal');
+            if (event.target === modal) {
+                closeEmailModal();
+            }
+        });
+
+        // Email Form Submission
+        document.addEventListener('DOMContentLoaded', function() {
+            const emailForm = document.getElementById('emailForm');
+            if (emailForm) {
+                emailForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const name = document.getElementById('emailName').value;
+                    const email = document.getElementById('emailAddress').value;
+                    const tour = document.getElementById('emailTour').value;
+                    const message = document.getElementById('emailMessage').value;
+
+                    // Get tour name for subject
+                    const tourSelect = document.getElementById('emailTour');
+                    const tourName = tourSelect.options[tourSelect.selectedIndex].text;
+
+                    // Compose email
+                    const subject = tour ? `Запрос: ${tourName}` : 'Запрос информации';
+                    const body = `Имя: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AТур: ${tourName}%0D%0A%0D%0AСообщение:%0D%0A${message}`;
+
+                    // Open email client
+                    window.location.href = `mailto:azurepictours@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+
+                    // Close modal and reset form
+                    setTimeout(function() {
+                        closeEmailModal();
+                        emailForm.reset();
+                    }, 500);
+                });
+            }
         });
     </script>
 </body>
