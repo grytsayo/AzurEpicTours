@@ -2743,78 +2743,81 @@
         });
 
         // Contact Form Handler
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const formMessage = document.getElementById('formMessage');
-    const submitButton = this.querySelector('.submit-button');
-    
-    // Показываем загрузку
-    submitButton.textContent = 'Отправка...';
-    submitButton.disabled = true;
-    
-    // Получаем данные формы
-    const formData = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value,
-        tour: document.getElementById('tour').value,
-        message: document.getElementById('message').value
-    };
-    
-    // ВАЖНО: Здесь нужно настроить отправку на ваш email
-    // Вариант 1: Используйте сервис типа Formspree.io или EmailJS
-    // Вариант 2: Отправьте на ваш backend
-    
-    // Для демонстрации - показываем успех через 1 секунду
-    setTimeout(() => {
-        formMessage.className = 'form-message success';
-        formMessage.textContent = '✓ Спасибо! Ваше сообщение отправлено. Я свяжусь с вами в ближайшее время.';
-        
-        // Очищаем форму
-        this.reset();
-        
-        // Возвращаем кнопку в исходное состояние
-        submitButton.textContent = 'Отправить запрос';
-        submitButton.disabled = false;
-        
-        // Скрываем сообщение через 5 секунд
-        setTimeout(() => {
-            formMessage.style.display = 'none';
-        }, 5000);
-    }, 1000);
-    
-    
-    // РЕАЛЬНАЯ ОТПРАВКА через FormSubmit.co (бесплатно):
-    // 1. Замените YOUR_EMAIL на ваш email
-  
-    
-    fetch('https://formsubmit.co/azurepictours@gmail.com', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => {
-        if (response.ok) {
-            formMessage.className = 'form-message success';
-            formMessage.textContent = '✓ Спасибо! Ваше сообщение отправлено.';
-            this.reset();
-        } else {
-            throw new Error('Ошибка отправки');
-        }
-    })
-    .catch(error => {
-        formMessage.className = 'form-message error';
-        formMessage.textContent = '✗ Ошибка отправки. Попробуйте позже или напишите напрямую.';
-    })
-    .finally(() => {
-        submitButton.textContent = 'Отправить запрос';
-        submitButton.disabled = false;
-    });
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-});
+        const formMessage = document.getElementById('formMessage');
+        const submitButton = this.querySelector('.submit-button');
+
+        // Показываем загрузку
+        submitButton.textContent = 'Отправка...';
+        submitButton.disabled = true;
+
+        // Получаем данные формы
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            tour: document.getElementById('tour').value,
+            message: document.getElementById('message').value
+        };
+
+        // ВАЖНО: Здесь нужно настроить отправку на ваш email
+        // Вариант 1: Используйте сервис типа Formspree.io или EmailJS
+        // Вариант 2: Отправьте на ваш backend
+
+        // Для демонстрации - показываем успех через 1 секунду
+        setTimeout(() => {
+            formMessage.className = 'form-message success';
+            formMessage.textContent = '✓ Спасибо! Ваше сообщение отправлено. Я свяжусь с вами в ближайшее время.';
+
+            // Очищаем форму
+            this.reset();
+
+            // Возвращаем кнопку в исходное состояние
+            submitButton.textContent = 'Отправить запрос';
+            submitButton.disabled = false;
+
+            // Скрываем сообщение через 5 секунд
+            setTimeout(() => {
+                formMessage.style.display = 'none';
+            }, 5000);
+        }, 1000);
+
+
+        // РЕАЛЬНАЯ ОТПРАВКА через FormSubmit.co (бесплатно):
+        // 1. Замените YOUR_EMAIL на ваш email
+
+
+        fetch('https://formsubmit.co/azurepictours@gmail.com', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(response => {
+            if (response.ok) {
+                formMessage.className = 'form-message success';
+                formMessage.textContent = '✓ Спасибо! Ваше сообщение отправлено.';
+                this.reset();
+            } else {
+                throw new Error('Ошибка отправки');
+            }
+        })
+        .catch(error => {
+            formMessage.className = 'form-message error';
+            formMessage.textContent = '✗ Ошибка отправки. Попробуйте позже или напишите напрямую.';
+        })
+        .finally(() => {
+            submitButton.textContent = 'Отправить запрос';
+            submitButton.disabled = false;
+        });
+
+    });
+}
 
         // Language Switcher Functions
         let currentLanguage = localStorage.getItem('selectedLanguage') || 'en';
