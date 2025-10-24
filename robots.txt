@@ -1,0 +1,26 @@
+# Robots.txt for AzurEpicTours - French Riviera Private Tours
+
+User-agent: *
+Allow: /
+
+# Disallow admin/config files if any
+Disallow: /desktop.ini
+
+# Sitemap location
+Sitemap: https://www.azurepictours.com/sitemap.xml
+
+# Crawl-delay (optional, for slower bots)
+# Crawl-delay: 1
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Allow: /images/
+
+User-agent: Bingbot
+Allow: /
+Allow: /images/
+
+User-agent: Yandex
+Allow: /
+Allow: /images/
