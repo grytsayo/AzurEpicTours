@@ -1349,7 +1349,7 @@
                 </ul>
 
                 <div style="text-align: center;">
-                    <a href="https://widgets.bokun.io/online-sales/your-booking-link" target="_blank" class="book-cta" data-i18n="bookButton">Выбрать дату</a>
+                    <button onclick="openBookingModal()" class="book-cta" data-i18n="bookButton">Выбрать дату</button>
                 </div>
             </div>
         </div>
@@ -1426,7 +1426,7 @@
                 </div>
 
                 <div style="text-align: center; margin-top: 20px;">
-                    <a href="https://widgets.bokun.io/online-sales/your-booking-link" target="_blank" class="book-cta" data-i18n="bookButton">Выбрать дату</a>
+                    <button onclick="openBookingModal()" class="book-cta" data-i18n="bookButton">Выбрать дату</button>
                 </div>
             </div>
         </div>
@@ -1501,8 +1501,44 @@
                 </ul>
 
                 <div style="text-align: center; margin-top: 20px;">
-                    <a href="https://widgets.bokun.io/online-sales/your-booking-link" target="_blank" class="book-cta" data-i18n="bookButton">Выбрать дату</a>
+                    <button onclick="openBookingModal()" class="book-cta" data-i18n="bookButton">Выбрать дату</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Unavailable Modal -->
+    <div id="bookingUnavailableModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header" style="text-align: center;">
+                <span class="close" onclick="closeBookingModal()">&times;</span>
+                <h2 data-i18n="bookingUnavailableTitle" style="color: #d4a574;">Service Temporarily Unavailable</h2>
+            </div>
+            <div class="modal-body" style="text-align: center; padding: 30px 20px;">
+                <div style="font-size: 48px; margin-bottom: 20px;">⚠️</div>
+                <p data-i18n="bookingUnavailableMessage" style="font-size: 16px; line-height: 1.6; margin-bottom: 25px;">
+                    The online booking service is temporarily unavailable. Please use our contact information below for any inquiries or to make a reservation.
+                </p>
+
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 data-i18n="contactInfoTitle" style="margin-bottom: 15px; color: #2c3e50;">Contact Information</h3>
+                    <div style="text-align: left; display: inline-block;">
+                        <p style="margin: 10px 0;">
+                            <strong>📧 Email:</strong><br>
+                            <a href="mailto:azurepictours@gmail.com" style="color: #d4a574;">azurepictours@gmail.com</a>
+                        </p>
+                        <p style="margin: 10px 0;">
+                            <strong data-i18n="phoneLabel">📞 Phone:</strong><br>
+                            <a href="tel:+33123456789" style="color: #d4a574;">+33 1 23 45 67 89</a>
+                        </p>
+                        <p style="margin: 10px 0;">
+                            <strong>💬 WhatsApp:</strong><br>
+                            <a href="https://wa.me/33123456789" target="_blank" style="color: #d4a574;">+33 1 23 45 67 89</a>
+                        </p>
+                    </div>
+                </div>
+
+                <button onclick="closeBookingModal()" class="book-cta" data-i18n="closeButton" style="margin-top: 10px;">Close</button>
             </div>
         </div>
     </div>
@@ -1730,6 +1766,13 @@
                 highlightsLabel: "Основные моменты:",
                 detailsButton: "Детали тура",
                 bookButton: "Выбрать дату",
+
+                // Booking unavailable modal
+                bookingUnavailableTitle: "Сервис временно недоступен",
+                bookingUnavailableMessage: "Онлайн-сервис бронирования временно недоступен. Пожалуйста, используйте нашу контактную информацию ниже для любых запросов или для бронирования.",
+                contactInfoTitle: "Контактная информация",
+                phoneLabel: "📞 Телефон:",
+                closeButton: "Закрыть",
 
                 // Tour 1 highlights
                 tour1H1: "Средневековая деревня Эз и парфюмерная фабрика",
@@ -2070,6 +2113,13 @@
                 detailsButton: "Tour details",
                 bookButton: "Choose your date",
 
+                // Booking unavailable modal
+                bookingUnavailableTitle: "Service Temporarily Unavailable",
+                bookingUnavailableMessage: "The online booking service is temporarily unavailable. Please use our contact information below for any inquiries or to make a reservation.",
+                contactInfoTitle: "Contact Information",
+                phoneLabel: "📞 Phone:",
+                closeButton: "Close",
+
                 // Tour 1 highlights
                 tour1H1: "Medieval village of Èze and perfume factory",
                 tour1H2: "Medieval Monaco-Ville",
@@ -2409,6 +2459,13 @@
                 detailsButton: "Détails de la visite",
                 bookButton: "Choisir votre date",
 
+                // Booking unavailable modal
+                bookingUnavailableTitle: "Service temporairement indisponible",
+                bookingUnavailableMessage: "Le service de réservation en ligne est temporairement indisponible. Veuillez utiliser nos coordonnées ci-dessous pour toute demande ou pour effectuer une réservation.",
+                contactInfoTitle: "Informations de contact",
+                phoneLabel: "📞 Téléphone:",
+                closeButton: "Fermer",
+
                 // Tour 1 highlights
                 tour1H1: "Village médiéval d'Èze et parfumerie",
                 tour1H2: "Palais du Prince avec histoires d'initiés",
@@ -2718,6 +2775,23 @@
 
         function closeModal(modalId) {
             const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Booking unavailable modal functions
+        function openBookingModal() {
+            const modal = document.getElementById('bookingUnavailableModal');
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeBookingModal() {
+            const modal = document.getElementById('bookingUnavailableModal');
             if (modal) {
                 modal.style.display = 'none';
                 document.body.style.overflow = 'auto';
