@@ -5,7 +5,7 @@
     <!-- Main page -->
     <url>
         <loc>https://www.azurepictours.com/</loc>
-        <lastmod>2025-10-24</lastmod>
+        <lastmod>2025-10-25</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <xhtml:link rel="alternate" hreflang="en" href="https://www.azurepictours.com/?lang=en"/>
@@ -16,7 +16,7 @@
     <!-- Tours section anchor -->
     <url>
         <loc>https://www.azurepictours.com/#tours</loc>
-        <lastmod>2025-10-24</lastmod>
+        <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
     </url>
@@ -24,7 +24,7 @@
     <!-- Reviews section anchor -->
     <url>
         <loc>https://www.azurepictours.com/#reviews</loc>
-        <lastmod>2025-10-24</lastmod>
+        <lastmod>2025-10-25</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
@@ -32,7 +32,7 @@
     <!-- Contact section anchor -->
     <url>
         <loc>https://www.azurepictours.com/#contact</loc>
-        <lastmod>2025-10-24</lastmod>
+        <lastmod>2025-10-25</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
