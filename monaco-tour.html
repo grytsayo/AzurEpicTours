@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en" id="html-root">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Private Monaco Tours | Monte Carlo, Èze & French Riviera | AzurEpicTours</title>
+    <meta id="meta-description" name="description" content="Discover Monaco with private tours: explore Monte Carlo Casino, Prince's Palace, Èze medieval village, Formula 1 track. Day and night tours from Nice with local guide.">
+    <meta id="meta-keywords" name="keywords" content="Monaco tours, Monte Carlo private tour, Monaco guide, Èze village, Formula 1 track Monaco, Prince's Palace tour, Monaco by night, private Monaco excursion">
+
+    <!-- Open Graph -->
+    <meta id="og-title" property="og:title" content="Private Monaco Tours | Monte Carlo & Èze | AzurEpicTours">
+    <meta id="og-description" property="og:description" content="Exclusive private Monaco tours: Monte Carlo, Prince's Palace, Èze village, F1 track. 4-6 hour tours with local guide in Mercedes.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://www.azurepictours.com/images/MC_magesty_01.jpg">
+    <meta property="og:url" content="https://www.azurepictours.com/monaco-tour.html">
+    <meta property="og:site_name" content="AzurEpicTours">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta id="twitter-title" name="twitter:title" content="Private Monaco Tours | AzurEpicTours">
+    <meta id="twitter-description" name="twitter:description" content="Discover Monaco glamour: Monte Carlo Casino, Prince's Palace, Èze village. Private tours with local guide.">
+    <meta name="twitter:image" content="https://www.azurepictours.com/images/MC_magesty_01.jpg">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+    <link rel="manifest" href="./site.webmanifest">
+
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "TouristTrip",
+          "@id": "https://www.azurepictours.com/monaco-tour.html#trip",
+          "name": "Private Monaco Tours",
+          "description": "Exclusive private tours of Monaco and Monte Carlo: explore the Prince's Palace, Casino Square, Formula 1 track, and medieval Èze village with a local guide.",
+          "touristType": "Families, Couples, Small Groups",
+          "itinerary": {
+            "@type": "ItemList",
+            "itemListElement": [
+              {
+                "@type": "TouristAttraction",
+                "name": "Èze Medieval Village",
+                "description": "Perched medieval village at 400m with cobblestone streets and panoramic sea views"
+              },
+              {
+                "@type": "TouristAttraction",
+                "name": "Monaco-Ville Old Town",
+                "description": "Historic medieval quarter with Prince's Palace and Saint Nicholas Cathedral"
+              },
+              {
+                "@type": "TouristAttraction",
+                "name": "Monte Carlo Casino",
+                "description": "Legendary Belle Époque casino and Casino Square with luxury cars"
+              },
+              {
+                "@type": "TouristAttraction",
+                "name": "Formula 1 Track",
+                "description": "Drive the famous Monaco Grand Prix circuit through city streets"
+              },
+              {
+                "@type": "TouristAttraction",
+                "name": "Port Hercules",
+                "description": "Luxury yacht harbor surrounded by Monaco skyscrapers"
+              }
+            ]
+          },
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "EUR",
+            "price": "200",
+            "availability": "https://schema.org/InStock"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://www.azurepictours.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Monaco Tours",
+              "item": "https://www.azurepictours.com/monaco-tour.html"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .nav-bar {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #667eea;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            padding: 5px 12px;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('./images/MC_magesty_01.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 140px 20px 80px;
+            text-align: center;
+            min-height: 500px;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            margin: 10px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+
+        .cta-button.secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 60px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Tours Grid */
+        .tours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .tour-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+        }
+
+        .tour-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .tour-image {
+            width: 100%;
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .tour-content {
+            padding: 30px;
+        }
+
+        .tour-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .tour-title {
+            font-size: 1.5rem;
+            color: #2d3748;
+        }
+
+        .tour-duration {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+
+        .tour-tagline {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .tour-highlights {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .tour-highlights li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+            color: #555;
+        }
+
+        .tour-highlights li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .tour-price {
+            font-size: 1.8rem;
+            color: #667eea;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .book-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Highlights Section */
+        .highlights-section {
+            background: #f8f9fa;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .highlight-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .highlight-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .highlight-title {
+            font-size: 1.3rem;
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+
+        .highlight-text {
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            background: #2d3748;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: #667eea;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .tours-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <div class="nav-bar">
+        <a href="./index.html" class="nav-brand">AzurEpicTours</a>
+        <div class="nav-links">
+            <a href="./index.html" class="nav-link" data-i18n="navHome">Home</a>
+            <div class="lang-switcher">
+                <button class="lang-btn" onclick="changeLanguage('ru')">RU</button>
+                <button class="lang-btn active" onclick="changeLanguage('en')">EN</button>
+                <button class="lang-btn" onclick="changeLanguage('fr')">FR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1 data-i18n="heroTitle">Private Monaco Tours with Local Guide</h1>
+            <p data-i18n="heroSubtitle">Discover the glamour of Monte Carlo, medieval Èze, and the French Riviera. Exclusive private tours from 4 to 6 hours.</p>
+            <a href="#tours" class="cta-button" data-i18n="ctaBook">Book Your Monaco Tour</a>
+            <a href="./index.html" class="cta-button secondary" data-i18n="ctaAll">View All Tours</a>
+        </div>
+    </div>
+
+    <!-- Tours Section -->
+    <div id="tours" class="container">
+        <h2 class="section-title" data-i18n="toursTitle">Monaco Private Tours</h2>
+        <p class="section-subtitle" data-i18n="toursSubtitle">Choose your perfect Monaco experience. Each tour is private, customizable, and includes hotel pickup from Nice, Cannes, or anywhere on the French Riviera.</p>
+
+        <div class="tours-grid">
+            <!-- Monaco Majesty Tour -->
+            <div class="tour-card">
+                <div class="tour-image" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/MC_magesty_01.jpg'); background-size: cover; background-position: center;"></div>
+                <div class="tour-content">
+                    <div class="tour-header">
+                        <h3 class="tour-title" data-i18n="tour1Title">Monaco Majesty</h3>
+                        <span class="tour-duration" data-i18n="tour1Duration">4 hours</span>
+                    </div>
+                    <p class="tour-tagline" data-i18n="tour1Tagline">The luxury of the principality in one tour</p>
+
+                    <ul class="tour-highlights">
+                        <li data-i18n="tour1HL1">Medieval village of Èze and perfume factory</li>
+                        <li data-i18n="tour1HL2">Prince's Palace and old town Monaco</li>
+                        <li data-i18n="tour1HL3">Monte Carlo Casino Square</li>
+                        <li data-i18n="tour1HL4">Formula 1 track drive</li>
+                        <li data-i18n="tour1HL5">Panoramic viewpoints</li>
+                    </ul>
+
+                    <div class="tour-price" data-i18n="tour1Price">from €200</div>
+                    <button class="book-btn" onclick="openBooking('monaco-majesty')" data-i18n="bookBtn">Book This Tour</button>
+                </div>
+            </div>
+
+            <!-- Monaco Coastline Journey -->
+            <div class="tour-card">
+                <div class="tour-image" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/MC_coast_02.jpg'); background-size: cover; background-position: center;"></div>
+                <div class="tour-content">
+                    <div class="tour-header">
+                        <h3 class="tour-title" data-i18n="tour2Title">Monaco Coastline Journey</h3>
+                        <span class="tour-duration" data-i18n="tour2Duration">6 hours</span>
+                    </div>
+                    <p class="tour-tagline" data-i18n="tour2Tagline">Create your perfect itinerary</p>
+
+                    <ul class="tour-highlights">
+                        <li data-i18n="tour2HL1">Extended time in Èze village</li>
+                        <li data-i18n="tour2HL2">Monaco-Ville with guide tour</li>
+                        <li data-i18n="tour2HL3">Monte Carlo leisure time</li>
+                        <li data-i18n="tour2HL4">Flexible customization</li>
+                        <li data-i18n="tour2HL5">Moyenne Corniche scenic drive</li>
+                    </ul>
+
+                    <div class="tour-price" data-i18n="tour2Price">from €300</div>
+                    <button class="book-btn" onclick="openBooking('monaco-coastline')" data-i18n="bookBtn">Book This Tour</button>
+                </div>
+            </div>
+
+            <!-- Monaco by Night -->
+            <div class="tour-card">
+                <div class="tour-image" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/MC_night_01.jpg'); background-size: cover; background-position: center;"></div>
+                <div class="tour-content">
+                    <div class="tour-header">
+                        <h3 class="tour-title" data-i18n="tour4Title">Monaco by Night</h3>
+                        <span class="tour-duration" data-i18n="tour4Duration">4 hours</span>
+                    </div>
+                    <p class="tour-tagline" data-i18n="tour4Tagline">Magic of the evening principality</p>
+
+                    <ul class="tour-highlights">
+                        <li data-i18n="tour4HL1">Èze village at sunset</li>
+                        <li data-i18n="tour4HL2">Illuminated Monaco panorama</li>
+                        <li data-i18n="tour4HL3">Prince's Palace night lighting</li>
+                        <li data-i18n="tour4HL4">Casino Monte Carlo at night</li>
+                        <li data-i18n="tour4HL5">Romantic photo opportunities</li>
+                    </ul>
+
+                    <div class="tour-price" data-i18n="tour4Price">from €200</div>
+                    <button class="book-btn" onclick="openBooking('monaco-night')" data-i18n="bookBtn">Book This Tour</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- What Makes Monaco Special -->
+    <div class="highlights-section">
+        <div class="container">
+            <h2 class="section-title" data-i18n="whyTitle">Why Visit Monaco?</h2>
+            <p class="section-subtitle" data-i18n="whySubtitle">The world's second-smallest country offers unmatched luxury, history, and Mediterranean beauty</p>
+
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <div class="highlight-icon">🏰</div>
+                    <h3 class="highlight-title" data-i18n="why1Title">Royal Heritage</h3>
+                    <p class="highlight-text" data-i18n="why1Text">Visit the Prince's Palace, home of the Grimaldi family for over 700 years</p>
+                </div>
+
+                <div class="highlight-card">
+                    <div class="highlight-icon">🎰</div>
+                    <h3 class="highlight-title" data-i18n="why2Title">Monte Carlo Casino</h3>
+                    <p class="highlight-text" data-i18n="why2Text">Legendary Belle Époque casino where James Bond was filmed</p>
+                </div>
+
+                <div class="highlight-card">
+                    <div class="highlight-icon">🏎️</div>
+                    <h3 class="highlight-title" data-i18n="why3Title">Formula 1 Track</h3>
+                    <p class="highlight-text" data-i18n="why3Text">Drive the world's most glamorous F1 circuit through city streets</p>
+                </div>
+
+                <div class="highlight-card">
+                    <div class="highlight-icon">🏘️</div>
+                    <h3 class="highlight-title" data-i18n="why4Title">Èze Medieval Village</h3>
+                    <p class="highlight-text" data-i18n="why4Text">Perched at 400m with breathtaking coastal views and artisan shops</p>
+                </div>
+
+                <div class="highlight-card">
+                    <div class="highlight-icon">⛵</div>
+                    <h3 class="highlight-title" data-i18n="why5Title">Port Hercules</h3>
+                    <p class="highlight-text" data-i18n="why5Text">Marvel at mega yachts in one of the world's most exclusive harbors</p>
+                </div>
+
+                <div class="highlight-card">
+                    <div class="highlight-icon">🌅</div>
+                    <h3 class="highlight-title" data-i18n="why6Title">Scenic Drives</h3>
+                    <p class="highlight-text" data-i18n="why6Text">Experience the stunning Moyenne Corniche road with Mediterranean views</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-content">
+            <h3>AzurEpicTours</h3>
+            <p data-i18n="footerText">Your personal guide to the French Riviera</p>
+            <div class="footer-links">
+                <a href="./index.html" class="footer-link" data-i18n="footerHome">Home</a>
+                <a href="./monaco-tour.html" class="footer-link" data-i18n="footerMonaco">Monaco Tours</a>
+                <a href="./cannes-tour.html" class="footer-link" data-i18n="footerCannes">Cannes Tours</a>
+                <a href="./nice-tour.html" class="footer-link" data-i18n="footerNice">Nice Tours</a>
+                <a href="./antibes-tour.html" class="footer-link" data-i18n="footerAntibes">Antibes Tours</a>
+            </div>
+            <p data-i18n="footerRights">© 2025 AzurEpicTours. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // Translations
+        const translations = {
+            ru: {
+                // Navigation
+                navHome: "Главная",
+
+                // Hero
+                heroTitle: "Приватные туры по Монако с местным гидом",
+                heroSubtitle: "Откройте для себя гламур Монте-Карло, средневековый Эз и Французскую Ривьеру. Эксклюзивные приватные туры от 4 до 6 часов.",
+                ctaBook: "Забронировать тур по Монако",
+                ctaAll: "Все туры",
+
+                // Tours Section
+                toursTitle: "Приватные туры по Монако",
+                toursSubtitle: "Выберите ваш идеальный опыт Монако. Каждый тур приватный, настраиваемый и включает трансфер из Ниццы, Канн или любого места на Французской Ривьере.",
+
+                // Tour 1
+                tour1Title: "Величие Монако",
+                tour1Duration: "4 часа",
+                tour1Tagline: "Роскошь княжества в одном туре",
+                tour1Price: "от €200",
+                tour1HL1: "Средневековая деревня Эз и парфюмерная фабрика",
+                tour1HL2: "Дворец Принца и старый город Монако",
+                tour1HL3: "Площадь Казино Монте-Карло",
+                tour1HL4: "Проезд по трассе Формулы 1",
+                tour1HL5: "Панорамные смотровые площадки",
+
+                // Tour 2
+                tour2Title: "Monaco Coastline Journey",
+                tour2Duration: "6 часов",
+                tour2Tagline: "Создайте ваш идеальный маршрут",
+                tour2Price: "от €300",
+                tour2HL1: "Больше времени в деревне Эз",
+                tour2HL2: "Монако-Виль с гид-экскурсией",
+                tour2HL3: "Свободное время в Монте-Карло",
+                tour2HL4: "Гибкая кастомизация",
+                tour2HL5: "Живописная дорога Moyenne Corniche",
+
+                // Tour 4
+                tour4Title: "Монако ночью",
+                tour4Duration: "4 часа",
+                tour4Tagline: "Волшебство вечернего княжества",
+                tour4Price: "от €200",
+                tour4HL1: "Деревня Эз на закате",
+                tour4HL2: "Освещённая панорама Монако",
+                tour4HL3: "Ночная подсветка Дворца Принца",
+                tour4HL4: "Казино Монте-Карло ночью",
+                tour4HL5: "Романтические фотовозможности",
+
+                bookBtn: "Забронировать тур",
+
+                // Why Section
+                whyTitle: "Почему стоит посетить Монако?",
+                whySubtitle: "Вторая самая маленькая страна мира предлагает непревзойденную роскошь, историю и средиземноморскую красоту",
+                why1Title: "Королевское наследие",
+                why1Text: "Посетите Дворец Принца, дом семьи Гримальди более 700 лет",
+                why2Title: "Казино Монте-Карло",
+                why2Text: "Легендарное казино эпохи Belle Époque, где снимали Джеймса Бонда",
+                why3Title: "Трасса Формулы 1",
+                why3Text: "Проедьте по самой гламурной трассе Ф1 через городские улицы",
+                why4Title: "Средневековая деревня Эз",
+                why4Text: "Расположена на высоте 400м с захватывающими видами на побережье",
+                why5Title: "Порт Геркулес",
+                why5Text: "Полюбуйтесь мега-яхтами в одной из самых эксклюзивных гаваней мира",
+                why6Title: "Живописные дороги",
+                why6Text: "Испытайте потрясающую дорогу Moyenne Corniche с видами на Средиземное море",
+
+                // Footer
+                footerText: "Ваш личный гид по Французской Ривьере",
+                footerHome: "Главная",
+                footerMonaco: "Туры Монако",
+                footerCannes: "Туры Канны",
+                footerNice: "Туры Ницца",
+                footerAntibes: "Туры Антиб",
+                footerRights: "© 2025 AzurEpicTours. Все права защищены.",
+
+                // Meta
+                metaTitle: "Приватные туры по Монако | Монте-Карло, Эз | AzurEpicTours",
+                metaDescription: "Откройте для себя Монако с приватными турами: Казино Монте-Карло, Дворец Принца, средневековая деревня Эз, трасса Формулы 1. Дневные и ночные туры из Ниццы с местным гидом.",
+                ogTitle: "Приватные туры по Монако | Монте-Карло и Эз | AzurEpicTours",
+                ogDescription: "Эксклюзивные приватные туры по Монако: Монте-Карло, Дворец Принца, деревня Эз, трасса Ф1. 4-6 часовые туры с местным гидом на Mercedes."
+            },
+            en: {
+                // Navigation
+                navHome: "Home",
+
+                // Hero
+                heroTitle: "Private Monaco Tours with Local Guide",
+                heroSubtitle: "Discover the glamour of Monte Carlo, medieval Èze, and the French Riviera. Exclusive private tours from 4 to 6 hours.",
+                ctaBook: "Book Your Monaco Tour",
+                ctaAll: "View All Tours",
+
+                // Tours Section
+                toursTitle: "Monaco Private Tours",
+                toursSubtitle: "Choose your perfect Monaco experience. Each tour is private, customizable, and includes hotel pickup from Nice, Cannes, or anywhere on the French Riviera.",
+
+                // Tour 1
+                tour1Title: "Monaco Majesty",
+                tour1Duration: "4 hours",
+                tour1Tagline: "The luxury of the principality in one tour",
+                tour1Price: "from €200",
+                tour1HL1: "Medieval village of Èze and perfume factory",
+                tour1HL2: "Prince's Palace and old town Monaco",
+                tour1HL3: "Monte Carlo Casino Square",
+                tour1HL4: "Formula 1 track drive",
+                tour1HL5: "Panoramic viewpoints",
+
+                // Tour 2
+                tour2Title: "Monaco Coastline Journey",
+                tour2Duration: "6 hours",
+                tour2Tagline: "Create your perfect itinerary",
+                tour2Price: "from €300",
+                tour2HL1: "Extended time in Èze village",
+                tour2HL2: "Monaco-Ville with guide tour",
+                tour2HL3: "Monte Carlo leisure time",
+                tour2HL4: "Flexible customization",
+                tour2HL5: "Moyenne Corniche scenic drive",
+
+                // Tour 4
+                tour4Title: "Monaco by Night",
+                tour4Duration: "4 hours",
+                tour4Tagline: "Magic of the evening principality",
+                tour4Price: "from €200",
+                tour4HL1: "Èze village at sunset",
+                tour4HL2: "Illuminated Monaco panorama",
+                tour4HL3: "Prince's Palace night lighting",
+                tour4HL4: "Casino Monte Carlo at night",
+                tour4HL5: "Romantic photo opportunities",
+
+                bookBtn: "Book This Tour",
+
+                // Why Section
+                whyTitle: "Why Visit Monaco?",
+                whySubtitle: "The world's second-smallest country offers unmatched luxury, history, and Mediterranean beauty",
+                why1Title: "Royal Heritage",
+                why1Text: "Visit the Prince's Palace, home of the Grimaldi family for over 700 years",
+                why2Title: "Monte Carlo Casino",
+                why2Text: "Legendary Belle Époque casino where James Bond was filmed",
+                why3Title: "Formula 1 Track",
+                why3Text: "Drive the world's most glamorous F1 circuit through city streets",
+                why4Title: "Èze Medieval Village",
+                why4Text: "Perched at 400m with breathtaking coastal views and artisan shops",
+                why5Title: "Port Hercules",
+                why5Text: "Marvel at mega yachts in one of the world's most exclusive harbors",
+                why6Title: "Scenic Drives",
+                why6Text: "Experience the stunning Moyenne Corniche road with Mediterranean views",
+
+                // Footer
+                footerText: "Your personal guide to the French Riviera",
+                footerHome: "Home",
+                footerMonaco: "Monaco Tours",
+                footerCannes: "Cannes Tours",
+                footerNice: "Nice Tours",
+                footerAntibes: "Antibes Tours",
+                footerRights: "© 2025 AzurEpicTours. All rights reserved.",
+
+                // Meta
+                metaTitle: "Private Monaco Tours | Monte Carlo, Èze & French Riviera | AzurEpicTours",
+                metaDescription: "Discover Monaco with private tours: explore Monte Carlo Casino, Prince's Palace, Èze medieval village, Formula 1 track. Day and night tours from Nice with local guide.",
+                ogTitle: "Private Monaco Tours | Monte Carlo & Èze | AzurEpicTours",
+                ogDescription: "Exclusive private Monaco tours: Monte Carlo, Prince's Palace, Èze village, F1 track. 4-6 hour tours with local guide in Mercedes."
+            },
+            fr: {
+                // Navigation
+                navHome: "Accueil",
+
+                // Hero
+                heroTitle: "Visites privées de Monaco avec guide local",
+                heroSubtitle: "Découvrez le glamour de Monte-Carlo, Èze médiéval et la Côte d'Azur. Visites privées exclusives de 4 à 6 heures.",
+                ctaBook: "Réserver votre visite de Monaco",
+                ctaAll: "Toutes les visites",
+
+                // Tours Section
+                toursTitle: "Visites privées de Monaco",
+                toursSubtitle: "Choisissez votre expérience parfaite à Monaco. Chaque visite est privée, personnalisable et inclut la prise en charge à l'hôtel depuis Nice, Cannes ou partout sur la Côte d'Azur.",
+
+                // Tour 1
+                tour1Title: "Majesté de Monaco",
+                tour1Duration: "4 heures",
+                tour1Tagline: "Le luxe de la principauté en une visite",
+                tour1Price: "à partir de €200",
+                tour1HL1: "Village médiéval d'Èze et usine de parfums",
+                tour1HL2: "Palais Princier et vieille ville de Monaco",
+                tour1HL3: "Place du Casino de Monte-Carlo",
+                tour1HL4: "Circuit de Formule 1",
+                tour1HL5: "Points de vue panoramiques",
+
+                // Tour 2
+                tour2Title: "Monaco Coastline Journey",
+                tour2Duration: "6 heures",
+                tour2Tagline: "Créez votre itinéraire parfait",
+                tour2Price: "à partir de €300",
+                tour2HL1: "Plus de temps au village d'Èze",
+                tour2HL2: "Monaco-Ville avec visite guidée",
+                tour2HL3: "Temps libre à Monte-Carlo",
+                tour2HL4: "Personnalisation flexible",
+                tour2HL5: "Route panoramique Moyenne Corniche",
+
+                // Tour 4
+                tour4Title: "Monaco de nuit",
+                tour4Duration: "4 heures",
+                tour4Tagline: "Magie de la principauté nocturne",
+                tour4Price: "à partir de €200",
+                tour4HL1: "Village d'Èze au coucher du soleil",
+                tour4HL2: "Panorama de Monaco illuminé",
+                tour4HL3: "Palais Princier illuminé",
+                tour4HL4: "Casino de Monte-Carlo la nuit",
+                tour4HL5: "Opportunités photos romantiques",
+
+                bookBtn: "Réserver cette visite",
+
+                // Why Section
+                whyTitle: "Pourquoi visiter Monaco?",
+                whySubtitle: "Le deuxième plus petit pays du monde offre un luxe, une histoire et une beauté méditerranéenne inégalés",
+                why1Title: "Héritage royal",
+                why1Text: "Visitez le Palais Princier, demeure de la famille Grimaldi depuis plus de 700 ans",
+                why2Title: "Casino de Monte-Carlo",
+                why2Text: "Casino légendaire Belle Époque où James Bond a été filmé",
+                why3Title: "Circuit de Formule 1",
+                why3Text: "Parcourez le circuit de F1 le plus glamour du monde à travers les rues",
+                why4Title: "Village médiéval d'Èze",
+                why4Text: "Perché à 400m avec des vues côtières à couper le souffle",
+                why5Title: "Port Hercule",
+                why5Text: "Admirez les méga-yachts dans l'un des ports les plus exclusifs du monde",
+                why6Title: "Routes panoramiques",
+                why6Text: "Découvrez la magnifique route de la Moyenne Corniche avec vues sur la Méditerranée",
+
+                // Footer
+                footerText: "Votre guide personnel sur la Côte d'Azur",
+                footerHome: "Accueil",
+                footerMonaco: "Visites Monaco",
+                footerCannes: "Visites Cannes",
+                footerNice: "Visites Nice",
+                footerAntibes: "Visites Antibes",
+                footerRights: "© 2025 AzurEpicTours. Tous droits réservés.",
+
+                // Meta
+                metaTitle: "Visites privées de Monaco | Monte-Carlo, Èze | AzurEpicTours",
+                metaDescription: "Découvrez Monaco avec des visites privées: Casino de Monte-Carlo, Palais Princier, village médiéval d'Èze, circuit F1. Visites de jour et de nuit depuis Nice avec guide local.",
+                ogTitle: "Visites privées de Monaco | Monte-Carlo et Èze | AzurEpicTours",
+                ogDescription: "Visites privées exclusives de Monaco: Monte-Carlo, Palais Princier, village d'Èze, circuit F1. Visites de 4-6 heures avec guide local en Mercedes."
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            document.getElementById('html-root').lang = lang;
+
+            // Update all elements with data-i18n
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+
+            // Update meta tags
+            if (translations[lang]) {
+                if (translations[lang].metaTitle) {
+                    document.getElementById('page-title').textContent = translations[lang].metaTitle;
+                }
+                if (translations[lang].metaDescription) {
+                    document.getElementById('meta-description').setAttribute('content', translations[lang].metaDescription);
+                }
+                if (translations[lang].ogTitle) {
+                    document.getElementById('og-title').setAttribute('content', translations[lang].ogTitle);
+                }
+                if (translations[lang].ogDescription) {
+                    document.getElementById('og-description').setAttribute('content', translations[lang].ogDescription);
+                }
+                if (translations[lang].ogTitle) {
+                    document.getElementById('twitter-title').setAttribute('content', translations[lang].ogTitle);
+                }
+                if (translations[lang].ogDescription) {
+                    document.getElementById('twitter-description').setAttribute('content', translations[lang].ogDescription);
+                }
+            }
+
+            // Update active language button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        function openBooking(tourType) {
+            // Redirect to main page contact section or open WhatsApp/Telegram
+            window.location.href = './index.html#contact';
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
