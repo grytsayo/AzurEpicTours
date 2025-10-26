@@ -37,4 +37,48 @@
         <priority>0.7</priority>
     </url>
 
+    <!-- Monaco Tours Page -->
+    <url>
+        <loc>https://www.azurepictours.com/monaco-tour.html</loc>
+        <lastmod>2025-10-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.azurepictours.com/monaco-tour.html?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://www.azurepictours.com/monaco-tour.html?lang=ru"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.azurepictours.com/monaco-tour.html?lang=fr"/>
+    </url>
+
+    <!-- Cannes Tours Page -->
+    <url>
+        <loc>https://www.azurepictours.com/cannes-tour.html</loc>
+        <lastmod>2025-10-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.azurepictours.com/cannes-tour.html?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://www.azurepictours.com/cannes-tour.html?lang=ru"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.azurepictours.com/cannes-tour.html?lang=fr"/>
+    </url>
+
+    <!-- Nice Tours Page -->
+    <url>
+        <loc>https://www.azurepictours.com/nice-tour.html</loc>
+        <lastmod>2025-10-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.azurepictours.com/nice-tour.html?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://www.azurepictours.com/nice-tour.html?lang=ru"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.azurepictours.com/nice-tour.html?lang=fr"/>
+    </url>
+
+    <!-- Antibes Tours Page -->
+    <url>
+        <loc>https://www.azurepictours.com/antibes-tour.html</loc>
+        <lastmod>2025-10-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.azurepictours.com/antibes-tour.html?lang=en"/>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://www.azurepictours.com/antibes-tour.html?lang=ru"/>
+        <xhtml:link rel="alternate" hreflang="fr" href="https://www.azurepictours.com/antibes-tour.html?lang=fr"/>
+    </url>
+
 </urlset>
