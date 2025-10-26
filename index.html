@@ -40,87 +40,170 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "TouristAttraction",
-      "name": "AzurEpicTours - French Riviera Private Tours",
-      "description": "Exclusive private tours of the French Riviera including Monaco, Nice, Cannes, and Èze with a personal multilingual guide",
-      "url": "https://www.azurepictours.com",
-      "telephone": "+33-1-23-45-67-89",
-      "email": "azurepictours@gmail.com",
-      "address": {
-        "@type": "PostalAddress",
-        "addressRegion": "French Riviera",
-        "addressCountry": "FR"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "43.7384",
-        "longitude": "7.4246"
-      },
-      "priceRange": "€200-€450",
-      "availableLanguage": ["Russian", "English", "French"],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "4",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "review": [
+      "@graph": [
         {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "Maria and Sergey"
+          "@type": "TourOperator",
+          "@id": "https://www.azurepictours.com/#organization",
+          "name": "AzurEpicTours",
+          "alternateName": "AzurEpic Tours - French Riviera Private Tours",
+          "description": "Exclusive private tours of the French Riviera including Monaco, Nice, Cannes, and Èze with a personal multilingual guide",
+          "url": "https://www.azurepictours.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.azurepictours.com/apple-touch-icon.png",
+            "width": 180,
+            "height": 180
           },
-          "datePublished": "2024-09-15",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
+          "image": [
+            "https://www.azurepictours.com/images/MC_magesty_01.jpg",
+            "https://www.azurepictours.com/images/MC_coast_01.jpg",
+            "https://www.azurepictours.com/images/grandtour_01.jpg",
+            "https://www.azurepictours.com/images/MC_night_01.jpg"
+          ],
+          "telephone": "+33-1-23-45-67-89",
+          "email": "azurepictours@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Nice",
+            "addressRegion": "Provence-Alpes-Côte d'Azur",
+            "addressCountry": "FR",
+            "postalCode": "06000"
           },
-          "reviewBody": "Amazing tour! Our guide showed us hidden gems of Monaco we would never have known about. Professional, informative and very comfortable. Definitely recommend!"
-        },
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "Jen"
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "43.7384",
+            "longitude": "7.4246"
           },
-          "datePublished": "2024-06-20",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Monaco"
+            },
+            {
+              "@type": "City",
+              "name": "Nice"
+            },
+            {
+              "@type": "City",
+              "name": "Cannes"
+            },
+            {
+              "@type": "City",
+              "name": "Antibes"
+            },
+            {
+              "@type": "City",
+              "name": "Èze"
+            },
+            {
+              "@type": "City",
+              "name": "Saint-Paul-de-Vence"
+            }
+          ],
+          "priceRange": "€200-€450",
+          "currenciesAccepted": "EUR",
+          "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+          "availableLanguage": [
+            {
+              "@type": "Language",
+              "name": "English"
+            },
+            {
+              "@type": "Language",
+              "name": "French"
+            },
+            {
+              "@type": "Language",
+              "name": "Russian"
+            }
+          ],
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+              ],
+              "opens": "08:00",
+              "closes": "20:00"
+            }
+          ],
+          "sameAs": [
+            "https://www.getyourguide.com/azurepictours",
+            "https://wa.me/33123456789",
+            "https://t.me/grytsayo"
+          ],
+          "hasMap": "https://goo.gl/maps/FrenchRiviera",
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "reviewCount": "4",
+            "bestRating": "5",
+            "worstRating": "1"
           },
-          "reviewBody": "Oleg is intelligent, highly knowledgeable, friendly and warm. We enjoyed every single moment of our tour. We were taken to beautiful locations with stunning views at sunset. Seeing Monaco at night was stunning! The evening hustle and bustle outside of the Monte Carlo casino is worth the trip alone. Our 16 year old was aching to see the F1 track and Oleg drove as much of the course as possible. Would recommend this trip to anyone of any age! Oleg is also a good driver! I felt safe and comfortable in his Mercedes. 10/10."
-        },
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "GetYourGuide traveler"
-          },
-          "datePublished": "2024-08-10",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
-          },
-          "reviewBody": "We had an amazing time on this half-day private tour from Nice to Monaco. Our guide, Oleg, was incredibly accommodating and tailored the experience exactly to our preferences. He made us feel relaxed and let us explore at our own pace. One of the highlights was visiting the beautiful Villa Kérylos. Everything ran smoothly, and Oleg's friendly, knowledgeable approach made the morning unforgettable. Highly recommend this tour for anyone wanting a flexible and relaxed way to experience the glamour and history of Monaco!"
-        },
-        {
-          "@type": "Review",
-          "author": {
-            "@type": "Person",
-            "name": "Donatas"
-          },
-          "datePublished": "2024-09-25",
-          "reviewRating": {
-            "@type": "Rating",
-            "ratingValue": "5",
-            "bestRating": "5"
-          },
-          "reviewBody": "A trip through Èze, Monaco, and the French Riviera would have been amazing on its own, but thanks to our guide Oleg, it turned into an unforgettable adventure that exceeded all expectations. Oleg is a true professional, fluent in Russian, English, and French – but more importantly, he speaks with heart, insight, and genuine enthusiasm. Each stop on the tour came alive through his storytelling. What impressed us even more was his flexibility. As soon as we mentioned we'd love to cool off with a swim, he immediately adjusted the route and added a beautiful beach stop. A guide like Oleg is a rare find. If he's available – don't hesitate for a second!"
+          "review": [
+            {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Maria and Sergey"
+              },
+              "datePublished": "2024-09-15",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Amazing tour! Our guide showed us hidden gems of Monaco we would never have known about. Professional, informative and very comfortable. Definitely recommend!"
+            },
+            {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Jen"
+              },
+              "datePublished": "2024-06-20",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "Oleg is intelligent, highly knowledgeable, friendly and warm. We enjoyed every single moment of our tour. We were taken to beautiful locations with stunning views at sunset. Seeing Monaco at night was stunning! The evening hustle and bustle outside of the Monte Carlo casino is worth the trip alone. Our 16 year old was aching to see the F1 track and Oleg drove as much of the course as possible. Would recommend this trip to anyone of any age! Oleg is also a good driver! I felt safe and comfortable in his Mercedes. 10/10."
+            },
+            {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "GetYourGuide traveler"
+              },
+              "datePublished": "2024-08-10",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "We had an amazing time on this half-day private tour from Nice to Monaco. Our guide, Oleg, was incredibly accommodating and tailored the experience exactly to our preferences. He made us feel relaxed and let us explore at our own pace. One of the highlights was visiting the beautiful Villa Kérylos. Everything ran smoothly, and Oleg's friendly, knowledgeable approach made the morning unforgettable. Highly recommend this tour for anyone wanting a flexible and relaxed way to experience the glamour and history of Monaco!"
+            },
+            {
+              "@type": "Review",
+              "author": {
+                "@type": "Person",
+                "name": "Donatas"
+              },
+              "datePublished": "2024-09-25",
+              "reviewRating": {
+                "@type": "Rating",
+                "ratingValue": "5",
+                "bestRating": "5"
+              },
+              "reviewBody": "A trip through Èze, Monaco, and the French Riviera would have been amazing on its own, but thanks to our guide Oleg, it turned into an unforgettable adventure that exceeded all expectations. Oleg is a true professional, fluent in Russian, English, and French – but more importantly, he speaks with heart, insight, and genuine enthusiasm. Each stop on the tour came alive through his storytelling. What impressed us even more was his flexibility. As soon as we mentioned we'd love to cool off with a swim, he immediately adjusted the route and added a beautiful beach stop. A guide like Oleg is a rare find. If he's available – don't hesitate for a second!"
+            }
+          ]
         }
       ]
     }
