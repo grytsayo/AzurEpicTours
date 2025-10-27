@@ -1229,7 +1229,7 @@
 
         <div class="tours-grid">
             <!-- Tour 1: Monaco Majesty -->
-            <div class="tour-card" onclick="openModal('modal1')">
+            <div class="tour-card" onclick="window.location.href='monaco-majesty.html'">
                 <div class="tour-image" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/MC_magesty_01.jpg'); background-size: cover; background-position: center;" role="img" aria-label="Monaco harbor with luxury yachts and Mediterranean Sea">
                 </div>
                 <div class="tour-content">
@@ -1262,13 +1262,13 @@
                     </div>
                     <div class="tour-footer">
                         <span class="tour-price" data-i18n="tour1Price">от €200</span>
-                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); openModal('modal1')">Детали тура</button>
+                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); window.location.href='monaco-majesty.html'">Детали тура</button>
                     </div>
                 </div>
             </div>
 
             <!-- Tour 2: Monaco Coastline -->
-            <div class="tour-card" onclick="openModal('modal2')">
+            <div class="tour-card" onclick="window.location.href='monaco-coastline.html'">
                 <div class="tour-image" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/MC_coast_02.jpg'); background-size: cover; background-position: center;" role="img" aria-label="Èze village narrow streets with Mediterranean sea views">
                 </div>
                 <div class="tour-content">
@@ -1303,13 +1303,13 @@
                     </div>
                     <div class="tour-footer">
                         <span class="tour-price" data-i18n="tour2Price">от €300</span>
-                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); openModal('modal2')">Детали тура</button>
+                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); window.location.href='monaco-coastline.html'">Детали тура</button>
                     </div>
                 </div>
             </div>
 
             <!-- Tour 3: Grand Riviera -->
-            <div class="tour-card" onclick="openModal('modal3')">
+            <div class="tour-card" onclick="window.location.href='grand-riviera-tour.html'">
                 <div class="tour-image" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/grandtour_04.jpg'); background-size: cover; background-position: center;" role="img" aria-label="Saint-Paul-de-Vence medieval village with art galleries">
                 </div>
                 <div class="tour-content">
@@ -1344,13 +1344,13 @@
                     </div>
                     <div class="tour-footer">
                         <span class="tour-price" data-i18n="tour3Price">от €450</span>
-                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); openModal('modal3')">Детали тура</button>
+                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); window.location.href='grand-riviera-tour.html'">Детали тура</button>
                     </div>
                 </div>
             </div>
 
             <!-- Tour 4: Monaco by Night -->
-            <div class="tour-card" onclick="openModal('modal4')">
+            <div class="tour-card" onclick="window.location.href='monaco-by-night.html'">
                 <div class="tour-image" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/MC_night_01.jpg'); background-size: cover; background-position: center;" role="img" aria-label="Monaco illuminated at night with glittering skyscrapers">
                 </div>
                 <div class="tour-content">
@@ -1383,330 +1383,8 @@
                     </div>
                     <div class="tour-footer">
                         <span class="tour-price" data-i18n="tour4Price">от €200</span>
-                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); openModal('modal4')">Детали тура</button>
+                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); window.location.href='monaco-by-night.html'">Детали тура</button>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 1: Monaco Majesty -->
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('modal1')">&times;</span>
-                <h2 data-i18n="modal1Title">Величие Монако: приватный адаптированный тур</h2>
-                <p style="margin-top: 10px; opacity: 0.9;" data-i18n="modal1Subtitle">4 часа роскоши и истории княжества</p>
-            </div>
-            <div class="modal-body">
-                <h3 data-i18n="modal1Gallery">📸 Фотогалерея</h3>
-                <div class="modal-gallery">
-                    <!-- ИНСТРУКЦИЯ: Замените src на ваши реальные фото -->
-                    <img src="./images/MC_magesty_01.jpg" alt="Panoramic view of Monaco harbor with luxury yachts and Mediterranean Sea" class="gallery-image" onclick="openLightbox(this.src, 'gallery1')" loading="lazy">
-                    <img src="./images/MC_magesty_02.jpg" alt="Monte Carlo Casino Square with exotic cars and Belle Époque architecture" class="gallery-image" onclick="openLightbox(this.src, 'gallery1')" loading="lazy">
-                    <img src="./images/MC_magesty_03.jpg" alt="Medieval village of Èze perched on hilltop with cobblestone streets and stone houses" class="gallery-image" onclick="openLightbox(this.src, 'gallery1')" loading="lazy">
-                    <img src="./images/MC_majesty_04.jpg" alt="Prince's Palace of Monaco with guards and historic architecture" class="gallery-image" onclick="openLightbox(this.src, 'gallery1')" loading="lazy">
-                </div>
-
-                <h3 data-i18n="modal1About">✨ О туре</h3>
-                <p data-i18n="modal1AboutText">Окунитесь в гламур Монако на приватном туре: прогуляйтесь по гавани, полной яхт, исследуйте Дворец Принца, испытайте удачу в казино Монте-Карло и почувствуйте адреналин трассы Формулы 1.</p>
-
-                <h3 data-i18n="modal1Highlights">🎯 Основные моменты</h3>
-                <ul>
-                    <li data-i18n="modal1HL1">Средневековая деревня Эз: мощеные улочки и парфюмерная фабрика</li>
-                    <li data-i18n="modal1HL2">Исследуйте старый город Монако и Дворец Принца с инсайдерскими историями от гида</li>
-                    <li data-i18n="modal1HL3">Погрузитесь в гламур Монте-Карло на площади Казино и трассе Формулы 1</li>
-                    <li data-i18n="modal1HL4">Полная гибкость — настройте остановки и темп для VIP-опыта</li>
-                    <li data-i18n="modal1HL5">Эксклюзивная остановка с панорамным видом на Монако</li>
-                </ul>
-
-                <h3 data-i18n="modal1Route">🗺️ Маршрут</h3>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal1Stop1">Мон-Борон, Ницца</strong> <span data-i18n="modal1Stop1Time">(10 мин)</span><br>
-                    <span data-i18n="modal1Stop1Desc">Потрясающий вид на Бухту Ангелов и холмы Ниццы</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal1Stop2">Эз</strong> <span data-i18n="modal1Stop2Time">(45 мин)</span><br>
-                    <span data-i18n="modal1Stop2Desc">Средневековая деревня на скале с захватывающими видами</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal1Stop3">Парфюмерия Fragonard</strong> <span data-i18n="modal1Stop3Time">(45 мин, опционально)</span><br>
-                    <span data-i18n="modal1Stop3Desc">Экскурсия по парфюмерной фабрике</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal1Stop4">Ла-Тюрби</strong> <span data-i18n="modal1Stop4Time">(1.5 часа, опционально)</span><br>
-                    <span data-i18n="modal1Stop4Desc">Римский трофей Августа с панорамными видами</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal1Stop5">Monaco City</strong> <span data-i18n="modal1Stop5Time">(1 час)</span><br>
-                    <span data-i18n="modal1Stop5Desc">Дворец Принца, собор, старый город</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal1Stop6">Казино Монте-Карло</strong> <span data-i18n="modal1Stop6Time">(40 мин)</span><br>
-                    <span data-i18n="modal1Stop6Desc">Легендарное казино, Отель де Пари, трасса Формулы 1</span>
-                </div>
-
-                <h3 data-i18n="modal1Included">✅ Что включено</h3>
-                <div class="includes-grid">
-                    <div class="includes-item included" data-i18n="modal1Inc1">Трансфер от/до вашего отеля или любой другой локации</div>
-                    <div class="includes-item included" data-i18n="modal1Inc2">Персональный водитель-гид</div>
-                    <div class="includes-item included" data-i18n="modal1Inc3">Сопровождение гида на всех остановках</div>
-                    <div class="includes-item not-included" data-i18n="modal1NotInc1">Еда и напитки не включены</div>
-                    <div class="includes-item included" data-i18n="modal1Inc4">Посещение парфюмерии Fragonard</div>
-                    <div class="includes-item not-included" data-i18n="modal1NotInc2">Вход во Дворец Принца не включен (~€10/чел)</div>
-                    <div class="includes-item included" data-i18n="modal1Inc5">Вода в бутылках</div>
-                    <div class="includes-item not-included" data-i18n="modal1NotInc3">Вход в Океанографический музей не включен (~€20/чел)</div>
-                    <div class="includes-item included" data-i18n="modal1Inc6">Гибкий маршрут, адаптированный под ваши пожелания</div>
-                    <div class="includes-item not-included" data-i18n="modal1NotInc4">Чаевые не включены (опционально)</div>
-                    <div class="includes-item included" data-i18n="modal1Inc7">Детское кресло при необходимости</div>
-                    <div class="includes-item included" data-i18n="modal1Inc8">Животные допускаются</div>
-                </div>
-
-                <h3 data-i18n="modal1Info">ℹ️ Важная информация</h3>
-                <ul>
-                    <li><strong data-i18n="modal1InfoLang">Языки:</strong> <span data-i18n="modal1InfoLangText">Английский, Французский, Русский</span></li>
-                    <li><strong data-i18n="modal1InfoPickup">Трансфер:</strong> <span data-i18n="modal1InfoPickupText">6 точек сбора (Ницца, Сен-Жан-Кап-Ферра, Вильнёв-Лубе, Антиб и др.)</span></li>
-                    <li><strong data-i18n="modal1InfoCancel">Бесплатная отмена:</strong> <span data-i18n="modal1InfoCancelText">За 48 часов до начала</span></li>
-                    <li><strong data-i18n="modal1InfoReserve">Бронь без оплаты:</strong> <span data-i18n="modal1InfoReserveText">Забронируйте сейчас, платите позже</span></li>
-                </ul>
-
-                <div style="text-align: center;">
-                    <a href="https://widgets.bokun.io/online-sales/your-booking-link" target="_blank" class="book-cta" data-i18n="bookButton">Забронировать тур</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 2: Monaco Coastline -->
-    <div id="modal2" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('modal2')">&times;</span>
-                <h2 data-i18n="modal2Title">Monaco Coastline Journey</h2>
-                <p style="margin-top: 10px; opacity: 0.9;" data-i18n="modal2Subtitle">6 часов вашего идеального путешествия</p>
-            </div>
-            <div class="modal-body">
-                <h3 data-i18n="modal2Gallery">📸 Фотогалерея</h3>
-                <div class="modal-gallery">
-                    <img src="./images/MC_coast_01.jpg" alt="French Riviera coastline with turquoise Mediterranean waters and scenic cliffs" class="gallery-image" onclick="openLightbox(this.src, 'gallery2')" loading="lazy">
-                    <img src="./images/MC_coast_02.jpg" alt="Èze village narrow streets with artisan shops and sea views" class="gallery-image" onclick="openLightbox(this.src, 'gallery2')" loading="lazy">
-                    <img src="./images/MC_coast_03.jpg" alt="Monaco skyline with modern skyscrapers and Port Hercules marina" class="gallery-image" onclick="openLightbox(this.src, 'gallery2')" loading="lazy">
-                    <img src="./images/MC_coast_04.jpg" alt="Panoramic coastal views along the Moyenne Corniche road French Riviera" class="gallery-image" onclick="openLightbox(this.src, 'gallery2')" loading="lazy">
-                </div>
-
-                <h3 data-i18n="modal2About">✨ О туре</h3>
-                <p data-i18n="modal2AboutText">Создайте своё лучшее путешествие по побережью Монако с нашим приватным туром на авто! Вы выбираете, где остановиться, что пропустить и сколько времени провести — каждая деталь подстроена под ваши желания.</p>
-
-                <h3 data-i18n="modal2Highlights">🎯 Основные моменты</h3>
-                <ul>
-                    <li data-i18n="modal2HL1">Средневековая деревня Эз: мощеные улочки и парфюмерная фабрика</li>
-                    <li data-i18n="modal2HL2">Знаковые места Монако: Дворец Принца и трасса Формулы 1</li>
-                    <li data-i18n="modal2HL3">Гламур Монте-Карло: роскошь Казино и Отель де Пари</li>
-                    <li data-i18n="modal2HL4">Полная кастомизация под вас: приватный гид, внимательный к вашим предпочтениям</li>
-                    <li data-i18n="modal2HL5">Живописные поездки: дорога Moyenne Corniche, виды на Средиземное море</li>
-                </ul>
-
-                <h3 data-i18n="modal2Route">🗺️ Маршрут</h3>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal2Stop1">Панорамные точки</strong> <span data-i18n="modal2Stop1Time">(20 мин)</span><br>
-                    <span data-i18n="modal2Stop1Desc">Фотостопы с видами на Бухту Ангелов</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal2Stop2">Эз</strong> <span data-i18n="modal2Stop2Time">(1 час 45 мин)</span><br>
-                    <span data-i18n="modal2Stop2Desc">Средневековая деревня, гид-экскурсия, свободное время</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal2Stop3">Парфюмерия Fragonard</strong> <span data-i18n="modal2Stop3Time">(опционально)</span><br>
-                    <span data-i18n="modal2Stop3Desc">Гид-тур и шопинг в парфюмерии</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal2Stop4">Ла-Тюрби</strong> <span data-i18n="modal2Stop4Time">(20 мин, опционально)</span><br>
-                    <span data-i18n="modal2Stop4Desc">Римский Трофей Августа</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal2Stop5">Monaco City</strong> <span data-i18n="modal2Stop5Time">(1.5 часа)</span><br>
-                    <span data-i18n="modal2Stop5Desc">Гид-экскурсия по старому городу, шопинг</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal2Stop6">Монте-Карло</strong> <span data-i18n="modal2Stop6Time">(1.5 часа)</span><br>
-                    <span data-i18n="modal2Stop6Desc">Казино, свободное время, прогулка</span>
-                </div>
-
-                <h3 data-i18n="modal2Included">✅ Что включено</h3>
-                <div class="includes-grid">
-                    <div class="includes-item included" data-i18n="modal2Inc1">Приватный гид/водитель</div>
-                    <div class="includes-item included" data-i18n="modal2Inc2">Трансфер на авто с кондиционером</div>
-                    <div class="includes-item included" data-i18n="modal2Inc3">Трансфер от/до отеля</div>
-                    <div class="includes-item included" data-i18n="modal2Inc4">Гид-тур по парфюмерии в Эз</div>
-                    <div class="includes-item included" data-i18n="modal2Inc5">Входной билет в Старый Эз</div>
-                    <div class="includes-item included" data-i18n="modal2Inc6">Пешая экскурсия (по желанию)</div>
-                    <div class="includes-item included" data-i18n="modal2Inc7">Вода в бутылках</div>
-                    <div class="includes-item not-included" data-i18n="modal2NotInc1">Еда и напитки</div>
-                    <div class="includes-item not-included" data-i18n="modal2NotInc2">Вход во Дворец Принца</div>
-                    <div class="includes-item not-included" data-i18n="modal2NotInc3">Вход в Океанографический музей</div>
-                </div>
-
-                <h3 data-i18n="modal2ImportantInfo">ℹ️ Важная информация</h3>
-                <ul>
-                    <li><strong data-i18n="modal2InfoLang">Языки:</strong> <span data-i18n="modal2InfoLangText">Английский, Французский, Русский</span></li>
-                    <li><strong data-i18n="modal2InfoTransfer">Трансфер:</strong> <span data-i18n="modal2InfoTransferText">5 точек сбора</span></li>
-                    <li><strong data-i18n="modal2InfoCancel">Бесплатная отмена:</strong> <span data-i18n="modal2InfoCancelText">За 24 часа до начала</span></li>
-                </ul>
-
-                <div style="text-align: center;">
-                    <button onclick="openBookingModal()" class="book-cta" data-i18n="bookButton">Выбрать дату</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 3: Grand Riviera -->
-    <div id="modal3" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('modal3')">&times;</span>
-                <h2 data-i18n="modal3Title">Grand Riviera Tour</h2>
-                <p style="margin-top: 10px; opacity: 0.9;" data-i18n="modal3Subtitle">8 часов магии Французской Ривьеры</p>
-            </div>
-            <div class="modal-body">
-                <h3 data-i18n="modal3Gallery">📸 Фотогалерея</h3>
-                <div class="modal-gallery">
-                    <img src="./images/grandtour_01.jpg" alt="French Riviera highlights tour featuring Monaco, Nice, and Cannes" class="gallery-image" onclick="openLightbox(this.src, 'gallery3')" loading="lazy">
-                    <img src="./images/grandtour_02.jpg" alt="Cannes La Croisette boulevard with Palais des Festivals and luxury hotels" class="gallery-image" onclick="openLightbox(this.src, 'gallery3')" loading="lazy">
-                    <img src="./images/grandtour_03.jpg" alt="Antibes old town ramparts and billionaires' port with mega yachts" class="gallery-image" onclick="openLightbox(this.src, 'gallery3')" loading="lazy">
-                    <img src="./images/grandtour_04.jpg" alt="Saint-Paul-de-Vence medieval artists village with galleries and stone architecture" class="gallery-image" onclick="openLightbox(this.src, 'gallery3')" loading="lazy">
-                </div>
-
-                <h3 data-i18n="modal3About">✨ О туре</h3>
-                <p data-i18n="modal3AboutText">Очарование Французской Ривьеры выходит за рамки известных красот Ниццы, Монако и Канн. Позвольте мне провести вас в завораживающее путешествие по скрытым жемчужинам региона.</p>
-
-                <h3 data-i18n="modal3Highlights">🎯 Основные моменты</h3>
-                <ul>
-                    <li data-i18n="modal3HL1">Приватный опыт. Только ваша семья или близкие друзья</li>
-                    <li data-i18n="modal3HL2">Ваш личный гид на каждой остановке</li>
-                    <li data-i18n="modal3HL3">Потрясающие пейзажи и захватывающие виды</li>
-                    <li data-i18n="modal3HL4">6 уникальных локаций за один день</li>
-                </ul>
-
-                <h3 data-i18n="modal3Route">🗺️ Полный маршрут</h3>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal3Stop1">1. Мон-Борон</strong> <span data-i18n="modal3Stop1Time">(7 мин)</span><br>
-                    <span data-i18n="modal3Stop1Desc">Потрясающий вид на Бухту Ангелов и холмы Ниццы</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal3Stop2">2. Эз</strong> <span data-i18n="modal3Stop2Time">(45 мин)</span><br>
-                    <span data-i18n="modal3Stop2Desc">Средневековая деревня на скале высотой 400 метров</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal3Stop3">3. Парфюмерия Fragonard</strong> <span data-i18n="modal3Stop3Time">(45 мин)</span><br>
-                    <span data-i18n="modal3Stop3Desc">Ароматный оазис</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal3Stop4">4. Монако и Монте-Карло</strong> <span data-i18n="modal3Stop4Time">(1 час 45 мин)</span><br>
-                    <span data-i18n="modal3Stop4Desc">Дворец, собор, музей, казино, трасса Формулы 1</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal3Stop5">5. Сен-Поль-де-Ванс</strong> <span data-i18n="modal3Stop5Time">(1 час)</span><br>
-                    <span data-i18n="modal3Stop5Desc">Живописная деревня художников</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal3Stop6">6. Антиб</strong> <span data-i18n="modal3Stop6Time">(1 час)</span><br>
-                    <span data-i18n="modal3Stop6Desc">Средневековый шарм на скалистом утёсе</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal3Stop7">7. Канны</strong> <span data-i18n="modal3Stop7Time">(1 час)</span><br>
-                    <span data-i18n="modal3Stop7Desc">Дворец Фестивалей, набережная Круазетт</span>
-                </div>
-
-                <h3 data-i18n="modal3Included">✅ Что включено</h3>
-                <div class="includes-grid">
-                    <div class="includes-item included" data-i18n="modal3Inc1">Ваш личный гид</div>
-                    <div class="includes-item included" data-i18n="modal3Inc2">Трансфер от/до отеля</div>
-                    <div class="includes-item included" data-i18n="modal3Inc3">Авто с кондиционером</div>
-                    <div class="includes-item included" data-i18n="modal3Inc4">Гид-тур по парфюмерии</div>
-                    <div class="includes-item included" data-i18n="modal3Inc5">Входной билет в Старый Эз</div>
-                    <div class="includes-item included" data-i18n="modal3Inc6">Вода в бутылках</div>
-                    <div class="includes-item not-included" data-i18n="modal3NotInc1">Еда и напитки</div>
-                    <div class="includes-item not-included" data-i18n="modal3NotInc2">Входы в музеи</div>
-                </div>
-
-                <div style="text-align: center; margin-top: 20px;">
-                    <button onclick="openBookingModal()" class="book-cta" data-i18n="bookButton">Выбрать дату</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal 4: Monaco by Night -->
-    <div id="modal4" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span class="close" onclick="closeModal('modal4')">&times;</span>
-                <h2 data-i18n="modal4Title">Monaco by Night</h2>
-                <p style="margin-top: 10px; opacity: 0.9;" data-i18n="modal4Subtitle">4 часа волшебства вечернего княжества</p>
-            </div>
-            <div class="modal-body">
-                <h3 data-i18n="modal4Gallery">📸 Фотогалерея</h3>
-                <div class="modal-gallery">
-                    <img src="./images/MC_night_01.jpg" alt="Monaco illuminated at night with glittering skyscrapers and harbor lights" class="gallery-image" onclick="openLightbox(this.src, 'gallery4')" loading="lazy">
-                    <img src="./images/MC_night_02.jpg" alt="Monte Carlo Casino lit up at night with luxury cars in front" class="gallery-image" onclick="openLightbox(this.src, 'gallery4')" loading="lazy">
-                    <img src="./images/MC_night_03.jpg" alt="Prince's Palace and Saint Nicholas Cathedral illuminated in evening lighting" class="gallery-image" onclick="openLightbox(this.src, 'gallery4')" loading="lazy">
-                    <img src="./images/MC_night_04.jpg" alt="Monaco night panorama with Port Hercules and yachts twinkling below" class="gallery-image" onclick="openLightbox(this.src, 'gallery4')" loading="lazy">
-                </div>
-
-                <h3 data-i18n="modal4About">✨ О туре</h3>
-                <p data-i18n="modal4AboutText">Откройте для себя красоту Монако ночью на приватном туре. Посетите средневековую деревню Эз и увидьте Дворец Принца, Собор Святого Николая и Казино Монте-Карло в волшебной ночной подсветке.</p>
-
-                <h3 data-i18n="modal4Highlights">🎯 Основные моменты</h3>
-                <ul>
-                    <li data-i18n="modal4HL1">Потрясающие виды на Средиземное море из средневековой деревни</li>
-                    <li data-i18n="modal4HL2">Восхититесь освещёнными небоскрёбами, яхтами и морем</li>
-                    <li data-i18n="modal4HL3">Увидьте Дворец Принца и Собор в ночной подсветке</li>
-                    <li data-i18n="modal4HL4">Знаменитое Казино Монте-Карло ночью</li>
-                    <li data-i18n="modal4HL5">Испытайте удачу в самом известном казино мира</li>
-                </ul>
-
-                <h3 data-i18n="modal4Route">🗺️ Вечерний маршрут</h3>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal4Stop1">Панорамная точка 1</strong> <span data-i18n="modal4Stop1Time">(10 мин)</span><br>
-                    <span data-i18n="modal4Stop1Desc">Вечерний вид на Бухту Ангелов</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal4Stop2">Эз-Виллаж</strong> <span data-i18n="modal4Stop2Time">(30 мин)</span><br>
-                    <span data-i18n="modal4Stop2Desc">Средневековая деревня в вечернем свете</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal4Stop3">Панорама Монако</strong> <span data-i18n="modal4Stop3Time">(5 мин)</span><br>
-                    <span data-i18n="modal4Stop3Desc">Освещённые небоскрёбы и яхты</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal4Stop4">Monaco-Ville</strong> <span data-i18n="modal4Stop4Time">(45 мин)</span><br>
-                    <span data-i18n="modal4Stop4Desc">Дворец и Собор в ночной подсветке</span>
-                </div>
-                <div class="itinerary-item">
-                    <strong data-i18n="modal4Stop5">Монте-Карло</strong> <span data-i18n="modal4Stop5Time">(1.5 часа)</span><br>
-                    <span data-i18n="modal4Stop5Desc">Казино, Отель де Пари, трасса Формулы 1</span>
-                </div>
-
-                <h3 data-i18n="modal4Included">✅ Что включено</h3>
-                <div class="includes-grid">
-                    <div class="includes-item included" data-i18n="modal4Inc1">Приватный трансфер</div>
-                    <div class="includes-item included" data-i18n="modal4Inc2">Живой гид</div>
-                    <div class="includes-item included" data-i18n="modal4Inc3">Панорамные остановки</div>
-                    <div class="includes-item included" data-i18n="modal4Inc4">Фото-возможности</div>
-                    <div class="includes-item not-included" data-i18n="modal4NotInc1">Еда и напитки</div>
-                    <div class="includes-item not-included" data-i18n="modal4NotInc2">Вход в Казино</div>
-                </div>
-
-                <h3 data-i18n="modal4ImportantInfo">ℹ️ Важная информация</h3>
-                <ul>
-                    <li><strong data-i18n="modal4InfoNotSuitable">Не подходит для:</strong> <span data-i18n="modal4InfoNotSuitableText">Людей в инвалидных колясках, людей с боязнью высоты</span></li>
-                    <li><strong data-i18n="modal4InfoCasino">Казино:</strong> <span data-i18n="modal4InfoCasinoText">Требуется ID для входа, есть дресс-код</span></li>
-                    <li><strong data-i18n="modal4InfoSmoking">Курение:</strong> <span data-i18n="modal4InfoSmokingText">Запрещено в автомобиле</span></li>
-                </ul>
-
-                <div style="text-align: center; margin-top: 20px;">
-                    <button onclick="openBookingModal()" class="book-cta" data-i18n="bookButton">Выбрать дату</button>
                 </div>
             </div>
         </div>
@@ -2185,7 +1863,7 @@
                 modal2InfoTransfer: "Трансфер:",
                 modal2InfoTransferText: "5 точек сбора",
                 modal2InfoCancel: "Бесплатная отмена:",
-                modal2InfoCancelText: "За 24 часа до начала",
+                modal2InfoCancelText: "За 48 часов до начала",
 
                 // Modal 3: Grand Riviera
                 modal3Title: "Grand Riviera Tour",
@@ -2560,7 +2238,7 @@
                 modal2InfoTransfer: "Transfer:",
                 modal2InfoTransferText: "5 pickup points",
                 modal2InfoCancel: "Free cancellation:",
-                modal2InfoCancelText: "24 hours before start",
+                modal2InfoCancelText: "48 hours before start",
 
                 // Modal 3: Grand Riviera
                 modal3Title: "Grand Riviera Tour",
@@ -2837,7 +2515,7 @@
                 modal1InfoPickup: "Transfert :",
                 modal1InfoPickupText: "6 points de ramassage (Nice, Saint-Jean-Cap-Ferrat, Villeneuve-Loubet, Antibes, etc.)",
                 modal1InfoCancel: "Annulation gratuite :",
-                modal1InfoCancelText: "24 heures avant le début",
+                modal1InfoCancelText: "48 heures avant le début",
                 modal1InfoReserve: "Réservation sans paiement :",
                 modal1InfoReserveText: "Réservez maintenant, payez plus tard",
 
@@ -2876,7 +2554,12 @@
                 modal2Inc5: "Billet d'entrée au Vieil Èze",
                 modal2Inc6: "Visite à pied (en option)",
                 modal2Inc7: "Eau en bouteille",
+                modal2InfoLang: "Langues :",
+                modal2InfoLangText: "Anglais, Français, Russe",
+                modal2InfoTransfer: "Transfert :",
                 modal2InfoPickupText: "5 points de ramassage",
+                modal2InfoCancel: "Annulation gratuite :",
+                modal2InfoCancelText: "48 heures avant le début",
 
                 // Modal 3: Grand Riviera
                 modal3Title: "Grand Tour de la Riviera",
