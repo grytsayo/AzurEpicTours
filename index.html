@@ -1607,9 +1607,9 @@
                     <div class="review-card">
                         <div class="review-content">
                             <div class="review-stars">★★★★★</div>
-                            <p class="review-text" data-i18n="review1Text">"Потрясающий тур! Наш гид показал нам скрытые жемчужины Монако, о которых мы никогда бы не узнали. Профессионально, познавательно и очень комфортно. Однозначно рекомендую!"</p>
-                            <p class="review-author" data-i18n="review1Author">Мария и Сергей</p>
-                            <p class="review-date" data-i18n="review1Date">Сентябрь 2024</p>
+                            <p class="review-text" data-i18n="review1Text">"Amazing tour! Our guide showed us hidden gems of Monaco we would never have known about. Professional, informative and very comfortable. Definitely recommend!"</p>
+                            <p class="review-author" data-i18n="review1Author">Maria & Sergey</p>
+                            <p class="review-date" data-i18n="review1Date">September 2024</p>
                         </div>
                     </div>
                     <div class="review-card">
@@ -3136,7 +3136,12 @@ if (contactForm) {
             elements.forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations[lang] && translations[lang][key]) {
-                    element.textContent = translations[lang][key];
+                    // Use textContent for most elements to avoid XSS, but innerHTML for elements that need HTML
+                    if (element.tagName === 'P' && element.classList.contains('review-text')) {
+                        element.textContent = translations[lang][key];
+                    } else {
+                        element.textContent = translations[lang][key];
+                    }
                 }
             });
 
