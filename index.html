@@ -37,9 +37,9 @@
     <link rel="shortcut icon" href="./favicon.ico">
 
     <!-- Google Analytics 4 -->
-    <!-- IMPORTANT: Replace 'G-XXXXXXXXXX' with your actual Google Analytics 4 Measurement ID -->
+    <!-- IMPORTANT: Replace 'G-8ZFFMW7WC3' with your actual Google Analytics 4 Measurement ID -->
     <!-- Get your ID from: https://analytics.google.com/analytics/web/ -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZFFMW7WC3"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -51,7 +51,7 @@
         });
 
         gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX', {
+        gtag('config', 'G-8ZFFMW7WC3', {
             'anonymize_ip': true
         });
     </script>
@@ -3112,6 +3112,11 @@ if (contactForm) {
         let currentLanguage = localStorage.getItem('selectedLanguage') || 'en';
 
         function changeLanguage(lang) {
+            // Track language change
+            if (currentLanguage !== lang) {
+                trackLanguageChange(lang);
+            }
+
             currentLanguage = lang;
             localStorage.setItem('selectedLanguage', lang);
 
@@ -3241,6 +3246,13 @@ if (contactForm) {
                             formMessage.className = 'email-form-message success';
                             formMessage.style.display = 'block';
 
+                            // Track form submission
+                            const tourSelected = formData.get('tour') || 'not_specified';
+                            trackFormSubmission('contact_form');
+                            trackEvent('contact_form_success', {
+                                tour_selected: tourSelected
+                            });
+
                             // Reset form
                             emailForm.reset();
 
@@ -3321,6 +3333,67 @@ if (contactForm) {
             console.log('Analytics disabled');
         }
 
+        // GA4 Event Tracking Functions
+        function trackEvent(eventName, eventParams = {}) {
+            // Only track if user has accepted cookies
+            const cookieConsent = localStorage.getItem('cookieConsent');
+            if (cookieConsent === 'accepted' && typeof gtag !== 'undefined') {
+                gtag('event', eventName, eventParams);
+                console.log('GA4 Event tracked:', eventName, eventParams);
+            }
+        }
+
+        // Track tour view
+        function trackTourView(tourName) {
+            trackEvent('view_tour', {
+                tour_name: tourName,
+                language: currentLanguage
+            });
+        }
+
+        // Track tour booking click
+        function trackBookingClick(tourName, tourPrice) {
+            trackEvent('begin_booking', {
+                tour_name: tourName,
+                tour_price: tourPrice,
+                currency: 'EUR',
+                language: currentLanguage
+            });
+        }
+
+        // Track contact form submission
+        function trackFormSubmission(formType) {
+            trackEvent('form_submit', {
+                form_type: formType,
+                language: currentLanguage
+            });
+        }
+
+        // Track social media clicks
+        function trackSocialClick(platform, action) {
+            trackEvent('social_click', {
+                platform: platform,
+                action: action,
+                language: currentLanguage
+            });
+        }
+
+        // Track phone/email clicks
+        function trackContactClick(contactType) {
+            trackEvent('contact_click', {
+                contact_type: contactType,
+                language: currentLanguage
+            });
+        }
+
+        // Track language change
+        function trackLanguageChange(newLanguage) {
+            trackEvent('language_change', {
+                previous_language: currentLanguage,
+                new_language: newLanguage
+            });
+        }
+
         function acceptCookies() {
             localStorage.setItem('cookieConsent', 'accepted');
             hideCookieConsent();
@@ -3370,6 +3443,93 @@ if (contactForm) {
 
             // Update cookie consent text
             updateCookieConsentText();
+
+            // Setup event tracking for interactive elements
+            setupEventTracking();
+        });
+
+        // Setup Event Tracking for buttons and links
+        function setupEventTracking() {
+            // Track hero CTA button
+            const heroCta = document.querySelector('.hero-cta');
+            if (heroCta) {
+                heroCta.addEventListener('click', function() {
+                    trackEvent('cta_click', {
+                        cta_location: 'hero',
+                        cta_text: this.textContent
+                    });
+                });
+            }
+
+            // Track email/phone clicks in footer
+            const footerLinks = document.querySelectorAll('footer a[href^="mailto:"], footer a[href^="tel:"]');
+            footerLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const type = this.href.startsWith('mailto:') ? 'email' : 'phone';
+                    trackContactClick(type);
+                });
+            });
+
+            // Track social media links
+            const socialLinks = document.querySelectorAll('footer a[href*="wa.me"], footer a[href*="t.me"], footer a[href*="whatsapp"], footer a[href*="telegram"]');
+            socialLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const platform = this.href.includes('wa.me') || this.href.includes('whatsapp') ? 'whatsapp' : 'telegram';
+                    trackSocialClick(platform, 'contact');
+                });
+            });
+
+            // Track "View Details" buttons for tours
+            const detailButtons = document.querySelectorAll('[onclick*="openModal"]');
+            detailButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const modalId = this.getAttribute('onclick').match(/openModal\((\d+)\)/);
+                    if (modalId) {
+                        const tourNumber = modalId[1];
+                        trackTourView(`tour_${tourNumber}`);
+                    }
+                });
+            });
+
+            // Track booking modal open
+            const bookingButtons = document.querySelectorAll('[onclick*="openBookingModal"], [onclick*="openEmailModal"]');
+            bookingButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const isBooking = this.getAttribute('onclick').includes('openBookingModal');
+                    const isEmail = this.getAttribute('onclick').includes('openEmailModal');
+
+                    if (isBooking) {
+                        trackEvent('booking_modal_open', {
+                            source: 'direct_button'
+                        });
+                    } else if (isEmail) {
+                        trackEvent('contact_modal_open', {
+                            source: 'email_button'
+                        });
+                    }
+                });
+            });
+
+            // Track Privacy Policy clicks
+            const privacyLinks = document.querySelectorAll('a[href*="privacy-policy"]');
+            privacyLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    trackEvent('privacy_policy_view', {
+                        source: this.closest('footer') ? 'footer' : 'cookie_banner'
+                    });
+                });
+            });
+
+            // Track tour page clicks
+            const tourLinks = document.querySelectorAll('a[href*="tour.html"], a[href*="monaco"]');
+            tourLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    const tourName = this.href.split('/').pop().replace('.html', '');
+                    trackEvent('tour_page_click', {
+                        tour_name: tourName
+                    });
+                });
+            });
         });
     </script>
 
