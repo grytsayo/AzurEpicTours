@@ -2874,41 +2874,50 @@
         let currentGallery = [];
         let currentImageIndex = 0;
 
-        // Reviews Slider
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.review-card');
-        const totalSlides = slides.length;
-        const slider = document.getElementById('reviewsSlider');
-        const dotsContainer = document.getElementById('sliderDots');
+        // Reviews Slider - Initialize after DOM loads
+        function initReviewsSlider() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.review-card');
+            const totalSlides = slides.length;
+            const slider = document.getElementById('reviewsSlider');
+            const dotsContainer = document.getElementById('sliderDots');
 
-        // Create dots
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'dot';
-            if (i === 0) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsContainer.appendChild(dot);
+            console.log('Initializing reviews slider with', totalSlides, 'slides');
+
+            if (!slider || !dotsContainer || totalSlides === 0) {
+                console.error('Reviews slider elements not found');
+                return;
+            }
+
+            // Create dots
+            for (let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                if (i === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(i));
+                dotsContainer.appendChild(dot);
+            }
+
+            function goToSlide(index) {
+                currentSlide = index;
+                slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+                updateDots();
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                goToSlide(currentSlide);
+            }
+
+            function updateDots() {
+                document.querySelectorAll('.dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+            }
+
+            // Auto-advance every 5 seconds
+            setInterval(nextSlide, 5000);
         }
-
-        function goToSlide(index) {
-            currentSlide = index;
-            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
-            updateDots();
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            goToSlide(currentSlide);
-        }
-
-        function updateDots() {
-            document.querySelectorAll('.dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
-
-        // Auto-advance every 5 seconds
-        setInterval(nextSlide, 5000);
 
         function openModal(modalId) {
             const modal = document.getElementById(modalId);
@@ -3477,7 +3486,10 @@ if (contactForm) {
                 });
             }
 
-            // ===== 4. SETUP EVENT TRACKING =====
+            // ===== 4. INITIALIZE REVIEWS SLIDER =====
+            initReviewsSlider();
+
+            // ===== 5. SETUP EVENT TRACKING =====
             setupEventTracking();
         });
 
@@ -3563,7 +3575,7 @@ if (contactForm) {
                     });
                 });
             });
-        });
+        }
     </script>
 
     <!-- Cookie Consent Modal -->
