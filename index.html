@@ -36,6 +36,41 @@
     <link rel="manifest" href="./site.webmanifest">
     <link rel="shortcut icon" href="./favicon.ico">
 
+    <!-- Google Analytics 4 -->
+    <!-- IMPORTANT: Replace 'G-XXXXXXXXXX' with your actual Google Analytics 4 Measurement ID -->
+    <!-- Get your ID from: https://analytics.google.com/analytics/web/ -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+
+        // Initialize GA4 in denied state (GDPR compliant)
+        gtag('consent', 'default', {
+            'analytics_storage': 'denied',
+            'ad_storage': 'denied'
+        });
+
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX', {
+            'anonymize_ip': true
+        });
+    </script>
+
+    <!-- Yandex Metrica -->
+    <!-- IMPORTANT: Replace '12345678' with your actual Yandex Metrica counter ID -->
+    <!-- Get your ID from: https://metrica.yandex.com/ -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        // Initialize Yandex Metrica
+        // This will be enabled only after user accepts cookies
+        window.yandexMetricaEnabled = false;
+    </script>
+
     <!-- Structured Data - JSON-LD -->
     <script type="application/ld+json">
     {
@@ -1640,6 +1675,7 @@
         <p> mail: azurepictours@gmail.com</p>
         <p> Phone: +33(0)6.24.72.99.83</p>
         <p style="margin-top: 20px; opacity: 0.8;" data-i18n="footerRights">© 2025 AzurEpicTours. Все права защищены.</p>
+        <p style="margin-top: 10px; opacity: 0.7;"><a href="./privacy-policy.html" style="color: #667eea; text-decoration: none;" data-i18n="footerPrivacy">Privacy Policy</a></p>
     </footer>
 
     <!-- Hidden form for Netlify detection (DO NOT REMOVE) -->
@@ -2119,10 +2155,11 @@
                 metaKeywords: "туры по Французской Ривьере, приватный гид Монако, экскурсии Ницца, туры Канны, Эз деревня, гид Лазурный берег, личный гид Монако, экскурсии по Лазурному берегу",
                 ogTitle: "AzurEpicTours – Приватные туры по Французской Ривьере",
                 ogDescription: "Откройте для себя Ниццу, Канны, Монако с местным приватным гидом. Эксклюзивные туры на Mercedes с персональным сопровождением.",
+                footerPrivacy: "Политика конфиденциальности",
 
                 // Cookie Consent
                 cookieConsentTitle: "🍪 Мы используем файлы cookie",
-                cookieConsentText: "Мы используем файлы cookie для улучшения вашего опыта на сайте, анализа трафика и персонализации контента. Принимая cookies, вы помогаете нам сделать сайт лучше.",
+                cookieConsentText: "Мы используем файлы cookie для улучшения вашего опыта на сайте, анализа трафика и персонализации контента. Подробнее в нашей Политике конфиденциальности.",
                 cookieAccept: "Принять",
                 cookieDecline: "Отклонить"
             },
@@ -2500,10 +2537,11 @@
                 metaKeywords: "French Riviera tours, Monaco private guide, Nice excursions, Cannes tours, Èze village, Côte d'Azur guide, private Monaco tours, French Riviera excursions",
                 ogTitle: "AzurEpicTours – Private Tours French Riviera",
                 ogDescription: "Discover Nice, Cannes, Monaco with a local private guide. Exclusive Mercedes tours with personal accompaniment and flexible itineraries.",
+                footerPrivacy: "Privacy Policy",
 
                 // Cookie Consent
                 cookieConsentTitle: "🍪 We use cookies",
-                cookieConsentText: "We use cookies to improve your experience on our site, analyze traffic, and personalize content. By accepting cookies, you help us make the site better.",
+                cookieConsentText: "We use cookies to improve your experience on our site, analyze traffic, and personalize content. Learn more in our Privacy Policy.",
                 cookieAccept: "Accept",
                 cookieDecline: "Decline"
             },
@@ -2818,10 +2856,11 @@
                 metaKeywords: "visites Côte d'Azur, guide privé Monaco, excursions Nice, visites Cannes, village Èze, guide Côte d'Azur, visites privées Monaco, excursions Côte d'Azur",
                 ogTitle: "AzurEpicTours – Visites privées Côte d'Azur",
                 ogDescription: "Découvrez Nice, Cannes, Monaco avec un guide privé local. Visites exclusives en Mercedes avec accompagnement personnel et itinéraires flexibles.",
+                footerPrivacy: "Politique de confidentialité",
 
                 // Cookie Consent
                 cookieConsentTitle: "🍪 Nous utilisons des cookies",
-                cookieConsentText: "Nous utilisons des cookies pour améliorer votre expérience sur notre site, analyser le trafic et personnaliser le contenu. En acceptant les cookies, vous nous aidez à améliorer le site.",
+                cookieConsentText: "Nous utilisons des cookies pour améliorer votre expérience sur notre site, analyser le trafic et personnaliser le contenu. En savoir plus dans notre Politique de confidentialité.",
                 cookieAccept: "Accepter",
                 cookieDecline: "Refuser"
             }
@@ -3246,16 +3285,53 @@ if (contactForm) {
             }
         }
 
+        function enableAnalytics() {
+            // Enable Google Analytics 4
+            if (typeof gtag !== 'undefined') {
+                gtag('consent', 'update', {
+                    'analytics_storage': 'granted',
+                    'ad_storage': 'granted'
+                });
+                console.log('Google Analytics 4 enabled');
+            }
+
+            // Enable Yandex Metrica
+            if (typeof ym !== 'undefined' && !window.yandexMetricaEnabled) {
+                // Replace 12345678 with your actual Yandex Metrica counter ID
+                ym(12345678, "init", {
+                    clickmap: true,
+                    trackLinks: true,
+                    accurateTrackBounce: true,
+                    webvisor: true
+                });
+                window.yandexMetricaEnabled = true;
+                console.log('Yandex Metrica enabled');
+            }
+        }
+
+        function disableAnalytics() {
+            // Disable Google Analytics 4
+            if (typeof gtag !== 'undefined') {
+                gtag('consent', 'update', {
+                    'analytics_storage': 'denied',
+                    'ad_storage': 'denied'
+                });
+                console.log('Google Analytics 4 disabled');
+            }
+            console.log('Analytics disabled');
+        }
+
         function acceptCookies() {
             localStorage.setItem('cookieConsent', 'accepted');
             hideCookieConsent();
-            // Here you can enable analytics or other cookie-based services
+            enableAnalytics();
             console.log('Cookies accepted');
         }
 
         function declineCookies() {
             localStorage.setItem('cookieConsent', 'declined');
             hideCookieConsent();
+            disableAnalytics();
             console.log('Cookies declined');
         }
 
@@ -3287,6 +3363,9 @@ if (contactForm) {
             if (!cookieConsent) {
                 // Show cookie consent after 1 second
                 setTimeout(showCookieConsent, 1000);
+            } else if (cookieConsent === 'accepted') {
+                // User previously accepted cookies, enable analytics
+                enableAnalytics();
             }
 
             // Update cookie consent text
