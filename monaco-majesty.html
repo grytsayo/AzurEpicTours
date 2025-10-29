@@ -173,6 +173,62 @@
       },
       "availableLanguage": ["English", "French", "Russian"]
     }
+
+        // Cookie Consent Management
+        function showCookieConsent() {
+            const cookieConsent = document.getElementById('cookieConsent');
+            if (cookieConsent) {
+                cookieConsent.classList.add('show');
+            }
+        }
+
+        function hideCookieConsent() {
+            const cookieConsent = document.getElementById('cookieConsent');
+            if (cookieConsent) {
+                cookieConsent.classList.remove('show');
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            hideCookieConsent();
+            console.log('Cookies accepted');
+        }
+
+        function declineCookies() {
+            localStorage.setItem('cookieConsent', 'declined');
+            hideCookieConsent();
+            console.log('Cookies declined');
+        }
+
+        function updateCookieConsentText() {
+            const title = document.getElementById('cookieConsentTitle');
+            const text = document.getElementById('cookieConsentText');
+            const acceptBtn = document.getElementById('cookieAcceptBtn');
+            const declineBtn = document.getElementById('cookieDeclineBtn');
+
+            if (title && translations[currentLang]) {
+                title.textContent = translations[currentLang].cookieConsentTitle;
+            }
+            if (text && translations[currentLang]) {
+                text.textContent = translations[currentLang].cookieConsentText;
+            }
+            if (acceptBtn && translations[currentLang]) {
+                acceptBtn.textContent = translations[currentLang].cookieAccept;
+            }
+            if (declineBtn && translations[currentLang]) {
+                declineBtn.textContent = translations[currentLang].cookieDecline;
+            }
+        }
+
+        // Check cookie consent on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const cookieConsent = localStorage.getItem('cookieConsent');
+            if (!cookieConsent) {
+                setTimeout(showCookieConsent, 1000);
+            }
+            updateCookieConsentText();
+        });
     </script>
 
     <style>
@@ -602,6 +658,136 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        /* Cookie Consent Modal */
+        .cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.98) 0%, rgba(118, 75, 162, 0.98) 100%);
+            color: white;
+            padding: 25px 20px;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            display: none;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .cookie-consent.show {
+            display: block;
+        }
+
+        .cookie-consent-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cookie-consent-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .cookie-consent-text h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .cookie-consent-text p {
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.5;
+            opacity: 0.95;
+        }
+
+        .cookie-consent-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .cookie-consent-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .cookie-accept-btn {
+            background: white;
+            color: #667eea;
+        }
+
+        .cookie-accept-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .cookie-decline-btn {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .cookie-decline-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .cookie-consent {
+                padding: 20px 15px;
+            }
+
+            .cookie-consent-container {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+            }
+
+            .cookie-consent-text {
+                min-width: 100%;
+            }
+
+            .cookie-consent-text h3 {
+                font-size: 1.1rem;
+            }
+
+            .cookie-consent-text p {
+                font-size: 0.9rem;
+            }
+
+            .cookie-consent-buttons {
+                justify-content: center;
+                width: 100%;
+            }
+
+            .cookie-consent-btn {
+                flex: 1;
+                min-width: 120px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -857,7 +1043,11 @@
                 footerTour3: "Grand Riviera Tour (8h)",
                 footerTour4: "Monaco by Night (4h)",
                 footerContact: "Contact",
-                footerHome: "Home"
+                footerHome: "Home",
+                cookieConsentTitle: "🍪 We use cookies",
+                cookieConsentText: "We use cookies to improve your experience on our site, analyze traffic, and personalize content. By accepting cookies, you help us make the site better.",
+                cookieAccept: "Accept",
+                cookieDecline: "Decline"
             },
             ru: {
                 logoText: "AzurEpicTours",
@@ -930,7 +1120,11 @@
                 footerTour3: "Большой тур по Ривьере (8ч)",
                 footerTour4: "Ночной Монако (4ч)",
                 footerContact: "Контакты",
-                footerHome: "Главная"
+                footerHome: "Главная",
+                cookieConsentTitle: "🍪 Мы используем файлы cookie",
+                cookieConsentText: "Мы используем файлы cookie для улучшения вашего опыта на сайте, анализа трафика и персонализации контента. Принимая cookies, вы помогаете нам сделать сайт лучше.",
+                cookieAccept: "Принять",
+                cookieDecline: "Отклонить"
             },
             fr: {
                 logoText: "AzurEpicTours",
@@ -1003,7 +1197,11 @@
                 footerTour3: "Grand Tour de la Riviera (8h)",
                 footerTour4: "Monaco de Nuit (4h)",
                 footerContact: "Contact",
-                footerHome: "Accueil"
+                footerHome: "Accueil",
+                cookieConsentTitle: "🍪 Nous utilisons des cookies",
+                cookieConsentText: "Nous utilisons des cookies pour améliorer votre expérience sur notre site, analyser le trafic et personnaliser le contenu. En acceptant les cookies, vous nous aidez à améliorer le site.",
+                cookieAccept: "Accepter",
+                cookieDecline: "Refuser"
             }
         };
 
@@ -1051,6 +1249,76 @@
                 closeLightbox();
             }
         });
+
+        // Cookie Consent Management
+        function showCookieConsent() {
+            const cookieConsent = document.getElementById('cookieConsent');
+            if (cookieConsent) {
+                cookieConsent.classList.add('show');
+            }
+        }
+
+        function hideCookieConsent() {
+            const cookieConsent = document.getElementById('cookieConsent');
+            if (cookieConsent) {
+                cookieConsent.classList.remove('show');
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            hideCookieConsent();
+            console.log('Cookies accepted');
+        }
+
+        function declineCookies() {
+            localStorage.setItem('cookieConsent', 'declined');
+            hideCookieConsent();
+            console.log('Cookies declined');
+        }
+
+        function updateCookieConsentText() {
+            const title = document.getElementById('cookieConsentTitle');
+            const text = document.getElementById('cookieConsentText');
+            const acceptBtn = document.getElementById('cookieAcceptBtn');
+            const declineBtn = document.getElementById('cookieDeclineBtn');
+
+            if (title && translations[currentLang]) {
+                title.textContent = translations[currentLang].cookieConsentTitle;
+            }
+            if (text && translations[currentLang]) {
+                text.textContent = translations[currentLang].cookieConsentText;
+            }
+            if (acceptBtn && translations[currentLang]) {
+                acceptBtn.textContent = translations[currentLang].cookieAccept;
+            }
+            if (declineBtn && translations[currentLang]) {
+                declineBtn.textContent = translations[currentLang].cookieDecline;
+            }
+        }
+
+        // Check cookie consent on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const cookieConsent = localStorage.getItem('cookieConsent');
+            if (!cookieConsent) {
+                setTimeout(showCookieConsent, 1000);
+            }
+            updateCookieConsentText();
+        });
     </script>
+
+    <!-- Cookie Consent Modal -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-consent-container">
+            <div class="cookie-consent-text">
+                <h3 id="cookieConsentTitle">🍪 We use cookies</h3>
+                <p id="cookieConsentText">We use cookies to improve your experience on our site, analyze traffic, and personalize content. By accepting cookies, you help us make the site better.</p>
+            </div>
+            <div class="cookie-consent-buttons">
+                <button id="cookieAcceptBtn" class="cookie-consent-btn cookie-accept-btn" onclick="acceptCookies()">Accept</button>
+                <button id="cookieDeclineBtn" class="cookie-consent-btn cookie-decline-btn" onclick="declineCookies()">Decline</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

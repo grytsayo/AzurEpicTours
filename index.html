@@ -1205,6 +1205,136 @@
     }
 }
 
+/* Cookie Consent Modal */
+.cookie-consent {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.98) 0%, rgba(118, 75, 162, 0.98) 100%);
+    color: white;
+    padding: 25px 20px;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+    display: none;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.cookie-consent.show {
+    display: block;
+}
+
+.cookie-consent-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.cookie-consent-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.cookie-consent-text h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.cookie-consent-text p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+    opacity: 0.95;
+}
+
+.cookie-consent-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.cookie-consent-btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.cookie-accept-btn {
+    background: white;
+    color: #667eea;
+}
+
+.cookie-accept-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+}
+
+.cookie-decline-btn {
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.cookie-decline-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .cookie-consent {
+        padding: 20px 15px;
+    }
+
+    .cookie-consent-container {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .cookie-consent-text {
+        min-width: 100%;
+    }
+
+    .cookie-consent-text h3 {
+        font-size: 1.1rem;
+    }
+
+    .cookie-consent-text p {
+        font-size: 0.9rem;
+    }
+
+    .cookie-consent-buttons {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .cookie-consent-btn {
+        flex: 1;
+        min-width: 120px;
+    }
+}
+
     </style>
 </head>
 <body>
@@ -1988,7 +2118,13 @@
                 metaDescription: "Эксклюзивные приватные туры по Французской Ривьере: Монако, Ницца, Канны, Эз. Персональный русско-англо-французский гид. Роскошные туры на Mercedes по побережью Средиземного моря.",
                 metaKeywords: "туры по Французской Ривьере, приватный гид Монако, экскурсии Ницца, туры Канны, Эз деревня, гид Лазурный берег, личный гид Монако, экскурсии по Лазурному берегу",
                 ogTitle: "AzurEpicTours – Приватные туры по Французской Ривьере",
-                ogDescription: "Откройте для себя Ниццу, Канны, Монако с местным приватным гидом. Эксклюзивные туры на Mercedes с персональным сопровождением."
+                ogDescription: "Откройте для себя Ниццу, Канны, Монако с местным приватным гидом. Эксклюзивные туры на Mercedes с персональным сопровождением.",
+
+                // Cookie Consent
+                cookieConsentTitle: "🍪 Мы используем файлы cookie",
+                cookieConsentText: "Мы используем файлы cookie для улучшения вашего опыта на сайте, анализа трафика и персонализации контента. Принимая cookies, вы помогаете нам сделать сайт лучше.",
+                cookieAccept: "Принять",
+                cookieDecline: "Отклонить"
             },
             en: {
                 // Hero section
@@ -2363,7 +2499,13 @@
                 metaDescription: "Exclusive private tours of the French Riviera: Monaco, Nice, Cannes, Èze. Personal multilingual guide. Luxury Mercedes tours along the Mediterranean coast. Book your unforgettable journey today!",
                 metaKeywords: "French Riviera tours, Monaco private guide, Nice excursions, Cannes tours, Èze village, Côte d'Azur guide, private Monaco tours, French Riviera excursions",
                 ogTitle: "AzurEpicTours – Private Tours French Riviera",
-                ogDescription: "Discover Nice, Cannes, Monaco with a local private guide. Exclusive Mercedes tours with personal accompaniment and flexible itineraries."
+                ogDescription: "Discover Nice, Cannes, Monaco with a local private guide. Exclusive Mercedes tours with personal accompaniment and flexible itineraries.",
+
+                // Cookie Consent
+                cookieConsentTitle: "🍪 We use cookies",
+                cookieConsentText: "We use cookies to improve your experience on our site, analyze traffic, and personalize content. By accepting cookies, you help us make the site better.",
+                cookieAccept: "Accept",
+                cookieDecline: "Decline"
             },
             fr: {
                 // Hero section
@@ -2675,7 +2817,13 @@
                 metaDescription: "Visites privées exclusives de la Côte d'Azur : Monaco, Nice, Cannes, Èze. Guide multilingue personnel. Visites luxueuses en Mercedes le long de la Méditerranée. Réservez votre voyage inoubliable !",
                 metaKeywords: "visites Côte d'Azur, guide privé Monaco, excursions Nice, visites Cannes, village Èze, guide Côte d'Azur, visites privées Monaco, excursions Côte d'Azur",
                 ogTitle: "AzurEpicTours – Visites privées Côte d'Azur",
-                ogDescription: "Découvrez Nice, Cannes, Monaco avec un guide privé local. Visites exclusives en Mercedes avec accompagnement personnel et itinéraires flexibles."
+                ogDescription: "Découvrez Nice, Cannes, Monaco avec un guide privé local. Visites exclusives en Mercedes avec accompagnement personnel et itinéraires flexibles.",
+
+                // Cookie Consent
+                cookieConsentTitle: "🍪 Nous utilisons des cookies",
+                cookieConsentText: "Nous utilisons des cookies pour améliorer votre expérience sur notre site, analyser le trafic et personnaliser le contenu. En acceptant les cookies, vous nous aidez à améliorer le site.",
+                cookieAccept: "Accepter",
+                cookieDecline: "Refuser"
             }
         };
 
@@ -2980,6 +3128,9 @@ if (contactForm) {
 
             // Update HTML lang attribute
             document.documentElement.lang = lang;
+
+            // Update cookie consent text
+            updateCookieConsentText();
         }
 
         // Initialize language switcher
@@ -3079,6 +3230,82 @@ if (contactForm) {
                 });
             }
         });
+
+        // Cookie Consent Management
+        function showCookieConsent() {
+            const cookieConsent = document.getElementById('cookieConsent');
+            if (cookieConsent) {
+                cookieConsent.classList.add('show');
+            }
+        }
+
+        function hideCookieConsent() {
+            const cookieConsent = document.getElementById('cookieConsent');
+            if (cookieConsent) {
+                cookieConsent.classList.remove('show');
+            }
+        }
+
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            hideCookieConsent();
+            // Here you can enable analytics or other cookie-based services
+            console.log('Cookies accepted');
+        }
+
+        function declineCookies() {
+            localStorage.setItem('cookieConsent', 'declined');
+            hideCookieConsent();
+            console.log('Cookies declined');
+        }
+
+        // Update cookie consent text when language changes
+        function updateCookieConsentText() {
+            const title = document.getElementById('cookieConsentTitle');
+            const text = document.getElementById('cookieConsentText');
+            const acceptBtn = document.getElementById('cookieAcceptBtn');
+            const declineBtn = document.getElementById('cookieDeclineBtn');
+
+            if (title && translations[currentLanguage]) {
+                title.textContent = translations[currentLanguage].cookieConsentTitle;
+            }
+            if (text && translations[currentLanguage]) {
+                text.textContent = translations[currentLanguage].cookieConsentText;
+            }
+            if (acceptBtn && translations[currentLanguage]) {
+                acceptBtn.textContent = translations[currentLanguage].cookieAccept;
+            }
+            if (declineBtn && translations[currentLanguage]) {
+                declineBtn.textContent = translations[currentLanguage].cookieDecline;
+            }
+        }
+
+        // Check cookie consent on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const cookieConsent = localStorage.getItem('cookieConsent');
+
+            if (!cookieConsent) {
+                // Show cookie consent after 1 second
+                setTimeout(showCookieConsent, 1000);
+            }
+
+            // Update cookie consent text
+            updateCookieConsentText();
+        });
     </script>
+
+    <!-- Cookie Consent Modal -->
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-consent-container">
+            <div class="cookie-consent-text">
+                <h3 id="cookieConsentTitle">🍪 Мы используем файлы cookie</h3>
+                <p id="cookieConsentText">Мы используем файлы cookie для улучшения вашего опыта на сайте, анализа трафика и персонализации контента. Принимая cookies, вы помогаете нам сделать сайт лучше.</p>
+            </div>
+            <div class="cookie-consent-buttons">
+                <button id="cookieAcceptBtn" class="cookie-consent-btn cookie-accept-btn" onclick="acceptCookies()">Принять</button>
+                <button id="cookieDeclineBtn" class="cookie-consent-btn cookie-decline-btn" onclick="declineCookies()">Отклонить</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
