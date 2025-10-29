@@ -3112,6 +3112,8 @@ if (contactForm) {
         let currentLanguage = localStorage.getItem('selectedLanguage') || 'en';
 
         function changeLanguage(lang) {
+            console.log('changeLanguage called with:', lang, '| current:', currentLanguage);
+
             // Track language change
             if (currentLanguage !== lang) {
                 trackLanguageChange(lang);
@@ -3120,8 +3122,13 @@ if (contactForm) {
             currentLanguage = lang;
             localStorage.setItem('selectedLanguage', lang);
 
+            console.log('Language set to:', lang);
+
             // Update all elements with data-i18n attribute
-            document.querySelectorAll('[data-i18n]').forEach(element => {
+            const elements = document.querySelectorAll('[data-i18n]');
+            console.log('Updating', elements.length, 'elements with data-i18n');
+
+            elements.forEach(element => {
                 const key = element.getAttribute('data-i18n');
                 if (translations[lang] && translations[lang][key]) {
                     element.textContent = translations[lang][key];
@@ -3177,19 +3184,8 @@ if (contactForm) {
             updateCookieConsentText();
         }
 
-        // Initialize language switcher
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set initial language
-            changeLanguage(currentLanguage);
-
-            // Add click handlers to language buttons
-            document.querySelectorAll('.lang-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    const lang = this.getAttribute('data-lang');
-                    changeLanguage(lang);
-                });
-            });
-        });
+        // ===== THIS SECTION REMOVED - Consolidated into main DOMContentLoaded below =====
+        // Language initialization is now handled in the combined DOMContentLoaded listener
 
         // Email Modal Functions
         function openEmailModal() {
@@ -3429,8 +3425,36 @@ if (contactForm) {
             }
         }
 
-        // Check cookie consent on page load
+        // Initialize everything on page load (SINGLE DOMContentLoaded)
         document.addEventListener('DOMContentLoaded', function() {
+            // ===== 1. INITIALIZE LANGUAGE FIRST =====
+            console.log('Initializing language...');
+
+            // Force default to English if not set
+            if (!localStorage.getItem('selectedLanguage')) {
+                console.log('No language set, defaulting to English');
+                currentLanguage = 'en';
+                localStorage.setItem('selectedLanguage', 'en');
+            } else {
+                currentLanguage = localStorage.getItem('selectedLanguage');
+                console.log('Loaded language from storage:', currentLanguage);
+            }
+
+            // Apply the initial language
+            changeLanguage(currentLanguage);
+
+            // Add click handlers to language buttons
+            document.querySelectorAll('.lang-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const lang = this.getAttribute('data-lang');
+                    console.log('Language button clicked:', lang);
+                    if (lang && lang !== currentLanguage) {
+                        changeLanguage(lang);
+                    }
+                });
+            });
+
+            // ===== 2. HANDLE COOKIE CONSENT =====
             const cookieConsent = localStorage.getItem('cookieConsent');
 
             if (!cookieConsent) {
@@ -3444,7 +3468,7 @@ if (contactForm) {
             // Update cookie consent text
             updateCookieConsentText();
 
-            // Setup event tracking for interactive elements
+            // ===== 3. SETUP EVENT TRACKING =====
             setupEventTracking();
         });
 
