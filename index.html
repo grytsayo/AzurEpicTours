@@ -189,6 +189,10 @@
           "review": [
             {
               "@type": "Review",
+              "itemReviewed": {
+                "@type": "TourOperator",
+                "@id": "https://www.azurepictours.com/#organization"
+              },
               "author": {
                 "@type": "Person",
                 "name": "Maria and Sergey"
@@ -203,6 +207,10 @@
             },
             {
               "@type": "Review",
+              "itemReviewed": {
+                "@type": "TourOperator",
+                "@id": "https://www.azurepictours.com/#organization"
+              },
               "author": {
                 "@type": "Person",
                 "name": "Jen"
@@ -217,6 +225,10 @@
             },
             {
               "@type": "Review",
+              "itemReviewed": {
+                "@type": "TourOperator",
+                "@id": "https://www.azurepictours.com/#organization"
+              },
               "author": {
                 "@type": "Person",
                 "name": "GetYourGuide traveler"
@@ -231,6 +243,10 @@
             },
             {
               "@type": "Review",
+              "itemReviewed": {
+                "@type": "TourOperator",
+                "@id": "https://www.azurepictours.com/#organization"
+              },
               "author": {
                 "@type": "Person",
                 "name": "Donatas"
@@ -1132,6 +1148,37 @@
     transform: none;
 }
 
+/* Star Rating Styles */
+.star-rating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 5px;
+    font-size: 40px;
+    margin: 10px 0;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input:checked ~ label {
+    color: #f5b301;
+}
+
+.star-rating input:checked ~ label:hover,
+.star-rating input:checked ~ label:hover ~ label {
+    color: #f5b301;
+}
+
 .email-form-message {
     margin-top: 15px;
     padding: 12px;
@@ -1601,7 +1648,11 @@
         <div class="reviews-container">
             <h2 class="section-title" data-i18n="reviewsTitle">Customer Reviews</h2>
             <p class="section-subtitle" data-i18n="reviewsSubtitle">What people say about our tours</p>
-            
+
+            <div style="text-align: center; margin: 20px 0;">
+                <button onclick="openReviewModal()" class="hero-cta" data-i18n="leaveReviewButton">Leave a Review</button>
+            </div>
+
             <div class="slider-wrapper">
                 <div class="reviews-slider" id="reviewsSlider">
                     <div class="review-card">
@@ -1699,6 +1750,16 @@
         <textarea name="message"></textarea>
     </form>
 
+    <!-- Hidden form for Netlify detection - Review Form (DO NOT REMOVE) -->
+    <form name="customer-review" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+        <input type="hidden" name="form-name" value="customer-review" />
+        <input type="text" name="bot-field" />
+        <input type="text" name="name" />
+        <input type="email" name="email" />
+        <input type="text" name="rating" />
+        <textarea name="review"></textarea>
+    </form>
+
     <!-- Floating Social Buttons -->
 <div class="floating-buttons">
     <a href="https://wa.me/+33624729983?text=Здравствуйте!%20Хочу%20узнать%20о%20турах%20по%20Ривьере" 
@@ -1779,6 +1840,60 @@
             <div id="emailFormMessage" class="email-form-message" style="display: none;"></div>
 
             <button type="submit" class="email-submit-button" data-i18n="formSubmit">Отправить запрос</button>
+        </form>
+    </div>
+</div>
+
+<!-- Review Modal -->
+<div id="reviewModal" class="email-modal">
+    <div class="email-modal-content">
+        <span class="email-modal-close" onclick="closeReviewModal()">&times;</span>
+        <h2 data-i18n="reviewModalTitle">Leave a Review</h2>
+        <p data-i18n="reviewModalSubtitle">Share your experience with us</p>
+
+        <form id="reviewForm" name="customer-review" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+            <!-- Netlify form identifier -->
+            <input type="hidden" name="form-name" value="customer-review" />
+
+            <!-- Honeypot field -->
+            <div style="display: none;">
+                <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+            </div>
+
+            <div class="email-form-group">
+                <label for="reviewName" data-i18n="reviewNameLabel">Your Name *</label>
+                <input type="text" id="reviewName" name="name" required placeholder="John Doe">
+            </div>
+
+            <div class="email-form-group">
+                <label for="reviewEmail" data-i18n="reviewEmailLabel">Email (optional)</label>
+                <input type="email" id="reviewEmail" name="email" placeholder="your@email.com">
+            </div>
+
+            <div class="email-form-group">
+                <label data-i18n="reviewRatingLabel">Rating *</label>
+                <div class="star-rating">
+                    <input type="radio" name="rating" value="5" id="star5" required>
+                    <label for="star5" title="5 stars">★</label>
+                    <input type="radio" name="rating" value="4" id="star4">
+                    <label for="star4" title="4 stars">★</label>
+                    <input type="radio" name="rating" value="3" id="star3">
+                    <label for="star3" title="3 stars">★</label>
+                    <input type="radio" name="rating" value="2" id="star2">
+                    <label for="star2" title="2 stars">★</label>
+                    <input type="radio" name="rating" value="1" id="star1">
+                    <label for="star1" title="1 star">★</label>
+                </div>
+            </div>
+
+            <div class="email-form-group">
+                <label for="reviewText" data-i18n="reviewTextLabel">Your Review *</label>
+                <textarea id="reviewText" name="review" rows="6" required placeholder="Tell us about your experience..." data-i18n-placeholder="reviewTextPlaceholder"></textarea>
+            </div>
+
+            <div id="reviewFormMessage" class="email-form-message" style="display: none;"></div>
+
+            <button type="submit" class="email-submit-button" data-i18n="reviewSubmitButton">Submit Review</button>
         </form>
     </div>
 </div>
@@ -2133,12 +2248,23 @@
                 // Reviews section
                 reviewsTitle: "Отзывы клиентов",
                 reviewsSubtitle: "Что говорят о наших турах",
+                leaveReviewButton: "Оставить отзыв",
 
                 // Contact section
                 contactTitle: "Свяжитесь со мной",
                 contactSubtitle: "Задайте вопрос или забронируйте тур прямо сейчас",
                 emailModalTitle: "Написать Email",
                 emailModalSubtitle: "Выберите тур и отправьте запрос",
+                reviewModalTitle: "Оставить отзыв",
+                reviewModalSubtitle: "Поделитесь своими впечатлениями",
+                reviewNameLabel: "Ваше имя *",
+                reviewEmailLabel: "Email (необязательно)",
+                reviewRatingLabel: "Оценка *",
+                reviewTextLabel: "Ваш отзыв *",
+                reviewTextPlaceholder: "Расскажите о вашем опыте...",
+                reviewSubmitButton: "Отправить отзыв",
+                reviewSuccessMessage: "✓ Спасибо! Ваш отзыв будет опубликован после модерации.",
+                reviewErrorMessage: "✗ Ошибка отправки. Попробуйте позже.",
                 formName: "Ваше имя",
                 formEmail: "Email",
                 formPhone: "Телефон",
@@ -2515,12 +2641,23 @@
                 // Reviews section
                 reviewsTitle: "Customer Reviews",
                 reviewsSubtitle: "What people say about our tours",
+                leaveReviewButton: "Leave a Review",
 
                 // Contact section
                 contactTitle: "Contact me",
                 contactSubtitle: "Ask a question or book a tour right now",
                 emailModalTitle: "Send Email",
                 emailModalSubtitle: "Choose a tour and send your request",
+                reviewModalTitle: "Leave a Review",
+                reviewModalSubtitle: "Share your experience with us",
+                reviewNameLabel: "Your Name *",
+                reviewEmailLabel: "Email (optional)",
+                reviewRatingLabel: "Rating *",
+                reviewTextLabel: "Your Review *",
+                reviewTextPlaceholder: "Tell us about your experience...",
+                reviewSubmitButton: "Submit Review",
+                reviewSuccessMessage: "✓ Thank you! Your review will be published after moderation.",
+                reviewErrorMessage: "✗ Submission failed. Please try again later.",
                 formName: "Your name",
                 formEmail: "Email",
                 formPhone: "Phone",
@@ -2834,12 +2971,23 @@
                 // Reviews section
                 reviewsTitle: "Avis des clients",
                 reviewsSubtitle: "Ce que les gens disent de nos visites",
+                leaveReviewButton: "Laisser un avis",
 
                 // Contact section
                 contactTitle: "Contactez-moi",
                 contactSubtitle: "Posez une question ou réservez une visite maintenant",
                 emailModalTitle: "Envoyer un Email",
                 emailModalSubtitle: "Choisissez une visite et envoyez votre demande",
+                reviewModalTitle: "Laisser un avis",
+                reviewModalSubtitle: "Partagez votre expérience avec nous",
+                reviewNameLabel: "Votre nom *",
+                reviewEmailLabel: "Email (optionnel)",
+                reviewRatingLabel: "Note *",
+                reviewTextLabel: "Votre avis *",
+                reviewTextPlaceholder: "Parlez-nous de votre expérience...",
+                reviewSubmitButton: "Soumettre l'avis",
+                reviewSuccessMessage: "✓ Merci ! Votre avis sera publié après modération.",
+                reviewErrorMessage: "✗ Échec de l'envoi. Veuillez réessayer plus tard.",
                 formName: "Votre nom",
                 formEmail: "Email",
                 formPhone: "Téléphone",
@@ -3217,11 +3365,26 @@ if (contactForm) {
             document.body.style.overflow = ''; // Restore scrolling
         }
 
-        // Close modal when clicking outside
+        // Review Modal Functions
+        function openReviewModal() {
+            document.getElementById('reviewModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeReviewModal() {
+            document.getElementById('reviewModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // Close modals when clicking outside
         window.addEventListener('click', function(event) {
-            const modal = document.getElementById('emailModal');
-            if (event.target === modal) {
+            const emailModal = document.getElementById('emailModal');
+            const reviewModal = document.getElementById('reviewModal');
+            if (event.target === emailModal) {
                 closeEmailModal();
+            }
+            if (event.target === reviewModal) {
+                closeReviewModal();
             }
         });
 
@@ -3486,10 +3649,79 @@ if (contactForm) {
                 });
             }
 
-            // ===== 4. INITIALIZE REVIEWS SLIDER =====
+            // ===== 4. SETUP REVIEW FORM =====
+            const reviewForm = document.getElementById('reviewForm');
+            const reviewMessage = document.getElementById('reviewFormMessage');
+            const reviewSubmitButton = reviewForm ? reviewForm.querySelector('button[type="submit"]') : null;
+
+            if (reviewForm) {
+                reviewForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    // Disable submit button
+                    if (reviewSubmitButton) {
+                        reviewSubmitButton.disabled = true;
+                        reviewSubmitButton.textContent = translations[currentLanguage].formSending || 'Отправка...';
+                    }
+
+                    // Hide any previous messages
+                    reviewMessage.style.display = 'none';
+                    reviewMessage.className = 'email-form-message';
+
+                    // Prepare form data
+                    const formData = new FormData(reviewForm);
+
+                    // Submit to Netlify
+                    fetch('/', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: new URLSearchParams(formData).toString()
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // Success
+                            reviewMessage.textContent = translations[currentLanguage].reviewSuccessMessage || '✓ Thank you! Your review will be published after moderation.';
+                            reviewMessage.className = 'email-form-message success';
+                            reviewMessage.style.display = 'block';
+
+                            // Track review submission
+                            trackEvent('review_submitted', {
+                                rating: formData.get('rating'),
+                                language: currentLanguage
+                            });
+
+                            // Reset form
+                            reviewForm.reset();
+
+                            // Close modal after 3 seconds
+                            setTimeout(function() {
+                                closeReviewModal();
+                                reviewMessage.style.display = 'none';
+                            }, 3000);
+                        } else {
+                            throw new Error('Form submission failed');
+                        }
+                    })
+                    .catch(error => {
+                        // Error
+                        reviewMessage.textContent = translations[currentLanguage].reviewErrorMessage || '✗ Submission failed. Please try again later.';
+                        reviewMessage.className = 'email-form-message error';
+                        reviewMessage.style.display = 'block';
+                    })
+                    .finally(() => {
+                        // Re-enable submit button
+                        if (reviewSubmitButton) {
+                            reviewSubmitButton.disabled = false;
+                            reviewSubmitButton.textContent = translations[currentLanguage].reviewSubmitButton || 'Submit Review';
+                        }
+                    });
+                });
+            }
+
+            // ===== 5. INITIALIZE REVIEWS SLIDER =====
             initReviewsSlider();
 
-            // ===== 5. SETUP EVENT TRACKING =====
+            // ===== 6. SETUP EVENT TRACKING =====
             setupEventTracking();
         });
 
