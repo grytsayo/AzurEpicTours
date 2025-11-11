@@ -645,6 +645,71 @@
             letter-spacing: -1px;
         }
 
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            max-width: 600px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+            animation: slideDown 0.3s ease;
+        }
+
+        .modal-header {
+            padding: 20px 30px;
+            border-bottom: 1px solid #eee;
+            position: relative;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
         /* Footer */
         footer {
             background: #2d3748;
@@ -1036,8 +1101,44 @@
                 </div>
                 <span class="price-info-new">€292</span>
             </div>
-            <a href="./index.html#contact" class="book-btn" data-i18n="bookButton">Book This Tour</a>
+            <button onclick="openBookingModal()" class="book-btn" data-i18n="bookButton">Book This Tour</button>
             <p style="margin-top: 15px; color: #666;" data-i18n="cancelPolicy">Free cancellation 48 hours before start</p>
+        </div>
+    </div>
+
+    <!-- Booking Unavailable Modal -->
+    <div id="bookingUnavailableModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+            <div class="modal-header" style="text-align: center;">
+                <span class="close" onclick="closeBookingModal()">&times;</span>
+                <h2 data-i18n="bookingUnavailableTitle" style="color: #d4a574;">Service Temporarily Unavailable</h2>
+            </div>
+            <div class="modal-body" style="text-align: center; padding: 30px 20px;">
+                <div style="font-size: 48px; margin-bottom: 20px;">⚠️</div>
+                <p data-i18n="bookingUnavailableMessage" style="font-size: 16px; line-height: 1.6; margin-bottom: 25px;">
+                    The online booking service is temporarily unavailable. Please use our contact information below for any inquiries or to make a reservation.
+                </p>
+
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h3 data-i18n="contactInfoTitle" style="margin-bottom: 15px; color: #2c3e50;">Contact Information</h3>
+                    <div style="text-align: left; display: inline-block;">
+                        <p style="margin: 10px 0;">
+                            <strong>📧 Email:</strong><br>
+                            <a href="mailto:azurepictours@gmail.com" style="color: #d4a574;">azurepictours@gmail.com</a>
+                        </p>
+                        <p style="margin: 10px 0;">
+                            <strong data-i18n="phoneLabel">📞 Phone:</strong><br>
+                            <a href="tel:+33624729983" style="color: #d4a574;">+33 6 24 72 99 83</a>
+                        </p>
+                        <p style="margin: 10px 0;">
+                            <strong>💬 WhatsApp:</strong><br>
+                            <a href="https://wa.me/+33624729983" target="_blank" style="color: #d4a574;">+33 6 24 72 99 83</a>
+                        </p>
+                    </div>
+                </div>
+
+                <button onclick="closeBookingModal()" class="book-btn" data-i18n="closeButton" style="margin-top: 10px;">Close</button>
+            </div>
         </div>
     </div>
 
@@ -1143,6 +1244,11 @@
                 priceDisplay: "from €300",
                 bookButton: "Book This Tour",
                 cancelPolicy: "Free cancellation 48 hours before start",
+                bookingUnavailableTitle: "Service Temporarily Unavailable",
+                bookingUnavailableMessage: "The online booking service is temporarily unavailable. Please use our contact information below for any inquiries or to make a reservation.",
+                contactInfoTitle: "Contact Information",
+                phoneLabel: "📞 Phone:",
+                closeButton: "Close",
                 footerAbout: "About AzurEpicTours",
                 footerAboutText: "Exclusive private tours of the French Riviera with a personal multilingual guide. Discover Monaco, Nice, Cannes, and hidden gems of Côte d'Azur.",
                 footerTours: "Our Tours",
@@ -1217,6 +1323,11 @@
                 priceDisplay: "от €300",
                 bookButton: "Забронировать тур",
                 cancelPolicy: "Бесплатная отмена за 48 часов до начала",
+                bookingUnavailableTitle: "Сервис временно недоступен",
+                bookingUnavailableMessage: "Онлайн-сервис бронирования временно недоступен. Пожалуйста, используйте нашу контактную информацию ниже для любых запросов или для бронирования.",
+                contactInfoTitle: "Контактная информация",
+                phoneLabel: "📞 Телефон:",
+                closeButton: "Закрыть",
                 footerAbout: "О нас",
                 footerAboutText: "Эксклюзивные приватные туры по Французской Ривьере с персональным многоязычным гидом. Откройте для себя Монако, Ниццу, Канны и скрытые жемчужины Лазурного Берега.",
                 footerTours: "Наши туры",
@@ -1291,6 +1402,11 @@
                 priceDisplay: "à partir de 300 €",
                 bookButton: "Réserver cette visite",
                 cancelPolicy: "Annulation gratuite 48 heures avant le début",
+                bookingUnavailableTitle: "Service temporairement indisponible",
+                bookingUnavailableMessage: "Le service de réservation en ligne est temporairement indisponible. Veuillez utiliser nos coordonnées ci-dessous pour toute demande ou pour effectuer une réservation.",
+                contactInfoTitle: "Coordonnées",
+                phoneLabel: "📞 Téléphone :",
+                closeButton: "Fermer",
                 footerAbout: "À propos d'AzurEpicTours",
                 footerAboutText: "Visites privées exclusives de la Côte d'Azur avec un guide multilingue personnel. Découvrez Monaco, Nice, Cannes et les joyaux cachés de la Côte d'Azur.",
                 footerTours: "Nos visites",
@@ -1451,6 +1567,31 @@
             }
             updateCookieConsentText();
         });
+
+        // Booking modal functions
+        function openBookingModal() {
+            const modal = document.getElementById('bookingUnavailableModal');
+            if (modal) {
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeBookingModal() {
+            const modal = document.getElementById('bookingUnavailableModal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('bookingUnavailableModal');
+            if (event.target == modal) {
+                closeBookingModal();
+            }
+        }
     </script>
 
     <!-- Cookie Consent Modal -->
