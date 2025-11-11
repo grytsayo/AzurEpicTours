@@ -595,9 +595,37 @@
         }
 
         .tour-price {
-            font-size: 1.3rem;
-            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-items: flex-start;
+        }
+
+        .tour-price-old {
+            font-size: 0.95rem;
             color: #667eea;
+            text-decoration: line-through;
+            opacity: 0.7;
+            font-weight: 500;
+        }
+
+        .tour-price-discount-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 12px;
+            margin-left: 8px;
+            box-shadow: 0 2px 4px rgba(245, 87, 108, 0.3);
+        }
+
+        .tour-price-new {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #f5576c;
+            letter-spacing: -0.5px;
         }
 
         .details-button {
@@ -1478,7 +1506,13 @@
                         <span class="feature-tag" data-i18n="tour1Tag7">Child seat provided if needed</span>
                     </div>
                     <div class="tour-footer">
-                        <span class="tour-price" data-i18n="tour1Price">from €200</span>
+                        <div class="tour-price">
+                            <div>
+                                <span class="tour-price-old">€225</span>
+                                <span class="tour-price-discount-badge">-20%</span>
+                            </div>
+                            <span class="tour-price-new">€180</span>
+                        </div>
                         <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); window.location.href='monaco-majesty.html'">Tour Details</button>
                     </div>
                 </div>
@@ -1519,7 +1553,13 @@
                         <span class="feature-tag" data-i18n="tour2Tag7">Child seat provided if needed</span>
                     </div>
                     <div class="tour-footer">
-                        <span class="tour-price" data-i18n="tour2Price">from €300</span>
+                        <div class="tour-price">
+                            <div>
+                                <span class="tour-price-old">€365</span>
+                                <span class="tour-price-discount-badge">-20%</span>
+                            </div>
+                            <span class="tour-price-new">€292</span>
+                        </div>
                         <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); window.location.href='monaco-coastline.html'">Tour Details</button>
                     </div>
                 </div>
@@ -1560,7 +1600,13 @@
                         <span class="feature-tag" data-i18n="tour3Tag7">Child seat provided if needed</span>
                     </div>
                     <div class="tour-footer">
-                        <span class="tour-price" data-i18n="tour3Price">from €450</span>
+                        <div class="tour-price">
+                            <div>
+                                <span class="tour-price-old">€385</span>
+                                <span class="tour-price-discount-badge">-20%</span>
+                            </div>
+                            <span class="tour-price-new">€308</span>
+                        </div>
                         <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); window.location.href='grand-riviera-tour.html'">Tour Details</button>
                     </div>
                 </div>
@@ -1599,7 +1645,13 @@
                         <span class="feature-tag" data-i18n="tour4Tag7">Child seat provided if needed</span>
                     </div>
                     <div class="tour-footer">
-                        <span class="tour-price" data-i18n="tour4Price">from €200</span>
+                        <div class="tour-price">
+                            <div>
+                                <span class="tour-price-old">€240</span>
+                                <span class="tour-price-discount-badge">-20%</span>
+                            </div>
+                            <span class="tour-price-new">€192</span>
+                        </div>
                         <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); window.location.href='monaco-by-night.html'">Tour Details</button>
                     </div>
                 </div>

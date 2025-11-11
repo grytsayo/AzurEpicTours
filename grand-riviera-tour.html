@@ -498,10 +498,38 @@
         }
 
         .price-info {
-            font-size: 2rem;
-            color: #667eea;
-            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
             margin-bottom: 20px;
+        }
+
+        .price-info-old {
+            font-size: 1.3rem;
+            color: #667eea;
+            text-decoration: line-through;
+            opacity: 0.7;
+            font-weight: 500;
+        }
+
+        .price-info-discount-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 15px;
+            margin-left: 10px;
+            box-shadow: 0 3px 8px rgba(245, 87, 108, 0.4);
+        }
+
+        .price-info-new {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #f5576c;
+            letter-spacing: -1px;
         }
 
         /* Footer */
@@ -881,7 +909,13 @@
 
         <!-- CTA Section -->
         <div class="cta-section">
-            <div class="price-info" data-i18n="priceDisplay">from €450</div>
+            <div class="price-info">
+                <div>
+                    <span class="price-info-old">€385</span>
+                    <span class="price-info-discount-badge">-20%</span>
+                </div>
+                <span class="price-info-new">€308</span>
+            </div>
             <a href="./index.html#contact" class="book-btn" data-i18n="bookButton">Book This Tour</a>
             <p style="margin-top: 15px; color: #666;" data-i18n="cancelPolicy">Free cancellation 48 hours before start</p>
         </div>
@@ -938,7 +972,7 @@
                 tourTitle: "Grand Riviera Tour",
                 tourSubtitle: "8 hours of French Riviera magic",
                 duration: "Duration: 8 hours",
-                priceFrom: "From €450",
+                priceFrom: "€385 €308 (-20%)",
                 languages: "Languages: EN, FR, RU",
                 galleryTitle: "📸 Photo Gallery",
                 aboutTitle: "✨ About the Tour",
@@ -979,7 +1013,7 @@
                 inc6: "Bottled water",
                 notInc1: "Food and drinks not included",
                 notInc2: "Museum entrances not included",
-                priceDisplay: "from €450",
+                priceDisplay: "€385 €308 (-20%)",
                 bookButton: "Book This Tour",
                 cancelPolicy: "Free cancellation 48 hours before start",
                 footerAbout: "About AzurEpicTours",
@@ -1005,7 +1039,7 @@
                 tourTitle: "Grand Riviera Tour",
                 tourSubtitle: "8 часов магии Французской Ривьеры",
                 duration: "Продолжительность: 8 часов",
-                priceFrom: "От €450",
+                priceFrom: "€385 €308 (-20%)",
                 languages: "Языки: EN, FR, RU",
                 galleryTitle: "📸 Фотогалерея",
                 aboutTitle: "✨ О туре",
@@ -1046,7 +1080,7 @@
                 inc6: "Вода в бутылках",
                 notInc1: "Еда и напитки не включены",
                 notInc2: "Входы в музеи не включены",
-                priceDisplay: "от €450",
+                priceDisplay: "€385 €308 (-20%)",
                 bookButton: "Забронировать тур",
                 cancelPolicy: "Бесплатная отмена за 48 часов до начала",
                 footerAbout: "О нас",
@@ -1072,7 +1106,7 @@
                 tourTitle: "Grand Tour de la Riviera",
                 tourSubtitle: "8 heures de magie de la Côte d'Azur",
                 duration: "Durée : 8 heures",
-                priceFrom: "À partir de 450 €",
+                priceFrom: "€385 €308 (-20%)",
                 languages: "Langues : EN, FR, RU",
                 galleryTitle: "📸 Galerie Photos",
                 aboutTitle: "✨ À propos de la visite",
@@ -1113,7 +1147,7 @@
                 inc6: "Eau en bouteille",
                 notInc1: "Nourriture et boissons non incluses",
                 notInc2: "Entrées aux musées non incluses",
-                priceDisplay: "à partir de 450 €",
+                priceDisplay: "€385 €308 (-20%)",
                 bookButton: "Réserver cette visite",
                 cancelPolicy: "Annulation gratuite 48 heures avant le début",
                 footerAbout: "À propos d'AzurEpicTours",

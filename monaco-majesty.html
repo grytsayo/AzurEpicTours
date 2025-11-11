@@ -615,10 +615,38 @@
         }
 
         .price-info {
-            font-size: 2rem;
-            color: #667eea;
-            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
             margin-bottom: 20px;
+        }
+
+        .price-info-old {
+            font-size: 1.3rem;
+            color: #667eea;
+            text-decoration: line-through;
+            opacity: 0.7;
+            font-weight: 500;
+        }
+
+        .price-info-discount-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            font-size: 1rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 15px;
+            margin-left: 10px;
+            box-shadow: 0 3px 8px rgba(245, 87, 108, 0.4);
+        }
+
+        .price-info-new {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #f5576c;
+            letter-spacing: -1px;
         }
 
         /* Footer */
@@ -1008,7 +1036,13 @@
 
         <!-- CTA Section -->
         <div class="cta-section">
-            <div class="price-info" data-i18n="priceDisplay">from €200</div>
+            <div class="price-info">
+                <div>
+                    <span class="price-info-old">€225</span>
+                    <span class="price-info-discount-badge">-20%</span>
+                </div>
+                <span class="price-info-new">€180</span>
+            </div>
             <a href="./index.html#contact" class="book-btn" data-i18n="bookButton">Book This Tour</a>
             <p style="margin-top: 15px; color: #666;" data-i18n="cancelPolicy">Free cancellation 48 hours before start</p>
         </div>
@@ -1065,7 +1099,7 @@
                 tourTitle: "Monaco Majesty: Private Tailor-Made Tour",
                 tourSubtitle: "4 hours of luxury and principality history",
                 duration: "Duration: 4 hours",
-                priceFrom: "From €200",
+                priceFrom: "€225 €180 (-20%)",
                 languages: "Languages: EN, FR, RU",
                 galleryTitle: "📸 Photo Gallery",
                 aboutTitle: "✨ About the Tour",
@@ -1143,7 +1177,7 @@
                 tourTitle: "Величие Монако: приватный адаптированный тур",
                 tourSubtitle: "4 часа роскоши и истории княжества",
                 duration: "Продолжительность: 4 часа",
-                priceFrom: "От €200",
+                priceFrom: "€225 €180 (-20%)",
                 languages: "Языки: EN, FR, RU",
                 galleryTitle: "📸 Фотогалерея",
                 aboutTitle: "✨ О туре",
