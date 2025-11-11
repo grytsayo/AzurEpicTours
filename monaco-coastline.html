@@ -47,7 +47,11 @@
         "https://www.azurepictours.com/images/monaco-coastline/MC_coast_01.jpg",
         "https://www.azurepictours.com/images/monaco-coastline/MC_coast_02.jpg",
         "https://www.azurepictours.com/images/monaco-coastline/MC_coast_03.JPG",
-        "https://www.azurepictours.com/images/monaco-coastline/MC_coast_04.JPG"
+        "https://www.azurepictours.com/images/monaco-coastline/MC_coast_04.JPG",
+        "https://www.azurepictours.com/images/monaco-coastline/MC_coast_05.JPG",
+        "https://www.azurepictours.com/images/monaco-coastline/MC_coast_06.JPG",
+        "https://www.azurepictours.com/images/monaco-coastline/MC_coast_07.JPG",
+        "https://www.azurepictours.com/images/monaco-coastline/MC_coast_08.JPG"
       ],
       "brand": {
         "@type": "TourOperator",
@@ -803,6 +807,46 @@
             transform: scale(1.2);
         }
 
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 20px;
+            user-select: none;
+            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(0, 0, 0, 0.6);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 18px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -1006,6 +1050,10 @@
                 <img src="./images/monaco-coastline/MC_coast_02.jpg" alt="Èze village narrow streets with artisan shops and sea views" onclick="openLightbox(this.src)" loading="lazy">
                 <img src="./images/monaco-coastline/MC_coast_03.JPG" alt="Monaco skyline with modern skyscrapers and Port Hercules marina" onclick="openLightbox(this.src)" loading="lazy">
                 <img src="./images/monaco-coastline/MC_coast_04.JPG" alt="Panoramic coastal views along the Moyenne Corniche road French Riviera" onclick="openLightbox(this.src)" loading="lazy">
+                <img src="./images/monaco-coastline/MC_coast_05.JPG" alt="Monaco harbor with luxury yachts and modern architecture" onclick="openLightbox(this.src)" loading="lazy">
+                <img src="./images/monaco-coastline/MC_coast_06.JPG" alt="Mediterranean coastline panorama with crystal clear waters" onclick="openLightbox(this.src)" loading="lazy">
+                <img src="./images/monaco-coastline/MC_coast_07.JPG" alt="Monte Carlo Casino Square with Belle Époque architecture" onclick="openLightbox(this.src)" loading="lazy">
+                <img src="./images/monaco-coastline/MC_coast_08.JPG" alt="Scenic coastal road winding along Mediterranean cliffs" onclick="openLightbox(this.src)" loading="lazy">
             </div>
         </div>
 
@@ -1176,9 +1224,12 @@
 
     <!-- Lightbox -->
     <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <div class="lightbox-content">
-            <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+            <span class="lightbox-nav lightbox-prev" onclick="changeLightboxImage(-1)">&#10094;</span>
+            <span class="lightbox-nav lightbox-next" onclick="changeLightboxImage(1)">&#10095;</span>
             <img id="lightbox-image" class="lightbox-image" src="" alt="Gallery image">
+            <div class="lightbox-counter" id="lightbox-counter"></div>
         </div>
     </div>
 
@@ -1453,19 +1504,59 @@
         }
 
         // Lightbox functionality
+        let currentImageIndex = 0;
+        const galleryImages = [
+            './images/monaco-coastline/MC_coast_01.jpg',
+            './images/monaco-coastline/MC_coast_02.jpg',
+            './images/monaco-coastline/MC_coast_03.JPG',
+            './images/monaco-coastline/MC_coast_04.JPG',
+            './images/monaco-coastline/MC_coast_05.JPG',
+            './images/monaco-coastline/MC_coast_06.JPG',
+            './images/monaco-coastline/MC_coast_07.JPG',
+            './images/monaco-coastline/MC_coast_08.JPG'
+        ];
+
         function openLightbox(src) {
+            currentImageIndex = galleryImages.indexOf(src);
+            if (currentImageIndex === -1) currentImageIndex = 0;
+
             document.getElementById('lightbox').style.display = 'block';
-            document.getElementById('lightbox-image').src = src;
+            updateLightboxImage();
         }
 
         function closeLightbox() {
             document.getElementById('lightbox').style.display = 'none';
         }
 
-        // Close lightbox on Escape key
+        function changeLightboxImage(direction) {
+            currentImageIndex += direction;
+
+            if (currentImageIndex >= galleryImages.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = galleryImages.length - 1;
+            }
+
+            updateLightboxImage();
+        }
+
+        function updateLightboxImage() {
+            document.getElementById('lightbox-image').src = galleryImages[currentImageIndex];
+            document.getElementById('lightbox-counter').textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
+        }
+
+        // Close lightbox on Escape key, navigate with arrow keys
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeLightbox();
+            } else if (e.key === 'ArrowLeft') {
+                if (document.getElementById('lightbox').style.display === 'block') {
+                    changeLightboxImage(-1);
+                }
+            } else if (e.key === 'ArrowRight') {
+                if (document.getElementById('lightbox').style.display === 'block') {
+                    changeLightboxImage(1);
+                }
             }
         });
 
