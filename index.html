@@ -1762,10 +1762,11 @@
 
     <!-- Floating Social Buttons -->
 <div class="floating-buttons">
-    <a href="https://wa.me/+33624729983?text=Здравствуйте!%20Хочу%20узнать%20о%20турах%20по%20Ривьере" 
-       target="_blank" 
-       class="social-button whatsapp-button" 
-       data-tooltip="Написать в WhatsApp"
+    <a href="https://wa.me/+33624729983?text=Здравствуйте!%20Хочу%20узнать%20о%20турах%20по%20Ривьере"
+       target="_blank"
+       class="social-button whatsapp-button"
+       data-i18n-tooltip="whatsappTooltip"
+       data-tooltip="Write on WhatsApp"
        aria-label="WhatsApp">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M16 0C7.164 0 0 7.164 0 16c0 2.825.744 5.488 2.044 7.792L0 32l8.384-2.192A15.939 15.939 0 0016 32c8.836 0 16-7.164 16-16S24.836 0 16 0zm0 29.156c-2.425 0-4.748-.656-6.728-1.9l-.484-.288-5.016 1.316 1.34-4.888-.316-.5A13.084 13.084 0 012.844 16C2.844 8.732 8.732 2.844 16 2.844S29.156 8.732 29.156 16 23.268 29.156 16 29.156z" fill="white"/>
@@ -1776,7 +1777,8 @@
     <a href="https://t.me/grytsayo"
        target="_blank"
        class="social-button telegram-button"
-       data-tooltip="Написать в Telegram"
+       data-i18n-tooltip="telegramTooltip"
+       data-tooltip="Write on Telegram"
        aria-label="Telegram">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M16 32C24.8366 32 32 24.8366 32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32Z" fill="white"/>
@@ -1785,7 +1787,8 @@
     </a>
 
     <button class="social-button email-button"
-       data-tooltip="Написать Email"
+       data-i18n-tooltip="emailTooltip"
+       data-tooltip="Send Email"
        aria-label="Email"
        onclick="openEmailModal()">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -2253,6 +2256,9 @@
                 // Contact section
                 contactTitle: "Свяжитесь со мной",
                 contactSubtitle: "Задайте вопрос или забронируйте тур прямо сейчас",
+                whatsappTooltip: "Написать в WhatsApp",
+                telegramTooltip: "Написать в Telegram",
+                emailTooltip: "Написать Email",
                 emailModalTitle: "Написать Email",
                 emailModalSubtitle: "Выберите тур и отправьте запрос",
                 reviewModalTitle: "Оставить отзыв",
@@ -2646,6 +2652,9 @@
                 // Contact section
                 contactTitle: "Contact me",
                 contactSubtitle: "Ask a question or book a tour right now",
+                whatsappTooltip: "Write on WhatsApp",
+                telegramTooltip: "Write on Telegram",
+                emailTooltip: "Send Email",
                 emailModalTitle: "Send Email",
                 emailModalSubtitle: "Choose a tour and send your request",
                 reviewModalTitle: "Leave a Review",
@@ -2976,6 +2985,9 @@
                 // Contact section
                 contactTitle: "Contactez-moi",
                 contactSubtitle: "Posez une question ou réservez une visite maintenant",
+                whatsappTooltip: "Écrire sur WhatsApp",
+                telegramTooltip: "Écrire sur Telegram",
+                emailTooltip: "Envoyer un Email",
                 emailModalTitle: "Envoyer un Email",
                 emailModalSubtitle: "Choisissez une visite et envoyez votre demande",
                 reviewModalTitle: "Laisser un avis",
@@ -3299,6 +3311,17 @@ if (contactForm) {
                     } else {
                         element.textContent = translations[lang][key];
                     }
+                }
+            });
+
+            // Update all elements with data-i18n-tooltip attribute
+            const tooltipElements = document.querySelectorAll('[data-i18n-tooltip]');
+            console.log('Updating', tooltipElements.length, 'elements with data-i18n-tooltip');
+
+            tooltipElements.forEach(element => {
+                const key = element.getAttribute('data-i18n-tooltip');
+                if (translations[lang] && translations[lang][key]) {
+                    element.setAttribute('data-tooltip', translations[lang][key]);
                 }
             });
 
