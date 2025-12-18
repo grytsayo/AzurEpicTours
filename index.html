@@ -36,9 +36,11 @@
     <link rel="manifest" href="./site.webmanifest">
     <link rel="shortcut icon" href="./favicon.ico">
 
+    <!-- Preload critical resources for better LCP -->
+    <link rel="preload" as="image" href="./riviera-background.webp" type="image/webp">
+
     <!-- Google Analytics 4 -->
-    <!-- IMPORTANT: Replace 'G-8ZFFMW7WC3' with your actual Google Analytics 4 Measurement ID -->
-    <!-- Get your ID from: https://analytics.google.com/analytics/web/ -->
+
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8ZFFMW7WC3"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -280,9 +282,12 @@
         }
 
         .hero {
-            /* ИНСТРУКЦИЯ: Замените 'riviera-background.jpg' на имя вашего файла фото */
-            /* Положите фото в ту же папку, что и этот HTML файл */
-            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('./riviera-background.jpg');
+            /* Optimized background with WebP format for better performance */
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                        image-set(
+                            url('./riviera-background.webp') type('image/webp'),
+                            url('./riviera-background.jpg') type('image/jpeg')
+                        );
             background-size: cover;
             background-position: center;
             color: white;

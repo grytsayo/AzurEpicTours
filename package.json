@@ -1,0 +1,12 @@
+{
+  "name": "azurepictours-optimizer",
+  "version": "1.0.0",
+  "description": "Image optimization for AzurEpicTours",
+  "scripts": {
+    "optimize": "node optimize-images.js",
+    "update-html": "node update-html-images.js"
+  },
+  "dependencies": {
+    "sharp": "^0.33.1"
+  }
+}

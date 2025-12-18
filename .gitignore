@@ -1,2 +1,9 @@
-desktop.ini 
-Thumbs.db 
+desktop.ini
+Thumbs.db
+
+# Node.js dependencies (for image optimization scripts)
+node_modules/
+package-lock.json
+
+# OS files
+.DS_Store
