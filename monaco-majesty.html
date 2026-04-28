@@ -46,9 +46,9 @@
 <body>
     <header>
         <nav>
-            <a href="./index.html" class="logo" data-i18n="logoText">AzurEpicTours</a>
+            <a class='logo' data-i18n='logoText' href='/'>AzurEpicTours</a>
             <div class="nav-links">
-                <a href="./index.html#tours" data-i18n="navTours">Tours</a>
+                <a data-i18n='navTours' href='/#tours'>Tours</a>
                 <div class="lang-switcher">
                     <button class="lang-btn" onclick="changeLanguage('ru')">RU</button>
                     <button class="lang-btn active" onclick="changeLanguage('en')">EN</button>
@@ -216,38 +216,85 @@
         </div>
     </div>
 
-    <!-- Booking Unavailable Modal -->
+    <!-- Booking Modal -->
     <div id="bookingUnavailableModal" class="modal">
-        <div class="modal-content" style="max-width: 500px;">
-            <div class="modal-header" style="text-align: center;">
+        <div class="modal-content" style="max-width: 560px;">
+            <div class="modal-header">
                 <span class="close" onclick="closeBookingModal()">&times;</span>
-                <h2 data-i18n="bookingUnavailableTitle" style="color: #d4a574;">Service Temporarily Unavailable</h2>
+                <h2 data-i18n="bookingModalTitle" style="margin:0; font-size:1.4rem;">Book This Tour</h2>
+                <p data-i18n="bookingModalSubtitle" style="margin:8px 0 0; opacity:0.85; font-size:0.95rem;">Monaco Majesty · 4 hours</p>
             </div>
-            <div class="modal-body" style="text-align: center; padding: 30px 20px;">
-                <div style="font-size: 48px; margin-bottom: 20px;">⚠️</div>
-                <p data-i18n="bookingUnavailableMessage" style="font-size: 16px; line-height: 1.6; margin-bottom: 25px;">
-                    The online booking service is temporarily unavailable. Please use our contact information below for any inquiries or to make a reservation.
-                </p>
+            <div class="modal-body" style="padding: 24px 28px;">
 
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                    <h3 data-i18n="contactInfoTitle" style="margin-bottom: 15px; color: #2c3e50;">Contact Information</h3>
-                    <div style="text-align: left; display: inline-block;">
-                        <p style="margin: 10px 0;">
-                            <strong>📧 Email:</strong><br>
-                            <a href="mailto:azurepictours@gmail.com" style="color: #d4a574;">azurepictours@gmail.com</a>
-                        </p>
-                        <p style="margin: 10px 0;">
-                            <strong data-i18n="phoneLabel">📞 Phone:</strong><br>
-                            <a href="tel:+33624729983" style="color: #d4a574;">+33 6 24 72 99 83</a>
-                        </p>
-                        <p style="margin: 10px 0;">
-                            <strong>💬 WhatsApp:</strong><br>
-                            <a href="https://wa.me/+33624729983" target="_blank" style="color: #d4a574;">+33 6 24 72 99 83</a>
-                        </p>
+                <div id="bk-step1">
+                    <h3 data-i18n="bkStep1Title" style="margin-top:0;">1. Choose a date</h3>
+                    <div style="flex:1; min-width:180px; margin-bottom:18px;">
+                        <label data-i18n="bkDateLabel" style="display:block; font-weight:600; margin-bottom:6px; color:#555;">Date</label>
+                        <input type="date" id="bk-date" class="bk-input"
+                            style="width:100%; padding:10px 14px; border:2px solid #e2e8f0; border-radius:10px; font-size:1rem; box-sizing:border-box;"
+                            oninput="loadSlots()">
                     </div>
+
+                    <div id="bk-slots-wrap">
+                        <label data-i18n="bkTimeLabel" style="display:block; font-weight:600; margin-bottom:8px; color:#555;">Available time slots</label>
+                        <div id="bk-slots" style="display:flex; flex-wrap:wrap; gap:10px; min-height:44px;">
+                            <p id="bk-slots-hint" style="color:#aaa; font-size:0.9rem; margin:0;" data-i18n="bkSlotsHint">Select a date to see availability</p>
+                        </div>
+                        <div id="bk-slots-loading" style="display:none; color:#d4a574; font-size:0.9rem;">Loading slots...</div>
+                        <div id="bk-slots-error" style="display:none; color:#e53e3e; font-size:0.9rem;"></div>
+                    </div>
+
+                    <button class="book-btn bk-next-btn" onclick="goToStep2()"
+                        style="margin-top:20px; padding:12px 36px; font-size:1rem; display:block; width:100%;"
+                        data-i18n="bkNextBtn" disabled>Continue</button>
                 </div>
 
-                <button onclick="closeBookingModal()" class="book-btn" data-i18n="closeButton" style="margin-top: 10px;">Close</button>
+                <div id="bk-step2" style="display:none;">
+                    <button onclick="goToStep1()" style="background:none; border:none; color:#d4a574; cursor:pointer; font-size:0.9rem; padding:0; margin-bottom:16px;">&#8592; <span data-i18n="bkBack">Back</span></button>
+                    <h3 data-i18n="bkStep2Title" style="margin-top:0;">2. Your details</h3>
+
+                    <div style="display:grid; gap:14px;">
+                        <div>
+                            <label data-i18n="bkNameLabel" style="display:block; font-weight:600; margin-bottom:5px; color:#555;">Full name *</label>
+                            <input type="text" id="bk-name" class="bk-input" placeholder="John Smith"
+                                style="width:100%; padding:10px 14px; border:2px solid #e2e8f0; border-radius:10px; font-size:1rem; box-sizing:border-box;">
+                        </div>
+                        <div>
+                            <label data-i18n="bkEmailLabel" style="display:block; font-weight:600; margin-bottom:5px; color:#555;">Email *</label>
+                            <input type="email" id="bk-email" class="bk-input" placeholder="you@example.com"
+                                style="width:100%; padding:10px 14px; border:2px solid #e2e8f0; border-radius:10px; font-size:1rem; box-sizing:border-box;">
+                        </div>
+                        <div>
+                            <label data-i18n="bkPhoneLabel" style="display:block; font-weight:600; margin-bottom:5px; color:#555;">Phone / WhatsApp *</label>
+                            <input type="tel" id="bk-phone" class="bk-input" placeholder="+33 6 12 34 56 78"
+                                style="width:100%; padding:10px 14px; border:2px solid #e2e8f0; border-radius:10px; font-size:1rem; box-sizing:border-box;">
+                        </div>
+                        <div>
+                            <label data-i18n="bkGuestsLabel" style="display:block; font-weight:600; margin-bottom:5px; color:#555;">Participants *</label>
+                            <input type="number" id="bk-guests" class="bk-input" min="1" max="8" value="2"
+                                style="width:100%; padding:10px 14px; border:2px solid #e2e8f0; border-radius:10px; font-size:1rem; box-sizing:border-box;">
+                        </div>
+                    </div>
+
+                    <div id="bk-summary" style="background:#fff8f0; border-radius:10px; padding:14px 18px; margin-top:18px; font-size:0.95rem; color:#444;"></div>
+                    <div id="bk-submit-error" style="display:none; color:#e53e3e; font-size:0.9rem; margin-top:10px;"></div>
+
+                    <button class="book-btn" id="bk-submit-btn" onclick="submitBooking()"
+                        style="margin-top:20px; padding:12px 36px; font-size:1rem; display:block; width:100%;"
+                        data-i18n="bkSubmitBtn">Confirm Booking</button>
+                </div>
+
+                <div id="bk-step3" style="display:none; text-align:center; padding:20px 0;">
+                    <div style="font-size:56px; margin-bottom:16px;">🎉</div>
+                    <h3 data-i18n="bkSuccessTitle" style="color:#38a169; margin-bottom:10px;">Booking Confirmed!</h3>
+                    <p data-i18n="bkSuccessMsg" style="font-size:1rem; color:#555; line-height:1.6;">
+                        Your booking has been received. We'll send a confirmation to your email shortly.
+                    </p>
+                    <button class="book-btn" onclick="closeBookingModal()"
+                        style="margin-top:20px; padding:12px 36px; font-size:1rem;"
+                        data-i18n="bkDoneBtn">Close</button>
+                </div>
+
             </div>
         </div>
     </div>
@@ -314,7 +361,7 @@
             <h2 data-i18n="relatedToursTitle">🌟 You May Also Like</h2>
             <div class="related-tours-grid">
 
-                <a href="./monaco-coastline.html" class="related-tour-card">
+                <a class='related-tour-card' href='/monaco-coastline'>
                     <picture>
                         <source srcset="./images/monaco-coastline/MC_coast_01.webp" type="image/webp">
                         <img src="./images/monaco-coastline/MC_coast_01.jpg" alt="Monaco Coastline" loading="lazy">
@@ -326,7 +373,7 @@
                     </div>
                 </a>
 
-                <a href="./monaco-by-night.html" class="related-tour-card">
+                <a class='related-tour-card' href='/monaco-by-night'>
                     <picture>
                         <source srcset="./images/monaco-by-night/MC_night_01.webp" type="image/webp">
                         <img src="./images/monaco-by-night/MC_night_01.jpg" alt="Monaco by Night" loading="lazy">
@@ -349,10 +396,10 @@
             <div class="footer-section">
                 <h3 data-i18n="footerTours">Our Tours</h3>
                 <ul>
-                    <li><a href="./monaco-majesty.html" data-i18n="footerTour1">Monaco Majesty (4h)</a></li>
-                    <li><a href="./monaco-coastline.html" data-i18n="footerTour2">Monaco Coastline Journey (6h)</a></li>
-                    <li><a href="./grand-riviera-tour.html" data-i18n="footerTour3">Grand Riviera Tour (8h)</a></li>
-                    <li><a href="./monaco-by-night.html" data-i18n="footerTour4">Monaco by Night (4h)</a></li>
+                    <li><a data-i18n='footerTour1' href='/monaco-majesty'>Monaco Majesty (4h)</a></li>
+                    <li><a data-i18n='footerTour2' href='/monaco-coastline'>Monaco Coastline Journey (6h)</a></li>
+                    <li><a data-i18n='footerTour3' href='/grand-riviera-tour'>Grand Riviera Tour (8h)</a></li>
+                    <li><a data-i18n='footerTour4' href='/monaco-by-night'>Monaco by Night (4h)</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -367,8 +414,8 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 AzurEpicTours. All rights reserved. | <a href="./index.html" data-i18n="footerHome">Home</a></p>
-        <p style="margin-top: 10px; opacity: 0.7;"><a href="./privacy-policy.html" style="color: #667eea; text-decoration: none;" data-i18n="footerPrivacy">Privacy Policy</a></p>
+            <p>&copy; 2025 AzurEpicTours. All rights reserved. | <a data-i18n='footerHome' href='/'>Home</a></p>
+        <p style="margin-top: 10px; opacity: 0.7;"><a data-i18n='footerPrivacy' href='/privacy-policy' style='color: #667eea; text-decoration: none;'>Privacy Policy</a></p>
         </div>
     </footer>
 
@@ -449,9 +496,24 @@
                 priceDisplay: "from €200",
                 bookButton: "Book This Tour",
                 cancelPolicy: "Free cancellation 48 hours before start",
-                bookingUnavailableTitle: "Service Temporarily Unavailable",
-                bookingUnavailableMessage: "The online booking service is temporarily unavailable. Please use our contact information below for any inquiries or to make a reservation.",
-                contactInfoTitle: "Contact Information",
+                bookingModalTitle: "Book This Tour",
+                bookingModalSubtitle: "Monaco Majesty · 4 hours",
+                bkStep1Title: "1. Choose a date",
+                bkDateLabel: "Date",
+                bkTimeLabel: "Available time slots",
+                bkSlotsHint: "Select a date to see availability",
+                bkNoSlots: "No slots available for this date",
+                bkNextBtn: "Continue",
+                bkBack: "Back",
+                bkStep2Title: "2. Your details",
+                bkNameLabel: "Full name *",
+                bkEmailLabel: "Email *",
+                bkPhoneLabel: "Phone / WhatsApp *",
+                bkGuestsLabel: "Participants *",
+                bkSubmitBtn: "Confirm Booking",
+                bkSuccessTitle: "Booking Confirmed!",
+                bkSuccessMsg: "Your booking has been received. We'll send a confirmation to your email shortly.",
+                bkDoneBtn: "Close",
                 phoneLabel: "📞 Phone:",
                 closeButton: "Close",
                 footerAbout: "About AzurEpicTours",
@@ -532,9 +594,24 @@
                 priceDisplay: "от €200",
                 bookButton: "Забронировать тур",
                 cancelPolicy: "Бесплатная отмена за 48 часов до начала",
-                bookingUnavailableTitle: "Сервис временно недоступен",
-                bookingUnavailableMessage: "Онлайн-сервис бронирования временно недоступен. Пожалуйста, используйте нашу контактную информацию ниже для любых запросов или для бронирования.",
-                contactInfoTitle: "Контактная информация",
+                bookingModalTitle: "Забронировать тур",
+                bookingModalSubtitle: "Monaco Majesty · 4 часа",
+                bkStep1Title: "1. Выберите дату",
+                bkDateLabel: "Дата",
+                bkTimeLabel: "Доступные слоты",
+                bkSlotsHint: "Выберите дату, чтобы увидеть доступность",
+                bkNoSlots: "На эту дату нет доступных слотов",
+                bkNextBtn: "Далее",
+                bkBack: "Назад",
+                bkStep2Title: "2. Ваши данные",
+                bkNameLabel: "Полное имя *",
+                bkEmailLabel: "Email *",
+                bkPhoneLabel: "Телефон / WhatsApp *",
+                bkGuestsLabel: "Количество человек *",
+                bkSubmitBtn: "Подтвердить бронирование",
+                bkSuccessTitle: "Бронирование подтверждено!",
+                bkSuccessMsg: "Ваше бронирование получено. Мы отправим подтверждение на ваш email.",
+                bkDoneBtn: "Закрыть",
                 phoneLabel: "📞 Телефон:",
                 closeButton: "Закрыть",
                 footerAbout: "О нас",
@@ -615,9 +692,24 @@
                 priceDisplay: "à partir de 200 €",
                 bookButton: "Réserver cette visite",
                 cancelPolicy: "Annulation gratuite 48 heures avant le début",
-                bookingUnavailableTitle: "Service temporairement indisponible",
-                bookingUnavailableMessage: "Le service de réservation en ligne est temporairement indisponible. Veuillez utiliser nos coordonnées ci-dessous pour toute demande ou pour effectuer une réservation.",
-                contactInfoTitle: "Coordonnées",
+                bookingModalTitle: "Réserver ce tour",
+                bookingModalSubtitle: "Monaco Majesté · 4 heures",
+                bkStep1Title: "1. Choisissez une date",
+                bkDateLabel: "Date",
+                bkTimeLabel: "Créneaux disponibles",
+                bkSlotsHint: "Sélectionnez une date pour voir les disponibilités",
+                bkNoSlots: "Aucun créneau disponible pour cette date",
+                bkNextBtn: "Continuer",
+                bkBack: "Retour",
+                bkStep2Title: "2. Vos coordonnées",
+                bkNameLabel: "Nom complet *",
+                bkEmailLabel: "Email *",
+                bkPhoneLabel: "Téléphone / WhatsApp *",
+                bkGuestsLabel: "Participants *",
+                bkSubmitBtn: "Confirmer la réservation",
+                bkSuccessTitle: "Réservation confirmée !",
+                bkSuccessMsg: "Votre réservation a été reçue. Nous vous enverrons une confirmation par email.",
+                bkDoneBtn: "Fermer",
                 phoneLabel: "📞 Téléphone :",
                 closeButton: "Fermer",
                 footerAbout: "À propos d'AzurEpicTours",
@@ -821,29 +913,204 @@
             updateCookieConsentText();
         });
 
-        // Booking modal functions
+        // ── Booking form ──────────────────────────────────────────
+        const BK_TOUR_ID  = 'majesty';
+        const BK_API_BASE = 'https://azure-epic-tours.vercel.app/api';
+        const BK_API_KEY  = 'dir_SBo5KKQ6st69lYLmOPHqoIUoHhbvZX8t';
+        const BK_ACCENT   = '#d4a574';
+        let bkSelectedTime = null;
+
+        function bkFetch(path, options = {}) {
+            return fetch(BK_API_BASE + path, {
+                ...options,
+                headers: { 'Authorization': 'Bearer ' + BK_API_KEY, 'Content-Type': 'application/json', ...(options.headers || {}) }
+            });
+        }
+
         function openBookingModal() {
             const modal = document.getElementById('bookingUnavailableModal');
-            if (modal) {
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            }
+            if (!modal) return;
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            resetBookingForm();
+            preloadAvailability();
         }
 
         function closeBookingModal() {
             const modal = document.getElementById('bookingUnavailableModal');
-            if (modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
+            if (!modal) return;
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
-        // Close modal when clicking outside of it
-        window.onclick = function(event) {
+        window.addEventListener('click', function(event) {
             const modal = document.getElementById('bookingUnavailableModal');
-            if (event.target == modal) {
-                closeBookingModal();
+            if (event.target === modal) closeBookingModal();
+        });
+
+        function resetBookingForm() {
+            bkSelectedTime = null;
+            document.getElementById('bk-step1').style.display = 'block';
+            document.getElementById('bk-step2').style.display = 'none';
+            document.getElementById('bk-step3').style.display = 'none';
+            document.getElementById('bk-slots').innerHTML = '<p id="bk-slots-hint" style="color:#aaa;font-size:.9rem;margin:0;" data-i18n="bkSlotsHint">Select a date to see availability</p>';
+            document.getElementById('bk-slots-loading').style.display = 'none';
+            document.getElementById('bk-slots-error').style.display = 'none';
+            document.querySelector('.bk-next-btn').disabled = true;
+            document.getElementById('bk-date').value = '';
+            document.getElementById('bk-submit-error').style.display = 'none';
+        }
+
+        function preloadAvailability() {
+            const today = new Date();
+            const dates = [];
+            for (let i = 1; i <= 14; i++) {
+                const d = new Date(today);
+                d.setDate(today.getDate() + i);
+                dates.push(d.toISOString().slice(0, 10));
             }
+            const dateInput = document.getElementById('bk-date');
+            dateInput.min = dates[0];
+            dateInput.max = dates[dates.length - 1];
+
+            const loading = document.getElementById('bk-slots-loading');
+            loading.style.display = 'block';
+            document.getElementById('bk-slots').innerHTML = '';
+
+            Promise.all(dates.map(d =>
+                bkFetch('/availability?date=' + d + '&tour=' + BK_TOUR_ID)
+                    .then(r => r.json())
+                    .then(data => ({ date: d, slots: data.availability?.[BK_TOUR_ID]?.slots || [] }))
+                    .catch(() => ({ date: d, slots: [] }))
+            )).then(results => {
+                loading.style.display = 'none';
+                const first = results.find(r => r.slots.some(s => s.available));
+                const pick = first ? first.date : dates[0];
+                dateInput.value = pick;
+                loadSlots();
+            });
+        }
+
+        function loadSlots() {
+            const dateVal = document.getElementById('bk-date').value;
+            if (!dateVal) return;
+            bkSelectedTime = null;
+            document.querySelector('.bk-next-btn').disabled = true;
+            const slotsDiv = document.getElementById('bk-slots');
+            const loading  = document.getElementById('bk-slots-loading');
+            const errDiv   = document.getElementById('bk-slots-error');
+            slotsDiv.innerHTML = '';
+            errDiv.style.display = 'none';
+            loading.style.display = 'block';
+
+            bkFetch('/availability?date=' + dateVal + '&tour=' + BK_TOUR_ID)
+                .then(r => r.json())
+                .then(data => {
+                    loading.style.display = 'none';
+                    const slots = data.availability?.[BK_TOUR_ID]?.slots || [];
+                    if (!slots.length) {
+                        slotsDiv.innerHTML = '<p style="color:#aaa;font-size:.9rem;margin:0;" data-i18n="bkNoSlots">No slots available for this date</p>';
+                        return;
+                    }
+                    slots.forEach(slot => {
+                        const btn = document.createElement('button');
+                        btn.textContent = slot.start + (slot.end ? '–' + slot.end : '');
+                        btn.dataset.time = slot.start;
+                        btn.className = 'bk-slot-btn';
+                        btn.style.cssText = 'padding:9px 18px;border-radius:8px;border:2px solid;font-size:.95rem;cursor:pointer;transition:all .2s;font-weight:500;';
+                        if (slot.available) {
+                            btn.style.borderColor = BK_ACCENT;
+                            btn.style.background = 'white';
+                            btn.style.color = BK_ACCENT;
+                            btn.onclick = () => selectSlot(btn, slot.start);
+                        } else {
+                            btn.style.borderColor = '#e2e8f0';
+                            btn.style.background = '#f7f7f7';
+                            btn.style.color = '#bbb';
+                            btn.disabled = true;
+                        }
+                        slotsDiv.appendChild(btn);
+                    });
+                })
+                .catch(() => {
+                    loading.style.display = 'none';
+                    errDiv.textContent = 'Could not load availability. Please try again.';
+                    errDiv.style.display = 'block';
+                });
+        }
+
+        function selectSlot(btn, time) {
+            bkSelectedTime = time;
+            document.querySelectorAll('.bk-slot-btn').forEach(b => {
+                b.style.background = 'white';
+                b.style.color = BK_ACCENT;
+                b.style.borderColor = BK_ACCENT;
+            });
+            btn.style.background = BK_ACCENT;
+            btn.style.color = 'white';
+            document.querySelector('.bk-next-btn').disabled = false;
+        }
+
+        function goToStep2() {
+            if (!bkSelectedTime) return;
+            document.getElementById('bk-step1').style.display = 'none';
+            document.getElementById('bk-step2').style.display = 'block';
+            const dateVal = document.getElementById('bk-date').value;
+            document.getElementById('bk-summary').innerHTML =
+                '<strong>&#128197; Date:</strong> ' + dateVal + ' &nbsp;|&nbsp; <strong>&#8987; Time:</strong> ' + bkSelectedTime;
+        }
+
+        function goToStep1() {
+            document.getElementById('bk-step2').style.display = 'none';
+            document.getElementById('bk-step1').style.display = 'block';
+        }
+
+        function submitBooking() {
+            const name  = document.getElementById('bk-name').value.trim();
+            const email = document.getElementById('bk-email').value.trim();
+            const phone = document.getElementById('bk-phone').value.trim();
+            const guests = parseInt(document.getElementById('bk-guests').value, 10);
+            const date  = document.getElementById('bk-date').value;
+            const errDiv = document.getElementById('bk-submit-error');
+            errDiv.style.display = 'none';
+
+            if (!name || !email || !phone || !guests || guests < 1) {
+                errDiv.textContent = 'Please fill in all required fields.';
+                errDiv.style.display = 'block';
+                return;
+            }
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                errDiv.textContent = 'Please enter a valid email address.';
+                errDiv.style.display = 'block';
+                return;
+            }
+
+            const btn = document.getElementById('bk-submit-btn');
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
+
+            bkFetch('/book', {
+                method: 'POST',
+                body: JSON.stringify({ tour: BK_TOUR_ID, date, time: bkSelectedTime, name, email, phone, participants: guests })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('bk-step2').style.display = 'none';
+                    document.getElementById('bk-step3').style.display = 'block';
+                } else {
+                    errDiv.textContent = data.error || 'Booking failed. Please try again.';
+                    errDiv.style.display = 'block';
+                    btn.disabled = false;
+                    btn.textContent = 'Confirm Booking';
+                }
+            })
+            .catch(() => {
+                errDiv.textContent = 'Network error. Please try again.';
+                errDiv.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = 'Confirm Booking';
+            });
         }
     </script>
 
