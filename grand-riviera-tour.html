@@ -269,6 +269,15 @@
                             <input type="number" id="bk-guests" class="bk-input" min="1" max="8" value="2"
                                 style="width:100%; padding:10px 14px; border:2px solid #e2e8f0; border-radius:10px; font-size:1rem; box-sizing:border-box;">
                         </div>
+                        <div>
+                            <label data-i18n="bkLanguageLabel" style="display:block; font-weight:600; margin-bottom:5px; color:#555;">Preferred language</label>
+                            <select id="bk-language" class="bk-input"
+                                style="width:100%; padding:10px 14px; border:2px solid #e2e8f0; border-radius:10px; font-size:1rem; box-sizing:border-box; background:white; cursor:pointer;">
+                                <option value="en">English</option>
+                                <option value="ru">Русский</option>
+                                <option value="fr">Français</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div id="bk-summary" style="background:#f0f4ff; border-radius:10px; padding:14px 18px; margin-top:18px; font-size:0.95rem; color:#444;">
@@ -498,6 +507,15 @@
                 bkPhoneLabel: "Phone / WhatsApp *",
                 bkGuestsLabel: "Participants *",
                 bkSubmitBtn: "Confirm Booking",
+                bkLanguageLabel: "Preferred language",
+                bkSending: "Sending...",
+                bkErrorRequired: "Please fill in all required fields.",
+                bkErrorInvalidEmail: "Please enter a valid email address.",
+                bkErrorNetwork: "Network error. Please try again.",
+                bkErrorBooking: "Booking failed. Please try again.",
+                bkErrorAvailability: "Could not load availability. Please try again.",
+                bkSummaryDate: "Date:",
+                bkSummaryTime: "Time:",
                 bkSuccessTitle: "Booking Confirmed!",
                 bkSuccessMsg: "Your booking has been received. We'll send a confirmation to your email shortly.",
                 bkDoneBtn: "Close",
@@ -585,6 +603,15 @@
                 bkPhoneLabel: "Телефон / WhatsApp *",
                 bkGuestsLabel: "Количество человек *",
                 bkSubmitBtn: "Подтвердить бронирование",
+                bkLanguageLabel: "Язык переписки",
+                bkSending: "Отправка...",
+                bkErrorRequired: "Заполните все обязательные поля.",
+                bkErrorInvalidEmail: "Введите корректный email.",
+                bkErrorNetwork: "Ошибка сети. Попробуйте ещё раз.",
+                bkErrorBooking: "Не удалось забронировать. Попробуйте ещё раз.",
+                bkErrorAvailability: "Не удалось загрузить доступность. Попробуйте ещё раз.",
+                bkSummaryDate: "Дата:",
+                bkSummaryTime: "Время:",
                 bkSuccessTitle: "Бронирование подтверждено!",
                 bkSuccessMsg: "Ваше бронирование получено. Мы отправим подтверждение на ваш email.",
                 bkDoneBtn: "Закрыть",
@@ -672,6 +699,15 @@
                 bkPhoneLabel: "Téléphone / WhatsApp *",
                 bkGuestsLabel: "Participants *",
                 bkSubmitBtn: "Confirmer la réservation",
+                bkLanguageLabel: "Langue de communication",
+                bkSending: "Envoi en cours...",
+                bkErrorRequired: "Veuillez remplir tous les champs obligatoires.",
+                bkErrorInvalidEmail: "Veuillez entrer une adresse email valide.",
+                bkErrorNetwork: "Erreur réseau. Veuillez réessayer.",
+                bkErrorBooking: "La réservation a échoué. Veuillez réessayer.",
+                bkErrorAvailability: "Impossible de charger les disponibilités. Veuillez réessayer.",
+                bkSummaryDate: "Date :",
+                bkSummaryTime: "Heure :",
                 bkSuccessTitle: "Réservation confirmée !",
                 bkSuccessMsg: "Votre réservation a été reçue. Nous vous enverrons une confirmation par email.",
                 bkDoneBtn: "Fermer",
@@ -920,12 +956,26 @@
             document.getElementById('bk-step1').style.display = 'block';
             document.getElementById('bk-step2').style.display = 'none';
             document.getElementById('bk-step3').style.display = 'none';
-            document.getElementById('bk-slots').innerHTML = '<p id="bk-slots-hint" style="color:#aaa;font-size:.9rem;margin:0;" data-i18n="bkSlotsHint">Select a date to see availability</p>';
+            const hint = document.createElement('p');
+            hint.id = 'bk-slots-hint';
+            hint.setAttribute('data-i18n', 'bkSlotsHint');
+            hint.style.cssText = 'color:#aaa;font-size:.9rem;margin:0;';
+            hint.textContent = translations[currentLang].bkSlotsHint;
+            document.getElementById('bk-slots').innerHTML = '';
+            document.getElementById('bk-slots').appendChild(hint);
+
             document.getElementById('bk-slots-loading').style.display = 'none';
             document.getElementById('bk-slots-error').style.display = 'none';
             document.querySelector('.bk-next-btn').disabled = true;
             document.getElementById('bk-date').value = '';
             document.getElementById('bk-submit-error').style.display = 'none';
+            document.getElementById('bk-summary').innerHTML = '';
+
+            const submitBtn = document.getElementById('bk-submit-btn');
+            submitBtn.disabled = false;
+            submitBtn.textContent = translations[currentLang].bkSubmitBtn;
+
+            document.getElementById('bk-language').value = currentLang;
         }
 
         function preloadAvailability() {
@@ -977,7 +1027,11 @@
                     loading.style.display = 'none';
                     const slots = data.availability?.[BK_TOUR_ID]?.slots || [];
                     if (!slots.length) {
-                        slotsDiv.innerHTML = '<p style="color:#aaa;font-size:.9rem;margin:0;" data-i18n="bkNoSlots">No slots available for this date</p>';
+                        const p = document.createElement('p');
+                        p.setAttribute('data-i18n', 'bkNoSlots');
+                        p.style.cssText = 'color:#aaa;font-size:.9rem;margin:0;';
+                        p.textContent = translations[currentLang].bkNoSlots;
+                        slotsDiv.appendChild(p);
                         return;
                     }
                     slots.forEach(slot => {
@@ -1004,7 +1058,7 @@
                 })
                 .catch(() => {
                     loading.style.display = 'none';
-                    errDiv.textContent = 'Could not load availability. Please try again.';
+                    errDiv.textContent = translations[currentLang].bkErrorAvailability;
                     errDiv.style.display = 'block';
                 });
         }
@@ -1027,7 +1081,7 @@
             document.getElementById('bk-step2').style.display = 'block';
             const dateVal = document.getElementById('bk-date').value;
             document.getElementById('bk-summary').innerHTML =
-                '<strong>&#128197; Date:</strong> ' + dateVal + ' &nbsp;|&nbsp; <strong>&#8987; Time:</strong> ' + bkSelectedTime;
+                '<strong>📅 ' + translations[currentLang].bkSummaryDate + '</strong> ' + dateVal + ' &nbsp;|&nbsp; <strong>⌛ ' + translations[currentLang].bkSummaryTime + '</strong> ' + bkSelectedTime;
         }
 
         function goToStep1() {
@@ -1041,27 +1095,28 @@
             const phone = document.getElementById('bk-phone').value.trim();
             const guests = parseInt(document.getElementById('bk-guests').value, 10);
             const date  = document.getElementById('bk-date').value;
+            const language = document.getElementById('bk-language').value;
             const errDiv = document.getElementById('bk-submit-error');
             errDiv.style.display = 'none';
 
             if (!name || !email || !phone || !guests || guests < 1) {
-                errDiv.textContent = 'Please fill in all required fields.';
+                errDiv.textContent = translations[currentLang].bkErrorRequired;
                 errDiv.style.display = 'block';
                 return;
             }
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                errDiv.textContent = 'Please enter a valid email address.';
+                errDiv.textContent = translations[currentLang].bkErrorInvalidEmail;
                 errDiv.style.display = 'block';
                 return;
             }
 
             const btn = document.getElementById('bk-submit-btn');
             btn.disabled = true;
-            btn.textContent = 'Sending...';
+            btn.textContent = translations[currentLang].bkSending;
 
             bkFetch('/book', {
                 method: 'POST',
-                body: JSON.stringify({ tour: BK_TOUR_ID, date, time: bkSelectedTime, name, email, phone, participants: guests })
+                body: JSON.stringify({ tour: BK_TOUR_ID, date, time: bkSelectedTime, name, email, phone, participants: guests, language })
             })
             .then(r => r.json())
             .then(data => {
@@ -1069,17 +1124,17 @@
                     document.getElementById('bk-step2').style.display = 'none';
                     document.getElementById('bk-step3').style.display = 'block';
                 } else {
-                    errDiv.textContent = data.error || 'Booking failed. Please try again.';
+                    errDiv.textContent = data.error || translations[currentLang].bkErrorBooking;
                     errDiv.style.display = 'block';
                     btn.disabled = false;
-                    btn.textContent = 'Confirm Booking';
+                    btn.textContent = translations[currentLang].bkSubmitBtn;
                 }
             })
             .catch(() => {
-                errDiv.textContent = 'Network error. Please try again.';
+                errDiv.textContent = translations[currentLang].bkErrorNetwork;
                 errDiv.style.display = 'block';
                 btn.disabled = false;
-                btn.textContent = 'Confirm Booking';
+                btn.textContent = translations[currentLang].bkSubmitBtn;
             });
         }
     </script>
