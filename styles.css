@@ -1818,15 +1818,51 @@ nav {
 }
 
 /* ============================================
-   TEMP: Hide discount UI — 2026-05-10
-   Hides strikethrough old price + discount badge on:
-   - Homepage tour cards (.tour-price)
-   - Tour pages and template (.price-info)
-   The current price (.tour-price-new / .price-info-new) stays visible.
+   TEMP: Hide discount UI — 2026-05-10 (updated)
+   Hides the discounted price + badges.
+   Promotes the original price (.tour-price-old / .price-info-old)
+   to look like the main visible price.
 
-   TO RESTORE DISCOUNTS: comment out or delete this entire block.
+   TO RESTORE DISCOUNTS: comment out or delete this entire block
+   (and the matching mobile media query override below, if separate).
    ============================================ */
-.tour-price > div:has(> .tour-price-old),
-.price-info > div:has(> .price-info-old) {
+
+/* Hide the discounted price */
+.tour-price-new,
+.price-info-new {
     display: none !important;
+}
+
+/* Hide the discount badges */
+.tour-price-discount-badge,
+.price-info-discount-badge {
+    display: none !important;
+}
+
+/* Promote .tour-price-old to look like .tour-price-new on homepage cards */
+.tour-price-old {
+    font-size: 1.5rem !important;
+    font-weight: 800 !important;
+    color: #f5576c !important;
+    text-decoration: none !important;
+    opacity: 1 !important;
+    letter-spacing: -0.5px !important;
+}
+
+/* Promote .price-info-old to look like .price-info-new on tour pages */
+.price-info-old {
+    font-size: 2.5rem !important;
+    font-weight: 800 !important;
+    color: #f5576c !important;
+    text-decoration: none !important;
+    opacity: 1 !important;
+    display: block !important;
+    margin-right: 0 !important;
+}
+
+/* TEMP mobile override — matches the .price-info-new { font-size: 2rem } rule above */
+@media (max-width: 768px) {
+    .price-info-old {
+        font-size: 2rem !important;
+    }
 }
