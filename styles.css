@@ -1816,3 +1816,17 @@ nav {
         height: 180px;
     }
 }
+
+/* ============================================
+   TEMP: Hide discount UI — 2026-05-10
+   Hides strikethrough old price + discount badge on:
+   - Homepage tour cards (.tour-price)
+   - Tour pages and template (.price-info)
+   The current price (.tour-price-new / .price-info-new) stays visible.
+
+   TO RESTORE DISCOUNTS: comment out or delete this entire block.
+   ============================================ */
+.tour-price > div:has(> .tour-price-old),
+.price-info > div:has(> .price-info-old) {
+    display: none !important;
+}
