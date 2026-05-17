@@ -381,10 +381,14 @@
     prevBtn.style.cursor          = canPrev ? 'pointer' : 'not-allowed';
     prevBtn.style.pointerEvents   = canPrev ? 'auto' : 'none';
 
-    // Next: disable when advancing by 1 would make the leftmost month start
-    // entirely beyond the horizon.
-    var nextLeftStart = monthStart(_viewMonth + 1);
-    var canNext = nextLeftStart <= horizon;
+    // Next: disable when the right-most visible month after advancing would start
+    // beyond the horizon. On desktop (count=2) the right month after one Next click
+    // is _viewMonth+count; on mobile (count=1) it is _viewMonth+1. Using +count
+    // (not +1) is critical on desktop — using +1 allows one extra click that puts
+    // the right column entirely beyond the 90-day window, which causes the fetch to
+    // receive from > to after clamping and breaks the calendar.
+    var nextRightStart = monthStart(_viewMonth + visibleMonthCount());
+    var canNext = nextRightStart <= horizon;
     nextBtn.disabled = !canNext;
     nextBtn.style.opacity         = canNext ? '1' : '0.3';
     nextBtn.style.cursor          = canNext ? 'pointer' : 'not-allowed';
@@ -464,6 +468,17 @@
     // Clamp toDate to horizon
     var hz = horizonDate();
     if (toDate > hz) toDate = hz;
+
+    // Guard: if fromDate is entirely beyond the horizon after clamping, there is
+    // nothing to fetch (toDate ended up before fromDate). Mark the months as cached
+    // with no data — every day in them will render as --out-of-range — and proceed.
+    // Without this guard the API receives from > to, returns 400, and the Retry
+    // loop spins forever with monthsRow hidden, freezing the modal.
+    if (fromDate > toDate) {
+      needed.forEach(function (ms) { _cachedMonths[monthKey(ms)] = true; });
+      onReady();
+      return;
+    }
 
     showCalLoading();
 
@@ -597,6 +612,11 @@
 
     if (!name || !email || !phone || !guests || guests < 1) {
       errDiv.textContent   = t('bkErrorRequired');
+      errDiv.style.display = 'block';
+      return;
+    }
+    if (guests > _opts.maxGuests) {
+      errDiv.textContent   = t('bkErrorMaxGuests').replace('{N}', _opts.maxGuests);
       errDiv.style.display = 'block';
       return;
     }
@@ -794,6 +814,8 @@
     if (summary) summary.innerHTML = '';
     var langSel = document.getElementById('bk-language');
     if (langSel) langSel.value = _opts.lang();
+    var guestsInput = document.getElementById('bk-guests');
+    if (guestsInput) guestsInput.max = _opts.maxGuests;
   }
 
   function open() {
@@ -852,6 +874,10 @@
   function init(options) {
     // Idempotent: if already initialised for the same modal, skip
     if (_opts && _opts.modalId === options.modalId) return;
+
+    if (!options.maxGuests || options.maxGuests < 1) {
+      throw new Error('[BookingModal] init() requires maxGuests (positive integer), e.g. maxGuests: 4');
+    }
 
     _opts  = options;
     _today = todayLocal();

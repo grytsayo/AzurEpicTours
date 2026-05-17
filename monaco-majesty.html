@@ -554,7 +554,8 @@
                 bkCalNoSlots: "No availability",
                 bkCalSlotsFor: "Available times for",
                 bkCalPrevMonth: "Previous month",
-                bkCalNextMonth: "Next month"
+                bkCalNextMonth: "Next month",
+                bkErrorMaxGuests: "Maximum {N} participants per private tour"
             },
             ru: {
                 logoText: "AzurEpicTours",
@@ -671,7 +672,8 @@
                 bkCalNoSlots: "\u041d\u0435\u0442 \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u044b\u0445 \u043c\u0435\u0441\u0442",
                 bkCalSlotsFor: "\u0414\u043e\u0441\u0442\u0443\u043f\u043d\u043e\u0435 \u0432\u0440\u0435\u043c\u044f \u043d\u0430",
                 bkCalPrevMonth: "\u041f\u0440\u0435\u0434\u044b\u0434\u0443\u0449\u0438\u0439 \u043c\u0435\u0441\u044f\u0446",
-                bkCalNextMonth: "\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u043c\u0435\u0441\u044f\u0446"
+                bkCalNextMonth: "\u0421\u043b\u0435\u0434\u0443\u044e\u0449\u0438\u0439 \u043c\u0435\u0441\u044f\u0446",
+                bkErrorMaxGuests: "\u041c\u0430\u043a\u0441\u0438\u043c\u0443\u043c {N} \u0443\u0447\u0430\u0441\u0442\u043d\u0438\u043a\u043e\u0432 \u043d\u0430 \u043f\u0440\u0438\u0432\u0430\u0442\u043d\u044b\u0439 \u0442\u0443\u0440"
             },
             fr: {
                 logoText: "AzurEpicTours",
@@ -788,7 +790,8 @@
                 bkCalNoSlots: "Aucune disponibilit\u00e9",
                 bkCalSlotsFor: "Heures disponibles pour le",
                 bkCalPrevMonth: "Mois pr\u00e9c\u00e9dent",
-                bkCalNextMonth: "Mois suivant"
+                bkCalNextMonth: "Mois suivant",
+                bkErrorMaxGuests: "Maximum {N} participants par visite priv\u00e9e"
             }
         };
 
@@ -982,7 +985,8 @@
             apiBaseUrl: 'https://azure-epic-tours.vercel.app/api',
             apiKey:     'dir_SBo5KKQ6st69lYLmOPHqoIUoHhbvZX8t',
             lang:       function() { return currentLang; },
-            modalId:    'bookingUnavailableModal'
+            modalId:    'bookingUnavailableModal',
+            maxGuests:  4
         });
     </script>
 
