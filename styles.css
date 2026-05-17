@@ -1866,3 +1866,209 @@ nav {
         font-size: 2rem !important;
     }
 }
+
+/* ============================================================
+   Booking Calendar Grid  (added 2026-05-17)
+   ============================================================ */
+
+.bk-cal-root {
+    width: 100%;
+}
+
+/* ── Header: prev arrow · month column(s) · next arrow ── */
+.bk-cal-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+.bk-cal-nav {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #667eea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s, color 0.15s;
+    margin-top: 24px; /* align with month titles */
+}
+
+.bk-cal-nav:hover:not(:disabled) {
+    background: #667eea;
+    color: white;
+    border-color: #667eea;
+}
+
+.bk-cal-months-row {
+    flex: 1;
+    display: flex;
+    gap: 24px;
+    min-width: 0;
+}
+
+/* ── Single month column ── */
+.bk-cal-month {
+    flex: 1;
+    min-width: 0;
+}
+
+.bk-cal-month-title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #2d3748;
+    margin-bottom: 8px;
+    height: 24px;
+    line-height: 24px;
+}
+
+/* ── Weekday header row ── */
+.bk-cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 4px;
+}
+
+.bk-cal-weekdays span {
+    text-align: center;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #a0aec0;
+    text-transform: uppercase;
+    padding: 4px 0;
+}
+
+/* ── Day grid ── */
+.bk-cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+}
+
+.bk-cal-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    position: relative;
+    transition: background 0.15s, color 0.15s;
+    user-select: none;
+}
+
+.bk-cal-day--empty {
+    /* placeholder — no content */
+}
+
+.bk-cal-day--available {
+    font-weight: 700;
+    color: #667eea;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+}
+
+.bk-cal-day--available:hover,
+.bk-cal-day--available:focus {
+    background: #667eea;
+    color: white;
+    outline: none;
+}
+
+.bk-cal-day--unavailable {
+    color: #c4cdd6;
+    text-decoration: line-through;
+    cursor: default;
+}
+
+.bk-cal-day--out-of-range {
+    color: #dde1e7;
+    text-decoration: line-through;
+    cursor: default;
+}
+
+.bk-cal-day--today {
+    box-shadow: inset 0 0 0 2px #667eea;
+}
+
+/* today + available: ring + bold purple (no fill until hover/selected) */
+.bk-cal-day--today.bk-cal-day--available {
+    box-shadow: inset 0 0 0 2px #667eea;
+}
+
+.bk-cal-day--selected {
+    background: #667eea !important;
+    color: white !important;
+    font-weight: 700;
+    box-shadow: none;
+}
+
+/* ── Loading overlay ── */
+.bk-cal-loading {
+    text-align: center;
+    color: #d4a574;
+    font-size: 0.9rem;
+    padding: 32px 0;
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ── Error area ── */
+.bk-cal-error {
+    text-align: center;
+    padding: 24px 0;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+/* ── Slot pills area ── */
+.bk-cal-slots-wrap {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.bk-cal-slots-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+.bk-cal-slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    min-height: 44px;
+}
+
+.bk-cal-slots-loading,
+.bk-cal-slots-error {
+    font-size: 0.9rem;
+    margin-top: 6px;
+}
+
+/* ── Mobile: single month only ── */
+@media (max-width: 768px) {
+    .bk-cal-months-row .bk-cal-month:nth-child(2) {
+        display: none;
+    }
+    .bk-cal-day {
+        font-size: 0.8rem;
+    }
+}
