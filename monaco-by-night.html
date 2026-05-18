@@ -42,6 +42,8 @@
 
 
         <link rel="stylesheet" href="styles.css">
+    <script src="/js/booking-modal.js"></script>
+    <script>if(typeof BookingModal==='undefined'){document.write('<script src="/js/booking-modal.js"><\/script>');}</script>
 </head>
 <body>
     <header>
@@ -214,26 +216,7 @@
             <div class="modal-body" style="padding: 24px 28px;">
 
                 <div id="bk-step1">
-                    <h3 data-i18n="bkStep1Title" style="margin-top:0;">1. Choose a date</h3>
-                    <div style="flex:1; min-width:180px; margin-bottom:18px;">
-                        <label data-i18n="bkDateLabel" style="display:block; font-weight:600; margin-bottom:6px; color:#555;">Date</label>
-                        <input type="date" id="bk-date" class="bk-input"
-                            style="width:100%; padding:10px 14px; border:2px solid #e2e8f0; border-radius:10px; font-size:1rem; box-sizing:border-box;"
-                            oninput="loadSlots()">
-                    </div>
-
-                    <div id="bk-slots-wrap">
-                        <label data-i18n="bkTimeLabel" style="display:block; font-weight:600; margin-bottom:8px; color:#555;">Available time slots</label>
-                        <div id="bk-slots" style="display:flex; flex-wrap:wrap; gap:10px; min-height:44px;">
-                            <p id="bk-slots-hint" style="color:#aaa; font-size:0.9rem; margin:0;" data-i18n="bkSlotsHint">Select a date to see availability</p>
-                        </div>
-                        <div id="bk-slots-loading" style="display:none; color:#d4a574; font-size:0.9rem;">Loading slots...</div>
-                        <div id="bk-slots-error" style="display:none; color:#e53e3e; font-size:0.9rem;"></div>
-                    </div>
-
-                    <button class="book-btn bk-next-btn" onclick="goToStep2()"
-                        style="margin-top:20px; padding:12px 36px; font-size:1rem; display:block; width:100%;"
-                        data-i18n="bkNextBtn" disabled>Continue</button>
+                    <!-- Calendar grid injected here by booking-modal.js -->
                 </div>
 
                 <div id="bk-step2" style="display:none;">
@@ -523,7 +506,18 @@
                 cookieConsentTitle: "🍪 We use cookies",
                 cookieConsentText: "We use cookies to improve your experience on our site, analyze traffic, and personalize content. Learn more in our Privacy Policy.",
                 cookieAccept: "Accept",
-                cookieDecline: "Decline"
+                cookieDecline: "Decline",
+                bkCalMonths: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+                bkCalWeekdays: ['Mo','Tu','We','Th','Fr','Sa','Su'],
+                bkCalLoading: 'Loading calendar…',
+                bkCalLoadError: 'Could not load availability. Please try again.',
+                bkCalRetry: 'Retry',
+                bkCalSelectPrompt: 'Select a date',
+                bkCalNoSlots: 'No availability',
+                bkCalSlotsFor: 'Available times for',
+                bkCalPrevMonth: 'Previous month',
+                bkCalNextMonth: 'Next month',
+                bkErrorMaxGuests: 'Maximum {N} guests per booking.',
             },
             ru: {
                 logoText: "AzurEpicTours",
@@ -619,7 +613,18 @@
                 cookieConsentTitle: "🍪 Мы используем файлы cookie",
                 cookieConsentText: "Мы используем файлы cookie для улучшения вашего опыта на сайте, анализа трафика и персонализации контента. Подробнее в нашей Политике конфиденциальности.",
                 cookieAccept: "Принять",
-                cookieDecline: "Отклонить"
+                cookieDecline: "Отклонить",
+                bkCalMonths: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],
+                bkCalWeekdays: ['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],
+                bkCalLoading: 'Загрузка календаря…',
+                bkCalLoadError: 'Не удалось загрузить доступность. Попробуйте ещё раз.',
+                bkCalRetry: 'Повторить',
+                bkCalSelectPrompt: 'Выберите дату',
+                bkCalNoSlots: 'Нет доступных мест',
+                bkCalSlotsFor: 'Доступное время на',
+                bkCalPrevMonth: 'Предыдущий месяц',
+                bkCalNextMonth: 'Следующий месяц',
+                bkErrorMaxGuests: 'Максимум {N} участников на одно бронирование.',
             },
             fr: {
                 logoText: "AzurEpicTours",
@@ -715,7 +720,18 @@
                 cookieConsentTitle: "🍪 Nous utilisons des cookies",
                 cookieConsentText: "Nous utilisons des cookies pour améliorer votre expérience sur notre site, analyser le trafic et personnaliser le contenu. En savoir plus dans notre Politique de confidentialité.",
                 cookieAccept: "Accepter",
-                cookieDecline: "Refuser"
+                cookieDecline: "Refuser",
+                bkCalMonths: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+                bkCalWeekdays: ['Lu','Ma','Me','Je','Ve','Sa','Di'],
+                bkCalLoading: 'Chargement du calendrier…',
+                bkCalLoadError: 'Impossible de charger les disponibilités. Veuillez réessayer.',
+                bkCalRetry: 'Réessayer',
+                bkCalSelectPrompt: 'Sélectionnez une date',
+                bkCalNoSlots: 'Aucune disponibilité',
+                bkCalSlotsFor: 'Heures disponibles pour le',
+                bkCalPrevMonth: 'Mois précédent',
+                bkCalNextMonth: 'Mois suivant',
+                bkErrorMaxGuests: 'Maximum {N} participants par réservation.',
             }
         };
 
@@ -903,224 +919,17 @@
             updateCookieConsentText();
         });
 
-        // ── Booking form ──────────────────────────────────────────
-        const BK_TOUR_ID  = 'bynight';
-        const BK_API_BASE = 'https://azure-epic-tours.vercel.app/api';
-        const BK_API_KEY  = 'dir_SBo5KKQ6st69lYLmOPHqoIUoHhbvZX8t';
-        const BK_ACCENT   = '#d4a574';
-        let bkSelectedTime = null;
-
-        function bkFetch(path, options = {}) {
-            return fetch(BK_API_BASE + path, {
-                ...options,
-                headers: { 'Authorization': 'Bearer ' + BK_API_KEY, 'Content-Type': 'application/json', ...(options.headers || {}) }
-            });
-        }
-
-        function openBookingModal() {
-            const modal = document.getElementById('bookingUnavailableModal');
-            if (!modal) return;
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            resetBookingForm();
-            preloadAvailability();
-        }
-
-        function closeBookingModal() {
-            const modal = document.getElementById('bookingUnavailableModal');
-            if (!modal) return;
-            modal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        window.addEventListener('click', function(event) {
-            const modal = document.getElementById('bookingUnavailableModal');
-            if (event.target === modal) closeBookingModal();
+        // ── Booking modal ──────────────────────────────────────────
+        BookingModal.init({
+            tourId:     'bynight',
+            apiBaseUrl: 'https://azure-epic-tours.vercel.app/api',
+            apiKey:     'dir_SBo5KKQ6st69lYLmOPHqoIUoHhbvZX8t',
+            lang:       function() { return currentLang; },
+            modalId:    'bookingUnavailableModal',
         });
 
-        function resetBookingForm() {
-            bkSelectedTime = null;
-            document.getElementById('bk-step1').style.display = 'block';
-            document.getElementById('bk-step2').style.display = 'none';
-            document.getElementById('bk-step3').style.display = 'none';
-            const hint = document.createElement('p');
-            hint.id = 'bk-slots-hint';
-            hint.setAttribute('data-i18n', 'bkSlotsHint');
-            hint.style.cssText = 'color:#aaa;font-size:.9rem;margin:0;';
-            hint.textContent = translations[currentLang].bkSlotsHint;
-            document.getElementById('bk-slots').innerHTML = '';
-            document.getElementById('bk-slots').appendChild(hint);
 
-            document.getElementById('bk-slots-loading').style.display = 'none';
-            document.getElementById('bk-slots-error').style.display = 'none';
-            document.querySelector('.bk-next-btn').disabled = true;
-            document.getElementById('bk-date').value = '';
-            document.getElementById('bk-submit-error').style.display = 'none';
-            document.getElementById('bk-summary').innerHTML = '';
 
-            const submitBtn = document.getElementById('bk-submit-btn');
-            submitBtn.disabled = false;
-            submitBtn.textContent = translations[currentLang].bkSubmitBtn;
-
-            document.getElementById('bk-language').value = currentLang;
-        }
-
-        function preloadAvailability() {
-            const today = new Date();
-            const dates = [];
-            for (let i = 1; i <= 14; i++) {
-                const d = new Date(today);
-                d.setDate(today.getDate() + i);
-                dates.push(d.toISOString().slice(0, 10));
-            }
-            const dateInput = document.getElementById('bk-date');
-            dateInput.min = dates[0];
-            dateInput.max = dates[dates.length - 1];
-
-            const loading = document.getElementById('bk-slots-loading');
-            loading.style.display = 'block';
-            document.getElementById('bk-slots').innerHTML = '';
-
-            Promise.all(dates.map(d =>
-                bkFetch('/availability?date=' + d + '&tour=' + BK_TOUR_ID)
-                    .then(r => r.json())
-                    .then(data => ({ date: d, slots: data.availability?.[BK_TOUR_ID]?.slots || [] }))
-                    .catch(() => ({ date: d, slots: [] }))
-            )).then(results => {
-                loading.style.display = 'none';
-                const first = results.find(r => r.slots.some(s => s.available));
-                const pick = first ? first.date : dates[0];
-                dateInput.value = pick;
-                loadSlots();
-            });
-        }
-
-        function loadSlots() {
-            const dateVal = document.getElementById('bk-date').value;
-            if (!dateVal) return;
-            bkSelectedTime = null;
-            document.querySelector('.bk-next-btn').disabled = true;
-            const slotsDiv = document.getElementById('bk-slots');
-            const loading  = document.getElementById('bk-slots-loading');
-            const errDiv   = document.getElementById('bk-slots-error');
-            slotsDiv.innerHTML = '';
-            errDiv.style.display = 'none';
-            loading.style.display = 'block';
-
-            bkFetch('/availability?date=' + dateVal + '&tour=' + BK_TOUR_ID)
-                .then(r => r.json())
-                .then(data => {
-                    loading.style.display = 'none';
-                    const slots = data.availability?.[BK_TOUR_ID]?.slots || [];
-                    if (!slots.length) {
-                        const p = document.createElement('p');
-                        p.setAttribute('data-i18n', 'bkNoSlots');
-                        p.style.cssText = 'color:#aaa;font-size:.9rem;margin:0;';
-                        p.textContent = translations[currentLang].bkNoSlots;
-                        slotsDiv.appendChild(p);
-                        return;
-                    }
-                    slots.forEach(slot => {
-                        const btn = document.createElement('button');
-                        btn.textContent = slot.start + (slot.end ? '–' + slot.end : '');
-                        btn.dataset.time = slot.start;
-                        btn.className = 'bk-slot-btn';
-                        btn.style.cssText = 'padding:9px 18px;border-radius:8px;border:2px solid;font-size:.95rem;cursor:pointer;transition:all .2s;font-weight:500;';
-                        if (slot.available) {
-                            btn.style.borderColor = BK_ACCENT;
-                            btn.style.background = 'white';
-                            btn.style.color = BK_ACCENT;
-                            btn.onclick = () => selectSlot(btn, slot.start);
-                        } else {
-                            btn.style.borderColor = '#e2e8f0';
-                            btn.style.background = '#f7f7f7';
-                            btn.style.color = '#bbb';
-                            btn.disabled = true;
-                        }
-                        slotsDiv.appendChild(btn);
-                    });
-                })
-                .catch(() => {
-                    loading.style.display = 'none';
-                    errDiv.textContent = translations[currentLang].bkErrorAvailability;
-                    errDiv.style.display = 'block';
-                });
-        }
-
-        function selectSlot(btn, time) {
-            bkSelectedTime = time;
-            document.querySelectorAll('.bk-slot-btn').forEach(b => {
-                b.style.background = 'white';
-                b.style.color = BK_ACCENT;
-                b.style.borderColor = BK_ACCENT;
-            });
-            btn.style.background = BK_ACCENT;
-            btn.style.color = 'white';
-            document.querySelector('.bk-next-btn').disabled = false;
-        }
-
-        function goToStep2() {
-            if (!bkSelectedTime) return;
-            document.getElementById('bk-step1').style.display = 'none';
-            document.getElementById('bk-step2').style.display = 'block';
-            const dateVal = document.getElementById('bk-date').value;
-            document.getElementById('bk-summary').innerHTML =
-                '<strong>📅 ' + translations[currentLang].bkSummaryDate + '</strong> ' + dateVal + ' &nbsp;|&nbsp; <strong>⌛ ' + translations[currentLang].bkSummaryTime + '</strong> ' + bkSelectedTime;
-        }
-
-        function goToStep1() {
-            document.getElementById('bk-step2').style.display = 'none';
-            document.getElementById('bk-step1').style.display = 'block';
-        }
-
-        function submitBooking() {
-            const name  = document.getElementById('bk-name').value.trim();
-            const email = document.getElementById('bk-email').value.trim();
-            const phone = document.getElementById('bk-phone').value.trim();
-            const guests = parseInt(document.getElementById('bk-guests').value, 10);
-            const date  = document.getElementById('bk-date').value;
-            const language = document.getElementById('bk-language').value;
-            const errDiv = document.getElementById('bk-submit-error');
-            errDiv.style.display = 'none';
-
-            if (!name || !email || !phone || !guests || guests < 1) {
-                errDiv.textContent = translations[currentLang].bkErrorRequired;
-                errDiv.style.display = 'block';
-                return;
-            }
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                errDiv.textContent = translations[currentLang].bkErrorInvalidEmail;
-                errDiv.style.display = 'block';
-                return;
-            }
-
-            const btn = document.getElementById('bk-submit-btn');
-            btn.disabled = true;
-            btn.textContent = translations[currentLang].bkSending;
-
-            bkFetch('/book', {
-                method: 'POST',
-                body: JSON.stringify({ tour: BK_TOUR_ID, date, time: bkSelectedTime, name, email, phone, participants: guests, language })
-            })
-            .then(r => r.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById('bk-step2').style.display = 'none';
-                    document.getElementById('bk-step3').style.display = 'block';
-                } else {
-                    errDiv.textContent = data.error || translations[currentLang].bkErrorBooking;
-                    errDiv.style.display = 'block';
-                    btn.disabled = false;
-                    btn.textContent = translations[currentLang].bkSubmitBtn;
-                }
-            })
-            .catch(() => {
-                errDiv.textContent = translations[currentLang].bkErrorNetwork;
-                errDiv.style.display = 'block';
-                btn.disabled = false;
-                btn.textContent = translations[currentLang].bkSubmitBtn;
-            });
-        }
     </script>
 
     <!-- Cookie Consent Modal -->

@@ -144,6 +144,14 @@
                                // Actually: _cache['YYYY-MM-DD'] = { available, slot_count }
   var _cachedMonths  = {};     // 'YYYY-MM' → true  (which months have been fetched)
   var _today         = null;   // Date object at local midnight
+  var _maxGuests     = null;   // read from API on first fetch; null until then
+
+  // ── Guest-count helper ────────────────────────────────────────────────────────
+
+  // Cascade: API value (read from range response) → init option → default 4
+  function effectiveMaxGuests() {
+    return _maxGuests || (_opts && _opts.maxGuests) || 4;
+  }
 
   // ── Translation helper ────────────────────────────────────────────────────────
 
@@ -243,6 +251,11 @@
         while (cur <= end) {
           _cachedMonths[monthKey(cur)] = true;
           cur.setMonth(cur.getMonth() + 1);
+        }
+        // Capture max_guests from API on first fetch
+        if (!_maxGuests && data.tours && data.tours[_opts.tourId] &&
+            data.tours[_opts.tourId].max_guests) {
+          _maxGuests = data.tours[_opts.tourId].max_guests;
         }
       });
   }
@@ -615,8 +628,8 @@
       errDiv.style.display = 'block';
       return;
     }
-    if (guests > _opts.maxGuests) {
-      errDiv.textContent   = t('bkErrorMaxGuests').replace('{N}', _opts.maxGuests);
+    if (guests > effectiveMaxGuests()) {
+      errDiv.textContent   = t('bkErrorMaxGuests').replace('{N}', effectiveMaxGuests());
       errDiv.style.display = 'block';
       return;
     }
@@ -815,7 +828,7 @@
     var langSel = document.getElementById('bk-language');
     if (langSel) langSel.value = _opts.lang();
     var guestsInput = document.getElementById('bk-guests');
-    if (guestsInput) guestsInput.max = _opts.maxGuests;
+    if (guestsInput) guestsInput.max = effectiveMaxGuests();
   }
 
   function open() {
@@ -865,6 +878,7 @@
     _viewMonth    = 0;
     _cache        = {};
     _cachedMonths = {};
+    _maxGuests    = null;
     global.openBookingModal  = undefined;
     global.closeBookingModal = undefined;
   }
@@ -874,10 +888,6 @@
   function init(options) {
     // Idempotent: if already initialised for the same modal, skip
     if (_opts && _opts.modalId === options.modalId) return;
-
-    if (!options.maxGuests || options.maxGuests < 1) {
-      throw new Error('[BookingModal] init() requires maxGuests (positive integer), e.g. maxGuests: 4');
-    }
 
     _opts  = options;
     _today = todayLocal();
