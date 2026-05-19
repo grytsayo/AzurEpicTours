@@ -7,3 +7,9 @@ package-lock.json
 
 # OS files
 .DS_Store
+
+# Credentials / tokens
+Ical token.txt
+
+# Claude Code local session files (keep .claude/commands/ committable)
+.claude/settings.local.json

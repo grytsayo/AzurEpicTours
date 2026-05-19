@@ -1,23 +1,25 @@
 # Azure Epic Tours — Frontend Site
 
-## Назначение
+## Purpose
+Static marketing site for azurepictours.com.
+Stack: plain HTML + CSS + JS, no build step.
+Production: Netlify.
+This repo is frontend only. Backend booking logic lives in a separate repo.
 
-Лендинг сайт azurepictours.com. Статичный HTML+CSS+JS, без сборки. Содержит главную, 4 страницы туров с интегрированной модалкой бронирования, и privacy policy.
+## Project paths and URLs
+- Local: `D:\Azurepictrips\WEB developement\Project Claude`
+- GitHub: `github.com/grytsayo/AzurEpicTours`
+- Production: `https://azurepictours.com`
+- Deploy: Netlify auto-publishes from `main`
 
-## Ключевые URL
+## Related backend
+- Backend repo: `github.com/grytsayo/azure-epic-tours-api`
+- Local backend path: `D:\Azurepictrips\WEB developement\tour-api`
+- Booking endpoint: `https://azure-epic-tours.vercel.app/api/book`
+- Do not implement backend logic changes in this repo
 
-- **Локально:** `D:\Azurepictrips\WEB developement\Project Claude`
-- **GitHub:** `github.com/grytsayo/AzurEpicTours` (public, ветка main)
-- **Production:** `https://azurepictours.com` (Netlify)
-- **Netlify Dashboard:** auto-publish от main ветки
-
-## Связанные проекты
-
-- **API Backend:** отдельный репо `github.com/grytsayo/azure-epic-tours-api`, локально в `D:\Azurepictrips\WEB developement\tour-api`, deployed на Vercel.
-- **API endpoint бронирования:** `https://azure-epic-tours.vercel.app/api/book`. Изменения в API делаются в backend репо, не здесь.
-
-## Перед началом работы — ОБЯЗАТЕЛЬНО
-
+## Before any edit
+Run:
 ```bash
 cd "D:\Azurepictrips\WEB developement\Project Claude"
 git fetch origin
@@ -25,44 +27,106 @@ git status
 git log --oneline -5
 ```
 
-Если `git fetch` показал новые коммиты на remote — `git pull` перед правками.
+If remote has new commits, run `git pull` before editing.
 
-## Правила деплоя
+## Deployment rules
+- Deploy ONLY through `git push origin main`
+- Never use `netlify deploy --prod`
+- Never use drag-and-drop deploy in Netlify Dashboard
+- Production must always match git history
 
-1. **Деплой ТОЛЬКО через `git push origin main`.** Netlify auto-deploy сам подхватит и задеплоит.
+## Why this rule exists
+A rogue Netlify deploy created a 4-month drift between git and production.
+Recovery required restoring production state into git in commit `50dc135`.
+Do not repeat this.
 
-2. **НИКОГДА не использовать `netlify deploy --prod` или drag-and-drop в Netlify Dashboard.** Любой такой деплой создаёт "теневую" версию сайта, которая отличается от git. В апреле 2026 такой деплой привёл к 4-месячному дрейфу repo от prod, и потребовал отдельной recovery-сессии.
-
-3. Перед коммитом обязательно:
-   - `git status` — какие файлы реально меняются
-   - Открыть локальные файлы в браузере и проверить что не сломано визуально
-   - `git diff --stat` — масштаб изменений выглядит разумно
-
-## Структура
-
-- `index.html` — главная страница
-- `monaco-majesty.html`, `monaco-coastline.html`, `grand-riviera-tour.html`, `monaco-by-night.html` — 4 страницы туров с модалкой бронирования
+## Core production files
+- `index.html`
+- `monaco-majesty.html`
+- `monaco-coastline.html`
+- `grand-riviera-tour.html`
+- `monaco-by-night.html`
 - `privacy-policy.html`
-- `tour-template.html` — шаблон для добавления новых туров
-- `images/`, `style.css` — ассеты
+- `tour-template.html`
+- `styles.css`
+- `js/booking-modal.js`
+- `images/`
+- `sitemap.xml`
+- `robots.txt`
+- `site.webmanifest`
 
-## Архитектура страниц туров
+Treat these as production-critical.
 
-Каждая страница — самостоятельный HTML файл с inline `<script>` секцией. **Код модалки бронирования идентичен на 4 страницах** (различается только `BK_TOUR_ID`). i18n словари (en/ru/fr) встроены прямо в `<script>`, переключение языка через JS без перезагрузки страницы.
+## Tour page architecture
+Each tour page is a separate HTML file.
+Booking modal logic is mirrored across the 4 tour pages.
+The main difference is `BK_TOUR_ID`.
+Language dictionaries (`en`, `ru`, `fr`) are embedded in page scripts.
 
-При правке модалки — менять во всех 4 файлах одинаково. Использовать паттерн: правка на одной странице → review diff → копирование того же diff на остальные 3.
+## Rule for booking modal edits
+If editing booking modal logic:
+1. Change one page first
+2. Review diff carefully
+3. Apply the same logical change to the other 3 tour pages
+4. Verify all 4 pages stay consistent
 
-## Известные особенности
+Never update only one tour page unless the change is intentionally page-specific.
 
-- Netlify настроен на **clean URLs** — `/monaco-majesty` вместо `/monaco-majesty.html`. Внутренние ссылки на сайте используют clean URL формат (без `.html`).
+## URL rules
+- Site uses clean URLs on Netlify
+- Internal links should use `/monaco-majesty`, not `/monaco-majesty.html`
+- Do not break clean URL behavior
 
-- На Windows git может ругаться `LF will be replaced by CRLF` — нормально, не влияет на работу.
+## What not to touch unless explicitly asked
+- favicon set
+- `site.webmanifest`
+- `robots.txt`
+- `sitemap.xml`
+- legacy SEO/report markdown files
+- one-off utility scripts
 
-- Если git ругается `dubious ownership in repository` — однократно сделать:
+## Repo hygiene
+The root contains one-off scripts and report files.
+Do not treat them as production code.
+Prefer moving:
+- utility scripts -> `scripts/`
+- reports and audits -> `docs/`
+
+## Visual safety rules
+Before commit:
+- open affected pages locally in browser
+- verify layout on desktop
+- verify layout on mobile-width viewport
+- verify booking modal still opens and closes
+- verify no broken links or missing images
+- verify language switch still works if affected
+
+## Pre-commit checklist
+Before commit always run:
 ```bash
-  git config --global --add safe.directory "D:/Azurepictrips/WEB developement/Project Claude"
+git status
+git diff --stat
 ```
 
-## Last critical lessons (что НЕ повторять)
+Then manually verify affected pages in browser.
 
-- Декабрь 2025 - апрель 2026: rogue Netlify deployments создали 4-месячный gap между git HEAD (Dec 19, 2025) и production (Apr 7, 2026). Production содержал booking modal которого не было в git. Восстановлено commit `50dc135` (Sync local copy with production state). Урок: всегда коммитить и пушить, никогда не использовать `netlify deploy --prod` напрямую.
+## Git rules
+- Make focused commits
+- Avoid unrelated cleanup mixed with feature work
+- Do not delete files unless sure they are not used in production
+- Ask before large structural changes
+
+## Windows notes
+- `LF will be replaced by CRLF` is expected on Windows
+- If git shows dubious ownership:
+```bash
+git config --global --add safe.directory "D:/Azurepictrips/WEB developement/Project Claude"
+```
+
+## Definition of done
+A frontend task is done only if:
+- requested pages are updated
+- mirrored modal changes are applied consistently
+- local visual check is complete
+- git diff is reasonable
+- changes are committed and pushed through git only
