@@ -1,0 +1,29 @@
+[[redirects]]
+  from = "/monaco-majesty.html"
+  to = "/monaco-majesty"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/monaco-coastline.html"
+  to = "/monaco-coastline"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/grand-riviera-tour.html"
+  to = "/grand-riviera-tour"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/monaco-by-night.html"
+  to = "/monaco-by-night"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/privacy-policy.html"
+  to = "/privacy-policy"
+  status = 301
+  force = true

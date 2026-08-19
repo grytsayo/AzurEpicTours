@@ -7,7 +7,7 @@ Allow: /
 Disallow: /desktop.ini
 
 # Sitemap location
-Sitemap: https://www.azurepictours.com/sitemap.xml
+Sitemap: https://azurepictours.com/sitemap.xml
 
 # Crawl-delay (optional, for slower bots)
 # Crawl-delay: 1
