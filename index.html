@@ -86,7 +86,7 @@
     <!-- /Yandex.Metrika counter -->
 
     <!-- Structured Data - JSON-LD -->
-    <script type="application/ld+json">
+    <script id="tourStructuredData" type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@graph": [
@@ -224,7 +224,7 @@
                 "@type": "Person",
                 "name": "Jen"
               },
-              "datePublished": "2024-06-20",
+              "datePublished": "2025-06-20",
               "reviewRating": {
                 "@type": "Rating",
                 "ratingValue": "5",
@@ -242,7 +242,7 @@
                 "@type": "Person",
                 "name": "GetYourGuide traveler"
               },
-              "datePublished": "2024-08-10",
+              "datePublished": "2025-08-10",
               "reviewRating": {
                 "@type": "Rating",
                 "ratingValue": "5",
@@ -260,7 +260,7 @@
                 "@type": "Person",
                 "name": "Donatas"
               },
-              "datePublished": "2024-09-25",
+              "datePublished": "2025-09-25",
               "reviewRating": {
                 "@type": "Rating",
                 "ratingValue": "5",
@@ -1222,7 +1222,7 @@
                 reviewTextLabel: "Ваш отзыв *",
                 reviewTextPlaceholder: "Расскажите о вашем опыте...",
                 reviewSubmitButton: "Отправить отзыв",
-                reviewSuccessMessage: "✓ Спасибо! Ваш отзыв будет опубликован после модерации.",
+                reviewSuccessMessage: "✓ Спасибо! Ваш отзыв отправлен и скоро появится на сайте.",
                 reviewErrorMessage: "✗ Ошибка отправки. Попробуйте позже.",
                 formName: "Ваше имя",
                 formEmail: "Email",
@@ -1630,7 +1630,7 @@
                 reviewTextLabel: "Your Review *",
                 reviewTextPlaceholder: "Tell us about your experience...",
                 reviewSubmitButton: "Submit Review",
-                reviewSuccessMessage: "✓ Thank you! Your review will be published after moderation.",
+                reviewSuccessMessage: "✓ Thank you! Your review was submitted and will appear shortly.",
                 reviewErrorMessage: "✗ Submission failed. Please try again later.",
                 formName: "Your name",
                 formEmail: "Email",
@@ -1975,7 +1975,7 @@
                 reviewTextLabel: "Votre avis *",
                 reviewTextPlaceholder: "Parlez-nous de votre expérience...",
                 reviewSubmitButton: "Soumettre l'avis",
-                reviewSuccessMessage: "✓ Merci ! Votre avis sera publié après modération.",
+                reviewSuccessMessage: "✓ Merci ! Votre avis a été envoyé et apparaîtra bientôt.",
                 reviewErrorMessage: "✗ Échec de l'envoi. Veuillez réessayer plus tard.",
                 formName: "Votre nom",
                 formEmail: "Email",
@@ -2024,6 +2024,102 @@
         let currentImageIndex = 0;
 
         // Reviews Slider - Initialize after DOM loads
+        function formatReviewDate(value, language = currentLanguage) {
+            const locales = { en: 'en-US', ru: 'ru-RU', fr: 'fr-FR' };
+            const formatted = new Intl.DateTimeFormat(locales[language] || locales.en, {
+                month: 'long',
+                year: 'numeric',
+                timeZone: 'Europe/Paris'
+            }).format(new Date(value));
+            return formatted.charAt(0).toUpperCase() + formatted.slice(1);
+        }
+
+        function updateDynamicReviewDates() {
+            document.querySelectorAll('.review-date[data-review-date]').forEach(element => {
+                element.textContent = formatReviewDate(element.dataset.reviewDate);
+            });
+        }
+
+        function addReviewsToStructuredData(reviews) {
+            const script = document.getElementById('tourStructuredData');
+            if (!script || !reviews.length) return;
+
+            try {
+                const data = JSON.parse(script.textContent);
+                const organization = data['@graph']?.find(item => item.aggregateRating && Array.isArray(item.review));
+                if (!organization) return;
+
+                const dynamicReviews = reviews.map(review => ({
+                    '@type': 'Review',
+                    itemReviewed: {
+                        '@type': 'TourOperator',
+                        '@id': 'https://azurepictours.com/#organization'
+                    },
+                    author: { '@type': 'Person', name: review.name },
+                    datePublished: review.submittedAt.slice(0, 10),
+                    reviewRating: {
+                        '@type': 'Rating',
+                        ratingValue: String(review.rating),
+                        bestRating: '5'
+                    },
+                    reviewBody: review.review
+                }));
+
+                organization.review.push(...dynamicReviews);
+                organization.aggregateRating.reviewCount = String(organization.review.length);
+                const totalRating = organization.review.reduce((sum, review) => {
+                    return sum + Number(review.reviewRating?.ratingValue || 0);
+                }, 0);
+                organization.aggregateRating.ratingValue = (totalRating / organization.review.length).toFixed(1);
+                script.textContent = JSON.stringify(data);
+            } catch (error) {
+                console.error('Could not update review structured data:', error);
+            }
+        }
+
+        async function loadPublishedReviews() {
+            try {
+                const response = await fetch('/.netlify/functions/reviews');
+                if (!response.ok) throw new Error(`Review API returned ${response.status}`);
+                const data = await response.json();
+                const reviews = Array.isArray(data.reviews) ? data.reviews : [];
+                if (!reviews.length) return;
+
+                const slider = document.getElementById('reviewsSlider');
+                const fragment = document.createDocumentFragment();
+                reviews.forEach(review => {
+                    const card = document.createElement('div');
+                    card.className = 'review-card';
+                    card.dataset.reviewId = review.id;
+
+                    const content = document.createElement('div');
+                    content.className = 'review-content';
+                    const stars = document.createElement('div');
+                    stars.className = 'review-stars';
+                    stars.textContent = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                    stars.setAttribute('aria-label', `${review.rating} out of 5 stars`);
+                    const text = document.createElement('p');
+                    text.className = 'review-text';
+                    text.textContent = `“${review.review}”`;
+                    const author = document.createElement('p');
+                    author.className = 'review-author';
+                    author.textContent = review.name;
+                    const date = document.createElement('p');
+                    date.className = 'review-date';
+                    date.dataset.reviewDate = review.submittedAt;
+                    date.textContent = formatReviewDate(review.submittedAt);
+
+                    content.append(stars, text, author, date);
+                    card.appendChild(content);
+                    fragment.appendChild(card);
+                });
+                slider.insertBefore(fragment, slider.firstChild);
+                addReviewsToStructuredData(reviews);
+            } catch (error) {
+                console.error('Could not load published reviews:', error);
+            }
+        }
+
         function initReviewsSlider() {
             let currentSlide = 0;
             const slides = document.querySelectorAll('.review-card');
@@ -2361,6 +2457,7 @@ if (contactForm) {
 
             // Update cookie consent text
             updateCookieConsentText();
+            updateDynamicReviewDates();
         }
 
         // ===== THIS SECTION REMOVED - Consolidated into main DOMContentLoaded below =====
@@ -2692,7 +2789,7 @@ if (contactForm) {
                     .then(response => {
                         if (response.ok) {
                             // Success
-                            reviewMessage.textContent = translations[currentLanguage].reviewSuccessMessage || '✓ Thank you! Your review will be published after moderation.';
+                            reviewMessage.textContent = translations[currentLanguage].reviewSuccessMessage || '✓ Thank you! Your review was submitted and will appear shortly.';
                             reviewMessage.className = 'email-form-message success';
                             reviewMessage.style.display = 'block';
 
@@ -2731,7 +2828,7 @@ if (contactForm) {
             }
 
             // ===== 5. INITIALIZE REVIEWS SLIDER =====
-            initReviewsSlider();
+            loadPublishedReviews().finally(initReviewsSlider);
 
             // ===== 6. SETUP EVENT TRACKING =====
             setupEventTracking();

@@ -7,6 +7,7 @@
     "update-html": "node update-html-images.js"
   },
   "dependencies": {
+    "@netlify/blobs": "8.2.0",
     "sharp": "^0.33.1"
   }
 }
