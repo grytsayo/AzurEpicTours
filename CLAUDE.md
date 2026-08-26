@@ -7,7 +7,8 @@ Production: Netlify.
 This repo is frontend only. Backend booking logic lives in a separate repo.
 
 ## Project paths and URLs
-- Local: `D:\Azurepictrips\WEB developement\Project Claude`
+- Primary working copy: `C:\work\azure-epic-tours\frontend`
+- Synchronized copy: `D:\Azurepictrips\WEB developement\Project Claude`
 - GitHub: `github.com/grytsayo/AzurEpicTours`
 - Production: `https://azurepictours.com`
 - Deploy: Netlify auto-publishes from `main`
@@ -21,7 +22,7 @@ This repo is frontend only. Backend booking logic lives in a separate repo.
 ## Before any edit
 Run:
 ```bash
-cd "D:\Azurepictrips\WEB developement\Project Claude"
+cd "C:\work\azure-epic-tours\frontend"
 git fetch origin
 git status
 git log --oneline -5
@@ -34,6 +35,10 @@ If remote has new commits, run `git pull` before editing.
 - Never use `netlify deploy --prod`
 - Never use drag-and-drop deploy in Netlify Dashboard
 - Production must always match git history
+- After every successful push, synchronize the D: copy:
+```powershell
+git -C "D:\Azurepictrips\WEB developement\Project Claude" pull --ff-only origin main
+```
 
 ## Why this rule exists
 A rogue Netlify deploy created a 4-month drift between git and production.
