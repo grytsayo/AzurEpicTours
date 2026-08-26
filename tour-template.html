@@ -113,6 +113,22 @@
                     <source srcset="./images/monaco-majesty/MC_magesty_08.webp" type="image/webp">
                     <img src="./images/monaco-majesty/MC_magesty_08.JPG" alt="Monaco Cathedral and old town architecture" onclick="openLightbox(this.src)" loading="lazy">
                 </picture>
+                <picture>
+                    <source srcset="./images/monaco-majesty/MC_magesty_09.webp" type="image/webp">
+                    <img src="./images/monaco-majesty/MC_magesty_09.jpg" alt="Oceanographic Museum of Monaco overlooking the Mediterranean Sea" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
+                <picture>
+                    <source srcset="./images/monaco-majesty/MC_magesty_10.webp" type="image/webp">
+                    <img src="./images/monaco-majesty/MC_magesty_10.jpg" alt="Ornate Belle Époque façade of the Monte Carlo Opera House" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
+                <picture>
+                    <source srcset="./images/monaco-majesty/MC_magesty_11.webp" type="image/webp">
+                    <img src="./images/monaco-majesty/MC_magesty_11.jpg" alt="Decorative stained-glass ceiling in a historic Monaco interior" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
+                <picture>
+                    <source srcset="./images/monaco-majesty/MC_magesty_12.webp" type="image/webp">
+                    <img src="./images/monaco-majesty/MC_magesty_12.jpg" alt="Interior nave and altar of Saint Nicholas Cathedral in Monaco" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
             </div>
         </div>
 
@@ -367,7 +383,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 AzurEpicTours. All rights reserved. | <a href="./index.html" data-i18n="footerHome">Home</a></p>
+            <p>&copy; 2026 AzurEpicTours. All rights reserved. | <a href="./index.html" data-i18n="footerHome">Home</a></p>
         <p style="margin-top: 10px; opacity: 0.7;"><a href="./privacy-policy.html" style="color: #667eea; text-decoration: none;" data-i18n="footerPrivacy">Privacy Policy</a></p>
         </div>
     </footer>
@@ -675,11 +691,18 @@
             './images/monaco-majesty/MC_magesty_05.jpg',
             './images/monaco-majesty/MC_magesty_06.jpg',
             './images/monaco-majesty/MC_magesty_07.JPG',
-            './images/monaco-majesty/MC_magesty_08.JPG'
+            './images/monaco-majesty/MC_magesty_08.JPG',
+            './images/monaco-majesty/MC_magesty_09.jpg',
+            './images/monaco-majesty/MC_magesty_10.jpg',
+            './images/monaco-majesty/MC_magesty_11.jpg',
+            './images/monaco-majesty/MC_magesty_12.jpg'
         ];
 
         function openLightbox(src) {
-            currentImageIndex = galleryImages.indexOf(src);
+            const normalizedSrc = new URL(src, window.location.href).pathname;
+            currentImageIndex = galleryImages.findIndex(image =>
+                new URL(image, window.location.href).pathname === normalizedSrc
+            );
             if (currentImageIndex === -1) currentImageIndex = 0;
 
             document.getElementById('lightbox').style.display = 'block';

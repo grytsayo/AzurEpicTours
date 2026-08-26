@@ -115,6 +115,22 @@
                     <source srcset="./images/grand-riviera/grandtour_08.webp" type="image/webp">
                     <img src="./images/grand-riviera/grandtour_08.JPG" alt="French Riviera coastal panorama with azure blue Mediterranean waters" onclick="openLightbox(this.src)" loading="lazy">
                 </picture>
+                <picture>
+                    <source srcset="./images/grand-riviera/grandtour_09.webp" type="image/webp">
+                    <img src="./images/grand-riviera/grandtour_09.jpg" alt="Panoramic view of the medieval village of Saint-Paul-de-Vence" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
+                <picture>
+                    <source srcset="./images/grand-riviera/grandtour_10.webp" type="image/webp">
+                    <img src="./images/grand-riviera/grandtour_10.jpg" alt="Antibes old town ramparts overlooking the Mediterranean Sea" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
+                <picture>
+                    <source srcset="./images/grand-riviera/grandtour_11.webp" type="image/webp">
+                    <img src="./images/grand-riviera/grandtour_11.jpg" alt="Colorful narrow street in the artisan village of Biot" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
+                <picture>
+                    <source srcset="./images/grand-riviera/grandtour_12.webp" type="image/webp">
+                    <img src="./images/grand-riviera/grandtour_12.jpg" alt="Palm trees on the Nice seafront with the Alps in the distance" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
             </div>
         </div>
 
@@ -401,7 +417,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 AzurEpicTours. All rights reserved. | <a data-i18n='footerHome' href='/'>Home</a></p>
+            <p>&copy; 2026 AzurEpicTours. All rights reserved. | <a data-i18n='footerHome' href='/'>Home</a></p>
         <p style="margin-top: 10px; opacity: 0.7;"><a data-i18n='footerPrivacy' href='/privacy-policy' style='color: #667eea; text-decoration: none;'>Privacy Policy</a></p>
         </div>
     </footer>
@@ -784,11 +800,18 @@
             './images/grand-riviera/grandtour_05.JPG',
             './images/grand-riviera/grandtour_016.JPG',
             './images/grand-riviera/grandtour_07.JPG',
-            './images/grand-riviera/grandtour_08.JPG'
+            './images/grand-riviera/grandtour_08.JPG',
+            './images/grand-riviera/grandtour_09.jpg',
+            './images/grand-riviera/grandtour_10.jpg',
+            './images/grand-riviera/grandtour_11.jpg',
+            './images/grand-riviera/grandtour_12.jpg'
         ];
 
         function openLightbox(src) {
-            currentImageIndex = galleryImages.indexOf(src);
+            const normalizedSrc = new URL(src, window.location.href).pathname;
+            currentImageIndex = galleryImages.findIndex(image =>
+                new URL(image, window.location.href).pathname === normalizedSrc
+            );
             if (currentImageIndex === -1) currentImageIndex = 0;
 
             document.getElementById('lightbox').style.display = 'block';

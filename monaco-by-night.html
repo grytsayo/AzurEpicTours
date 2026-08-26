@@ -115,6 +115,22 @@
                     <source srcset="./images/monaco-by-night/MC_night_018.webp" type="image/webp">
                     <img src="./images/monaco-by-night/MC_night_018.JPG" alt="Monaco Formula 1 circuit illuminated with city lights reflecting on water" onclick="openLightbox(this.src)" loading="lazy">
                 </picture>
+                <picture>
+                    <source srcset="./images/monaco-by-night/MC_night_09.webp" type="image/webp">
+                    <img src="./images/monaco-by-night/MC_night_09.jpg" alt="Hôtel de Paris illuminated at night in Monte Carlo" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
+                <picture>
+                    <source srcset="./images/monaco-by-night/MC_night_10.webp" type="image/webp">
+                    <img src="./images/monaco-by-night/MC_night_10.jpg" alt="Monte Carlo city lights sparkling above the Mediterranean at night" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
+                <picture>
+                    <source srcset="./images/monaco-by-night/MC_night_11.webp" type="image/webp">
+                    <img src="./images/monaco-by-night/MC_night_11.jpg" alt="Monte Carlo Opera House glowing beneath the night sky" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
+                <picture>
+                    <source srcset="./images/monaco-by-night/MC_night_12.webp" type="image/webp">
+                    <img src="./images/monaco-by-night/MC_night_12.jpg" alt="Ornate entrance of the Monte Carlo Opera House at night" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
             </div>
         </div>
 
@@ -393,7 +409,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 AzurEpicTours. All rights reserved. | <a data-i18n='footerHome' href='/'>Home</a></p>
+            <p>&copy; 2026 AzurEpicTours. All rights reserved. | <a data-i18n='footerHome' href='/'>Home</a></p>
         <p style="margin-top: 10px; opacity: 0.7;"><a data-i18n='footerPrivacy' href='/privacy-policy' style='color: #667eea; text-decoration: none;'>Privacy Policy</a></p>
         </div>
     </footer>
@@ -773,11 +789,18 @@
             './images/monaco-by-night/MC_night_05.JPG',
             './images/monaco-by-night/MC_night_06.jpg',
             './images/monaco-by-night/MC_night_07.jpg',
-            './images/monaco-by-night/MC_night_018.JPG'
+            './images/monaco-by-night/MC_night_018.JPG',
+            './images/monaco-by-night/MC_night_09.jpg',
+            './images/monaco-by-night/MC_night_10.jpg',
+            './images/monaco-by-night/MC_night_11.jpg',
+            './images/monaco-by-night/MC_night_12.jpg'
         ];
 
         function openLightbox(src) {
-            currentImageIndex = galleryImages.indexOf(src);
+            const normalizedSrc = new URL(src, window.location.href).pathname;
+            currentImageIndex = galleryImages.findIndex(image =>
+                new URL(image, window.location.href).pathname === normalizedSrc
+            );
             if (currentImageIndex === -1) currentImageIndex = 0;
 
             document.getElementById('lightbox').style.display = 'block';

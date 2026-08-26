@@ -115,6 +115,22 @@
                     <source srcset="./images/monaco-coastline/MC_coast_08.webp" type="image/webp">
                     <img src="./images/monaco-coastline/MC_coast_08.JPG" alt="Scenic coastal road winding along Mediterranean cliffs" onclick="openLightbox(this.src)" loading="lazy">
                 </picture>
+                <picture>
+                    <source srcset="./images/monaco-coastline/MC_coast_09.webp" type="image/webp">
+                    <img src="./images/monaco-coastline/MC_coast_09.jpg" alt="Wide Mediterranean panorama from the hills above the French Riviera" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
+                <picture>
+                    <source srcset="./images/monaco-coastline/MC_coast_10.webp" type="image/webp">
+                    <img src="./images/monaco-coastline/MC_coast_10.jpg" alt="Villefranche-sur-Mer bay with turquoise water and Cap Ferrat" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
+                <picture>
+                    <source srcset="./images/monaco-coastline/MC_coast_11.webp" type="image/webp">
+                    <img src="./images/monaco-coastline/MC_coast_11.jpg" alt="Turquoise shallows and sheltered coastline of Villefranche-sur-Mer" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
+                <picture>
+                    <source srcset="./images/monaco-coastline/MC_coast_12.webp" type="image/webp">
+                    <img src="./images/monaco-coastline/MC_coast_12.jpg" alt="Forest-covered Cap Ferrat coastline beneath a bright Mediterranean sky" onclick="openLightbox(this.src)" loading="lazy">
+                </picture>
             </div>
         </div>
 
@@ -403,7 +419,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 AzurEpicTours. All rights reserved. | <a data-i18n='footerHome' href='/'>Home</a></p>
+            <p>&copy; 2026 AzurEpicTours. All rights reserved. | <a data-i18n='footerHome' href='/'>Home</a></p>
         <p style="margin-top: 10px; opacity: 0.7;"><a data-i18n='footerPrivacy' href='/privacy-policy' style='color: #667eea; text-decoration: none;'>Privacy Policy</a></p>
         </div>
     </footer>
@@ -804,11 +820,18 @@
             './images/monaco-coastline/MC_coast_05.JPG',
             './images/monaco-coastline/MC_coast_06.JPG',
             './images/monaco-coastline/MC_coast_07.JPG',
-            './images/monaco-coastline/MC_coast_08.JPG'
+            './images/monaco-coastline/MC_coast_08.JPG',
+            './images/monaco-coastline/MC_coast_09.jpg',
+            './images/monaco-coastline/MC_coast_10.jpg',
+            './images/monaco-coastline/MC_coast_11.jpg',
+            './images/monaco-coastline/MC_coast_12.jpg'
         ];
 
         function openLightbox(src) {
-            currentImageIndex = galleryImages.indexOf(src);
+            const normalizedSrc = new URL(src, window.location.href).pathname;
+            currentImageIndex = galleryImages.findIndex(image =>
+                new URL(image, window.location.href).pathname === normalizedSrc
+            );
             if (currentImageIndex === -1) currentImageIndex = 0;
 
             document.getElementById('lightbox').style.display = 'block';
