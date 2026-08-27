@@ -24,6 +24,14 @@
       bkEmailLabel:      'Email *',
       bkPhoneLabel:      'Phone / WhatsApp *',
       bkGuestsLabel:     'Participants *',
+      bkExtrasTitle:     'Optional extras',
+      bkExtraHour:       'Extend the tour by 1 hour',
+      bkLargeGroup:      'Increase the group size to 8 guests',
+      bkBasePrice:       'Base tour',
+      bkSummaryExtras:   'Extras:',
+      bkSummaryTotal:    'Total:',
+      bkNoExtras:        'None',
+      bkErrorLargeGroupRequired: 'Select the large-group option for more than 4 guests.',
       bkLanguageLabel:   'Preferred language',
       bkSubmitBtn:       'Confirm Booking',
       bkSending:         'Sending…',
@@ -60,6 +68,14 @@
       bkEmailLabel:      'Email *',
       bkPhoneLabel:      'Телефон / WhatsApp *',
       bkGuestsLabel:     'Количество человек *',
+      bkExtrasTitle:     'Дополнительные услуги',
+      bkExtraHour:       'Продлить тур на 1 час',
+      bkLargeGroup:      'Увеличить группу до 8 человек',
+      bkBasePrice:       'Базовая стоимость тура',
+      bkSummaryExtras:   'Доп. услуги:',
+      bkSummaryTotal:    'Итого:',
+      bkNoExtras:        'Нет',
+      bkErrorLargeGroupRequired: 'Для группы более 4 человек выберите соответствующую дополнительную услугу.',
       bkLanguageLabel:   'Язык переписки',
       bkSubmitBtn:       'Подтвердить бронирование',
       bkSending:         'Отправка…',
@@ -96,6 +112,14 @@
       bkEmailLabel:      'Email *',
       bkPhoneLabel:      'Téléphone / WhatsApp *',
       bkGuestsLabel:     'Participants *',
+      bkExtrasTitle:     'Options supplémentaires',
+      bkExtraHour:       'Prolonger la visite d’une heure',
+      bkLargeGroup:      'Augmenter le groupe jusqu’à 8 personnes',
+      bkBasePrice:       'Prix de base',
+      bkSummaryExtras:   'Options :',
+      bkSummaryTotal:    'Total :',
+      bkNoExtras:        'Aucune',
+      bkErrorLargeGroupRequired: 'Sélectionnez l’option grand groupe pour plus de 4 personnes.',
       bkLanguageLabel:   'Langue de communication',
       bkSubmitBtn:       'Confirmer la réservation',
       bkSending:         'Envoi en cours…',
@@ -128,6 +152,7 @@
   var BK_PURPLE      = '#667eea';   // brand purple
   var WINDOW_DAYS    = 90;          // bookable horizon
   var MOBILE_BP      = 768;         // px — matches existing site breakpoint
+  var BASE_PRICES    = { majesty: 255, coastal: 385, cannes: 415, bynight: 255, wine: 415 };
 
   // ── Module state ─────────────────────────────────────────────────────────────
 
@@ -145,12 +170,32 @@
   var _cachedMonths  = {};     // 'YYYY-MM' → true  (which months have been fetched)
   var _today         = null;   // Date object at local midnight
   var _maxGuests     = null;   // read from API on first fetch; null until then
+  var _basePrice     = 0;      // server-provided group price
+  var _addonsMeta    = {
+    extra_hour: { price: 50, duration_minutes: 60 },
+    large_group: { price: 350, max_guests: 8 },
+  };
 
   // ── Guest-count helper ────────────────────────────────────────────────────────
 
   // Cascade: API value (read from range response) → init option → default 4
   function effectiveMaxGuests() {
     return _maxGuests || (_opts && _opts.maxGuests) || 4;
+  }
+
+  function addonState() {
+    var extraHour = document.getElementById('bk-addon-extra-hour');
+    var largeGroup = document.getElementById('bk-addon-large-group');
+    return {
+      extra_hour: Boolean(extraHour && extraHour.checked),
+      large_group: Boolean(largeGroup && largeGroup.checked),
+    };
+  }
+
+  function effectiveGuestLimit() {
+    return addonState().large_group
+      ? (_addonsMeta.large_group.max_guests || 8)
+      : effectiveMaxGuests();
   }
 
   // ── Translation helper ────────────────────────────────────────────────────────
@@ -256,6 +301,11 @@
         if (!_maxGuests && data.tours && data.tours[_opts.tourId] &&
             data.tours[_opts.tourId].max_guests) {
           _maxGuests = data.tours[_opts.tourId].max_guests;
+        }
+        if (data.tours && data.tours[_opts.tourId]) {
+          var tourMeta = data.tours[_opts.tourId];
+          if (tourMeta.price_group !== undefined) _basePrice = Number(tourMeta.price_group) || 0;
+          if (tourMeta.addons) _addonsMeta = tourMeta.addons;
         }
       });
   }
@@ -597,16 +647,78 @@
 
   // ── Step navigation ───────────────────────────────────────────────────────────
 
+  function buildAddonOptions() {
+    var step2 = document.getElementById('bk-step2');
+    var summary = document.getElementById('bk-summary');
+    if (!step2 || !summary || document.getElementById('bk-addons')) return;
+
+    var wrap = document.createElement('div');
+    wrap.id = 'bk-addons';
+    wrap.style.cssText = 'margin-top:18px; padding:16px; border:2px solid #e8eaf6; border-radius:12px; background:#fafaff;';
+
+    var title = document.createElement('h4');
+    title.textContent = t('bkExtrasTitle');
+    title.style.cssText = 'margin:0 0 12px; color:#444; font-size:1rem;';
+    wrap.appendChild(title);
+
+    function addOption(id, labelText, price, onChange) {
+      var label = document.createElement('label');
+      label.style.cssText = 'display:flex; align-items:flex-start; gap:10px; padding:9px 0; cursor:pointer; color:#444; line-height:1.35;';
+      var input = document.createElement('input');
+      input.type = 'checkbox';
+      input.id = id;
+      input.style.cssText = 'width:18px; height:18px; margin-top:1px; accent-color:' + BK_PURPLE + '; flex:0 0 auto;';
+      var text = document.createElement('span');
+      text.innerHTML = labelText + ' <strong style="color:' + BK_PURPLE + '; white-space:nowrap;">+€' + price + '</strong>';
+      input.addEventListener('change', onChange);
+      label.appendChild(input);
+      label.appendChild(text);
+      wrap.appendChild(label);
+    }
+
+    addOption('bk-addon-extra-hour', t('bkExtraHour'), _addonsMeta.extra_hour.price, updateSummary);
+    addOption('bk-addon-large-group', t('bkLargeGroup'), _addonsMeta.large_group.price, function () {
+      var guestsInput = document.getElementById('bk-guests');
+      if (guestsInput) {
+        guestsInput.max = effectiveGuestLimit();
+        if (!this.checked && Number(guestsInput.value) > effectiveMaxGuests()) {
+          guestsInput.value = effectiveMaxGuests();
+        }
+      }
+      updateSummary();
+    });
+
+    summary.parentNode.insertBefore(wrap, summary);
+  }
+
+  function updateSummary() {
+    var summary = document.getElementById('bk-summary');
+    if (!summary || !_selectedDate || !_selectedTime) return;
+    var selected = addonState();
+    var extras = [];
+    var total = _basePrice;
+    if (selected.extra_hour) {
+      total += Number(_addonsMeta.extra_hour.price) || 0;
+      extras.push(t('bkExtraHour') + ' (+€' + _addonsMeta.extra_hour.price + ')');
+    }
+    if (selected.large_group) {
+      total += Number(_addonsMeta.large_group.price) || 0;
+      extras.push(t('bkLargeGroup') + ' (+€' + _addonsMeta.large_group.price + ')');
+    }
+    summary.innerHTML =
+      '<div><strong>📅 ' + t('bkSummaryDate') + '</strong> ' + _selectedDate +
+      ' &nbsp;|&nbsp; <strong>⌛ ' + t('bkSummaryTime') + '</strong> ' + _selectedTime + '</div>' +
+      '<div style="margin-top:8px;"><strong>' + t('bkBasePrice') + ':</strong> €' + _basePrice + '</div>' +
+      '<div style="margin-top:5px;"><strong>' + t('bkSummaryExtras') + '</strong> ' + (extras.length ? extras.join('<br>') : t('bkNoExtras')) + '</div>' +
+      '<div style="margin-top:8px; padding-top:8px; border-top:1px solid #d8ddf0; font-size:1.05rem;"><strong>' + t('bkSummaryTotal') + ' €' + total + '</strong></div>';
+  }
+
   function goToStep2() {
     if (!_selectedTime || !_selectedDate) return;
     document.getElementById('bk-step1').style.display = 'none';
     document.getElementById('bk-step2').style.display = 'block';
-    var summary = document.getElementById('bk-summary');
-    if (summary) {
-      summary.innerHTML =
-        '<strong>📅 ' + t('bkSummaryDate') + '</strong> ' + _selectedDate +
-        ' &nbsp;|&nbsp; <strong>⌛ ' + t('bkSummaryTime') + '</strong> ' + _selectedTime;
-    }
+    buildAddonOptions();
+    updateSummary();
   }
 
   function goToStep1() {
@@ -620,6 +732,7 @@
     var phone    = document.getElementById('bk-phone').value.trim();
     var guests   = parseInt(document.getElementById('bk-guests').value, 10);
     var language = document.getElementById('bk-language').value;
+    var addons   = addonState();
     var errDiv   = document.getElementById('bk-submit-error');
     errDiv.style.display = 'none';
 
@@ -628,8 +741,10 @@
       errDiv.style.display = 'block';
       return;
     }
-    if (guests > effectiveMaxGuests()) {
-      errDiv.textContent   = t('bkErrorMaxGuests').replace('{N}', effectiveMaxGuests());
+    if (guests > effectiveGuestLimit()) {
+      errDiv.textContent   = !addons.large_group && guests > effectiveMaxGuests()
+        ? t('bkErrorLargeGroupRequired')
+        : t('bkErrorMaxGuests').replace('{N}', effectiveGuestLimit());
       errDiv.style.display = 'block';
       return;
     }
@@ -653,6 +768,7 @@
         email:        email,
         phone:        phone,
         participants: guests,
+        addons:       addons,
         language:     language,
       }),
     })
@@ -825,6 +941,8 @@
     if (submitErr) submitErr.style.display = 'none';
     var summary = document.getElementById('bk-summary');
     if (summary) summary.innerHTML = '';
+    var addonsWrap = document.getElementById('bk-addons');
+    if (addonsWrap) addonsWrap.remove();
     var langSel = document.getElementById('bk-language');
     if (langSel) langSel.value = _opts.lang();
     var guestsInput = document.getElementById('bk-guests');
@@ -879,6 +997,11 @@
     _cache        = {};
     _cachedMonths = {};
     _maxGuests    = null;
+    _basePrice    = 0;
+    _addonsMeta   = {
+      extra_hour: { price: 50, duration_minutes: 60 },
+      large_group: { price: 350, max_guests: 8 },
+    };
     global.openBookingModal  = undefined;
     global.closeBookingModal = undefined;
   }
@@ -890,6 +1013,7 @@
     if (_opts && _opts.modalId === options.modalId) return;
 
     _opts  = options;
+    _basePrice = BASE_PRICES[options.tourId] || 0;
     _today = todayLocal();
     _cache        = {};
     _cachedMonths = {};
