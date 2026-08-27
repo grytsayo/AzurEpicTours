@@ -107,7 +107,8 @@
             "https://azurepictours.com/images/monaco-majesty/MC_magesty_01.jpg",
             "https://azurepictours.com/images/monaco-coastline/MC_coast_01.jpg",
             "https://azurepictours.com/images/grand-riviera/grandtour_01.jpg",
-            "https://azurepictours.com/images/monaco-by-night/MC_night_01.jpg"
+            "https://azurepictours.com/images/monaco-by-night/MC_night_01.jpg",
+            "https://azurepictours.com/images/riviera-wine-villages/wine-riviera-05.jpg"
           ],
           "telephone": "+33 6 24 72 99 83",
           "email": "azurepictours@gmail.com",
@@ -487,6 +488,38 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Tour 5: Riviera Wine & Villages -->
+            <div class="tour-card" id="tour-riviera-wine-villages" onclick="window.location.href='/riviera-wine-villages'">
+                <div class="tour-image" style="background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('./images/riviera-wine-villages/wine-riviera-05.jpg'); background-size: cover; background-position: center;" role="img" aria-label="Saint-Paul-de-Vence medieval village on the French Riviera"></div>
+                <div class="tour-content">
+                    <div class="tour-header">
+                        <h3 class="tour-title" data-i18n="tour5Title">Riviera Wine & Villages</h3>
+                        <span class="tour-duration" data-i18n="tour5Duration">6.5 hours</span>
+                    </div>
+                    <p class="tour-tagline" data-i18n="tour5Tagline">Wine, waterfalls and timeless villages</p>
+                    <p class="tour-description" data-i18n="tour5Description">Taste the authentic Riviera through a local winery, medieval villages, waterfalls, Antibes and Cannes.</p>
+                    <div class="tour-highlights">
+                        <h4 data-i18n="highlightsLabel">Highlights:</h4>
+                        <ul>
+                            <li data-i18n="tour5H1">Local winery and optional wine tasting</li>
+                            <li data-i18n="tour5H2">Saint-Paul-de-Vence art village</li>
+                            <li data-i18n="tour5H3">Saut du Loup waterfalls and Gourdon</li>
+                            <li data-i18n="tour5H4">Antibes old town and Cannes red carpet</li>
+                        </ul>
+                    </div>
+                    <div class="tour-features">
+                        <span class="feature-tag" data-i18n="tour5Tag1">Private tour for 1–4 guests</span>
+                        <span class="feature-tag" data-i18n="tour5Tag2">Pickup from Nice and nearby Riviera towns</span>
+                        <span class="feature-tag" data-i18n="tour5Tag3">English, French or Russian</span>
+                        <span class="feature-tag" data-i18n="tour5Tag4">Child seat available on request</span>
+                    </div>
+                    <div class="tour-footer">
+                        <div class="tour-price"><div><span class="tour-price-old">€415</span><span class="tour-price-discount-badge">-20%</span></div><span class="tour-price-new">€332</span></div>
+                        <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); window.location.href='/riviera-wine-villages'">Tour Details</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -698,6 +731,7 @@
             <option value="monaco-coastline">Monaco Coastline Journey</option>
             <option value="grand-riviera">Grand Riviera Tour</option>
             <option value="monaco-night">Monaco by Night</option>
+            <option value="riviera-wine-villages">Riviera Wine & Villages</option>
             <option value="other">Other</option>
         </select>
         <textarea name="message"></textarea>
@@ -784,6 +818,7 @@
                     <option value="monaco-coastline" data-i18n="formOption2">Monaco Coastline Journey (6 часов)</option>
                     <option value="grand-riviera" data-i18n="formOption3">Grand Riviera Tour (8 часов)</option>
                     <option value="monaco-night" data-i18n="formOption4">Monaco by Night (4 часа)</option>
+                    <option value="riviera-wine-villages" data-i18n="formOption5">Riviera Wine & Villages (6,5 часа)</option>
                     <option value="other" data-i18n="formOptionOther">Другое</option>
                 </select>
             </div>
@@ -887,6 +922,19 @@
                 tour4Duration: "4 часа",
                 tour4Tagline: "Волшебство вечернего княжества",
                 tour4Price: "от €255",
+
+                tour5Title: "Вино и деревни Лазурного берега",
+                tour5Duration: "6,5 часа",
+                tour5Tagline: "Вино, водопады и средневековые деревни",
+                tour5Description: "Откройте настоящую Ривьеру: местная винодельня, старинные деревни, водопады, Антиб и Канны.",
+                tour5H1: "Местная винодельня и дегустация по желанию",
+                tour5H2: "Деревня художников Сен-Поль-де-Ванс",
+                tour5H3: "Водопады Saut du Loup и Гурдон",
+                tour5H4: "Старый Антиб и красная дорожка Канн",
+                tour5Tag1: "Приватный тур для 1–4 гостей",
+                tour5Tag2: "Трансфер из Ниццы и соседних городов Ривьеры",
+                tour5Tag3: "Английский, французский или русский язык",
+                tour5Tag4: "Детское кресло по запросу",
 
                 highlightsLabel: "Основные моменты:",
                 detailsButton: "Детали тура",
@@ -1001,6 +1049,7 @@
                 formOption2: "Monaco Coastline Journey (6 часов)",
                 formOption3: "Grand Riviera Tour (8 часов)",
                 formOption4: "Monaco by Night (4 часа)",
+                formOption5: "Вино и деревни Ривьеры (6,5 часа)",
                 formOptionOther: "Другое",
 
                 // Modal 1: Monaco Majesty
@@ -1296,6 +1345,19 @@
                 tour4Tagline: "Magic of the evening principality",
                 tour4Price: "from €255",
 
+                tour5Title: "Riviera Wine & Villages",
+                tour5Duration: "6.5 hours",
+                tour5Tagline: "Wine, waterfalls and timeless villages",
+                tour5Description: "Taste the authentic Riviera through a local winery, medieval villages, waterfalls, Antibes and Cannes.",
+                tour5H1: "Local winery and optional wine tasting",
+                tour5H2: "Saint-Paul-de-Vence art village",
+                tour5H3: "Saut du Loup waterfalls and Gourdon",
+                tour5H4: "Antibes old town and Cannes red carpet",
+                tour5Tag1: "Private tour for 1–4 guests",
+                tour5Tag2: "Pickup from Nice and nearby Riviera towns",
+                tour5Tag3: "English, French or Russian",
+                tour5Tag4: "Child seat available on request",
+
                 highlightsLabel: "Highlights:",
                 detailsButton: "Tour details",
                 bookButton: "Choose your date",
@@ -1409,6 +1471,7 @@
                 formOption2: "Monaco Coastline Journey (6 hours)",
                 formOption3: "Grand Riviera Tour (8 hours)",
                 formOption4: "Monaco by Night (4 hours)",
+                formOption5: "Riviera Wine & Villages (6.5 hours)",
                 formOptionOther: "Other",
 
                 // Modal 1: Monaco Majesty
@@ -1704,6 +1767,19 @@
                 tour4Tagline: "Magie de la principauté le soir",
                 tour4Price: "à partir de 255€",
 
+                tour5Title: "Vins et villages de la Riviera",
+                tour5Duration: "6 h 30",
+                tour5Tagline: "Vins, cascades et villages intemporels",
+                tour5Description: "Découvrez la vraie Riviera : domaine viticole, villages médiévaux, cascades, Antibes et Cannes.",
+                tour5H1: "Domaine local et dégustation en option",
+                tour5H2: "Village d'art de Saint-Paul-de-Vence",
+                tour5H3: "Cascades du Saut du Loup et Gourdon",
+                tour5H4: "Vieil Antibes et tapis rouge de Cannes",
+                tour5Tag1: "Visite privée pour 1 à 4 personnes",
+                tour5Tag2: "Départ de Nice et des villes voisines",
+                tour5Tag3: "Anglais, français ou russe",
+                tour5Tag4: "Siège enfant sur demande",
+
                 highlightsLabel: "Points forts :",
                 detailsButton: "Détails de la visite",
                 bookButton: "Choisir votre date",
@@ -1781,6 +1857,7 @@
                 formOption2: "Voyage Côtier de Monaco (6 heures)",
                 formOption3: "Grand Tour de la Riviera (8 heures)",
                 formOption4: "Monaco la Nuit (4 heures)",
+                formOption5: "Vins et villages de la Riviera (6 h 30)",
                 formOptionOther: "Autre",
 
                 // Modal 1: Monaco Majesty
