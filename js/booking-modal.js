@@ -157,7 +157,7 @@
   // ── Module state ─────────────────────────────────────────────────────────────
 
   var _opts          = null;   // init options
-  var _modal         = null;   // DOM: #bookingUnavailableModal
+  var _modal         = null;   // DOM: booking modal element
   var _step1         = null;   // DOM: #bk-step1
   var _calRoot       = null;   // DOM: .bk-cal-root (created by us inside _step1)
   var _selectedDate  = null;   // 'YYYY-MM-DD' or null

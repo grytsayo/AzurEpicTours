@@ -336,11 +336,7 @@
                     </div>
                     <div class="tour-footer">
                         <div class="tour-price">
-                            <div>
-                                <span class="tour-price-old">€255</span>
-                                <span class="tour-price-discount-badge">-20%</span>
-                            </div>
-                            <span class="tour-price-new">€204</span>
+                            <span class="tour-price-current">€255</span>
                         </div>
                         <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); window.location.href='monaco-majesty.html'">Tour Details</button>
                     </div>
@@ -384,11 +380,7 @@
                     </div>
                     <div class="tour-footer">
                         <div class="tour-price">
-                            <div>
-                                <span class="tour-price-old">€385</span>
-                                <span class="tour-price-discount-badge">-20%</span>
-                            </div>
-                            <span class="tour-price-new">€308</span>
+                            <span class="tour-price-current">€385</span>
                         </div>
                         <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); window.location.href='monaco-coastline.html'">Tour Details</button>
                     </div>
@@ -432,11 +424,7 @@
                     </div>
                     <div class="tour-footer">
                         <div class="tour-price">
-                            <div>
-                                <span class="tour-price-old">€415</span>
-                                <span class="tour-price-discount-badge">-20%</span>
-                            </div>
-                            <span class="tour-price-new">€332</span>
+                            <span class="tour-price-current">€415</span>
                         </div>
                         <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); window.location.href='grand-riviera-tour.html'">Tour Details</button>
                     </div>
@@ -478,11 +466,7 @@
                     </div>
                     <div class="tour-footer">
                         <div class="tour-price">
-                            <div>
-                                <span class="tour-price-old">€255</span>
-                                <span class="tour-price-discount-badge">-20%</span>
-                            </div>
-                            <span class="tour-price-new">€204</span>
+                            <span class="tour-price-current">€255</span>
                         </div>
                         <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); window.location.href='monaco-by-night.html'">Tour Details</button>
                     </div>
@@ -515,46 +499,10 @@
                         <span class="feature-tag" data-i18n="tour5Tag4">Child seat available on request</span>
                     </div>
                     <div class="tour-footer">
-                        <div class="tour-price"><div><span class="tour-price-old">€415</span><span class="tour-price-discount-badge">-20%</span></div><span class="tour-price-new">€332</span></div>
+                        <div class="tour-price"><span class="tour-price-current">€415</span></div>
                         <button class="details-button" data-i18n="detailsButton" onclick="event.stopPropagation(); window.location.href='/riviera-wine-villages'">Tour Details</button>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Booking Unavailable Modal -->
-    <div id="bookingUnavailableModal" class="modal">
-        <div class="modal-content" style="max-width: 500px;">
-            <div class="modal-header" style="text-align: center;">
-                <span class="close" onclick="closeBookingModal()">&times;</span>
-                <h2 data-i18n="bookingUnavailableTitle" style="color: #d4a574;">Service Temporarily Unavailable</h2>
-            </div>
-            <div class="modal-body" style="text-align: center; padding: 30px 20px;">
-                <div style="font-size: 48px; margin-bottom: 20px;">⚠️</div>
-                <p data-i18n="bookingUnavailableMessage" style="font-size: 16px; line-height: 1.6; margin-bottom: 25px;">
-                    The online booking service is temporarily unavailable. Please use our contact information below for any inquiries or to make a reservation.
-                </p>
-
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-                    <h3 data-i18n="contactInfoTitle" style="margin-bottom: 15px; color: #2c3e50;">Contact Information</h3>
-                    <div style="text-align: left; display: inline-block;">
-                        <p style="margin: 10px 0;">
-                            <strong>📧 Email:</strong><br>
-                            <a href="mailto:azurepictours@gmail.com" style="color: #d4a574;">azurepictours@gmail.com</a>
-                        </p>
-                        <p style="margin: 10px 0;">
-                            <strong data-i18n="phoneLabel">📞 Phone:</strong><br>
-                            <a href="tel:+33624729983" style="color: #d4a574;">+33 6 24 72 99 83</a>
-                        </p>
-                        <p style="margin: 10px 0;">
-                            <strong>💬 WhatsApp:</strong><br>
-                            <a href="https://wa.me/+33624729983" target="_blank" style="color: #d4a574;">+33 6 24 72 99 83</a>
-                        </p>
-                    </div>
-                </div>
-
-                <button onclick="closeBookingModal()" class="book-cta" data-i18n="closeButton" style="margin-top: 10px;">Close</button>
             </div>
         </div>
     </div>
@@ -940,9 +888,6 @@
                 detailsButton: "Детали тура",
                 bookButton: "Выбрать дату",
 
-                // Booking unavailable modal
-                bookingUnavailableTitle: "Сервис временно недоступен",
-                bookingUnavailableMessage: "Онлайн-сервис бронирования временно недоступен. Пожалуйста, используйте нашу контактную информацию ниже для любых запросов или для бронирования.",
                 contactInfoTitle: "Контактная информация",
                 phoneLabel: "📞 Телефон:",
                 closeButton: "Закрыть",
@@ -1362,9 +1307,6 @@
                 detailsButton: "Tour details",
                 bookButton: "Choose your date",
 
-                // Booking unavailable modal
-                bookingUnavailableTitle: "Service Temporarily Unavailable",
-                bookingUnavailableMessage: "The online booking service is temporarily unavailable. Please use our contact information below for any inquiries or to make a reservation.",
                 contactInfoTitle: "Contact Information",
                 phoneLabel: "📞 Phone:",
                 closeButton: "Close",
@@ -1784,9 +1726,6 @@
                 detailsButton: "Détails de la visite",
                 bookButton: "Choisir votre date",
 
-                // Booking unavailable modal
-                bookingUnavailableTitle: "Service temporairement indisponible",
-                bookingUnavailableMessage: "Le service de réservation en ligne est temporairement indisponible. Veuillez utiliser nos coordonnées ci-dessous pour toute demande ou pour effectuer une réservation.",
                 contactInfoTitle: "Informations de contact",
                 phoneLabel: "📞 Téléphone:",
                 closeButton: "Fermer",
@@ -2251,23 +2190,6 @@
 
         function closeModal(modalId) {
             const modal = document.getElementById(modalId);
-            if (modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        // Booking unavailable modal functions
-        function openBookingModal() {
-            const modal = document.getElementById('bookingUnavailableModal');
-            if (modal) {
-                modal.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-        function closeBookingModal() {
-            const modal = document.getElementById('bookingUnavailableModal');
             if (modal) {
                 modal.style.display = 'none';
                 document.body.style.overflow = 'auto';

@@ -47,13 +47,13 @@
     // Fallback: if booking-modal.js fails to load, show a graceful message
     if (!window.BookingModal) {
         window.openBookingModal = function() {
-            var m = document.getElementById('bookingUnavailableModal');
+            var m = document.getElementById('bookingModal');
             if (m) { m.style.display = 'block'; document.body.style.overflow = 'hidden'; }
             var s = document.getElementById('bk-step1');
-            if (s) s.innerHTML = '<p style="color:#e53e3e;padding:20px;text-align:center">Booking temporarily unavailable. Please refresh the page or contact us at <a href="mailto:azurepictours@gmail.com">azurepictours@gmail.com</a></p>';
+            if (s) s.innerHTML = '<p style="color:#e53e3e;padding:20px;text-align:center">We could not load the booking form. Please refresh the page or contact us at <a href="mailto:azurepictours@gmail.com">azurepictours@gmail.com</a>.</p>';
         };
         window.closeBookingModal = function() {
-            var m = document.getElementById('bookingUnavailableModal');
+            var m = document.getElementById('bookingModal');
             if (m) { m.style.display = 'none'; document.body.style.overflow = 'auto'; }
         };
     }
@@ -237,11 +237,7 @@
         <!-- CTA Section -->
         <div class="cta-section">
             <div class="price-info">
-                <div>
-                    <span class="price-info-old">€255</span>
-                    <span class="price-info-discount-badge">-20%</span>
-                </div>
-                <span class="price-info-new">€204</span>
+                <span class="price-info-current">€255</span>
             </div>
             <button onclick="openBookingModal()" class="book-btn" data-i18n="bookButton">Book This Tour</button>
             <p style="margin-top: 15px; color: #666;" data-i18n="cancelPolicy">Free cancellation 48 hours before start</p>
@@ -249,7 +245,7 @@
     </div>
 
     <!-- Booking Modal -->
-    <div id="bookingUnavailableModal" class="modal">
+    <div id="bookingModal" class="modal">
         <div class="modal-content" style="max-width: 560px;">
             <div class="modal-header">
                 <span class="close" onclick="closeBookingModal()">&times;</span>
@@ -1012,7 +1008,7 @@
             apiBaseUrl: 'https://azure-epic-tours.vercel.app/api',
             apiKey:     'dir_SBo5KKQ6st69lYLmOPHqoIUoHhbvZX8t',
             lang:       function() { return currentLang; },
-            modalId:    'bookingUnavailableModal',
+            modalId:    'bookingModal',
         });
     </script>
 

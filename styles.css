@@ -356,27 +356,7 @@ h1 {
     align-items: flex-start;
 }
 
-.tour-price-old {
-    font-size: 0.95rem;
-    color: #667eea;
-    text-decoration: line-through;
-    opacity: 0.7;
-    font-weight: 500;
-}
-
-.tour-price-discount-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 12px;
-    margin-left: 8px;
-    box-shadow: 0 2px 4px rgba(245, 87, 108, 0.3);
-}
-
-.tour-price-new {
+.tour-price-current {
     font-size: 1.5rem;
     font-weight: 800;
     color: #f5576c;
@@ -1509,27 +1489,7 @@ nav {
     margin-bottom: 30px;
 }
 
-.price-info-old {
-    font-size: 1.2rem;
-    color: #667eea;
-    text-decoration: line-through;
-    opacity: 0.7;
-    display: inline-block;
-    margin-right: 10px;
-}
-
-.price-info-discount-badge {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    color: white;
-    font-size: 0.9rem;
-    font-weight: 700;
-    padding: 4px 12px;
-    border-radius: 15px;
-    display: inline-block;
-    margin-left: 10px;
-}
-
-.price-info-new {
+.price-info-current {
     font-size: 2.5rem;
     font-weight: 800;
     color: #f5576c;
@@ -1783,7 +1743,7 @@ nav {
         padding: 30px 20px;
     }
 
-    .price-info-new {
+    .price-info-current {
         font-size: 2rem;
     }
 
@@ -1814,56 +1774,6 @@ nav {
 
     .related-tour-card picture {
         height: 180px;
-    }
-}
-
-/* ============================================
-   TEMP: Hide discount UI — 2026-05-10 (updated)
-   Hides the discounted price + badges.
-   Promotes the original price (.tour-price-old / .price-info-old)
-   to look like the main visible price.
-
-   TO RESTORE DISCOUNTS: comment out or delete this entire block
-   (and the matching mobile media query override below, if separate).
-   ============================================ */
-
-/* Hide the discounted price */
-.tour-price-new,
-.price-info-new {
-    display: none !important;
-}
-
-/* Hide the discount badges */
-.tour-price-discount-badge,
-.price-info-discount-badge {
-    display: none !important;
-}
-
-/* Promote .tour-price-old to look like .tour-price-new on homepage cards */
-.tour-price-old {
-    font-size: 1.5rem !important;
-    font-weight: 800 !important;
-    color: #f5576c !important;
-    text-decoration: none !important;
-    opacity: 1 !important;
-    letter-spacing: -0.5px !important;
-}
-
-/* Promote .price-info-old to look like .price-info-new on tour pages */
-.price-info-old {
-    font-size: 2.5rem !important;
-    font-weight: 800 !important;
-    color: #f5576c !important;
-    text-decoration: none !important;
-    opacity: 1 !important;
-    display: block !important;
-    margin-right: 0 !important;
-}
-
-/* TEMP mobile override — matches the .price-info-new { font-size: 2rem } rule above */
-@media (max-width: 768px) {
-    .price-info-old {
-        font-size: 2rem !important;
     }
 }
 

@@ -213,11 +213,7 @@
         <!-- CTA Section -->
         <div class="cta-section">
             <div class="price-info">
-                <div>
-                    <span class="price-info-old">€415</span>
-                    <span class="price-info-discount-badge">-20%</span>
-                </div>
-                <span class="price-info-new">€332</span>
+                <span class="price-info-current">€415</span>
             </div>
             <button onclick="openBookingModal()" class="book-btn" data-i18n="bookButton">Book This Tour</button>
             <p style="margin-top: 15px; color: #666;" data-i18n="cancelPolicy">Free cancellation 48 hours before start</p>
@@ -225,7 +221,7 @@
     </div>
 
     <!-- Booking Modal -->
-    <div id="bookingUnavailableModal" class="modal">
+    <div id="bookingModal" class="modal">
         <div class="modal-content" style="max-width: 560px;">
             <div class="modal-header">
                 <span class="close" onclick="closeBookingModal()">&times;</span>
@@ -963,7 +959,7 @@
             apiBaseUrl: 'https://azure-epic-tours.vercel.app/api',
             apiKey:     'dir_SBo5KKQ6st69lYLmOPHqoIUoHhbvZX8t',
             lang:       function() { return currentLang; },
-            modalId:    'bookingUnavailableModal',
+            modalId:    'bookingModal',
         });
 
     </script>

@@ -221,28 +221,24 @@
         <!-- CTA Section -->
         <div class="cta-section">
             <div class="price-info">
-                <div>
-                    <span class="price-info-old">€225</span>
-                    <span class="price-info-discount-badge">-20%</span>
-                </div>
-                <span class="price-info-new">€180</span>
+                <span class="price-info-current">€225</span>
             </div>
             <button onclick="openBookingModal()" class="book-btn" data-i18n="bookButton">Book This Tour</button>
             <p style="margin-top: 15px; color: #666;" data-i18n="cancelPolicy">Free cancellation 48 hours before start</p>
         </div>
     </div>
 
-    <!-- Booking Unavailable Modal -->
-    <div id="bookingUnavailableModal" class="modal">
+    <!-- Booking Information Modal -->
+    <div id="bookingModal" class="modal">
         <div class="modal-content" style="max-width: 500px;">
             <div class="modal-header" style="text-align: center;">
                 <span class="close" onclick="closeBookingModal()">&times;</span>
-                <h2 data-i18n="bookingUnavailableTitle" style="color: #d4a574;">Service Temporarily Unavailable</h2>
+                <h2 data-i18n="bookingInfoTitle" style="color: #d4a574;">Book This Tour</h2>
             </div>
             <div class="modal-body" style="text-align: center; padding: 30px 20px;">
                 <div style="font-size: 48px; margin-bottom: 20px;">⚠️</div>
-                <p data-i18n="bookingUnavailableMessage" style="font-size: 16px; line-height: 1.6; margin-bottom: 25px;">
-                    The online booking service is temporarily unavailable. Please use our contact information below for any inquiries or to make a reservation.
+                <p data-i18n="bookingInfoMessage" style="font-size: 16px; line-height: 1.6; margin-bottom: 25px;">
+                    Online booking is available on every published tour page.
                 </p>
 
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
@@ -465,8 +461,8 @@
                 priceDisplay: "from €200",
                 bookButton: "Book This Tour",
                 cancelPolicy: "Free cancellation 48 hours before start",
-                bookingUnavailableTitle: "Service Temporarily Unavailable",
-                bookingUnavailableMessage: "The online booking service is temporarily unavailable. Please use our contact information below for any inquiries or to make a reservation.",
+                bookingInfoTitle: "Book This Tour",
+                bookingInfoMessage: "Online booking is available on every published tour page.",
                 contactInfoTitle: "Contact Information",
                 phoneLabel: "📞 Phone:",
                 closeButton: "Close",
@@ -548,8 +544,8 @@
                 priceDisplay: "от €200",
                 bookButton: "Забронировать тур",
                 cancelPolicy: "Бесплатная отмена за 48 часов до начала",
-                bookingUnavailableTitle: "Сервис временно недоступен",
-                bookingUnavailableMessage: "Онлайн-сервис бронирования временно недоступен. Пожалуйста, используйте нашу контактную информацию ниже для любых запросов или для бронирования.",
+                bookingInfoTitle: "Забронировать тур",
+                bookingInfoMessage: "Онлайн-бронирование доступно на странице каждого опубликованного тура.",
                 contactInfoTitle: "Контактная информация",
                 phoneLabel: "📞 Телефон:",
                 closeButton: "Закрыть",
@@ -631,8 +627,8 @@
                 priceDisplay: "à partir de 200 €",
                 bookButton: "Réserver cette visite",
                 cancelPolicy: "Annulation gratuite 48 heures avant le début",
-                bookingUnavailableTitle: "Service temporairement indisponible",
-                bookingUnavailableMessage: "Le service de réservation en ligne est temporairement indisponible. Veuillez utiliser nos coordonnées ci-dessous pour toute demande ou pour effectuer une réservation.",
+                bookingInfoTitle: "Réserver cette excursion",
+                bookingInfoMessage: "La réservation en ligne est disponible sur la page de chaque excursion publiée.",
                 contactInfoTitle: "Coordonnées",
                 phoneLabel: "📞 Téléphone :",
                 closeButton: "Fermer",
@@ -846,7 +842,7 @@
 
         // Booking modal functions
         function openBookingModal() {
-            const modal = document.getElementById('bookingUnavailableModal');
+            const modal = document.getElementById('bookingModal');
             if (modal) {
                 modal.style.display = 'block';
                 document.body.style.overflow = 'hidden';
@@ -854,7 +850,7 @@
         }
 
         function closeBookingModal() {
-            const modal = document.getElementById('bookingUnavailableModal');
+            const modal = document.getElementById('bookingModal');
             if (modal) {
                 modal.style.display = 'none';
                 document.body.style.overflow = 'auto';
@@ -863,7 +859,7 @@
 
         // Close modal when clicking outside of it
         window.onclick = function(event) {
-            const modal = document.getElementById('bookingUnavailableModal');
+            const modal = document.getElementById('bookingModal');
             if (event.target == modal) {
                 closeBookingModal();
             }
