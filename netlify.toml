@@ -2,6 +2,34 @@
   node_bundler = "esbuild"
 
 [[redirects]]
+  from = "/weekly-tours.html"
+  to = "/weekly-tours"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/weekly-tours-admin.html"
+  to = "/weekly-tours-admin"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/weekly-tours-admin*"
+  [headers.values]
+    Cache-Control = "no-store"
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-Robots-Tag = "noindex, nofollow, noarchive"
+    Referrer-Policy = "no-referrer"
+
+# Local design drafts must never be served by production hosting.
+[[redirects]]
+  from = "/drafts/*"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
   from = "/monaco-majesty.html"
   to = "/monaco-majesty"
   status = 301
