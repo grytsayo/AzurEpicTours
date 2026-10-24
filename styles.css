@@ -1001,6 +1001,27 @@ footer {
     }
 }
 
+/* The entire weekly-tour announcement is one accessible link. */
+.weekly-tour-preview {
+    display: flex;
+    flex-wrap: wrap;
+    background: #faf7ee;
+    border-radius: 12px;
+    overflow: hidden;
+    color: #163d42;
+    text-decoration: none;
+    transition: box-shadow 0.2s ease;
+}
+
+.weekly-tour-preview:hover {
+    box-shadow: 0 8px 24px rgba(22, 61, 66, 0.18);
+}
+
+.weekly-tour-preview:focus-visible {
+    outline: 3px solid #667eea;
+    outline-offset: 5px;
+}
+
 /* Language Switcher Styles */
 .language-switcher {
     position: absolute;

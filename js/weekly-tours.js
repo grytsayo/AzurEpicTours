@@ -76,7 +76,11 @@
     document.querySelector('meta[property="og:description"]').content = tr('description');
     document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = tr(el.dataset.i18n); });
     document.querySelectorAll('[data-i18n-aria]').forEach(el => { el.setAttribute('aria-label', tr(el.dataset.i18nAria)); });
-    document.querySelectorAll('[data-lang]').forEach(el => el.setAttribute('aria-pressed', String(el.dataset.lang === lang)));
+    document.querySelectorAll('[data-lang]').forEach(el => {
+      const active = el.dataset.lang === lang;
+      el.setAttribute('aria-pressed', String(active));
+      el.classList.toggle('active', active);
+    });
     renderDepartures(); renderDialog();
   }
   document.querySelectorAll('[data-lang]').forEach(button => button.onclick = () => changeLanguage(button.dataset.lang));
