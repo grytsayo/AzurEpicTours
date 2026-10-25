@@ -2,12 +2,12 @@
   'use strict';
   const translations = window.weeklyTourTranslations;
   const $ = id => document.getElementById(id);
-  let lang = 'en';
-  try { lang = localStorage.getItem('selectedLanguage') || 'en'; } catch {}
-  if (!translations[lang]) lang = 'en';
+  let lang = 'ru';
+  try { lang = localStorage.getItem('weeklyTourLanguage') || 'ru'; } catch {}
+  if (!translations[lang]) lang = 'ru';
   let departures = [], loadState = 'loading', selected = null;
   const tr = key => translations[lang][key];
-  const locale = () => ({ en: 'en-GB', ru: 'ru-RU', fr: 'fr-FR' })[lang];
+  const locale = () => ({ ru: 'ru-RU', uk: 'uk-UA' })[lang];
   const money = value => new Intl.NumberFormat(locale(), { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 }).format(value);
   function dates(d) {
     const format = new Intl.DateTimeFormat(locale(), { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
@@ -68,7 +68,7 @@
   function changeLanguage(next) {
     if (!translations[next]) return;
     lang = next;
-    try { localStorage.setItem('selectedLanguage', lang); } catch {}
+    try { localStorage.setItem('weeklyTourLanguage', lang); } catch {}
     document.documentElement.lang = lang;
     document.title = tr('meta');
     document.querySelector('meta[name="description"]').content = tr('description');
